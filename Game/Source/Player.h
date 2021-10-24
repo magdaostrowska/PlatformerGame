@@ -18,13 +18,15 @@ public:
 
 	bool Start();
 
+	bool PreUpdate();
+
 	bool Update(float dt);
 
 	bool PostUpdate();
 
 	bool CleanUp();
 
-	void OnCollision(Collider* c1, Collider* c2);
+	void OnCollision(Collider* c1, Collider* c2) override;
 
 	void spawn(int lvl);
 
@@ -39,9 +41,23 @@ public:
 	iPoint position;
 
 	int speed = 1;
+	int jumpSPeed = 3;
 
 	bool runningToLeft = false;
 	bool runningToRight = false;
+
+	bool onGround=false;
+	bool isJumping = false;
+	bool isTouchingLeft = false;
+	bool isTouchingRight= false;
+	int numPlat = 0;
+	bool sumPlat = false;
+	bool sumPlat2 = false;
+	bool wallLeft = false;
+	bool wallRight = false;
+
+	int heightOnGround = NULL;
+	int weightOnWall = NULL;
 
 	SDL_Rect rectPlayer;
 
@@ -49,13 +65,21 @@ public:
 	SDL_Texture* textureIdleRight = nullptr;
 	SDL_Texture* textureRunLeft = nullptr;
 	SDL_Texture* textureRunRight = nullptr;
+	SDL_Texture* textureJumpLeft = nullptr;
+	SDL_Texture* textureJumpRight = nullptr;
 
 
 	Animation* currentAnimation = nullptr;
 
-	Animation idleLeft, idleRight, runLeft, runRight;
+	Animation idleLeft, idleRight, runLeft, runRight, jumpLeft, jumpRight;
 
 	Collider* collider = nullptr;
+
+	unsigned int currentTime;
+
+	unsigned int lastTimeJump = 0;
+	unsigned int lastTimeFall = 0;
+
 	/*
 	iPoint position;
 

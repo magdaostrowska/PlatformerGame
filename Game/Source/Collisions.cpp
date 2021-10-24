@@ -10,7 +10,11 @@ Collisions::Collisions() : Module()
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
+
+	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = true;
+
+	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = true;
 /*
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;

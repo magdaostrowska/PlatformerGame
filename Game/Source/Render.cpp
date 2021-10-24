@@ -1,6 +1,7 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -70,6 +71,38 @@ bool Render::PreUpdate()
 
 bool Render::Update(float dt)
 {
+	uint scale = app->win->GetScale();
+
+	camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + (app->win->screenSurface->w / 2 - 24 * scale);
+	camera.y = ((app->player->position.y - app->player->position.y * 2) * scale) + (app->win->screenSurface->h / 2 - 24 * scale);
+
+	if (camera.x > 0) {
+		//camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + (app->win->screenSurface->w / 2 - 24 * scale);
+		camera.x = 0;
+	}
+	
+	if (camera.y > 0) {
+		//camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + (app->win->screenSurface->w / 2 - 24 * scale);
+		camera.y = 0;
+	}
+
+	if (camera.x - camera.w < (-1600 * scale)) {
+		camera.x = -1600 * scale + camera.w;
+	}
+
+	if (camera.y - camera.h < (-288*scale)) {
+		camera.y = -288 * scale + camera.h;
+	}
+
+	//camera.x = ((app->player->position.x - app->player->position.x * 2) * scale )+ (app->win->screenSurface->w / 2 - 24*scale);// - ((app->win->screenSurface->w / 2)- app->win->screenSurface->w/2)*scale;
+	//camera.y = ((app->player->position.y - app->player->position.y * 2) * scale)+(app->win->screenSurface->h / 2 - 24 * scale); // + ((app->win->screenSurface->h / 2) - app->win->screenSurface->h/2)*scale;
+	
+	/*
+	camera.x = App->player->playerRect.x-(SCREEN_WIDTH/2)+ (App->player->playerRect.w / 2);
+	camera.y = App->player->playerRect.y - (SCREEN_HEIGHT / 2) + (App->player->playerRect.h/2);
+	*/
+	//camera.x = (app->player->position.x - (app->win->screenSurface->w / 2))*3;
+	//camera.y = (app->player->position.y - (app->win->screenSurface->h / 2)) * 3;
 	return true;
 }
 

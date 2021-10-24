@@ -68,8 +68,7 @@ public:
 		return true;
 	}
 
-	void Module::OnCollision(Collider* c1, Collider* c2)
-	{
+	virtual void OnCollision(Collider* c1, Collider* c2) {
 
 	}
 

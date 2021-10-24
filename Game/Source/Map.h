@@ -5,6 +5,7 @@
 #include "List.h"
 #include "Point.h"
 #include "DynArray.h"
+#include "Collisions.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -120,6 +121,8 @@ public:
     // Called before render is available
     bool Awake(pugi::xml_node& conf);
 
+	bool Start();
+
     // Called each loop iteration
     void Draw();
 
@@ -147,6 +150,7 @@ private:
 
 	// Load a group of properties 
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+	void LoadCol();
 
 	// Pick the right Tileset based on a tile id
 	TileSet* GetTilesetFromTileId(int id) const;
@@ -155,6 +159,8 @@ public:
 
     // Add a struct for map info
 	MapData mapData;
+
+	Collider* collider[MAX_COLLIDERS];
 
 private:
 

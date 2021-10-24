@@ -17,6 +17,8 @@ class Textures;
 class Audio;
 class Scene;
 class Map;
+class Collisions;
+class Player;
 
 class App
 {
@@ -53,6 +55,8 @@ public:
 	void LoadGameRequest();
 	void SaveGameRequest() const;
 
+	//virtual void OnCollision(Collider* c1, Collider* c2);
+
 private:
 
 	// Load config file
@@ -88,6 +92,8 @@ public:
 	Audio* audio;
 	Scene* scene;
 	Map* map;
+	Collisions* collisions;
+	Player* player;
 
 private:
 

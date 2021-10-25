@@ -32,7 +32,8 @@ bool Scene::Awake()
 bool Scene::Start()
 {
 	// Loading map
-	app->map->Load("kill_me.tmx");
+	//app->map->Load("kill_me.tmx");
+	app->map->Load("map2.tmx");
 	//app->map->Load("map_1.tmx");
 	
 	// Load music

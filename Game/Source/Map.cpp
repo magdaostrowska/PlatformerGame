@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "Defs.h"
 #include "Log.h"
+#include "Collisions.h"
 
 #include <math.h>
 
@@ -42,6 +43,11 @@ bool Map::Awake(pugi::xml_node& config)
     return ret;
 }
 
+bool Map::Start() {
+	LoadCol();
+	return true;
+}
+
 // Draw the map (all requried layers)
 void Map::Draw()
 {
@@ -50,31 +56,65 @@ void Map::Draw()
 	// Prepare the loop to draw all tilesets + DrawTexture()
 	ListItem<MapLayer*>* mapLayerItem;
 	mapLayerItem = mapData.layers.start;
-
+	
+	
+	
 	while (mapLayerItem != NULL) {
+		
 
-		for (int x = 0; x < mapLayerItem->data->width; x++)
-		{
-			for (int y = 0; y < mapLayerItem->data->height; y++)
+		if (mapLayerItem->data->properties.GetProperty("col") == 1) {
+
+			for (int x = 0; x < mapLayerItem->data->width; x++)
 			{
-				// L04: DONE 9: Complete the draw function
-				int gid = mapLayerItem->data->Get(x, y);
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
 
-				if (gid > 0) {
+					if (gid > 0) {
 
-					//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
-					//now we always use the firt tileset in the list
-					TileSet* tileset = mapData.tilesets.start->data;
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
 
-					SDL_Rect r = tileset->GetTileRect(gid);
-					iPoint pos = MapToWorld(x, y);
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
 
-					app->render->DrawTexture(tileset->texture,
-						pos.x,
-						pos.y,
-						&r);
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y,
+							&r);
+						
+						
+					}
+
 				}
+			}
+		}
+		else {
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
 
+					if (gid > 0) {
+
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
+
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
+
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y,
+							&r);
+					}
+
+				}
 			}
 		}
 
@@ -480,3 +520,76 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	}
 	return ret;
 }
+
+void Map::LoadCol() {
+	
+	if (mapLoaded == false) return;
+
+	// Prepare the loop to draw all tilesets + DrawTexture()
+	ListItem<MapLayer*>* mapLayerItem;
+	mapLayerItem = mapData.layers.start;
+
+	int i = 0;
+
+	while (mapLayerItem != NULL) {
+
+
+		if (mapLayerItem->data->properties.GetProperty("col") == 1) {
+
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
+
+					if (gid > 0) {
+
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
+
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
+
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y,
+							&r);
+						
+						collider[i] = app->collisions->AddCollider({ pos.x, pos.y, r.w,  r.h }, Collider::Type::GROUND, this);
+						i++;
+					}
+
+				}
+			}
+		}
+
+		mapLayerItem = mapLayerItem->next;
+	}
+}
+	
+
+
+/*
+bool Map::AddCol(int x, int y)
+{
+	bool ret = false;
+
+	for (uint i = 0; i < app->; ++i)
+	{
+		if (spawnQueue[i].type == Box_Type::NO_TYPE)
+		{
+			spawnQueue[i].type = type;
+			spawnQueue[i].x = x;
+			spawnQueue[i].y = y;
+			ret = true;
+			break;
+		}
+
+
+	}
+
+	return ret;
+}
+*/

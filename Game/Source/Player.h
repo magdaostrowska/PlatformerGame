@@ -4,6 +4,11 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Point.h"
+#include "App.h"
+#include "Textures.h"
+#include "Render.h"
+#include "Input.h"
+#include "Collisions.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -16,19 +21,18 @@ public:
 
 	virtual ~Player();
 
+	bool Awake(pugi::xml_node&);
 	bool Start();
-
 	bool PreUpdate();
-
 	bool Update(float dt);
-
 	bool PostUpdate();
-
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2) override;
-
 	void spawn(int lvl);
+
+	bool Save(pugi::xml_node& data) const;
+	bool Load(pugi::xml_node& data);
 
 public:
 
@@ -40,47 +44,50 @@ public:
 
 	iPoint position;
 
+	int lifes;
+
 	int speed = 1;
-	int jumpSPeed = 3;
+	int jumpSpeed = 3;
 
-	bool runningToLeft = false;
-	bool runningToRight = false;
+	bool runningToLeft;
+	bool runningToRight;
 
-	bool onGround = false;
-	bool isJumping = false;
-	bool isTouchingLeft = false;
-	bool isTouchingRight = false;
-	int numPlat = 0;
-	bool sumPlat = false;
-	bool sumPlat2 = false;
-	bool wallLeft = false;
-	bool wallRight = false;
-	int numJumps = 0;
-	bool stopJumping = true;
+	bool onGround;
+	bool isJumping;
+	bool isTouchingLeft;
+	bool isTouchingRight;
+	int numPlat;
+	bool sumPlat;
+	bool sumPlat2;
+	bool wallLeft;
+	bool wallRight;
+	int numJumps;
+	bool stopJumping;
 
-	int heightOnGround = NULL;
-	int weightOnWall = NULL;
+	int heightOnGround;
+	int weightOnWall;
 
 	SDL_Rect rectPlayer;
 
-	SDL_Texture* textureIdleLeft = nullptr;
-	SDL_Texture* textureIdleRight = nullptr;
-	SDL_Texture* textureRunLeft = nullptr;
-	SDL_Texture* textureRunRight = nullptr;
-	SDL_Texture* textureJumpLeft = nullptr;
-	SDL_Texture* textureJumpRight = nullptr;
+	SDL_Texture* textureIdleLeft;
+	SDL_Texture* textureIdleRight;
+	SDL_Texture* textureRunLeft;
+	SDL_Texture* textureRunRight;
+	SDL_Texture* textureJumpLeft;
+	SDL_Texture* textureJumpRight;
 
-
-	Animation* currentAnimation = nullptr;
+	Animation* currentAnimation;
 
 	Animation idleLeft, idleRight, runLeft, runRight, jumpLeft, jumpRight;
 
-	Collider* collider = nullptr;
+	Collider* collider;
 
 	unsigned int currentTime;
 
-	unsigned int lastTimeJump = 0;
-	unsigned int lastTimeFall = 0;
+	unsigned int lastTimeJump;
+	unsigned int lastTimeFall;
+
+	pugi::xml_document	document;
 
 	/*
 	iPoint position;

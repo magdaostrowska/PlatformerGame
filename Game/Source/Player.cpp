@@ -1,12 +1,45 @@
 #include "Player.h"
-#include "App.h"
-#include "Textures.h"
-#include "Render.h"
-#include "Input.h"
-#include "Collisions.h"
 
 Player::Player() : Module()
 {
+
+	lifes = 3;
+
+	speed = 1;
+	jumpSpeed = 3;
+
+	runningToLeft = false;
+	runningToRight = false;
+	onGround = false;
+	isJumping = false;
+	isTouchingLeft = false;
+	isTouchingRight = false;
+	numPlat = 0;
+	sumPlat = false;
+	sumPlat2 = false;
+	wallLeft = false;
+	wallRight = false;
+	numJumps = 0;
+	stopJumping = true;
+
+	heightOnGround = NULL;
+	weightOnWall = NULL;
+
+	textureIdleLeft = nullptr;
+	textureIdleRight = nullptr;
+	textureRunLeft = nullptr;
+	textureRunRight = nullptr;
+	textureJumpLeft = nullptr;
+	textureJumpRight = nullptr;
+
+
+	currentAnimation = nullptr;
+
+	collider = nullptr;
+
+	lastTimeJump = 0;
+	lastTimeFall = 0;
+
 	idleLeft.PushBack({ 0, 0, 48, 48 });
 	idleLeft.PushBack({ 48, 0, 48, 48 });
 	idleLeft.PushBack({ 96, 0, 48, 48 });
@@ -66,6 +99,15 @@ Player::Player() : Module()
 Player::~Player()
 {}
 
+bool Player::Awake(pugi::xml_node& config) {
+
+	bool ret = true;
+	config = app->GetConfig();
+	lifes = config.child("lifes").attribute("value").as_int();
+	document.load_file("config.xml");
+	return ret;
+}
+
 bool Player::Start()
 {
 	//texture = App->textures->Load("Assets/Textures/spritesheet_player.png");
@@ -79,7 +121,7 @@ bool Player::Start()
 	//idleLeft.Reset();
 	currentAnimation = &idleLeft;
 	position = { 0,0 };
-	collider = app->collisions->AddCollider({ position.x + 7 - speed, position.y + 14, 15 + 2 + 2 * speed, 34 + jumpSPeed }, Collider::Type::PLAYER, this);
+	collider = app->collisions->AddCollider({ position.x + 7 - speed, position.y + 14, 15 + 2 + 2 * speed, 34 + jumpSpeed }, Collider::Type::PLAYER, this);
 
 	lastTimeFall = SDL_GetTicks();
 	lastTimeJump = SDL_GetTicks();
@@ -113,8 +155,6 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 		position = { 0,0 };
 	}
-
-
 
 	if (isTouchingLeft == false && isTouchingRight == false) {
 		if (onGround == true) {
@@ -317,7 +357,7 @@ bool Player::Update(float dt)
 			position.y -= 2;
 		}
 		else {
-			position.y -= jumpSPeed;
+			position.y -= jumpSpeed;
 		}
 
 	}
@@ -370,8 +410,8 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			position.y = heightOnGround - 47;
 			onGround = true;
 		}
-		else if (((c1->rect.y + c1->rect.h-jumpSPeed+1) < c2->rect.y)|| ((c1->rect.x +1 ) >= c2->rect.x+c2->rect.w) ||
-			(((c1->rect.x + c1->rect.w -2) <= c2->rect.x ) && (c1->rect.y + c1->rect.h-jumpSPeed-1) == c2->rect.y)){
+		else if (((c1->rect.y + c1->rect.h-jumpSpeed+1) < c2->rect.y)|| ((c1->rect.x +1 ) >= c2->rect.x+c2->rect.w) ||
+			(((c1->rect.x + c1->rect.w -2) <= c2->rect.x ) && (c1->rect.y + c1->rect.h-jumpSpeed-1) == c2->rect.y)){
 			//position.y = heightOnGround - 47;
 			onGround = false;
 			lastTimeFall = currentTime;
@@ -386,14 +426,14 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		//isTouchingRight = false;
 		//wallRight = false;
 
-		if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSPeed && c1->rect.y + c1->rect.h >= c2->rect.y) {
-			//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+		if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSpeed && c1->rect.y + c1->rect.h >= c2->rect.y) {
+			//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 			position.y = c2->rect.y - 48;
 
 			/*/
 			if ((c1->rect.x + c1->rect.w - 2 > c2->rect.x) || (c1->rect.x + 2 < c2->rect.x + c2->rect.w)) {
 
-				c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 				onGround = true;
 			}
 			//else if()
@@ -403,13 +443,13 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { //&& c2->rect.x<=c1->rect.x) {
 
 				isTouchingLeft = true;
-				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 			}
 
 			/*
 			if (c1->rect.x + c1->rect.w - 3 > c2->rect.x) {
 				//isTouchingRight = true;
-				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 			}
 
 
@@ -454,12 +494,12 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 			//if (c1->rect.x + c1->rect.w > c2->rect.x ) {
 		//		isTouchingRight = true;
-			//	c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+			//	c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 		//	}
 
 		}
 
-		if (c1->rect.y + c1->rect.h - jumpSPeed != c2->rect.y && isJumping == false) {
+		if (c1->rect.y + c1->rect.h - jumpSpeed != c2->rect.y && isJumping == false) {
 			//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
 
 			if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x && c1->rect.x + c1->rect.w + speed > c2->rect.x) {
@@ -506,7 +546,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				//isTouchingLeft = true;
 			}
 			else {
-				c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 				//onGround = true;
 				if (c1->rect.x>c2->rect.x) {
 					//isTouchingLeft = true;
@@ -568,14 +608,14 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 		
 
-		if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSPeed && c1->rect.y + c1->rect.h >= c2->rect.y) {
-			//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+		if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSpeed && c1->rect.y + c1->rect.h >= c2->rect.y) {
+			//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 			position.y = c2->rect.y - 48;
 
 			/*/
 			if ((c1->rect.x + c1->rect.w - 2 > c2->rect.x) || (c1->rect.x + 2 < c2->rect.x + c2->rect.w)) {
 
-				c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 				onGround = true;
 			}
 			//else if()
@@ -585,13 +625,13 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { //&& c2->rect.x<=c1->rect.x) {
 
 				isTouchingLeft = true;
-				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 			}
 
 		
 		}
 
-		if (c1->rect.y + c1->rect.h - jumpSPeed != c2->rect.y && isJumping == false) {
+		if (c1->rect.y + c1->rect.h - jumpSpeed != c2->rect.y && isJumping == false) {
 			//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
 
 			if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x && c1->rect.x + c1->rect.w + speed > c2->rect.x) {
@@ -601,19 +641,20 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			if (c1->rect.x + 2 + speed > c2->rect.x + c2->rect.w && c1->rect.x - speed < c2->rect.x + c2->rect.w) {
 				wallLeft = true;
 			}
-
-
 		}
+	}
 
-
-	
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::DEATH) {
+		if (true)
+		{
+			lifes--;
+		}
 
 	}
 }
 
 
 bool Player::CleanUp() {
-
 	return true;
 }
 

@@ -281,6 +281,11 @@ const char* App::GetOrganization() const
 	return organization.GetString();
 }
 
+pugi::xml_node App::GetConfig()
+{
+	return config;
+}
+
 // Load / Save
 void App::LoadGameRequest()
 {

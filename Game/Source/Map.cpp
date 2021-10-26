@@ -567,6 +567,39 @@ void Map::LoadCol() {
 				}
 			}
 		}
+		else if (mapLayerItem->data->properties.GetProperty("col") == 3) {
+
+
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
+
+					if (gid > 0) {
+
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
+
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
+
+						/*
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y+4,
+							&r);
+						*/
+
+						collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::WALL, this);
+						i++;
+					}
+
+				}
+			}
+		}
 		mapLayerItem = mapLayerItem->next;
 	}
 }

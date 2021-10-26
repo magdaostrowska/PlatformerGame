@@ -50,6 +50,7 @@ public:
 	const char* GetArgv(int index) const;
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
+	pugi::xml_node GetConfig();
 
     // L02: DONE 1: Create methods to request Load / Save
 	void LoadGameRequest();

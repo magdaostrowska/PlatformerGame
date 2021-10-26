@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -32,7 +33,9 @@ bool Scene::Awake()
 bool Scene::Start()
 {
 	// Loading map
-	app->map->Load("map.tmx");
+	app->map->Load("map_no_back.tmx");
+	back1 = app->tex->Load("Assets/Textures/back_image.png");
+	back_pos = { 0,0 };
 	//app->map->Load("map_1.tmx");
 	
 	// Load music
@@ -69,10 +72,14 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += 1;
 
+	//for (int i = 0; i <= app->render->camera.x; i++){
+	//	back_pos.x = i * 2;
+	//}
+
+	back_pos.x = app->render->camera.x/40;
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
-	// Draw map
-	app->map->Draw();
+	
 
 	// Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
@@ -89,9 +96,35 @@ bool Scene::Update(float dt)
 bool Scene::PostUpdate()
 {
 	bool ret = true;
+	app->render->DrawTexture(back1, back_pos.x, back_pos.y, &rectMap, 1.0f);
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	// Draw map
+	app->map->Draw();
+
+	app->player->rectPlayer = app->player->currentAnimation->GetCurrentFrame();
+
+	if (app->player->currentAnimation == &app->player->idleLeft) {
+		app->render->DrawTexture(app->player->textureIdleLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->idleRight) {
+		app->render->DrawTexture(app->player->textureIdleRight, app->player->position.x - 19, app->player->position.y, & app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->runLeft) {
+		app->render->DrawTexture(app->player->textureRunLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->runRight) {
+		app->render->DrawTexture(app->player->textureRunRight, app->player->position.x - 19, app->player->position.y, &app->player-> rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->jumpLeft) {
+		app->render->DrawTexture(app->player->textureJumpLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->jumpRight) {
+		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;
+	}
 
 	return ret;
 }

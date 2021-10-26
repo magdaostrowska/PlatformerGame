@@ -33,7 +33,11 @@ public:
 	bool CleanUp();
 
 private:
+	iPoint back_pos;
+	SDL_Rect rectMap = {0,0,2304,324};
+
 	SDL_Texture* img;
+	SDL_Texture* back1;
 };
 
 #endif // __SCENE_H__

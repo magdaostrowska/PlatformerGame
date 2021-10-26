@@ -39,7 +39,7 @@ Player::Player() : Module()
 	runRight.PushBack({ 96, 0, 48, 48 });
 	runRight.PushBack({ 48, 0, 48, 48 });
 	runRight.PushBack({ 0, 0, 48, 48 });
-	
+
 	runRight.loop = true;
 	runRight.speed = 0.05;
 
@@ -56,7 +56,7 @@ Player::Player() : Module()
 	jumpRight.PushBack({ 48, 0, 48, 48 });
 	jumpRight.PushBack({ 0, 0, 48, 48 });
 
-	
+
 
 	jumpRight.loop = false;
 	jumpRight.speed = 0.05;
@@ -79,8 +79,8 @@ bool Player::Start()
 	//idleLeft.Reset();
 	currentAnimation = &idleLeft;
 	position = { 0,0 };
-	collider = app->collisions->AddCollider({ position.x+7-speed, position.y+14, 15+2+2*speed, 34+jumpSPeed }, Collider::Type::PLAYER, this);
-	
+	collider = app->collisions->AddCollider({ position.x + 7 - speed, position.y + 14, 15 + 2 + 2 * speed, 34 + jumpSPeed }, Collider::Type::PLAYER, this);
+
 	lastTimeFall = SDL_GetTicks();
 	lastTimeJump = SDL_GetTicks();
 
@@ -106,51 +106,139 @@ bool Player::Update(float dt)
 		SDL_Delay(frameDelay - frameTime);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN) {
+		position = { 1500,0 };
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+		position = { 0,0 };
+	}
+
+
+
 	if (isTouchingLeft == false && isTouchingRight == false) {
-		onGround = false;
+		if (onGround == true) {
+			lastTimeFall = currentTime;
+			onGround = false;
+			isJumping = false;
+			jumpLeft.Reset();
+			jumpRight.Reset();
+			//stopJumping = false;
+		}
 	}
 	else if (isTouchingLeft == true || isTouchingRight == true) {
+
 		onGround = true;
+		numJumps = 2;
+		//doubleJump = true;
 	}
 	isTouchingLeft = false;
 	isTouchingRight = false;
 	//isTouchingLeft = false;
 	//isTouchingRight = false;
-	
-	
 
-	if (onGround == false && isJumping==false) {
-	
+
+
+	if (onGround == false && stopJumping == true) {
+		//jumpLeft.Reset();
+		//jumpRight.Reset();
+		isJumping = false;
 		if (currentTime >= lastTimeFall + 200) {
+
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+					currentAnimation = &jumpLeft;
+					runningToLeft = true;
+				}
+				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+					currentAnimation = &jumpRight;
+					runningToRight = true;
+				}
+				lastTimeJump = currentTime;
+				isJumping = true;
+				numJumps--;
+				stopJumping = false;
+				//doubleJump = false;
+			}
+
+
 			position.y += 3;
 		}
 		else if (currentTime >= lastTimeFall + 150) {
+
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+					currentAnimation = &jumpLeft;
+					runningToLeft = true;
+				}
+				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+					currentAnimation = &jumpRight;
+					runningToRight = true;
+				}
+				lastTimeJump = currentTime;
+				isJumping = true;
+				numJumps--;
+				stopJumping = false;
+				//doubleJump = false;
+			}
+
+
 			position.y += 2;
 		}
 		else if (currentTime >= lastTimeFall + 50) {
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-				lastTimeJump = SDL_GetTicks();
+
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+					currentAnimation = &jumpLeft;
+					runningToLeft = true;
+				}
+				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+					currentAnimation = &jumpRight;
+					runningToRight = true;
+				}
+				lastTimeJump = currentTime;
 				isJumping = true;
+				numJumps--;
+				stopJumping = false;
+				//doubleJump = false;
 			}
+
+
+
 			position.y += 1;
 		}
 		else {
-			position.y += 1;
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+					currentAnimation = &jumpLeft;
+					runningToLeft = true;
+				}
+				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+					currentAnimation = &jumpRight;
+					runningToRight = true;
+				}
+				lastTimeJump = currentTime;
+				isJumping = true;
+				numJumps--;
+				stopJumping = false;
+			}
+
 		}
+
 		//position.y += 1;
 	}
 
-	
-	
-	
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight==false){
-		if (position.x < 1600-24) {
+
+
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
+		if (position.x < 1600 - 24) {
 			position.x += speed;
 			runningToLeft = true;
 			runRight.Reset();
 			currentAnimation = &runLeft;
 		}
-		
+
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && wallLeft == false) {
 		if (position.x > -7) {
@@ -160,7 +248,7 @@ bool Player::Update(float dt)
 			currentAnimation = &runRight;
 		}
 	}
-	else if(onGround==true){
+	else if (onGround == true) {
 		if (runningToRight == true) {
 			runningToRight = false;
 			idleRight.Reset();
@@ -198,10 +286,10 @@ bool Player::Update(float dt)
 			runningToLeft = false;
 			idleLeft.Reset();
 			currentAnimation = &idleLeft;
-		}	
+		}
 	}*/
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && onGround==true) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && onGround == true && numJumps > 0) {
 		if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
 			currentAnimation = &jumpLeft;
 			runningToLeft = true;
@@ -210,14 +298,17 @@ bool Player::Update(float dt)
 			currentAnimation = &jumpRight;
 			runningToRight = true;
 		}
-		lastTimeJump = SDL_GetTicks();
+		lastTimeJump = currentTime;
 		isJumping = true;
+		stopJumping = false;
+		numJumps--;
 	}
 
-	if (isJumping == true) {
+	if (stopJumping == false && numJumps >= 0) {
+
 		if (currentTime >= lastTimeJump + 150) {
 			lastTimeFall = currentTime;
-			isJumping = false;
+			stopJumping = true;
 		}
 		else if (currentTime >= lastTimeJump + 120) {
 			position.y -= 1;
@@ -228,9 +319,28 @@ bool Player::Update(float dt)
 		else {
 			position.y -= jumpSPeed;
 		}
+
 	}
 
-	collider->SetPos(position.x + 6-speed, position.y + 14);
+	if (isJumping == true ) {
+		if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+			currentAnimation = &jumpLeft;
+			runningToLeft = true;
+			jumpRight.Reset();
+		}
+		if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+			currentAnimation = &jumpRight;
+			runningToRight = true;
+			jumpLeft.Reset();
+		}
+	}
+	else {
+		//jumpLeft.Reset();
+		//jumpRight.Reset();
+		
+	}
+
+	collider->SetPos(position.x + 6 - speed, position.y + 14);
 
 	return true;
 }
@@ -238,37 +348,18 @@ bool Player::Update(float dt)
 bool Player::PostUpdate()
 {
 
-	rectPlayer = currentAnimation->GetCurrentFrame();
 	
-	if (currentAnimation == &idleLeft) {
-		app->render->DrawTexture(textureIdleLeft, position.x, position.y, &rectPlayer, 1.0f);
-	}
-	else if (currentAnimation == &idleRight) {
-		app->render->DrawTexture(textureIdleRight,position.x -19, position.y, &rectPlayer, 1.0f);
-	}
-	else if (currentAnimation == &runLeft) {
-		app->render->DrawTexture(textureRunLeft, position.x, position.y, &rectPlayer, 1.0f);
-	}
-	else if (currentAnimation == &runRight) {
-		app->render->DrawTexture(textureRunRight, position.x - 19, position.y, &rectPlayer, 1.0f);
-	}
-	else if (currentAnimation == &jumpLeft) {
-		app->render->DrawTexture(textureJumpLeft, position.x, position.y, &rectPlayer, 1.0f);
-	}
-	else if (currentAnimation == &jumpRight) {
-		app->render->DrawTexture(textureJumpRight, position.x - 19, position.y, &rectPlayer, 1.0f);
-	}
-	
+
 	currentAnimation->Update();
 	return true;
 }
 
 void Player::OnCollision(Collider* c1, Collider* c2)
 {
-	
-	
+
+
 	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::GROUND) {
-	
+
 		//if (heightOnGround == NULL) {
 		//heightOnGround = c2->rect.y;//position.y;
 		//weightOnWall = c2->rect.x;
@@ -291,8 +382,8 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		*/
 		//SI ESTA PISANDO EL SUELO
-		isTouchingLeft = false;
-		isTouchingRight = false;
+		//isTouchingLeft = false;
+		//isTouchingRight = false;
 		//wallRight = false;
 
 		if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSPeed && c1->rect.y + c1->rect.h >= c2->rect.y) {
@@ -307,34 +398,82 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			}
 			//else if()
 		}*/
-			
-			if (c1->rect.x+jumpSPeed<c2->rect.x+c2->rect.w) {
+
+		//HACE QUE NO SE ENGANCHE A LA PARED DE LA IZQUIERDA
+			if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { //&& c2->rect.x<=c1->rect.x) {
+
 				isTouchingLeft = true;
-				c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
 			}
+
+			/*
+			if (c1->rect.x + c1->rect.w - 3 > c2->rect.x) {
+				//isTouchingRight = true;
+				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+			}
+
+
+/*
+			if (c2->rect.x < c1->rect.x && c2->rect.x + c2->rect.w>c1->rect.x) {
+				isTouchingLeft = true;
+			}
+
+			if (c2->rect.x<c1->rect.x && c2->rect.x + c2->rect.w>c1->rect.x) {
+				isTouchingLeft = true;
+			}
+
+			if (c2->rect.x > c1->rect.x && c2->rect.x + c2->rect.w > c1->rect.x) {
+				isTouchingLeft = true;
+			}
+			*/
+			//SUELO A LA DERECHA
+			/*
+			if (c1->rect.x<=c2->rect.x) {
+				if (c1->rect.x+c1->rect.w-speed>=c2->rect.x) {
+					//isTouchingLeft = true;
+					//isTouchingLeft = true;
+				}
+				else {
+
+				}
+				//isTouchingLeft = true;
+
+			}
+			//SUELO A LA IZQUIERDA
+			if (c1->rect.x >= c2->rect.x) {
+				if (c2->rect.x+c2->rect.w-speed<c1->rect.x) {
+
+				}
+				else {
+					//isTouchingLeft = true;
+					//isTouchingLeft = true;
+				}
+
+			}
+			*/
 
 			//if (c1->rect.x + c1->rect.w > c2->rect.x ) {
 		//		isTouchingRight = true;
 			//	c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
 		//	}
-			
+
 		}
 
 		if (c1->rect.y + c1->rect.h - jumpSPeed != c2->rect.y && isJumping == false) {
-		//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
+			//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
 
 			if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x && c1->rect.x + c1->rect.w + speed > c2->rect.x) {
-				wallRight = true;
+				//wallRight = true;
 			}
 
 			if (c1->rect.x + 2 + speed > c2->rect.x + c2->rect.w && c1->rect.x - speed < c2->rect.x + c2->rect.w) {
-				wallLeft = true;
+				//wallLeft = true;
 			}
 
-			
+
 		}
-		
-		
+
+
 		//if(c1->rect.x)
 
 			/*
@@ -424,8 +563,54 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		*/
 
 	}
-}
+
+	if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::WALL) {
+
+		
+
+		if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSPeed && c1->rect.y + c1->rect.h >= c2->rect.y) {
+			//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+			position.y = c2->rect.y - 48;
+
+			/*/
+			if ((c1->rect.x + c1->rect.w - 2 > c2->rect.x) || (c1->rect.x + 2 < c2->rect.x + c2->rect.w)) {
+
+				c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+				onGround = true;
+			}
+			//else if()
+		}*/
+
+		//HACE QUE NO SE ENGANCHE A LA PARED DE LA IZQUIERDA
+			if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { //&& c2->rect.x<=c1->rect.x) {
+
+				isTouchingLeft = true;
+				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSPeed;
+			}
+
+		
+		}
+
+		if (c1->rect.y + c1->rect.h - jumpSPeed != c2->rect.y && isJumping == false) {
+			//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
+
+			if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x && c1->rect.x + c1->rect.w + speed > c2->rect.x) {
+				wallRight = true;
+			}
+
+			if (c1->rect.x + 2 + speed > c2->rect.x + c2->rect.w && c1->rect.x - speed < c2->rect.x + c2->rect.w) {
+				wallLeft = true;
+			}
+
+
+		}
+
+
 	
+
+	}
+}
+
 
 bool Player::CleanUp() {
 

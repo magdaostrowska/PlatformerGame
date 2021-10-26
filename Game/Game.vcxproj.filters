@@ -80,5 +80,8 @@
     <None Include="..\Output\Assets\maps\map2.tmx">
       <Filter>File</Filter>
     </None>
+    <None Include="..\Output\Assets\maps\map_no_back.tmx">
+      <Filter>File</Filter>
+    </None>
   </ItemGroup>
 </Project>

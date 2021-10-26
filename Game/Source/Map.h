@@ -160,7 +160,7 @@ public:
     // Add a struct for map info
 	MapData mapData;
 
-	Collider* collider[MAX_COLLIDERS];
+	Collider* collider[400];
 
 private:
 

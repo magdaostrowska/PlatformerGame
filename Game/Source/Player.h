@@ -46,15 +46,17 @@ public:
 	bool runningToLeft = false;
 	bool runningToRight = false;
 
-	bool onGround=false;
+	bool onGround = false;
 	bool isJumping = false;
 	bool isTouchingLeft = false;
-	bool isTouchingRight= false;
+	bool isTouchingRight = false;
 	int numPlat = 0;
 	bool sumPlat = false;
 	bool sumPlat2 = false;
 	bool wallLeft = false;
 	bool wallRight = false;
+	int numJumps = 0;
+	bool stopJumping = true;
 
 	int heightOnGround = NULL;
 	int weightOnWall = NULL;

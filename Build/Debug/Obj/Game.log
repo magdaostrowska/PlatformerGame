@@ -1,2 +1,10 @@
-﻿  Scene.cpp
-  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+﻿  Player.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(16,24): warning C4305: '=': truncamiento de 'double' a 'float'
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(24,25): warning C4305: '=': truncamiento de 'double' a 'float'
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(34,22): warning C4305: '=': truncamiento de 'double' a 'float'
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(44,23): warning C4305: '=': truncamiento de 'double' a 'float'
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(52,23): warning C4305: '=': truncamiento de 'double' a 'float'
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(62,24): warning C4305: '=': truncamiento de 'double' a 'float'
+  Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

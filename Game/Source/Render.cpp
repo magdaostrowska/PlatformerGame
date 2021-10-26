@@ -90,8 +90,8 @@ bool Render::Update(float dt)
 		camera.x = -1600 * scale + camera.w;
 	}
 
-	if (camera.y - camera.h < (-288*scale)) {
-		camera.y = -288 * scale + camera.h;
+	if (camera.y - camera.h < (-324*scale)) {
+		camera.y = -324 * scale + camera.h;
 	}
 
 	//camera.x = ((app->player->position.x - app->player->position.x * 2) * scale )+ (app->win->screenSurface->w / 2 - 24*scale);// - ((app->win->screenSurface->w / 2)- app->win->screenSurface->w/2)*scale;

@@ -13,9 +13,16 @@ Collisions::Collisions() : Module()
 
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 
 	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::GROUND][Collider::Type::WALL] = false;
+
+	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
+	matrix[Collider::Type::WALL][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
+	
 /*
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = false;
@@ -165,10 +172,11 @@ void Collisions::DebugDraw()
 		case Collider::Type::GROUND: // green
 			app->render->DrawRectangle(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
-			/*
-		case Collider::Type::TOUCH: // red
+			
+		case Collider::Type::WALL: // red
 			app->render->DrawRectangle(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
+			/*
 		case Collider::Type::BOX: // yellow
 			app->render->DrawRectangle(colliders[i]->rect, 255, 255, 0, alpha);
 			break;

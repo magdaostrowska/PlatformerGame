@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Collisions.h"
+#include "Fonts.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -25,6 +26,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
+	fonts = new Fonts();
 	scene = new Scene();
 	map = new Map();
 	collisions = new Collisions();
@@ -37,9 +39,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(scene);
+	AddModule(fonts);
 	AddModule(map);
 	AddModule(collisions);
 	AddModule(player);
+	
 	
 
 	// Render last to swap buffer

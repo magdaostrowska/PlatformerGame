@@ -15,10 +15,12 @@ class Input;
 class Render;
 class Textures;
 class Audio;
+class Fonts;
 class Scene;
 class Map;
 class Collisions;
 class Player;
+
 
 class App
 {
@@ -95,6 +97,7 @@ public:
 	Map* map;
 	Collisions* collisions;
 	Player* player;
+	Fonts* fonts;
 
 private:
 

@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Player.h"
+#include "Fonts.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -35,6 +36,9 @@ bool Scene::Start()
 	// Loading map
 	app->map->Load("map_no_back.tmx");
 	back1 = app->tex->Load("Assets/Textures/back_image.png");
+	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
+	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);
+
 	back_pos = { 0,0 };
 	//app->map->Load("map_1.tmx");
 	
@@ -77,6 +81,7 @@ bool Scene::Update(float dt)
 	//}
 
 	back_pos.x = app->render->camera.x/40;
+	
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
 	
@@ -121,7 +126,10 @@ bool Scene::PostUpdate()
 	else if (app->player->currentAnimation == &app->player->jumpRight) {
 		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
 	}
-
+	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);
+	//app->fonts->BlitText(((app->player->position.x - app->player->position.x * 2) * app->win->GetScale()) + (app->win->screenSurface->w / 2 - 24 * app->win->GetScale()) , 0, textFont,"Lifes:");
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 -  (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes:");
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale())+240 / app->win->GetScale(), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerLifes);
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;
 	}

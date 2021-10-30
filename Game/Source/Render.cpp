@@ -73,7 +73,7 @@ bool Render::Update(float dt)
 {
 	uint scale = app->win->GetScale();
 
-	camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + (app->win->screenSurface->w / 2 - 24 * scale);
+	camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + ((app->win->screenSurface->w - 24 * scale) / 2);
 	camera.y = ((app->player->position.y - app->player->position.y * 2) * scale) + (app->win->screenSurface->h / 2 - 24 * scale);
 
 	if (camera.x > 0) {
@@ -81,19 +81,24 @@ bool Render::Update(float dt)
 		camera.x = 0;
 	}
 	
-	if (camera.y > 0) {
+	//if (camera.y > 0) {
 		//camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + (app->win->screenSurface->w / 2 - 24 * scale);
 		camera.y = 0;
-	}
+	//}
 
 	if (camera.x - camera.w < (-1600 * scale)) {
 		camera.x = -1600 * scale + camera.w;
 	}
 
-	if (camera.y - camera.h < (-324*scale)) {
-		camera.y = -324 * scale + camera.h;
-	}
+	//if (camera.y - camera.h < (-324*scale)) {
+	//	camera.y = -324 * scale + camera.h;
+	//}
 
+	//int i = -324 * scale - app->win->screenSurface->h;
+	//int j = app->win->screenSurface->h/2 + -324 * scale/2;
+
+	//camera.y = (app->win->screenSurface->h - app->win->screenSurface->h * 2) / 2; //+ -324 * scale / 2;
+	camera.y = app->win->screenSurface->h / 2-324*scale / 2; //+324 * scale/2;
 	//camera.x = ((app->player->position.x - app->player->position.x * 2) * scale )+ (app->win->screenSurface->w / 2 - 24*scale);// - ((app->win->screenSurface->w / 2)- app->win->screenSurface->w/2)*scale;
 	//camera.y = ((app->player->position.y - app->player->position.y * 2) * scale)+(app->win->screenSurface->h / 2 - 24 * scale); // + ((app->win->screenSurface->h / 2) - app->win->screenSurface->h/2)*scale;
 	

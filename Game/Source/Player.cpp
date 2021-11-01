@@ -170,6 +170,7 @@ bool Player::Update(float dt)
 
 		onGround = true;
 		numJumps = 2;
+		isJumping = false;
 		//doubleJump = true;
 	}
 	isTouchingLeft = false;
@@ -631,7 +632,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		
 		}
 
-		if (c1->rect.y + c1->rect.h - jumpSpeed != c2->rect.y && isJumping == false) {
+		if (c1->rect.y + c1->rect.h - jumpSpeed != c2->rect.y && isJumping == false && onGround == true) {
 			//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
 
 			if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x && c1->rect.x + c1->rect.w + speed > c2->rect.x) {

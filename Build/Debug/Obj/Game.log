@@ -1,33 +1,4 @@
-﻿  Collider.cpp
-  Collisions.cpp
-  Fonts.cpp
-  Main.cpp
-  App.cpp
+﻿  Scene.cpp
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Audio.cpp
-  Input.cpp
-  Map.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(25,20): warning C4018: '<': no coinciden signed/unsigned
-  Player.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(49,24): warning C4305: '=': truncamiento de 'double' a 'float'
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(57,25): warning C4305: '=': truncamiento de 'double' a 'float'
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(67,22): warning C4305: '=': truncamiento de 'double' a 'float'
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(77,23): warning C4305: '=': truncamiento de 'double' a 'float'
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(85,23): warning C4305: '=': truncamiento de 'double' a 'float'
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(95,24): warning C4305: '=': truncamiento de 'double' a 'float'
-  Scene.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Render.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Render.cpp(89,26): warning C4018: '<': no coinciden signed/unsigned
-  Textures.cpp
-  Window.cpp
-  Log.cpp
-  pugixml.cpp
-  Generando código...
   Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

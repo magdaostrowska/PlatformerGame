@@ -42,6 +42,8 @@ private:
 	SDL_Texture* back1;
 
 	char playerLifes[2] = { "\0" };
+	SDL_Rect blackRect = {0,0,0,0};
+	SDL_Rect blackRect2 = { 0,0,0,0 };
 };
 
 #endif // __SCENE_H__

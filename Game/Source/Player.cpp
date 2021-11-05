@@ -205,7 +205,7 @@ bool Player::Update(float dt)
 		position = { 1500,0 };
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		position = { 0,0 };
 	}
 

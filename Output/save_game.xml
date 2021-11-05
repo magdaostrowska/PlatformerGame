@@ -140,4 +140,16 @@
 	<renderer>
 		<camera x="-309" y="54" />
 	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="0" y="54" />
+	</renderer>
 </game_state>

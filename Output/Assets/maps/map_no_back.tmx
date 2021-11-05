@@ -471,22 +471,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="161"/>
-   <tile gid="163"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="161"/>
-   <tile gid="163"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="161"/>
-   <tile gid="162"/>
-   <tile gid="163"/>
    <tile/>
    <tile/>
    <tile/>
@@ -497,11 +481,27 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="161"/>
-   <tile gid="162"/>
-   <tile gid="163"/>
    <tile/>
-   <tile gid="229"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -965,20 +965,6 @@
    <tile/>
    <tile gid="161"/>
    <tile gid="162"/>
-   <tile gid="162"/>
-   <tile gid="162"/>
-   <tile gid="162"/>
-   <tile gid="163"/>
-   <tile/>
-   <tile gid="161"/>
-   <tile gid="162"/>
-   <tile gid="163"/>
-   <tile gid="161"/>
-   <tile gid="163"/>
-   <tile/>
-   <tile gid="161"/>
-   <tile gid="162"/>
-   <tile gid="163"/>
    <tile/>
    <tile/>
    <tile/>
@@ -988,33 +974,47 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="161"/>
-   <tile gid="163"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="182"/>
-   <tile gid="163"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="161"/>
-   <tile gid="163"/>
    <tile/>
    <tile/>
-   <tile gid="161"/>
-   <tile gid="162"/>
-   <tile gid="162"/>
-   <tile gid="163"/>
    <tile/>
    <tile/>
-   <tile gid="161"/>
-   <tile gid="162"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
   </data>
  </layer>
  <layer id="2" name="platforms_ground" width="50" height="10" locked="1">
@@ -1489,10 +1489,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="228"/>
-   <tile/>
-   <tile gid="145"/>
-   <tile gid="147"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1500,14 +1496,18 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="145"/>
-   <tile gid="146"/>
-   <tile gid="146"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="228"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -2031,7 +2031,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="6" name="death" width="50" height="10">
+ <layer id="6" name="death" width="50" height="10" locked="1">
   <properties>
    <property name="col" type="int" value="3"/>
   </properties>
@@ -2486,56 +2486,56 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="162"/>
+   <tile gid="162"/>
+   <tile gid="162"/>
+   <tile gid="163"/>
    <tile gid="156"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="161"/>
+   <tile gid="162"/>
+   <tile gid="163"/>
+   <tile gid="161"/>
+   <tile gid="163"/>
    <tile gid="156"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="156"/>
-   <tile gid="156"/>
-   <tile/>
-   <tile gid="156"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="156"/>
-   <tile/>
-   <tile/>
-   <tile gid="156"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="161"/>
+   <tile gid="162"/>
+   <tile gid="163"/>
+   <tile gid="163"/>
    <tile gid="156"/>
    <tile gid="156"/>
-   <tile/>
+   <tile gid="228"/>
+   <tile gid="156"/>
+   <tile gid="145"/>
+   <tile gid="147"/>
+   <tile gid="163"/>
+   <tile gid="156"/>
+   <tile gid="161"/>
+   <tile gid="163"/>
+   <tile gid="156"/>
+   <tile gid="161"/>
+   <tile gid="162"/>
+   <tile gid="145"/>
+   <tile gid="146"/>
+   <tile gid="146"/>
+   <tile gid="182"/>
+   <tile gid="163"/>
    <tile gid="156"/>
    <tile gid="156"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="228"/>
    <tile gid="156"/>
    <tile gid="156"/>
-   <tile/>
-   <tile/>
+   <tile gid="161"/>
+   <tile gid="163"/>
+   <tile gid="162"/>
+   <tile gid="163"/>
+   <tile gid="161"/>
+   <tile gid="162"/>
+   <tile gid="162"/>
+   <tile gid="163"/>
+   <tile gid="156"/>
+   <tile gid="156"/>
+   <tile gid="161"/>
+   <tile gid="162"/>
   </data>
  </layer>
 </map>

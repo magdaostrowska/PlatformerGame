@@ -80,11 +80,8 @@ void Map::Draw()
 							pos.y+4,
 							&r);
 					}
-
 				}
 			}
-		
-
 		mapLayerItem = mapLayerItem->next;
 	}
 }
@@ -110,8 +107,6 @@ iPoint Map::MapToWorld(int x, int y) const
 		ret.x = x; 
 		ret.y = y;
 	}
-
-
 	return ret;
 }
 

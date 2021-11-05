@@ -15,6 +15,8 @@
 Scene::Scene() : Module()
 {
 	name.Create("scene");
+	win = false;
+	loss = false;
 }
 
 // Destructor
@@ -33,7 +35,6 @@ bool Scene::Awake()
 // Called before the first frame
 bool Scene::Start()
 {
-
 	app->SaveConfigRequested();
 
 	// Loading map
@@ -67,29 +68,17 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		app->render->camera.y -= 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		app->render->camera.y += 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 		app->render->camera.x -= 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		app->render->camera.x += 1;
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-	{
-		if (app->player->godMode == true)
-		{
-			app->player->godMode = false;
-		}
-		else 
-		{
-			app->player->godMode = true;
-		}
-
-	}
 
 	//for (int i = 0; i <= app->render->camera.x; i++){
 	//	back_pos.x = i * 2;

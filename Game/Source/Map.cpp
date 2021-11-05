@@ -57,8 +57,6 @@ void Map::Draw()
 	ListItem<MapLayer*>* mapLayerItem;
 	mapLayerItem = mapData.layers.start;
 	
-	
-	
 	while (mapLayerItem != NULL) {
 		
 			for (int x = 0; x < mapLayerItem->data->width; x++)

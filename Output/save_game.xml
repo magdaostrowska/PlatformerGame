@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- L02: TODO 4: Create a simulation xml file to read -->
 <game_state>
 	<input />
 	<window />
@@ -8,5 +7,137 @@
 	<scene />
 	<renderer>
 		<camera x="0" y="0" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-1623" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-1998" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2121" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2121" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2121" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2121" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2880" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2880" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2880" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-2880" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-309" y="54" />
 	</renderer>
 </game_state>

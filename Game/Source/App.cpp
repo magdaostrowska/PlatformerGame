@@ -32,6 +32,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	collisions = new Collisions();
 	player = new Player();
 
+	filenameGame = "save_game.xml";
+	filenameConfig = "config.xml";
+
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(win);
@@ -43,8 +46,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(collisions);
 	AddModule(player);
-	
-	
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -158,8 +159,10 @@ pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 
 	pugi::xml_parse_result result = configFile.load_file(CONFIG_FILENAME);
 
-	if (result == NULL) LOG("Could not load xml file: %s. pugi error: %s", CONFIG_FILENAME, result.description());
-	else ret = configFile.child("config");
+	if (result == NULL) 
+		LOG("Could not load xml file: %s. pugi error: %s", CONFIG_FILENAME, result.description());
+	else 
+		ret = configFile.child("config");
 
 	return ret;
 }
@@ -173,8 +176,8 @@ void App::PrepareUpdate()
 void App::FinishUpdate()
 {
 	// Calling Load / Save methods
-	if (loadGameRequested == true) LoadGame();
-	if (saveGameRequested == true) SaveGame();
+	if (loadGameRequested == true) LoadGame(filenameGame.GetString());
+	if (saveGameRequested == true) SaveGame(filenameGame.GetString());
 }
 
 // Calling modules before each loop iteration
@@ -304,31 +307,99 @@ void App::SaveGameRequest() const
 	saveGameRequested = true;
 }
 
+void App::LoadConfigRequested()
+{
+	loadConfigRequested = true;
+}
+
+void App::SaveConfigRequested() const
+{
+	saveConfigRequested = true;
+}
+
 // ---------------------------------------
 // L02: TODO 5: Create a method to actually load an xml file
 // then call all the modules to load themselves
-bool App::LoadGame()
+bool App::LoadGame(SString filename)
 {
 	bool ret = false;
 
-	//...
+	pugi::xml_parse_result result = configFile.load_file(filename.GetString());
+	//pugi::xml_document data;
+	//pugi::xml_node root;
+
+	if (result != NULL)
+	{
+		LOG("");
+
+		config = configFile.first_child();
+		
+		ListItem<Module*>* item = modules.start;
+		ret = true;
+
+		while (ret == true && item != NULL)
+		{
+			ret = item->data->LoadState(config.child(item->data->name.GetString()));
+			item = item->next;
+		}
+
+		configFile.reset();
+
+		if (ret == true)
+		{
+			LOG("Finished loading");
+		}
+		else
+		{
+			LOG("Loading was interrupted with error on %s module", ((item != NULL) ? item->data->name.GetString() : "unknown"));
+		}
+	}
+	else
+	{
+		LOG("Couldn't parse xml file. Error: %s", result.description());
+	}
 
 	loadGameRequested = false;
-
+	loadConfigRequested = false;
 	return ret;
 }
 
 // L02: TODO 7: Implement the xml save method for current state
-bool App::SaveGame() const
+bool App::SaveGame(SString filename) const
 {
 	bool ret = true;
 
-	//...
+	pugi::xml_document data;
+	pugi::xml_node root;
 
+	pugi::xml_parse_result result = data.load_file(filename.GetString());
+	ListItem<Module*>* item;
+
+	if (result != NULL)
+	{
+		root = data.first_child();
+		item = modules.start;
+		ret = true;
+
+		while (ret == true && item != NULL)
+		{
+			ret = item->data->SaveState(root.append_child(item->data->name.GetString()));
+			item = item->next;
+		}
+
+		data.save_file(filename.GetString());
+		data.reset();
+
+		if (ret == true)
+		{
+			LOG("Saving finished");
+		}
+		else
+			LOG("Save was interrupted with error on %s module", (item != NULL) ? item->data->name.GetString() : "unknown");
+	}
+
+	//data.reset();
 	saveGameRequested = false;
-
+	saveConfigRequested = false;
 	return ret;
 }
-
-
-

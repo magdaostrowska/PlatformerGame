@@ -85,9 +85,15 @@
     <None Include="..\Output\Assets\maps\map_no_back.tmx">
       <Filter>File</Filter>
     </None>
+    <None Include="..\Output\Assets\maps\map2_no_back.tmx">
+      <Filter>File</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml">
+      <Filter>File</Filter>
+    </Xml>
+    <Xml Include="..\Output\save_game.xml">
       <Filter>File</Filter>
     </Xml>
   </ItemGroup>

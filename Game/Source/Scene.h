@@ -32,6 +32,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Load state game
+	bool LoadState(pugi::xml_node& data);
+
+	// Save state game
+	bool SaveState(pugi::xml_node& data)const;
+
 private:
 	int textFont = -1;
 

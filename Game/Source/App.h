@@ -21,7 +21,6 @@ class Map;
 class Collisions;
 class Player;
 
-
 class App
 {
 public:
@@ -57,6 +56,8 @@ public:
     // L02: DONE 1: Create methods to request Load / Save
 	void LoadGameRequest();
 	void SaveGameRequest() const;
+	void LoadConfigRequested();
+	void SaveConfigRequested() const;
 
 	//virtual void OnCollision(Collider* c1, Collider* c2);
 
@@ -82,8 +83,8 @@ private:
 	bool PostUpdate();
 
 	// Load / Save
-	bool LoadGame();
-	bool SaveGame() const;
+	bool LoadGame(const SString _filename);
+	bool SaveGame(const SString _filename) const;
 
 public:
 
@@ -119,6 +120,11 @@ private:
 
 	mutable bool saveGameRequested;
 	bool loadGameRequested;
+
+	bool loadConfigRequested;
+	mutable bool saveConfigRequested;
+	SString filenameGame;
+	SString filenameConfig;
 };
 
 extern App* app;

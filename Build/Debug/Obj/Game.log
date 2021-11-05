@@ -1,4 +1,3 @@
-﻿  Scene.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+﻿  Map.cpp
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(25,20): warning C4018: '<': signed/unsigned mismatch
+  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

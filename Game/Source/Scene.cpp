@@ -33,9 +33,12 @@ bool Scene::Awake()
 // Called before the first frame
 bool Scene::Start()
 {
+
+	app->SaveConfigRequested();
+
 	// Loading map
 	app->map->Load("map_no_back.tmx");
-	back1 = app->tex->Load("Assets/Textures/back_image.png");
+	back1 = app->tex->Load("Assets/textures/back_image.png");
 	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
 	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);
 
@@ -57,11 +60,11 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-    // Request Load / Save when pressing L/S
+    // Request Load / Save when pressing L/F5
 	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		app->LoadGameRequest();
 
-	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	if(app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
 	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -75,6 +78,18 @@ bool Scene::Update(float dt)
 
 	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += 1;
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		if (app->player->godMode == true)
+		{
+			app->player->godMode = false;
+		}
+		else 
+		{
+			app->player->godMode = true;
+		}
+
+	}
 
 	//for (int i = 0; i <= app->render->camera.x; i++){
 	//	back_pos.x = i * 2;
@@ -83,8 +98,6 @@ bool Scene::Update(float dt)
 	back_pos.x = app->render->camera.x/40;
 	
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
-
-	
 
 	// Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
@@ -150,5 +163,15 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
+	return true;
+}
+
+bool Scene::LoadState(pugi::xml_node& data)
+{
+	return true;
+}
+
+bool Scene::SaveState(pugi::xml_node& data) const
+{
 	return true;
 }

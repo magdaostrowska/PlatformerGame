@@ -9,6 +9,9 @@
 #include "Player.h"
 #include "Collisions.h"
 #include "Fonts.h"
+#include "Title.h"
+#include "FadeToBlack.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -31,6 +34,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	collisions = new Collisions();
 	player = new Player();
+	titleScreen = new Title();
+	fade = new FadeToBlack();
 
 	filenameGame = "save_game.xml";
 	filenameConfig = "config.xml";
@@ -46,6 +51,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(collisions);
 	AddModule(player);
+	AddModule(titleScreen);
+	AddModule(fade);
 
 	// Render last to swap buffer
 	AddModule(render);

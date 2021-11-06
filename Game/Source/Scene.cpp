@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Fonts.h"
+#include "Title.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -15,8 +16,8 @@
 Scene::Scene() : Module()
 {
 	name.Create("scene");
-	win = false;
-	loss = false;
+	//win = false;
+	//loss = false;
 }
 
 // Destructor
@@ -103,6 +104,13 @@ bool Scene::Update(float dt)
 bool Scene::PostUpdate()
 {
 	bool ret = true;
+
+	if (app->titleScreen->inTitle == true) {
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PRESS SPACE TO START");
+
+		return true;
+	}
+
 	app->render->DrawTexture(back1, back_pos.x, back_pos.y, &rectMap, 1.0f);
 
 	// Draw map

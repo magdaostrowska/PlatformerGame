@@ -20,6 +20,8 @@ class Scene;
 class Map;
 class Collisions;
 class Player;
+class Title;
+class FadeToBlack;
 
 class App
 {
@@ -99,6 +101,8 @@ public:
 	Collisions* collisions;
 	Player* player;
 	Fonts* fonts;
+	Title* titleScreen;
+	FadeToBlack* fade;
 
 private:
 

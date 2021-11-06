@@ -1,7 +1,2 @@
-﻿  Collisions.cpp
-  Player.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(9,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+﻿  Title.cpp
+  Game.vcxproj -> X:\Users\xavie\Downloads\PlatformerGame-dev\PlatformerGame-dev\Build\Debug\Game.exe

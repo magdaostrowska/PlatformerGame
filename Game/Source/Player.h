@@ -34,6 +34,8 @@ public:
 	bool Save(pugi::xml_node& data) const;
 	bool Load(pugi::xml_node& data);
 
+	void Die();
+
 public:
 
 	const int FPS = 30;
@@ -88,6 +90,9 @@ public:
 
 	unsigned int lastTimeJump;
 	unsigned int lastTimeFall;
+
+	int lastGroundposX;
+	int lastGroundposY;
 
 	pugi::xml_document	document;
 

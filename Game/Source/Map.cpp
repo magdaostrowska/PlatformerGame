@@ -586,7 +586,7 @@ void Map::LoadCol() {
 							&r);
 						*/
 
-						collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::WALL, this);
+						collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::DEATH, this);
 						i++;
 					}
 

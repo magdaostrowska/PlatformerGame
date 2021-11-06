@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
+
+
 <game_state>
+  <!-- 
 	<input />
 	<window />
 	<textures />
@@ -152,4 +155,77 @@
 	<renderer>
 		<camera x="0" y="54" />
 	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-381" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-966" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-966" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-882" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-273" y="54" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-423" y="54" />
+	</renderer> -->
 </game_state>
+  

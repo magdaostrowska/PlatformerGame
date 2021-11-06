@@ -4,11 +4,6 @@
 #include "SDL/include/SDL.h"
 #include "FadeToBlack.h"
 
-
-
-
-
-
 Title::Title() : Module()
 {
 
@@ -26,7 +21,6 @@ bool Title::Awake() {
 }
 bool Title::Start()
 {
-
 	return true;
 }
 
@@ -38,13 +32,11 @@ bool Title::Update(float dt)
 			inTitle = false;
 		}
 	}
-
 	return true;
 }
 
 bool Title::PostUpdate()
 {
-
 	return true;
 }
 

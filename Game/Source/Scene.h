@@ -38,7 +38,13 @@ public:
 	// Save state game
 	bool SaveState(pugi::xml_node& data)const;
 
+
+public:
+
+	int level = 2;
+
 private:
+
 	int textFont = -1;
 
 	iPoint back_pos;

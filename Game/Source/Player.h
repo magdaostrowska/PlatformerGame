@@ -9,6 +9,9 @@
 #include "Render.h"
 #include "Input.h"
 #include "Collisions.h"
+#include "Scene.h"
+#include "Fonts.h"
+#include "Window.h"
 
 struct SDL_Texture;
 struct Collider;

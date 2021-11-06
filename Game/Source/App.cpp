@@ -312,6 +312,7 @@ void App::SaveGameRequest() const
 {
 	// NOTE: We should check if SAVE_STATE_FILENAME actually exist and... should we overwriten
 	saveGameRequested = true;
+	
 }
 
 void App::LoadConfigRequested()
@@ -380,12 +381,12 @@ bool App::SaveGame(SString filename) const
 	pugi::xml_node root;
 
 	pugi::xml_parse_result result = data.load_file(filename.GetString());
-	ListItem<Module*>* item;
+	//ListItem<Module*>* item;
 
 	if (result != NULL)
 	{
 		root = data.first_child();
-		item = modules.start;
+		ListItem<Module*>* item = modules.start;
 		ret = true;
 
 		while (ret == true && item != NULL)

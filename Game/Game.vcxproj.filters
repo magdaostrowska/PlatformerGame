@@ -92,6 +92,9 @@
     <None Include="..\Output\Assets\maps\map2_no_back.tmx">
       <Filter>File</Filter>
     </None>
+    <None Include="..\Output\Assets\maps\level2.tmx">
+      <Filter>File</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml">

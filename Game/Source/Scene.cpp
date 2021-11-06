@@ -6,9 +6,14 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Player.h"
+#include "Fonts.h"
+#include "Title.h"
 
 #include "Defs.h"
 #include "Log.h"
+
+#include <iostream>
 
 Scene::Scene() : Module()
 {
@@ -31,8 +36,25 @@ bool Scene::Awake()
 // Called before the first frame
 bool Scene::Start()
 {
+	app->SaveConfigRequested();
+
 	// Loading map
-	app->map->Load("map.tmx");
+
+	if (level == 1)
+	{
+		app->map->Load("map_no_back.tmx");
+		back1 = app->tex->Load("Assets/textures/back_image.png");
+	}
+	else if (level == 2)
+	{
+		app->map->Load("level2.tmx");
+		back1 = app->tex->Load("Assets/textures/Background.png");
+	}
+
+	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
+	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);
+
+	back_pos = { 0,0 };
 	//app->map->Load("map_1.tmx");
 	
 	// Load music
@@ -50,29 +72,32 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-    // Request Load / Save when pressing L/S
+    // Request Load / Save when pressing L/F5
 	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		app->LoadGameRequest();
 
-	if(app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		app->render->camera.y -= 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		app->render->camera.y += 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 		app->render->camera.x -= 1;
 
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		app->render->camera.x += 1;
 
-	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
+	//for (int i = 0; i <= app->render->camera.x; i++){
+	//	back_pos.x = i * 2;
+	//}
 
-	// Draw map
-	app->map->Draw();
+	back_pos.x = app->render->camera.x/40;
+	
+	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
 	// Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
@@ -90,8 +115,54 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (app->titleScreen->inTitle == true) {
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PRESS SPACE TO START");
+
+		return true;
+	}
+
+	app->render->DrawTexture(back1, back_pos.x, back_pos.y, &rectMap, 1.0f);
+
+	// Draw map
+	app->map->Draw();
+
+	app->player->rectPlayer = app->player->currentAnimation->GetCurrentFrame();
+
+	if (app->player->currentAnimation == &app->player->idleLeft) {
+		app->render->DrawTexture(app->player->textureIdleLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->idleRight) {
+		app->render->DrawTexture(app->player->textureIdleRight, app->player->position.x - 19, app->player->position.y, & app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->runLeft) {
+		app->render->DrawTexture(app->player->textureRunLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->runRight) {
+		app->render->DrawTexture(app->player->textureRunRight, app->player->position.x - 19, app->player->position.y, &app->player-> rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->jumpLeft) {
+		app->render->DrawTexture(app->player->textureJumpLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+	else if (app->player->currentAnimation == &app->player->jumpRight) {
+		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	}
+	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);
+	
+	blackRect = { 0, (app->render->camera.y - app->render->camera.y * 2) / 3, app->render->camera.w,( app->win->screenSurface->h / 2 - 324 * 3 / 2)/3 };
+	app->render->DrawRectangle(blackRect, 0, 0, 0, 255, true);
+	blackRect2 = { 0, (app->render->camera.y - app->render->camera.y * 2) / 3 + (app->win->screenSurface->h / 2 - 324 * 3 / 2) / 3 + 324, app->render->camera.w,(app->win->screenSurface->h / 2 - 324 * 3 / 2) / 3 };
+	app->render->DrawRectangle(blackRect2, 0, 0, 0, 255, true);
+
+	//app->fonts->BlitText(((app->player->position.x - app->player->position.x * 2) * app->win->GetScale()) + (app->win->screenSurface->w / 2 - 24 * app->win->GetScale()) , 0, textFont,"Lifes:");
+	//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes:");
+	const char* text = "Lifes: " + app->player->lifes;
+	//std::cout << "!!!!!!!!!!!!!!!!"<< app->player->lifes << "!!!!!!!!!!!!!!!!" << std::endl;
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 140/2) - (app->render->camera.x - (app->render->camera.w / 2 - 140/2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, text);
+	//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()) + 240 / app->win->GetScale(), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerLifes);
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;
+	}
 
 	return ret;
 }
@@ -101,5 +172,15 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
+	return true;
+}
+
+bool Scene::LoadState(pugi::xml_node& data)
+{
+	return true;
+}
+
+bool Scene::SaveState(pugi::xml_node& data) const
+{
 	return true;
 }

@@ -14,7 +14,8 @@ struct Collider
 		NONE = -1,
 		PLAYER,
 		GROUND,
-		
+		WALL,
+		DEATH,
 
 		MAX
 	};
@@ -22,9 +23,7 @@ struct Collider
 	Collider(SDL_Rect rectangle, Type type, Module* listener = nullptr);
 
 	void SetPos(int x, int y);
-
 	bool Intersects(const SDL_Rect& r) const;
-
 	void AddListener(Module* listener);
 
 	SDL_Rect rect;

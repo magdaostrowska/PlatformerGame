@@ -19,6 +19,9 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Collisions.cpp" />
+    <ClCompile Include="Source\Fonts.cpp" />
+    <ClCompile Include="Source\Title.cpp" />
+    <ClCompile Include="Source\FadeToBlack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -58,6 +61,9 @@
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\Collisions.h" />
+    <ClInclude Include="Source\Fonts.h" />
+    <ClInclude Include="Source\Title.h" />
+    <ClInclude Include="Source\FadeToBlack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -77,5 +83,25 @@
     <None Include="..\Output\Assets\maps\map.tmx">
       <Filter>File</Filter>
     </None>
+    <None Include="..\Output\Assets\maps\map2.tmx">
+      <Filter>File</Filter>
+    </None>
+    <None Include="..\Output\Assets\maps\map_no_back.tmx">
+      <Filter>File</Filter>
+    </None>
+    <None Include="..\Output\Assets\maps\map2_no_back.tmx">
+      <Filter>File</Filter>
+    </None>
+    <None Include="..\Output\Assets\maps\level2.tmx">
+      <Filter>File</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Output\config.xml">
+      <Filter>File</Filter>
+    </Xml>
+    <Xml Include="..\Output\save_game.xml">
+      <Filter>File</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

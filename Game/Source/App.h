@@ -15,10 +15,13 @@ class Input;
 class Render;
 class Textures;
 class Audio;
+class Fonts;
 class Scene;
 class Map;
 class Collisions;
 class Player;
+class Title;
+class FadeToBlack;
 
 class App
 {
@@ -50,10 +53,13 @@ public:
 	const char* GetArgv(int index) const;
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
+	pugi::xml_node GetConfig();
 
     // L02: DONE 1: Create methods to request Load / Save
 	void LoadGameRequest();
 	void SaveGameRequest() const;
+	void LoadConfigRequested();
+	void SaveConfigRequested() const;
 
 	//virtual void OnCollision(Collider* c1, Collider* c2);
 
@@ -79,8 +85,8 @@ private:
 	bool PostUpdate();
 
 	// Load / Save
-	bool LoadGame();
-	bool SaveGame() const;
+	bool LoadGame(const SString _filename);
+	bool SaveGame(const SString _filename) const;
 
 public:
 
@@ -94,6 +100,9 @@ public:
 	Map* map;
 	Collisions* collisions;
 	Player* player;
+	Fonts* fonts;
+	Title* titleScreen;
+	FadeToBlack* fade;
 
 private:
 
@@ -115,6 +124,11 @@ private:
 
 	mutable bool saveGameRequested;
 	bool loadGameRequested;
+
+	bool loadConfigRequested;
+	mutable bool saveConfigRequested;
+	SString filenameGame;
+	SString filenameConfig;
 };
 
 extern App* app;

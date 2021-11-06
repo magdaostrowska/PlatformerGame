@@ -13,75 +13,22 @@ Collisions::Collisions() : Module()
 
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::DEATH] = true;
 
 	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = true;
-/*
+	matrix[Collider::Type::GROUND][Collider::Type::WALL] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::DEATH] = false;
+
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
-	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::WALL][Collider::Type::TOUCH] = true;
-	matrix[Collider::Type::WALL][Collider::Type::BOX] = false;
-	matrix[Collider::Type::WALL][Collider::Type::TOUCHB] = true;
-	matrix[Collider::Type::WALL][Collider::Type::BALL] = true;
-	matrix[Collider::Type::WALL][Collider::Type::UI] = false;
-
-
-	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::TOUCH] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::BOX] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::TOUCHB] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::BALL] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::UI] = true;
-
-	matrix[Collider::Type::TOUCH][Collider::Type::WALL] = true;
-	matrix[Collider::Type::TOUCH][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::TOUCH][Collider::Type::TOUCH] = false;
-	matrix[Collider::Type::TOUCH][Collider::Type::BOX] = true;
-	matrix[Collider::Type::TOUCH][Collider::Type::TOUCHB] = false;
-	matrix[Collider::Type::TOUCH][Collider::Type::BALL] = false;
-	matrix[Collider::Type::TOUCH][Collider::Type::UI] = false;
-
-	matrix[Collider::Type::BOX][Collider::Type::WALL] = false;
-	matrix[Collider::Type::BOX][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::BOX][Collider::Type::TOUCH] = true;
-	matrix[Collider::Type::BOX][Collider::Type::BOX] = false;
-	matrix[Collider::Type::BOX][Collider::Type::TOUCHB] = true;
-	matrix[Collider::Type::BOX][Collider::Type::BALL] = true;
-	matrix[Collider::Type::BOX][Collider::Type::UI] = false;
-
-	matrix[Collider::Type::TOUCHB][Collider::Type::WALL] = true;
-	matrix[Collider::Type::TOUCHB][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::TOUCHB][Collider::Type::TOUCH] = false;
-	matrix[Collider::Type::TOUCHB][Collider::Type::BOX] = true;
-	matrix[Collider::Type::TOUCHB][Collider::Type::TOUCHB] = false;
-	matrix[Collider::Type::TOUCHB][Collider::Type::BALL] = false;
-	matrix[Collider::Type::TOUCHB][Collider::Type::UI] = false;
-
-	matrix[Collider::Type::BALL][Collider::Type::WALL] = false;
-	matrix[Collider::Type::BALL][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::BALL][Collider::Type::TOUCH] = false;
-	matrix[Collider::Type::BALL][Collider::Type::BOX] = true;
-	matrix[Collider::Type::BALL][Collider::Type::TOUCHB] = false;
-	matrix[Collider::Type::BALL][Collider::Type::BALL] = false;
-	matrix[Collider::Type::BALL][Collider::Type::UI] = false;
-
-	matrix[Collider::Type::UI][Collider::Type::WALL] = false;
-	matrix[Collider::Type::UI][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::UI][Collider::Type::TOUCH] = false;
-	matrix[Collider::Type::UI][Collider::Type::BOX] = false;
-	matrix[Collider::Type::UI][Collider::Type::TOUCHB] = false;
-	matrix[Collider::Type::UI][Collider::Type::BALL] = false;
-	matrix[Collider::Type::UI][Collider::Type::UI] = false;
-	*/
-
-
-
+	matrix[Collider::Type::WALL][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::WALL][Collider::Type::DEATH] = false;
 }
 
 Collisions::~Collisions()
 {
-
 }
 
 bool Collisions::PreUpdate()
@@ -125,13 +72,12 @@ bool Collisions::PreUpdate()
 			}
 		}
 	}
-
 	return true;
 }
 
 bool Collisions::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		debug = !debug;
 
 	return true;
@@ -165,26 +111,15 @@ void Collisions::DebugDraw()
 		case Collider::Type::GROUND: // green
 			app->render->DrawRectangle(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
-			/*
-		case Collider::Type::TOUCH: // red
-			app->render->DrawRectangle(colliders[i]->rect, 255, 0, 0, alpha);
-			break;
-		case Collider::Type::BOX: // yellow
+			
+		case Collider::Type::WALL: // yellow
 			app->render->DrawRectangle(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
-		case Collider::Type::TOUCHB: // celeste
-			app->render->DrawRectangle(colliders[i]->rect, 0, 255, 255, alpha);
+		case Collider::Type::DEATH: // red
+			app->render->DrawRectangle(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-		case Collider::Type::BALL: // fuxia
-			app->render->DrawRectangle(colliders[i]->rect, 255, 0, 255, alpha);
-			break;
-
-		case Collider::Type::UI: // salmon
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
-			break;*/
 		}
 	}
-
 }
 
 bool Collisions::CleanUp()
@@ -215,7 +150,6 @@ Collider* Collisions::AddCollider(SDL_Rect rect, Collider::Type type, Module* li
 			break;
 		}
 	}
-
 	return ret;
 }
 

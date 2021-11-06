@@ -19,21 +19,15 @@ public:
 	bool Update(float dt);
 
 	bool PostUpdate();
-
 	bool CleanUp();
-
 	Collider* AddCollider(SDL_Rect rect, Collider::Type type, Module* listener = nullptr);
-
 	void RemoveCollider(Collider* collider);
-
 	void DebugDraw();
 
 private:
 
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };
-
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];
-
 	bool debug = false;
 };
 

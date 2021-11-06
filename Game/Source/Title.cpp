@@ -27,7 +27,7 @@ bool Title::Start()
 bool Title::Update(float dt)
 {
 	if (inTitle == true) {
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 			app->fade->Fade(240, 1);
 			inTitle = false;
 		}

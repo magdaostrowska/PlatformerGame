@@ -155,16 +155,16 @@ bool Player::LoadState(pugi::xml_node& data)
 	position.x = data.child("position").attribute("x").as_int();
 	position.y = data.child("position").attribute("y").as_int();
 
+	//Load level
+	if (app->scene->level != data.child("level").attribute("level").as_int())
+	{
+		app->scene->level = data.child("level").attribute("level").as_int();
+		app->fade->Fade();
+	}
+
 	//Load camera's position
 	app->render->camera.x = data.child("playercamera").attribute("x").as_int();
 	app->render->camera.y = data.child("playercamera").attribute("y").as_int();
-
-	//Load level
-	if (app->scene->level != data.child("level").attribute("value").as_int())
-	{
-		app->scene->level = data.child("level").attribute("value").as_int();
-		app->fade->Fade();
-	}
 
 	return true;
 }
@@ -173,16 +173,17 @@ bool Player::SaveState(pugi::xml_node& data) const
 {
 	std::cout << "SaveState Player" << std::endl;
 
-	//Level
-	//pugi::xml_node level = data.child("level");
-
+	//Player's position and lifes
 	data.append_child("position").append_attribute("x") = position.x;
 	data.child("position").append_attribute("y") = position.y;
 	data.append_child("lifes").append_attribute("lifes") = lifes;
+
+	//Level
 	data.append_child("level").append_attribute("level") = app->scene->level;
-	//playerPosition.attribute("y").set_value(position.y);
-	//playerLifes.attribute("lifes").set_value(lifes);
-	//level.attribute("level").set_value(app->scene->level);
+
+	//Camera position
+	data.append_child("camera").append_attribute("x") = app->render->camera.x;
+	data.child("camera").append_attribute("y") = app->render->camera.y;
 
 	return true;
 }

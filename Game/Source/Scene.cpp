@@ -173,10 +173,9 @@ bool Scene::PostUpdate()
 
 	//app->fonts->BlitText(((app->player->position.x - app->player->position.x * 2) * app->win->GetScale()) + (app->win->screenSurface->w / 2 - 24 * app->win->GetScale()) , 0, textFont,"Lifes:");
 	//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes:");
-	const char* text = "Lifes: " + app->player->lifes;
-	//std::cout << "!!!!!!!!!!!!!!!!"<< app->player->lifes << "!!!!!!!!!!!!!!!!" << std::endl;
-	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 140/2) - (app->render->camera.x - (app->render->camera.w / 2 - 140/2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, text);
-	//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()) + 240 / app->win->GetScale(), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerLifes);
+
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 140/2) - (app->render->camera.x - (app->render->camera.w / 2 - 140/2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes: ");
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()) + 240 / app->win->GetScale(), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerLifes);
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;

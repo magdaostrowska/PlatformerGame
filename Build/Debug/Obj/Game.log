@@ -1,24 +1,4 @@
-﻿  App.cpp
+﻿  Scene.cpp
 C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
 C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Collisions.cpp
-  FadeToBlack.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\FadeToBlack.cpp(83,17): warning C4244: '=': conversion from 'float' to 'Uint32', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\FadeToBlack.cpp(87,19): warning C4244: '=': conversion from 'float' to 'Uint32', possible loss of data
-  Fonts.cpp
-  Map.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(25,20): warning C4018: '<': signed/unsigned mismatch
-  Player.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(12,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Render.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Render.cpp(90,26): warning C4018: '<': signed/unsigned mismatch
-  Scene.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Textures.cpp
-  Generating Code...
   Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

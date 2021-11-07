@@ -116,7 +116,7 @@ bool Player::Awake(pugi::xml_node& config) {
 		position.y = config.child("level2").child("position").attribute("y").as_int();
 	}
 	
-	lifes = config.child("lifes").attribute("lifes").as_int();
+	lifes = config.child("lifes").attribute("value").as_int();
 	document.load_file("config.xml");
 	return ret;
 }

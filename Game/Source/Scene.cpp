@@ -18,7 +18,7 @@
 Scene::Scene() : Module()
 {
 	name.Create("scene");
-	level = 1;
+	level = 2;
 }
 
 // Destructor
@@ -76,7 +76,15 @@ bool Scene::PreUpdate()
 
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
-		// TODO
+		if (level == 1)
+		{
+			app->player->position.x = 0;
+			app->player->position.y = 0;
+		}
+		else if (level == 2) {
+			app->player->position.x = 0;
+			app->player->position.y = 180;
+		}
 	}
 	return true;
 }

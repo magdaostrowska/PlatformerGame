@@ -65,9 +65,10 @@ bool Scene::Start()
 bool Scene::PreUpdate()
 {
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		level = 1;
-		app->fade->Fade();
+		loadinglvl1 = true;
 	}
+
+	
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		level = 2;
@@ -92,6 +93,24 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+
+	if (loadinglvl1 == true) {
+		app->fade->Fade(120, 1);
+		if (app->fade->frameCount >= 120 / 2) {
+			level = 2;
+			app->map->RemoveCol();
+			app->map->CleanUp();
+
+			app->map->Load("map_level2.tmx");
+			app->tex->UnLoad(back1);
+			back1 = app->tex->Load("Assets/textures/back_image2.png");
+			//app->player->Spawn();
+			app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+			app->map->LoadCol();
+			loadinglvl1 = false;
+		}
+	}
+
 	if (app->player->position.x > 1504 && app->player->position.y == 148) {
 		if (level == 1) {
 			app->fade->Fade(120, 1);
@@ -128,8 +147,10 @@ bool Scene::Update(float dt)
 		app->SaveGameRequest();
 
 	//Load the previous state (even across levels)
-	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
 		app->LoadGameRequest();
+		app->player->loadingPos = 1;
+	}
 
 	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		app->render->camera.y += (int)(100 * dt);
@@ -175,15 +196,14 @@ bool Scene::PostUpdate()
 	else if(app->titleScreen->inTitle == 2){
 		
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 180 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 180 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "GAME OVER");
-		//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 180 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 180 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "|GAME OVER");
-
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 480 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 480 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO TRY AGAIN");
 		return true;
 		
 	}
 	else if (app->titleScreen->inTitle == 3) {
 
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 300 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 300 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "CONGRATULATIONS");
-		//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 300 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 300 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "|CONGRATULATIONS");
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 620 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 620 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START A NEW GAME");
 
 		return true;
 

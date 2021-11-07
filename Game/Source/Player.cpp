@@ -468,7 +468,20 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::GROUND) {
 
 			if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSpeed + 1 && c1->rect.y + c1->rect.h >= c2->rect.y) {
-				position.y = c2->rect.y - 48;
+				if (loadingPos == 0) {
+					position.y = c2->rect.y - 48;
+				}
+				else {
+					loadingPos++;
+					if (loadingPos >= 3) {
+						if (position.y != c2->rect.y - 48) {
+							loadingPos = 0;
+						}
+					}
+
+
+
+				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
 
@@ -495,7 +508,20 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 			if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSpeed + 1 && c1->rect.y + c1->rect.h >= c2->rect.y) {
 				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
-				position.y = c2->rect.y - 48;
+				if (loadingPos == 0) {
+					position.y = c2->rect.y - 48;
+				}
+				else {
+					loadingPos++;
+					if (loadingPos >= 3) {
+						if (position.y != c2->rect.y - 48) {
+							loadingPos = 0;
+						}
+					}
+
+
+
+				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
 

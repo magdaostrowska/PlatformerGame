@@ -44,6 +44,8 @@ public:
 	int level;
 	SDL_Texture* back1;
 
+	bool loadinglvl1 = false;
+
 private:
 
 	int textFont = -1;

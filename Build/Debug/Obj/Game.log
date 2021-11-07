@@ -1,8 +1,4 @@
-﻿  Player.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(12,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(195,35): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(224,35): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(444,35): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
-  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+﻿  Scene.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

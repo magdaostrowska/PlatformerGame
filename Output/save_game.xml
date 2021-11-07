@@ -219,4 +219,99 @@
 	<renderer>
 		<rendercamera x="-382" y="-186" />
 	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="313" y="84" />
+		<lifes lifes="0" />
+		<level level="1" />
+		<camera x="-335" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="-335" y="-126" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="390" y="180" />
+		<lifes lifes="0" />
+		<level level="2" />
+		<camera x="-566" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="-566" y="-126" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="219" y="148" />
+		<lifes lifes="0" />
+		<level level="1" />
+		<camera x="-53" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="-53" y="-126" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="71" y="148" />
+		<lifes lifes="0" />
+		<level level="1" />
+		<camera x="0" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="0" y="-126" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="183" y="148" />
+		<lifes lifes="0" />
+		<level level="1" />
+		<camera x="0" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="0" y="-126" />
+	</renderer>
 </game_state>

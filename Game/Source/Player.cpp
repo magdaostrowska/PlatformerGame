@@ -104,8 +104,18 @@ Player::~Player()
 bool Player::Awake(pugi::xml_node& config) {
 
 	bool ret = true;
-	config = app->GetConfig();
-	config = config.child("entity").child("player");
+
+	if (app->scene->level == 1)
+	{
+		position.x = config.child("level1").child("position").attribute("x").as_int();
+		position.y = config.child("level1").child("position").attribute("y").as_int();
+	}
+	else if (app->scene->level == 2)
+	{
+		position.x = config.child("level2").child("position").attribute("x").as_int();
+		position.y = config.child("level2").child("position").attribute("y").as_int();
+	}
+	
 	lifes = config.child("lifes").attribute("value").as_int();
 	document.load_file("config.xml");
 	return ret;
@@ -123,7 +133,6 @@ bool Player::Start()
 
 	//idleLeft.Reset();
 	currentAnimation = &idleLeft;
-	position = { 0,0 };
 	collider = app->collisions->AddCollider({ position.x + 7 - speed, position.y + 14, 15 + 2 + 2 * speed, 34 + jumpSpeed }, Collider::Type::PLAYER, this);
 
 	lastTimeFall = SDL_GetTicks();

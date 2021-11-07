@@ -1,16 +1,15 @@
 <?xml version="1.0"?>
 <config>
 	<app>
-		<title>Game Development Testbed</title>
+		<title>Platformer Game</title>
 		<organization>UPC</organization>
 	</app>
 	<renderer>
 		<vsync value="false" />
-		<camera x="0" y="54" />
 	</renderer>
 	<window>
-		<resolution width="1000" height="600" scale="3" />
-		<fullscreen value="false" />
+		<resolution width="1280" height="720" scale="3" />
+		<fullscreen value="true" />
 		<borderless value="false" />
 		<resizable value="false" />
 		<fullscreen_window value="false" />
@@ -23,298 +22,24 @@
 	<textures />
 	<audio />
 	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<renderer>
-		<camera x="0" y="54" />
-	</renderer>
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous>
-		<position />
-	</:anonymous>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous>
-		<position x="0" />
-	</:anonymous>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous>
-		<position x="0" />
-	</:anonymous>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</:anonymous>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</:anonymous>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</:anonymous>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<:anonymous>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</:anonymous>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<:anonymous />
-	<map />
-	<:anonymous />
-	<player>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</player>
-	<:anonymous />
-	<:anonymous />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
 	<fonts />
 	<map />
 	<collisions />
 	<player>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</player>
-	<title />
-	<fade />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<fonts />
-	<map />
-	<collisions />
-	<player>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</player>
-	<title />
-	<fade />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<fonts />
-	<map />
-	<collisions />
-	<player>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</player>
-	<title />
-	<fade />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<fonts />
-	<map />
-	<collisions />
-	<player>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</player>
-	<title />
-	<fade />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<fonts />
-	<map />
-	<collisions />
-	<player>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="2" />
-	</player>
-	<title />
-	<fade />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<fonts />
-	<map />
-	<collisions />
-	<player>
-		<position x="0" y="0" />
+		<level1>
+			<position x="0" y="0" />
+		</level1>
+		<level2>
+			<position x="0" y="0" />
+		</level2>
 		<lifes lifes="0" />
 		<level level="1" />
-	</player>
-	<title />
-	<fade />
-	<renderer />
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<fonts />
-	<map />
-	<collisions />
-	<player>
-		<position x="0" y="0" />
-		<lifes lifes="0" />
-		<level level="1" />
+		<camera x="0" y="-126" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<rendercamera x="0" y="-186" />
+		<rendercamera x="0" y="-126" />
 	</renderer>
 	<window />
 	<input />
@@ -328,11 +53,12 @@
 		<position x="0" y="0" />
 		<lifes lifes="0" />
 		<level level="1" />
+		<camera x="0" y="-126" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<rendercamera x="0" y="-186" />
+		<rendercamera x="0" y="-126" />
 	</renderer>
 	<window />
 	<input />
@@ -346,11 +72,12 @@
 		<position x="0" y="0" />
 		<lifes lifes="0" />
 		<level level="1" />
+		<camera x="0" y="-126" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<rendercamera x="0" y="-186" />
+		<rendercamera x="0" y="-126" />
 	</renderer>
 	<window />
 	<input />
@@ -364,11 +91,12 @@
 		<position x="0" y="0" />
 		<lifes lifes="0" />
 		<level level="1" />
+		<camera x="0" y="-126" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<rendercamera x="0" y="-186" />
+		<rendercamera x="0" y="-126" />
 	</renderer>
 	<window />
 	<input />
@@ -382,12 +110,12 @@
 		<position x="0" y="0" />
 		<lifes lifes="0" />
 		<level level="1" />
-		<camera x="0" y="-186" />
+		<camera x="0" y="-126" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<rendercamera x="0" y="-186" />
+		<rendercamera x="0" y="-126" />
 	</renderer>
 	<window />
 	<input />
@@ -401,12 +129,31 @@
 		<position x="0" y="0" />
 		<lifes lifes="0" />
 		<level level="1" />
-		<camera x="0" y="-186" />
+		<camera x="0" y="-126" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<rendercamera x="0" y="-186" />
+		<rendercamera x="0" y="-126" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="200" y="0" />
+		<lifes lifes="0" />
+		<level level="1" />
+		<camera x="0" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="0" y="-126" />
 	</renderer>
 	<window />
 	<input />
@@ -420,11 +167,49 @@
 		<position x="0" y="0" />
 		<lifes lifes="0" />
 		<level level="1" />
-		<camera x="0" y="-186" />
+		<camera x="0" y="-126" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<rendercamera x="0" y="-186" />
+		<rendercamera x="0" y="-126" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="1" />
+		<camera x="0" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="0" y="-126" />
+	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="1" />
+		<camera x="0" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="0" y="-126" />
 	</renderer>
 </config>

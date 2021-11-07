@@ -33,9 +33,9 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 	void Spawn(int lvl);
 	void ControlGodMode(float dt);
-
-	bool Save(pugi::xml_node& data) const;
-	bool Load(pugi::xml_node& data);
+	
+	bool LoadState(pugi::xml_node& data) override;
+	bool SaveState(pugi::xml_node& data) const override;
 
 	void Die();
 

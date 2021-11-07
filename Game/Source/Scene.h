@@ -39,7 +39,6 @@ public:
 	// Save state game
 	bool SaveState(pugi::xml_node& data)const;
 
-
 public:
 
 	int level = 2;

@@ -8,7 +8,7 @@
 
 Fonts::Fonts() : Module()
 {
-
+	name.Create("fonts");
 }
 
 Fonts::~Fonts()

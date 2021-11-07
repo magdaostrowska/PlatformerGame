@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "Log.h"
 #include "Title.h"
+#include <iostream>
 
 Player::Player() : Module()
 {
+	name.Create("player");
 
 	lifes = 3;
 
@@ -145,7 +147,7 @@ void Player::ControlGodMode(float dt)
 	}
 }
 
-bool Player::Load(pugi::xml_node& data)
+bool Player::LoadState(pugi::xml_node& data)
 {
 
 	//Load player's lifes and  position
@@ -154,8 +156,8 @@ bool Player::Load(pugi::xml_node& data)
 	position.y = data.child("position").attribute("y").as_int();
 
 	//Load camera's position
-	app->render->camera.x = data.child("camera").attribute("x").as_int();
-	app->render->camera.y = data.child("camera").attribute("y").as_int();
+	app->render->camera.x = data.child("playercamera").attribute("x").as_int();
+	app->render->camera.y = data.child("playercamera").attribute("y").as_int();
 
 	//Load level
 	if (app->scene->level != data.child("level").attribute("value").as_int())
@@ -167,19 +169,20 @@ bool Player::Load(pugi::xml_node& data)
 	return true;
 }
 
-bool Player::Save(pugi::xml_node& data) const
+bool Player::SaveState(pugi::xml_node& data) const
 {
-	//Player's lifes and position
-	pugi::xml_node playerPosition = data.child("position");
-	pugi::xml_node playerLifes = data.child("lifes");
+	std::cout << "SaveState Player" << std::endl;
 
 	//Level
-	pugi::xml_node level = data.child("level");
+	//pugi::xml_node level = data.child("level");
 
-	playerPosition.attribute("x").set_value(position.x);
-	playerPosition.attribute("y").set_value(position.y);
-	playerLifes.attribute("lifes").set_value(lifes);
-	level.attribute("level").set_value(app->scene->level);
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+	data.append_child("lifes").append_attribute("lifes") = lifes;
+	data.append_child("level").append_attribute("level") = app->scene->level;
+	//playerPosition.attribute("y").set_value(position.y);
+	//playerLifes.attribute("lifes").set_value(lifes);
+	//level.attribute("level").set_value(app->scene->level);
 
 	return true;
 }

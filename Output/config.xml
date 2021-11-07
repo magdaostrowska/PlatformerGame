@@ -9,8 +9,8 @@
 		<camera x="0" y="54" />
 	</renderer>
 	<window>
-		<resolution width="1920" height="1080" scale="3" />
-		<fullscreen value="true" />
+		<resolution width="1000" height="600" scale="3" />
+		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
 		<fullscreen_window value="false" />
@@ -32,4 +32,190 @@
 	<renderer>
 		<camera x="0" y="54" />
 	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous>
+		<position />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous>
+		<position x="0" />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous>
+		<position x="0" />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<player>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</player>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="0" y="0" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</player>
+	<title />
+	<fade />
+	<renderer />
 </config>

@@ -5,56 +5,17 @@
 	<textures />
 	<audio />
 	<scene />
+	<:anonymous />
 	<map />
-	<renderer>
-		<camera x="-438" y="54" />
-		<camera x="-105" y="54" />
-	</renderer>
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<map />
-	<renderer>
-		<camera x="-2073" y="54" />
-	</renderer>
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<map />
-	<renderer>
-		<camera x="-2880" y="54" />
-	</renderer>
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<map />
-	<renderer>
-		<camera x="-2880" y="54" />
-	</renderer>
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<map />
-	<renderer>
-		<camera x="-1038" y="54" />
-	</renderer>
-	<window />
-	<input />
-	<textures />
-	<audio />
-	<scene />
-	<map />
-	<renderer>
-		<camera x="-1038" y="54" />
-	</renderer>
+	<:anonymous />
+	<:anonymous>
+		<position x="483" y="116" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</:anonymous>
+	<:anonymous />
+	<:anonymous />
+	<renderer />
 	<window />
 	<input />
 	<textures />
@@ -63,24 +24,28 @@
 	<:anonymous />
 	<map />
 	<:anonymous />
+	<player>
+		<position x="203" y="116" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</player>
 	<:anonymous />
 	<:anonymous />
-	<:anonymous />
-	<renderer>
-		<camera x="0" y="54" />
-	</renderer>
+	<renderer />
 	<window />
 	<input />
 	<textures />
 	<audio />
 	<scene />
-	<:anonymous />
+	<fonts />
 	<map />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<renderer>
-		<camera x="0" y="54" />
-	</renderer>
+	<collisions />
+	<player>
+		<position x="157" y="1490" />
+		<lifes lifes="0" />
+		<level level="2" />
+	</player>
+	<title />
+	<fade />
+	<renderer />
 </game_state>

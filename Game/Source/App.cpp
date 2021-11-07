@@ -21,7 +21,7 @@
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
-{
+{	
 	frames = 0;
 
 	win = new Window();
@@ -36,6 +36,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
+
+	saveGameRequested = false;
+	loadGameRequested = false;
 
 	filenameGame = "save_game.xml";
 	filenameConfig = "config.xml";
@@ -394,7 +397,8 @@ bool App::SaveGame(SString filename) const
 
 		while (ret == true && item != NULL)
 		{
-			ret = item->data->SaveState(root.child(item->data->name.GetString()));
+			ret = item->data->SaveState(root.append_child(item->data->name.GetString()));
+			
 			item = item->next;
 		}
 

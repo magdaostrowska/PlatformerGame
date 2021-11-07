@@ -192,7 +192,7 @@ bool Player::SaveState(pugi::xml_node& data) const
 
 bool Player::PreUpdate() {
 
-	if (app->titleScreen->inTitle == true) {
+	if (app->titleScreen->inTitle == 1) {
 		return true;
 	}
 
@@ -221,7 +221,7 @@ bool Player::Update(float dt)
 		SDL_Delay(frameDelay - frameTime);
 	}
 
-	if (app->titleScreen->inTitle == true) {
+	if (app->titleScreen->inTitle == 1) {
 		return true;
 	}
 
@@ -230,14 +230,15 @@ bool Player::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		app->scene->level = 1;
-		app->scene->Start();
+		//app->scene->level = 1;
+		//app->scene->Start();
 		//position = { 0,0 };
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		app->scene->level = 2;
-		app->scene->Start();
+		//app->scene->level = 2;
+		//app->scene->Start();
+		//position = { 0,0 };
 	}
 
 	if (isTouchingLeft == false && isTouchingRight == false) {
@@ -454,7 +455,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate()
 {
-	if (app->titleScreen->inTitle == true) {
+	if (app->titleScreen->inTitle == 1) {
 		return true;
 	}
 	currentAnimation->Update();

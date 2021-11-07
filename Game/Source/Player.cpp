@@ -151,7 +151,7 @@ bool Player::LoadState(pugi::xml_node& data)
 {
 
 	//Load player's lifes and  position
-	lifes = data.child("lives").attribute("value").as_int();
+	lifes = data.child("lifes").attribute("lifes").as_int();
 	position.x = data.child("position").attribute("x").as_int();
 	position.y = data.child("position").attribute("y").as_int();
 

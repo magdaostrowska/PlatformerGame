@@ -34,8 +34,8 @@ public:
 	void Spawn(int lvl);
 	void ControlGodMode(float dt);
 	
-	bool LoadState(pugi::xml_node& data) override;
-	bool SaveState(pugi::xml_node& data) const override;
+	bool LoadState(pugi::xml_node& data);
+	bool SaveState(pugi::xml_node& data) const;
 
 	void Die();
 

@@ -2,6 +2,7 @@
 #define __SCENE_H__
 
 #include "Module.h"
+#include "FadeToBlack.h"
 
 struct SDL_Texture;
 
@@ -41,7 +42,7 @@ public:
 
 public:
 
-	int level = 2;
+	int level = 1;
 
 private:
 

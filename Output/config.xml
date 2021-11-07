@@ -1,26 +1,35 @@
-<!-- Config file for the game -->
-<!-- L01: DONE 1: Create configuration file-->
+<?xml version="1.0"?>
 <config>
-  <app>
-    <title>Game Development Testbed</title>
-    <organization>UPC</organization>
-  </app>
-
-  <renderer>
-    <vsync value="false"/>
-  </renderer>
-
-  <window>
-    <!--<resolution width="1280" height="720" scale="1"/>-->
-    <resolution width="1920" height="1080" scale="3"/>
-    <fullscreen value="true"/>
-    <borderless value="false"/>
-    <resizable value="false"/>
-    <fullscreen_window value="false"/>
-  </window>
-
-  <!-- L03: Added maps folder as config option -->
-  <map>
-    <folder>Assets/maps/</folder>
-  </map>
+	<app>
+		<title>Game Development Testbed</title>
+		<organization>UPC</organization>
+	</app>
+	<renderer>
+		<vsync value="false" />
+		<camera x="0" y="54" />
+	</renderer>
+	<window>
+		<resolution width="1920" height="1080" scale="3" />
+		<fullscreen value="true" />
+		<borderless value="false" />
+		<resizable value="false" />
+		<fullscreen_window value="false" />
+	</window>
+	<map>
+		<folder>Assets/maps/</folder>
+	</map>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<:anonymous />
+	<map />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="0" y="54" />
+	</renderer>
 </config>

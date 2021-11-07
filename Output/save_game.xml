@@ -314,4 +314,23 @@
 	<renderer>
 		<rendercamera x="0" y="-126" />
 	</renderer>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<scene />
+	<fonts />
+	<map />
+	<collisions />
+	<player>
+		<position x="193" y="148" />
+		<lifes lifes="3" />
+		<level level="1" />
+		<camera x="0" y="-126" />
+	</player>
+	<title />
+	<fade />
+	<renderer>
+		<rendercamera x="0" y="-126" />
+	</renderer>
 </game_state>

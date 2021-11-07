@@ -58,8 +58,6 @@ public:
     // L02: DONE 1: Create methods to request Load / Save
 	void LoadGameRequest();
 	void SaveGameRequest() const;
-	void LoadConfigRequested();
-	void SaveConfigRequested() const;
 
 	//virtual void OnCollision(Collider* c1, Collider* c2);
 
@@ -125,8 +123,6 @@ private:
 	mutable bool saveGameRequested;
 	bool loadGameRequested;
 
-	bool loadConfigRequested;
-	mutable bool saveConfigRequested;
 	SString filenameGame;
 	SString filenameConfig;
 };

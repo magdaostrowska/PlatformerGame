@@ -100,8 +100,8 @@ bool App::Awake()
 		configApp = config.child("app");
 
 		// Reading the title from the config file
-		title.Create(configApp.child("title").child_value());
-		organization.Create(configApp.child("organization").child_value());
+		//title.Create(configApp.child("title").child_value());
+		//organization.Create(configApp.child("organization").child_value());
 	}
 
 	if (ret == true)
@@ -189,9 +189,6 @@ void App::FinishUpdate()
 	// Calling Load / Save methods
 	if (loadGameRequested == true) LoadGame(filenameGame.GetString());
 	if (saveGameRequested == true) SaveGame(filenameGame.GetString());
-
-	if (loadConfigRequested == true) LoadGame(filenameConfig.GetString());
-	if (saveConfigRequested == true) SaveGame(filenameConfig.GetString());
 }
 
 // Calling modules before each loop iteration
@@ -323,16 +320,6 @@ void App::SaveGameRequest() const
 	
 }
 
-void App::LoadConfigRequested()
-{
-	loadConfigRequested = true;
-}
-
-void App::SaveConfigRequested() const
-{
-	saveConfigRequested = true;
-}
-
 // ---------------------------------------
 // L02: TODO 5: Create a method to actually load an xml file
 // then call all the modules to load themselves
@@ -374,7 +361,6 @@ bool App::LoadGame(SString filename)
 	}
 
 	loadGameRequested = false;
-	loadConfigRequested = false;
 	return ret;
 }
 
@@ -415,6 +401,5 @@ bool App::SaveGame(SString filename) const
 
 	//data.reset();
 	saveGameRequested = false;
-	saveConfigRequested = false;
 	return ret;
 }

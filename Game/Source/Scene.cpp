@@ -36,8 +36,6 @@ bool Scene::Awake()
 // Called before the first frame
 bool Scene::Start()
 {
-	app->SaveConfigRequested();
-
 	// Loading map
 
 	if (level == 1)

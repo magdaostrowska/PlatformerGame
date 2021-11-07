@@ -379,32 +379,6 @@ bool Player::Update(float dt)
 
 	wallLeft = false;
 	wallRight = false;
-	/*else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		position.y -= speed;
-		runningToLeft = true;
-		runRight.Reset();
-		currentAnimation = &runLeft;
-		onGround = false;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && onGround == false) {
-		position.y += speed;
-		runningToLeft = true;
-		runRight.Reset();
-		currentAnimation = &runLeft;
-	}
-	else {
-		if (runningToRight == true) {
-			runningToRight = false;
-			idleRight.Reset();
-			currentAnimation = &idleRight;
-		}
-		else if(runningToLeft == true){
-			runningToLeft = false;
-			idleLeft.Reset();
-			currentAnimation = &idleLeft;
-		}
-	}*/
-
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && onGround == true && numJumps > 0) {
 		if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
@@ -450,13 +424,11 @@ bool Player::Update(float dt)
 			jumpLeft.Reset();
 		}
 	}
-	else {
-		//jumpLeft.Reset();
-		//jumpRight.Reset();
-	}
 
-	if (position.y >= (app->render->camera.y + app->render->camera.h) / 3) {
-		Die();
+	if (!godMode) {
+		if (position.y >= (app->render->camera.y + app->render->camera.h) / 3) {
+			Die();
+		}
 	}
 
 	if (collider != nullptr)
@@ -546,14 +518,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 						wallLeft = true;
 					}
 				}
-
-			}
-		}
-
-		if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::DEATH) {
-			if (true)
-			{
-				lifes--;
 			}
 		}
 	}

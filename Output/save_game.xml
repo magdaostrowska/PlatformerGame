@@ -9,14 +9,14 @@
 	<map />
 	<collisions />
 	<player>
-		<position x="0" y="180" />
-		<lifes lifes="3" />
-		<level level="2" />
-		<camera x="0" y="39" />
+		<position x="1247" y="116" />
+		<lifes lifes="2" />
+		<level level="1" />
+		<camera x="-2817" y="54" />
 	</player>
 	<title />
 	<fade />
 	<renderer>
-		<renderer_camera x="0" y="39" />
+		<renderer_camera x="-2817" y="54" />
 	</renderer>
 </game_state>

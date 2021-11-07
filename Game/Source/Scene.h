@@ -42,6 +42,7 @@ public:
 public:
 
 	int level;
+	SDL_Texture* back1;
 
 private:
 
@@ -51,7 +52,7 @@ private:
 	SDL_Rect rectMap = {0,0,2304,324};
 
 	SDL_Texture* img;
-	SDL_Texture* back1;
+	
 
 	char playerLifes[2] = { "\0" };
 	SDL_Rect blackRect = {0,0,0,0};

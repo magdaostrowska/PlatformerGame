@@ -597,7 +597,50 @@ void Map::LoadCol() {
 	}
 }
 	
+void Map::RemoveCol() {
 
+	if (mapLoaded == false) return;
+
+	// Prepare the loop to draw all tilesets + DrawTexture()
+	ListItem<MapLayer*>* mapLayerItem;
+	mapLayerItem = mapData.layers.start;
+
+	int i = 0;
+
+	while (mapLayerItem != NULL) {
+
+		for (int x = 0; x < mapLayerItem->data->width; x++)
+		{
+			for (int y = 0; y < mapLayerItem->data->height; y++)
+			{
+				// L04: DONE 9: Complete the draw function
+				int gid = mapLayerItem->data->Get(x, y);
+
+				if (gid > 0) {
+
+					//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+					//now we always use the firt tileset in the list
+					TileSet* tileset = mapData.tilesets.start->data;
+
+					SDL_Rect r = tileset->GetTileRect(gid);
+					iPoint pos = MapToWorld(x, y);
+					/*
+					app->render->DrawTexture(tileset->texture,
+						pos.x,
+						pos.y+4,
+						&r);
+					*/
+					app->collisions->RemoveCollider(collider[i]);
+					//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::GROUND, this);
+					i++;
+				}
+
+			}
+		}
+		mapLayerItem = mapLayerItem->next;
+	}
+
+}
 
 /*
 bool Map::AddCol(int x, int y)

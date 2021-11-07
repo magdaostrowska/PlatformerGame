@@ -18,7 +18,7 @@
 Scene::Scene() : Module()
 {
 	name.Create("scene");
-	level = 2;
+	level = 1;
 }
 
 // Destructor
@@ -47,7 +47,7 @@ bool Scene::Start()
 	else if (level == 2)
 	{
 		app->map->Load("map_level2.tmx");
-		back1 = app->tex->Load("Assets/textures/Background.png");
+		back1 = app->tex->Load("Assets/textures/back_image2.png");
 	}
 
 	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
@@ -92,6 +92,33 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	if (app->player->position.x > 1504 && app->player->position.y == 148) {
+		if (level == 1) {
+			app->fade->Fade(120, 1);
+			if (app->fade->frameCount >= 120 / 2) {
+				level = 2;
+				app->map->RemoveCol();
+				app->map->CleanUp();
+
+				app->map->Load("map_level2.tmx");
+				app->tex->UnLoad(back1);
+				back1 = app->tex->Load("Assets/textures/back_image2.png");
+				//app->player->Spawn();
+				app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+				app->map->LoadCol();
+			}
+		}
+	}
+
+	if (app->player->position.x > 1504 && app->player->position.y == 180) {
+		if(level == 2 && app->titleScreen->inTitle !=3) {
+			app->fade->Fade(120,0);
+			if (app->fade->frameCount >= app->fade->maxFadeFrames) {
+				app->titleScreen->inTitle = 3;
+			}
+			
+		}
+	}
     // Request Load when pressing L
 	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		app->LoadGameRequest();
@@ -140,10 +167,26 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if (app->titleScreen->inTitle == true) {
+	if (app->titleScreen->inTitle == 1) {
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START");
 
 		return true;
+	}
+	else if(app->titleScreen->inTitle == 2){
+		
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 180 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 180 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "GAME OVER");
+		//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 180 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 180 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "|GAME OVER");
+
+		return true;
+		
+	}
+	else if (app->titleScreen->inTitle == 3) {
+
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 300 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 300 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "CONGRATULATIONS");
+		//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 300 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 300 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "|CONGRATULATIONS");
+
+		return true;
+
 	}
 
 	app->render->DrawTexture(back1, back_pos.x, back_pos.y, &rectMap, 1.0f);

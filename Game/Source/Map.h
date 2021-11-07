@@ -150,22 +150,24 @@ private:
 
 	// Load a group of properties 
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
-	void LoadCol();
 
 	// Pick the right Tileset based on a tile id
 	TileSet* GetTilesetFromTileId(int id) const;
 
 public:
 
-    // Add a struct for map info
+	// Add a struct for map info
 	MapData mapData;
+
+	void LoadCol();
+	void RemoveCol();
 
 	Collider* collider[400];
 
 private:
 
-    SString folder;
-    bool mapLoaded;
+	SString folder;
+	bool mapLoaded;
 };
 
 #endif // __MAP_H__

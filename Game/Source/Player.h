@@ -24,6 +24,7 @@ public:
 	virtual ~Player();
 
 	bool Awake(pugi::xml_node&);
+	void Spawn(pugi::xml_node&);
 	bool Start();
 	bool PreUpdate();
 	bool Update(float dt);
@@ -31,8 +32,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2) override;
-	void Spawn(int lvl);
-	
+		
 	bool LoadState(pugi::xml_node& data);
 	bool SaveState(pugi::xml_node& data) const;
 

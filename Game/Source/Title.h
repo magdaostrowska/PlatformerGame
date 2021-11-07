@@ -27,7 +27,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool inTitle=true;
+	int inTitle=0;
 
 private:
 	//int textFont = -1;

@@ -425,6 +425,19 @@ bool Player::Update(float dt)
 		}
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
+		if (position.x < 1600 - 24) {
+			runningToLeft = true;
+			runningToRight = false;
+		}
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && wallLeft == false) {
+		if (position.x > -7) {
+			runningToRight = true;
+			runningToLeft = false;
+		}
+	}
+
 	if (!godMode) {
 		if (position.y >= (app->render->camera.y + app->render->camera.h) / 3) {
 			Die();

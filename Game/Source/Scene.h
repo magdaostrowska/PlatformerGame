@@ -42,7 +42,7 @@ public:
 
 public:
 
-	int level = 1;
+	int level = 2;
 
 private:
 

@@ -83,8 +83,8 @@ private:
 	bool PostUpdate();
 
 	// Load / Save
-	bool LoadGame(const SString _filename);
-	bool SaveGame(const SString _filename) const;
+	bool LoadGame();
+	bool SaveGame() const;
 
 public:
 

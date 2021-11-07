@@ -18,6 +18,7 @@
 Scene::Scene() : Module()
 {
 	name.Create("scene");
+	level = 1;
 }
 
 // Destructor

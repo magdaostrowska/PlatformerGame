@@ -187,8 +187,8 @@ void App::PrepareUpdate()
 void App::FinishUpdate()
 {
 	// Calling Load / Save methods
-	if (loadGameRequested == true) LoadGame(filenameGame.GetString());
-	if (saveGameRequested == true) SaveGame(filenameGame.GetString());
+	if (loadGameRequested == true) LoadGame();
+	if (saveGameRequested == true) SaveGame();
 }
 
 // Calling modules before each loop iteration
@@ -323,32 +323,33 @@ void App::SaveGameRequest() const
 // ---------------------------------------
 // L02: TODO 5: Create a method to actually load an xml file
 // then call all the modules to load themselves
-bool App::LoadGame(SString filename)
+bool App::LoadGame()
 {
 	bool ret = false;
 
-	pugi::xml_parse_result result = configFile.load_file(filename.GetString());
-	//pugi::xml_document data;
-	//pugi::xml_node root;
+	pugi::xml_document data;
+	pugi::xml_node root;
+
+	pugi::xml_parse_result result = data.load_file("save_game.xml");
 
 	if (result != NULL)
-	{
-		config = configFile.first_child();
-		
+	{		
+		root = data.child("game_state");
+
 		ListItem<Module*>* item = modules.start;
 		ret = true;
 
-		while (ret == true && item != NULL)
+		while (ret && item != NULL)
 		{
-			ret = item->data->LoadState(config.child(item->data->name.GetString()));
+			ret = item->data->LoadState(root.child(item->data->name.GetString()));
 			item = item->next;
 		}
 
-		configFile.reset();
+		data.reset();
 
 		if (ret == true)
 		{
-			LOG("Finished loading");
+			LOG("Loading finished");
 		}
 		else
 		{
@@ -365,41 +366,32 @@ bool App::LoadGame(SString filename)
 }
 
 // L02: TODO 7: Implement the xml save method for current state
-bool App::SaveGame(SString filename) const
+bool App::SaveGame() const
 {
 	bool ret = true;
 
 	pugi::xml_document data;
 	pugi::xml_node root;
 
-	pugi::xml_parse_result result = data.load_file(filename.GetString());
-	//ListItem<Module*>* item;
+	root = data.append_child("game_state");
 
-	if (result != NULL)
+	ListItem<Module*>* item = modules.start;
+
+	while (ret && item != NULL)
 	{
-		root = data.first_child();
-		ListItem<Module*>* item = modules.start;
-		ret = true;
-
-		while (ret == true && item != NULL)
-		{
-			ret = item->data->SaveState(root.append_child(item->data->name.GetString()));
-			
-			item = item->next;
-		}
-
-		data.save_file(filename.GetString());
-		data.reset();
-
-		if (ret == true)
-		{
-			LOG("Saving finished");
-		}
-		else
-			LOG("Save was interrupted with error on %s module", (item != NULL) ? item->data->name.GetString() : "unknown");
+		ret = item->data->SaveState(root.append_child(item->data->name.GetString()));
+		item = item->next;
 	}
 
-	//data.reset();
+	if (ret == true)
+	{
+		data.save_file("save_game.xml");
+		LOG("Saving finished", );
+	}
+	else
+		LOG("Saving process interrupted. Error in module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
+
+	data.reset();
 	saveGameRequested = false;
 	return ret;
 }

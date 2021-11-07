@@ -141,8 +141,7 @@ bool Render::LoadState(pugi::xml_node& data)
 // Save Game State
 bool Render::SaveState(pugi::xml_node& data) const
 {
-	std::cout << "SaveState Renderer" << std::endl;
-	pugi::xml_node cam = data.append_child("rendercamera");
+	pugi::xml_node cam = data.append_child("renderer_camera");
 	cam.append_attribute("x") = camera.x;
 	cam.append_attribute("y") = camera.y;
 

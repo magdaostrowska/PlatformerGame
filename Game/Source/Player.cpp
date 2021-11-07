@@ -210,7 +210,6 @@ bool Player::PreUpdate() {
 	return true;
 }
 
-
 bool Player::Update(float dt)
 {
 	currentTime = SDL_GetTicks();
@@ -222,16 +221,12 @@ bool Player::Update(float dt)
 		SDL_Delay(frameDelay - frameTime);
 	}
 
-	if (app->titleScreen->inTitle == 1|| app->titleScreen->inTitle == 2) {
+	if (app->titleScreen->inTitle == true) {
 		return true;
 	}
 
-
-
 	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN) {
-		app->scene->level = 1;
-		app->scene->Start();
-		//position = { 0,0 };
+		position = { 1500,0 };
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
@@ -239,12 +234,10 @@ bool Player::Update(float dt)
 		app->scene->Start();
 		//position = { 0,0 };
 	}
-
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		app->scene->level = 2;
 		app->scene->Start();
-		//position = { 0,180 };
 	}
 
 	if (isTouchingLeft == false && isTouchingRight == false) {
@@ -267,87 +260,94 @@ bool Player::Update(float dt)
 	isTouchingLeft = false;
 	isTouchingRight = false;
 
-	if (onGround == false && stopJumping == true) {
-		//jumpLeft.Reset();
-		//jumpRight.Reset();
-		isJumping = false;
-		if (currentTime >= lastTimeFall + 200) {
+	if (godMode == false)
+	{
+		if (onGround == false && stopJumping == true) {
+			isJumping = false;
+			if (currentTime >= lastTimeFall + 200) {
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
-				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
-					currentAnimation = &jumpLeft;
-					runningToLeft = true;
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+					if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+						currentAnimation = &jumpLeft;
+						runningToLeft = true;
+					}
+					if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+						currentAnimation = &jumpRight;
+						runningToRight = true;
+					}
+					lastTimeJump = currentTime;
+					isJumping = true;
+					numJumps--;
+					stopJumping = false;
 				}
-				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
-					currentAnimation = &jumpRight;
-					runningToRight = true;
-				}
-				lastTimeJump = currentTime;
-				isJumping = true;
-				numJumps--;
-				stopJumping = false;
-				//doubleJump = false;
+				position.y += 3;
 			}
-			position.y += 3;
-		}
-		else if (currentTime >= lastTimeFall + 150) {
+			else if (currentTime >= lastTimeFall + 150) {
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
-				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
-					currentAnimation = &jumpLeft;
-					runningToLeft = true;
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+					if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+						currentAnimation = &jumpLeft;
+						runningToLeft = true;
+					}
+					if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+						currentAnimation = &jumpRight;
+						runningToRight = true;
+					}
+					lastTimeJump = currentTime;
+					isJumping = true;
+					numJumps--;
+					stopJumping = false;
 				}
-				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
-					currentAnimation = &jumpRight;
-					runningToRight = true;
-				}
-				lastTimeJump = currentTime;
-				isJumping = true;
-				numJumps--;
-				stopJumping = false;
-				//doubleJump = false;
+				position.y += 2;
 			}
+			else if (currentTime >= lastTimeFall + 50) {
 
-			position.y += 2;
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+					if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+						currentAnimation = &jumpLeft;
+						runningToLeft = true;
+					}
+					if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+						currentAnimation = &jumpRight;
+						runningToRight = true;
+					}
+					lastTimeJump = currentTime;
+					isJumping = true;
+					numJumps--;
+					stopJumping = false;
+					//doubleJump = false;
+				}
+				position.y += 1;
+			}
+			else {
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
+					if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
+						currentAnimation = &jumpLeft;
+						runningToLeft = true;
+					}
+					if (currentAnimation == &runRight || currentAnimation == &idleRight) {
+						currentAnimation = &jumpRight;
+						runningToRight = true;
+					}
+					lastTimeJump = currentTime;
+					isJumping = true;
+					numJumps--;
+					stopJumping = false;
+				}
+			}
+			//position.y += 1;
 		}
-		else if (currentTime >= lastTimeFall + 50) {
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
-				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
-					currentAnimation = &jumpLeft;
-					runningToLeft = true;
-				}
-				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
-					currentAnimation = &jumpRight;
-					runningToRight = true;
-				}
-				lastTimeJump = currentTime;
-				isJumping = true;
-				numJumps--;
-				stopJumping = false;
-				//doubleJump = false;
-			}
-			position.y += 1;
-		}
-		else {
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
-				if (currentAnimation == &runLeft || currentAnimation == &idleLeft) {
-					currentAnimation = &jumpLeft;
-					runningToLeft = true;
-				}
-				if (currentAnimation == &runRight || currentAnimation == &idleRight) {
-					currentAnimation = &jumpRight;
-					runningToRight = true;
-				}
-				lastTimeJump = currentTime;
-				isJumping = true;
-				numJumps--;
-				stopJumping = false;
-			}
-		}
-		//position.y += 1;
 	}
-
+	//godMode == true
+	else {
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			position.y -= speed;
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			position.y += speed;
+		}
+	}
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
 		if (position.x < 1600 - 24) {
 			position.x += speed;
@@ -379,6 +379,31 @@ bool Player::Update(float dt)
 
 	wallLeft = false;
 	wallRight = false;
+	/*else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		position.y -= speed;
+		runningToLeft = true;
+		runRight.Reset();
+		currentAnimation = &runLeft;
+		onGround = false;
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && onGround == false) {
+		position.y += speed;
+		runningToLeft = true;
+		runRight.Reset();
+		currentAnimation = &runLeft;
+	}
+	else {
+		if (runningToRight == true) {
+			runningToRight = false;
+			idleRight.Reset();
+			currentAnimation = &idleRight;
+		}
+		else if(runningToLeft == true){
+			runningToLeft = false;
+			idleLeft.Reset();
+			currentAnimation = &idleLeft;
+		}
+	}*/
 
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && onGround == true && numJumps > 0) {
@@ -428,23 +453,6 @@ bool Player::Update(float dt)
 	else {
 		//jumpLeft.Reset();
 		//jumpRight.Reset();
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
-		if (position.x < 1600 - 24) {
-			runningToLeft = true;
-			runningToRight = false;
-			//	runRight.Reset();
-				//currentAnimation = &runLeft;
-		}
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && wallLeft == false) {
-		if (position.x > -7) {
-			runningToRight = true;
-			runningToLeft = false;
-			//runLeft.Reset();
-			//currentAnimation = &runRight;
-		}
 	}
 
 	if (position.y >= (app->render->camera.y + app->render->camera.h) / 3) {

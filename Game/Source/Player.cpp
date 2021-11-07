@@ -149,17 +149,6 @@ void Player::Spawn(pugi::xml_node& config) {
 
 }
 
-void Player::ControlGodMode(float dt)
-{
-	if (godMode == true){
-
-		onGround = true;
-
-	}
-	else if (godMode == false){
-	}
-}
-
 bool Player::LoadState(pugi::xml_node& data)
 {
 
@@ -240,11 +229,22 @@ bool Player::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN) {
-		position = { 1500,0 };
+		app->scene->level = 1;
+		app->scene->Start();
+		//position = { 0,0 };
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		position = { 0,0 };
+		app->scene->level = 1;
+		app->scene->Start();
+		//position = { 0,0 };
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->scene->level = 2;
+		app->scene->Start();
+		//position = { 0,180 };
 	}
 
 	if (isTouchingLeft == false && isTouchingRight == false) {
@@ -377,35 +377,8 @@ bool Player::Update(float dt)
 		}
 	}
 
-
-
 	wallLeft = false;
 	wallRight = false;
-	/*else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		position.y -= speed;
-		runningToLeft = true;
-		runRight.Reset();
-		currentAnimation = &runLeft;
-		onGround = false;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && onGround == false) {
-		position.y += speed;
-		runningToLeft = true;
-		runRight.Reset();
-		currentAnimation = &runLeft;
-	}
-	else {
-		if (runningToRight == true) {
-			runningToRight = false;
-			idleRight.Reset();
-			currentAnimation = &idleRight;
-		}
-		else if(runningToLeft == true){
-			runningToLeft = false;
-			idleLeft.Reset();
-			currentAnimation = &idleLeft;
-		}
-	}*/
 
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && onGround == true && numJumps > 0) {
@@ -514,106 +487,19 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 		if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::GROUND) {
 
-			//if (heightOnGround == NULL) {
-			//heightOnGround = c2->rect.y;//position.y;
-			//weightOnWall = c2->rect.x;
-			//}
-			//if (app->input->GetKey(SDL_SCANCODE_T) == KEY_REPEAT) {
-			/*
-			if (((c1->rect.y + c1->rect.h) <= c2->rect.y + 6) && ((c1->rect.y + c1->rect.h) >= c2->rect.y + 1) && (c1->rect.x + c1->rect.w - 2) > c2->rect.x) {
-				position.y = heightOnGround - 47;
-				onGround = true;
-			}
-			else if (((c1->rect.y + c1->rect.h-jumpSpeed+1) < c2->rect.y)|| ((c1->rect.x +1 ) >= c2->rect.x+c2->rect.w) ||
-				(((c1->rect.x + c1->rect.w -2) <= c2->rect.x ) && (c1->rect.y + c1->rect.h-jumpSpeed-1) == c2->rect.y)){
-				//position.y = heightOnGround - 47;
-				onGround = false;
-				lastTimeFall = currentTime;
-			}
-			else {
-				//onGround = false;
-				//lastTimeFall = currentTime;
-			}
-			*/
-			//SI ESTA PISANDO EL SUELO
-			//isTouchingLeft = false;
-			//isTouchingRight = false;
-			//wallRight = false;
-
 			if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSpeed + 1 && c1->rect.y + c1->rect.h >= c2->rect.y) {
-				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 				position.y = c2->rect.y - 48;
 
-				/*/
-				if ((c1->rect.x + c1->rect.w - 2 > c2->rect.x) || (c1->rect.x + 2 < c2->rect.x + c2->rect.w)) {
-
-					c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
-					onGround = true;
-				}
-				//else if()
-			}*/
-
-			//HACE QUE NO SE ENGANCHE A LA PARED DE LA IZQUIERDA
-				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { //&& c2->rect.x<=c1->rect.x) {
+				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
 
 					isTouchingLeft = true;
 					lastGroundposX = c2->rect.x;
 					lastGroundposY = c2->rect.y;
-					//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 				}
-
-				/*
-				if (c1->rect.x + c1->rect.w - 3 > c2->rect.x) {
-					//isTouchingRight = true;
-					//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
-				}
-
-				if (c2->rect.x < c1->rect.x && c2->rect.x + c2->rect.w>c1->rect.x) {
-					isTouchingLeft = true;
-				}
-
-				if (c2->rect.x<c1->rect.x && c2->rect.x + c2->rect.w>c1->rect.x) {
-					isTouchingLeft = true;
-				}
-
-				if (c2->rect.x > c1->rect.x && c2->rect.x + c2->rect.w > c1->rect.x) {
-					isTouchingLeft = true;
-				}
-				*/
-				//SUELO A LA DERECHA
-				/*
-				if (c1->rect.x<=c2->rect.x) {
-					if (c1->rect.x+c1->rect.w-speed>=c2->rect.x) {
-						//isTouchingLeft = true;
-						//isTouchingLeft = true;
-					}
-					else {
-					}
-					//isTouchingLeft = true;
-
-				}
-				//SUELO A LA IZQUIERDA
-				if (c1->rect.x >= c2->rect.x) {
-					if (c2->rect.x+c2->rect.w-speed<c1->rect.x) {
-
-					}
-					else {
-						//isTouchingLeft = true;
-						//isTouchingLeft = true;
-					}
-
-				}
-				*/
-
-				//if (c1->rect.x + c1->rect.w > c2->rect.x ) {
-			//		isTouchingRight = true;
-				//	c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
-			//	}
 
 			}
 
 			if (c1->rect.y + c1->rect.h - jumpSpeed != c2->rect.y && isJumping == false) {
-				//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
 
 				if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x && c1->rect.x + c1->rect.w + speed > c2->rect.x) {
 					//wallRight = true;
@@ -623,89 +509,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					//wallLeft = true;
 				}
 			}
-
-			//if(c1->rect.x)
-
-			/*
-			if (sumPlat == false) {
-				if (numPlat == 0) {
-					numPlat = 1;
-				}
-				else if (numPlat == 1) {
-					numPlat = 2;
-				}
-			}
-			*/
-			/*
-			if (c1->rect.x + c1->rect.w - 2 < c2->rect.x) {
-				//onGround = false;
-				//sumPlat = false;
-				isTouchingLeft = false;
-				isTouchingRight = false;
-			//	if (c1->rect.x + 2 > c2->rect.x + c2->rect.w) {
-			//		isTouchingRight = false;
-			//	}
-				//onGround = true;
-			}
-			else if(c1->rect.x + 2 > c2->rect.x + c2->rect.w) {
-				//onGround = false;
-				//sumPlat = false;
-				isTouchingRight = false;
-				isTouchingLeft = false;
-
-				//isTouchingLeft = true;
-			}
-			else {
-					c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
-					//onGround = true;
-					if (c1->rect.x>c2->rect.x) {
-						//isTouchingLeft = true;
-					}
-					isTouchingLeft = true;
-					isTouchingRight = true;
-					if (c1->rect.x < c2->rect.x) {
-						//isTouchingRight = true;
-					}
-					//isTouchingLeft = false;
-					//sumPlat = true;
-				}
-			}
-			/*
-			if (((c1->rect.x + c1->rect.w  -1-speed) == c2->rect.x) && (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h)) { //&& (c1->rect.x + c1->rect.w  >= c2->rect.x) && (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h)) {
-			position.x = weightOnWall-23;
-			//position.x = c2->rect.x + -rectPlayer.w +23 ;
-			//isTouchingRight = true;
-			}
-			else if (((c1->rect.x + c1->rect.w -speed) <= c2->rect.x)){// && (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h)) {
-				//position.x = weightOnWall - 23;
-				//isTouchingRight = false;
-			}
-
-
-			if (((c1->rect.x) == c2->rect.x+c2->rect.w-1-speed) && (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h)) { //&& (c1->rect.x + c1->rect.w  >= c2->rect.x) && (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h)) {
-
-				position.x = c2->rect.x + c2->rect.w+6+speed ;
-				//isTouchingLeft = true;
-			}
-			else if (((c1->rect.x ) >= c2->rect.x+c2->rect.w - speed)) {// && (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h)) {
-				//isTouchingLeft = false;
-			}
-
-			/*
-			else if (((c1->rect.y + c1->rect.h) <= c2->rect.y + 6) && ((c1->rect.y + c1->rect.h) >= c2->rect.y + 1)) {
-				position.y = heightOnGround - 47;
-				onGround = true;
-			}
-			else {
-				onGround = false;
-				lastTimeFall = currentTime;
-			}
-			//}
-			//else {
-			//	position.y = heightOnGround - 48;
-			//}
-			*/
-
 		}
 
 		if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::WALL) {
@@ -714,38 +517,22 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 				position.y = c2->rect.y - 48;
 
-				/*/
-				if ((c1->rect.x + c1->rect.w - 2 > c2->rect.x) || (c1->rect.x + 2 < c2->rect.x + c2->rect.w)) {
-
-					c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
-					onGround = true;
-				}
-				//else if()
-			}*/
-
-			//HACE QUE NO SE ENGANCHE A LA PARED DE LA IZQUIERDA
-				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { //&& c2->rect.x<=c1->rect.x) {
+				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
 
 					isTouchingLeft = true;
 					lastGroundposX = c2->rect.x;
 					lastGroundposY = c2->rect.y;
 					//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
 				}
-
-
 			}
 
-			if (c1->rect.y + c1->rect.h - jumpSpeed != c2->rect.y) {// && isJumping == false //&& isTouchingLeft == true) {//&& onGround == true) {
-				//if(position.y <= c2->rect.y - 45 && position.y >= c2->rect.y - 47){
+			if (c1->rect.y + c1->rect.h - jumpSpeed != c2->rect.y) {
 
 				if (c1->rect.y < c2->rect.y) {
-					//if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x && c1->rect.x + c1->rect.w + speed > c2->rect.x) {
-					//	wallRight = true;
-					//}
-					if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x) {// && c1->rect.x + c1->rect.w + speed > c2->rect.x) {
+					
+					if (c1->rect.x + c1->rect.w - 2 - speed < c2->rect.x) {
 						wallRight = true;
 					}
-
 
 					if (c1->rect.x + 2 + speed > c2->rect.x + c2->rect.w && c1->rect.x - speed < c2->rect.x + c2->rect.w) {
 						wallLeft = true;

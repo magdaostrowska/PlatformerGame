@@ -1,4 +1,4 @@
-﻿  Title.cpp
-X:\Users\xavie\Downloads\PlatformerGame-dev (5)\PlatformerGame-dev\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Downloads\PlatformerGame-dev (5)\PlatformerGame-dev\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Game.vcxproj -> X:\Users\xavie\Downloads\PlatformerGame-dev (5)\PlatformerGame-dev\Build\Debug\Game.exe
+﻿  Scene.cpp
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

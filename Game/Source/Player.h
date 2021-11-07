@@ -32,9 +32,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2) override;
-	
-	void ControlGodMode(float dt);
-	
+		
 	bool LoadState(pugi::xml_node& data);
 	bool SaveState(pugi::xml_node& data) const;
 

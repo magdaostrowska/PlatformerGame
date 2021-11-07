@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "Log.h"
 #include "Title.h"
+#include <iostream>
 
 Player::Player() : Module()
 {
+	name.Create("player");
 
 	lifes = 3;
 
@@ -102,9 +104,19 @@ Player::~Player()
 bool Player::Awake(pugi::xml_node& config) {
 
 	bool ret = true;
-	config = app->GetConfig();
-	config = config.child("entity").child("player");
-	lifes = config.child("lifes").attribute("value").as_int();
+
+	if (app->scene->level == 1)
+	{
+		position.x = config.child("level1").child("position").attribute("x").as_int();
+		position.y = config.child("level1").child("position").attribute("y").as_int();
+	}
+	else if (app->scene->level == 2)
+	{
+		position.x = config.child("level2").child("position").attribute("x").as_int();
+		position.y = config.child("level2").child("position").attribute("y").as_int();
+	}
+	
+	lifes = config.child("lifes").attribute("lifes").as_int();
 	document.load_file("config.xml");
 	return ret;
 }
@@ -121,7 +133,6 @@ bool Player::Start()
 
 	//idleLeft.Reset();
 	currentAnimation = &idleLeft;
-	position = { 0,0 };
 	collider = app->collisions->AddCollider({ position.x + 7 - speed, position.y + 14, 15 + 2 + 2 * speed, 34 + jumpSpeed }, Collider::Type::PLAYER, this);
 
 	lastTimeFall = SDL_GetTicks();
@@ -145,41 +156,43 @@ void Player::ControlGodMode(float dt)
 	}
 }
 
-bool Player::Load(pugi::xml_node& data)
+bool Player::LoadState(pugi::xml_node& data)
 {
 
 	//Load player's lifes and  position
-	lifes = data.child("lives").attribute("value").as_int();
+	lifes = data.child("lifes").attribute("lifes").as_int();
 	position.x = data.child("position").attribute("x").as_int();
 	position.y = data.child("position").attribute("y").as_int();
 
-	//Load camera's position
-	app->render->camera.x = data.child("camera").attribute("x").as_int();
-	app->render->camera.y = data.child("camera").attribute("y").as_int();
-
 	//Load level
-	if (app->scene->level != data.child("level").attribute("value").as_int())
+	if (app->scene->level != data.child("level").attribute("level").as_int())
 	{
-		app->scene->level = data.child("level").attribute("value").as_int();
+		app->scene->level = data.child("level").attribute("level").as_int();
 		app->fade->Fade();
 	}
+
+	//Load camera's position
+	app->render->camera.x = data.child("playercamera").attribute("x").as_int();
+	app->render->camera.y = data.child("playercamera").attribute("y").as_int();
 
 	return true;
 }
 
-bool Player::Save(pugi::xml_node& data) const
+bool Player::SaveState(pugi::xml_node& data) const
 {
-	//Player's lifes and position
-	pugi::xml_node playerPosition = data.child("position");
-	pugi::xml_node playerLifes = data.child("lifes");
+	std::cout << "SaveState Player" << std::endl;
+
+	//Player's position and lifes
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+	data.append_child("lifes").append_attribute("lifes") = lifes;
 
 	//Level
-	pugi::xml_node level = data.child("level");
+	data.append_child("level").append_attribute("level") = app->scene->level;
 
-	playerPosition.attribute("x").set_value(position.x);
-	playerPosition.attribute("y").set_value(position.y);
-	playerLifes.attribute("lifes").set_value(lifes);
-	level.attribute("level").set_value(app->scene->level);
+	//Camera position
+	data.append_child("camera").append_attribute("x") = app->render->camera.x;
+	data.child("camera").append_attribute("y") = app->render->camera.y;
 
 	return true;
 }

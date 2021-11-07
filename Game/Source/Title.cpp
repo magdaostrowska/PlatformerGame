@@ -6,7 +6,7 @@
 
 Title::Title() : Module()
 {
-
+	name.Create("title");
 }
 
 Title::~Title()

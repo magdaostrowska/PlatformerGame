@@ -5,6 +5,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include <iostream>
 
 #define VSYNC true
 
@@ -140,10 +141,9 @@ bool Render::LoadState(pugi::xml_node& data)
 // Save Game State
 bool Render::SaveState(pugi::xml_node& data) const
 {
-	pugi::xml_node cam = data.child("camera");
-
-	cam.attribute("x").set_value(camera.x);
-	cam.attribute("y").set_value(camera.y);
+	pugi::xml_node cam = data.append_child("renderer_camera");
+	cam.append_attribute("x") = camera.x;
+	cam.append_attribute("y") = camera.y;
 
 	return true;
 }

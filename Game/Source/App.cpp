@@ -129,10 +129,11 @@ bool App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->active == true) {
+			ret = item->data->Start();
+		}
 		item = item->next;
 	}
-
 	return ret;
 }
 
@@ -185,6 +186,9 @@ void App::FinishUpdate()
 	// Calling Load / Save methods
 	if (loadGameRequested == true) LoadGame(filenameGame.GetString());
 	if (saveGameRequested == true) SaveGame(filenameGame.GetString());
+
+	if (loadConfigRequested == true) LoadGame(filenameConfig.GetString());
+	if (saveConfigRequested == true) SaveGame(filenameConfig.GetString());
 }
 
 // Calling modules before each loop iteration
@@ -205,7 +209,6 @@ bool App::PreUpdate()
 
 		ret = item->data->PreUpdate();
 	}
-
 	return ret;
 }
 
@@ -261,7 +264,9 @@ bool App::CleanUp()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->CleanUp();
+		if (item->data->active == true) {
+			ret = item->data->CleanUp();
+		}
 		item = item->prev;
 	}
 
@@ -338,8 +343,6 @@ bool App::LoadGame(SString filename)
 
 	if (result != NULL)
 	{
-		LOG("");
-
 		config = configFile.first_child();
 		
 		ListItem<Module*>* item = modules.start;
@@ -391,7 +394,7 @@ bool App::SaveGame(SString filename) const
 
 		while (ret == true && item != NULL)
 		{
-			ret = item->data->SaveState(root.append_child(item->data->name.GetString()));
+			ret = item->data->SaveState(root.child(item->data->name.GetString()));
 			item = item->next;
 		}
 

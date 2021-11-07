@@ -42,12 +42,12 @@ bool Scene::Start()
 
 	if (level == 1)
 	{
-		app->map->Load("map_no_back.tmx");
+		app->map->Load("map_level1.tmx");
 		back1 = app->tex->Load("Assets/textures/back_image.png");
 	}
 	else if (level == 2)
 	{
-		app->map->Load("level2.tmx");
+		app->map->Load("map_level2.tmx");
 		back1 = app->tex->Load("Assets/textures/Background.png");
 	}
 
@@ -55,7 +55,6 @@ bool Scene::Start()
 	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);
 
 	back_pos = { 0,0 };
-	//app->map->Load("map_1.tmx");
 	
 	// Load music
 	//app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
@@ -66,30 +65,49 @@ bool Scene::Start()
 // Called each loop iteration
 bool Scene::PreUpdate()
 {
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		level = 1;
+		app->fade->Fade();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		level = 2;
+		app->fade->Fade();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		// TODO
+	}
 	return true;
 }
 
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-    // Request Load / Save when pressing L/F5
+    // Request Load when pressing L
 	if(app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		app->LoadGameRequest();
 
+	//Save when pressing F5
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
+	//Load the previous state (even across levels)
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+		app->LoadGameRequest();
+
 	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		app->render->camera.y -= 1;
+		app->render->camera.y += (int)(100 * dt);
 
 	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-		app->render->camera.y += 1;
+		app->render->camera.y -= (int)(100 * dt);
 
 	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
-		app->render->camera.x -= 1;
+		app->render->camera.x += (int)(100 * dt);
 
 	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
-		app->render->camera.x += 1;
+		app->render->camera.x -= (int)(100 * dt);
 
 	//for (int i = 0; i <= app->render->camera.x; i++){
 	//	back_pos.x = i * 2;
@@ -116,7 +134,7 @@ bool Scene::PostUpdate()
 	bool ret = true;
 
 	if (app->titleScreen->inTitle == true) {
-		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PRESS SPACE TO START");
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START");
 
 		return true;
 	}
@@ -182,5 +200,6 @@ bool Scene::LoadState(pugi::xml_node& data)
 
 bool Scene::SaveState(pugi::xml_node& data) const
 {
+	data.child("level").attribute("level").set_value(1);
 	return true;
 }

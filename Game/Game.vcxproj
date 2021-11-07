@@ -132,11 +132,8 @@
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Output\Assets\maps\level2.tmx" />
-    <None Include="..\Output\Assets\maps\map.tmx" />
-    <None Include="..\Output\Assets\maps\map2.tmx" />
-    <None Include="..\Output\Assets\maps\map2_no_back.tmx" />
-    <None Include="..\Output\Assets\maps\map_no_back.tmx" />
+    <None Include="..\Output\Assets\maps\map_level2.tmx" />
+    <None Include="..\Output\Assets\maps\map_level1.tmx" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />

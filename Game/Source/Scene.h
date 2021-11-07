@@ -2,6 +2,7 @@
 #define __SCENE_H__
 
 #include "Module.h"
+#include "FadeToBlack.h"
 
 struct SDL_Texture;
 

@@ -192,7 +192,7 @@ bool Player::SaveState(pugi::xml_node& data) const
 
 bool Player::PreUpdate() {
 
-	if (app->titleScreen->inTitle == true) {
+	if (app->titleScreen->inTitle == 1) {
 		return true;
 	}
 
@@ -221,7 +221,7 @@ bool Player::Update(float dt)
 		SDL_Delay(frameDelay - frameTime);
 	}
 
-	if (app->titleScreen->inTitle == true) {
+	if (app->titleScreen->inTitle == 1) {
 		return true;
 	}
 
@@ -230,14 +230,15 @@ bool Player::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		app->scene->level = 1;
-		app->scene->Start();
+		//app->scene->level = 1;
+		//app->scene->Start();
 		//position = { 0,0 };
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		app->scene->level = 2;
-		app->scene->Start();
+		//app->scene->level = 2;
+		//app->scene->Start();
+		//position = { 0,0 };
 	}
 
 	if (isTouchingLeft == false && isTouchingRight == false) {
@@ -425,6 +426,19 @@ bool Player::Update(float dt)
 		}
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
+		if (position.x < 1600 - 24) {
+			runningToLeft = true;
+			runningToRight = false;
+		}
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && wallLeft == false) {
+		if (position.x > -7) {
+			runningToRight = true;
+			runningToLeft = false;
+		}
+	}
+
 	if (!godMode) {
 		if (position.y >= (app->render->camera.y + app->render->camera.h) / 3) {
 			Die();
@@ -441,7 +455,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate()
 {
-	if (app->titleScreen->inTitle == true) {
+	if (app->titleScreen->inTitle == 1) {
 		return true;
 	}
 	currentAnimation->Update();
@@ -468,7 +482,20 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		if (c1->type == Collider::Type::PLAYER && c2->type == Collider::Type::GROUND) {
 
 			if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSpeed + 1 && c1->rect.y + c1->rect.h >= c2->rect.y) {
-				position.y = c2->rect.y - 48;
+				if (loadingPos == 0) {
+					position.y = c2->rect.y - 48;
+				}
+				else {
+					loadingPos++;
+					if (loadingPos >= 3) {
+						if (position.y != c2->rect.y - 48) {
+							loadingPos = 0;
+						}
+					}
+
+
+
+				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
 
@@ -495,7 +522,20 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 			if (c1->rect.y + c1->rect.h <= c2->rect.y + jumpSpeed + 1 && c1->rect.y + c1->rect.h >= c2->rect.y) {
 				//c1->rect.y = c2->rect.y - c1->rect.h + jumpSpeed;
-				position.y = c2->rect.y - 48;
+				if (loadingPos == 0) {
+					position.y = c2->rect.y - 48;
+				}
+				else {
+					loadingPos++;
+					if (loadingPos >= 3) {
+						if (position.y != c2->rect.y - 48) {
+							loadingPos = 0;
+						}
+					}
+
+
+
+				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
 

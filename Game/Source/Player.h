@@ -96,6 +96,8 @@ public:
 	int lastGroundposX;
 	int lastGroundposY;
 
+	int loadingPos = 0;
+
 	pugi::xml_document	document;
 
 };

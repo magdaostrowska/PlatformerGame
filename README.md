@@ -15,6 +15,7 @@ Repository Link: [github.com/magdaostrowska/PlatformerGame](https://github.com/m
 - F6: load the previous state (even across levels)
 - F9: view colliders / logic
 - F10: God Mode (fly around, cannot be killed)
+- 9: Go to the end of the level
 
 ## Team Members
 - Magdalena Ostrowska [github.com/magdaostrowska](https://github.com/magdaostrowska)

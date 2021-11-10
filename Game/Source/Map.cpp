@@ -630,6 +630,7 @@ void Map::RemoveCol() {
 						pos.y+4,
 						&r);
 					*/
+					
 					app->collisions->RemoveCollider(collider[i]);
 					//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::GROUND, this);
 					i++;

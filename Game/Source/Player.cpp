@@ -229,18 +229,6 @@ bool Player::Update(float dt)
 		position = { 1500,0 };
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		//app->scene->level = 1;
-		//app->scene->Start();
-		//position = { 0,0 };
-	}
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		//app->scene->level = 2;
-		//app->scene->Start();
-		//position = { 0,0 };
-	}
-
 	if (isTouchingLeft == false && isTouchingRight == false) {
 		if (onGround == true) {
 			lastTimeFall = currentTime;
@@ -448,7 +436,6 @@ bool Player::Update(float dt)
 	if (collider != nullptr)
 	{
 		collider->SetPos(position.x + 6 - speed, position.y + 14);
-
 	}
 	return true;
 }

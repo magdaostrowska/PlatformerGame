@@ -1,21 +1,4 @@
-﻿  App.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Map.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(25,20): warning C4018: '<': no coinciden signed/unsigned
-  Player.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(12,10): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Render.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Render.cpp(90,26): warning C4018: '<': no coinciden signed/unsigned
-  Scene.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Title.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Generando código...
-  Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+﻿  PerfTimer.cpp
+  Timer.cpp
+  Generating Code...
+  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

@@ -65,18 +65,12 @@ bool Scene::Start()
 bool Scene::PreUpdate()
 {
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		//if (level == 2) {
-			loadinglvl1 = true;
-		//}
-		
+		loadinglvl1 = true;
 	}
 
-	
-
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-		
-		loadinglvl2 = true;
-		
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) 
+	{
+		loadinglvl2 = true;	
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)

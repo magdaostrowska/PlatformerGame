@@ -22,6 +22,7 @@ class Collisions;
 class Player;
 class Title;
 class FadeToBlack;
+class ModuleEnemy;
 
 class App
 {
@@ -101,6 +102,7 @@ public:
 	Fonts* fonts;
 	Title* titleScreen;
 	FadeToBlack* fade;
+	ModuleEnemy* enemies;
 
 private:
 

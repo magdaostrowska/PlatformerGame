@@ -1,23 +1,5 @@
 #include "App.h"
-#include "Window.h"
-#include "Input.h"
-#include "Render.h"
-#include "Textures.h"
-#include "Audio.h"
-#include "Scene.h"
-#include "Map.h"
-#include "Player.h"
-#include "Collisions.h"
-#include "Fonts.h"
-#include "Title.h"
-#include "FadeToBlack.h"
-
-
-#include "Defs.h"
-#include "Log.h"
-
-#include <iostream>
-#include <sstream>
+#include "ModuleEnemy.h"
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
@@ -36,6 +18,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
+	enemies = new ModuleEnemy(false);
 
 	saveGameRequested = false;
 	loadGameRequested = false;

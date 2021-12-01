@@ -16,6 +16,7 @@ struct Collider
 		GROUND,
 		WALL,
 		DEATH,
+		ENEMY,
 
 		MAX
 	};

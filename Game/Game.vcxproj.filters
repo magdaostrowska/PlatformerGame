@@ -24,6 +24,10 @@
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="PerfTimer.cpp" />
+    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\WalkingEnemy.cpp" />
+    <ClCompile Include="Source\FlyingEnemy.cpp" />
+    <ClCompile Include="Source\ModuleEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -68,6 +72,10 @@
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="PerfTimer.h" />
+    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\FlyingEnemy.h" />
+    <ClInclude Include="Source\WalkingEnemy.h" />
+    <ClInclude Include="Source\ModuleEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

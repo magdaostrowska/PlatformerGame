@@ -113,12 +113,12 @@ bool Player::Awake(pugi::xml_node& config) {
 bool Player::Start()
 {
 	//texture = App->textures->Load("Assets/Textures/spritesheet_player.png");
-	textureIdleLeft = app->tex->Load("Assets/Textures/Punk_idle_left.png");
-	textureRunLeft = app->tex->Load("Assets/Textures/Punk_run_left.png");
-	textureJumpLeft = app->tex->Load("Assets/Textures/Punk_jump_left.png");
-	textureIdleRight = app->tex->Load("Assets/Textures/Punk_idle_right.png");
-	textureRunRight = app->tex->Load("Assets/Textures/Punk_run_right.png");
-	textureJumpRight = app->tex->Load("Assets/Textures/Punk_jump_right.png");
+	textureIdleLeft = app->tex->Load("Assets/Textures/player/Punk_idle_left.png");
+	textureRunLeft = app->tex->Load("Assets/Textures/player/Punk_run_left.png");
+	textureJumpLeft = app->tex->Load("Assets/Textures/player/Punk_jump_left.png");
+	textureIdleRight = app->tex->Load("Assets/Textures/player/Punk_idle_right.png");
+	textureRunRight = app->tex->Load("Assets/Textures/player/Punk_run_right.png");
+	textureJumpRight = app->tex->Load("Assets/Textures/player/Punk_jump_right.png");
 
 	//idleLeft.Reset();
 	currentAnimation = &idleLeft;

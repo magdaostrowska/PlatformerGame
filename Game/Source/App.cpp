@@ -11,7 +11,7 @@
 #include "Fonts.h"
 #include "Title.h"
 #include "FadeToBlack.h"
-#include "Enemy.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -36,7 +36,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
-	//enemies = new ModuleEnemy();
 
 	saveGameRequested = false;
 	loadGameRequested = false;
@@ -57,7 +56,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(titleScreen);
 	AddModule(fade);
-	
+
 	// Render last to swap buffer
 	AddModule(render);
 }

@@ -39,6 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(titleScreen);
 	AddModule(fade);
+	AddModule(enemies);
 
 	// Render last to swap buffer
 	AddModule(render);

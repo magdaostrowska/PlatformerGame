@@ -17,8 +17,7 @@ ModuleEnemy::~ModuleEnemy()
 
 bool ModuleEnemy::Start()
 {
-	//texture = app->tex->Load("");
-
+	texture = app->tex->Load("Assets/Textures/enemies/enemy.png");
 	return true;
 }
 
@@ -73,7 +72,6 @@ bool ModuleEnemy::CleanUp()
 			enemies[i] = nullptr;
 		}
 	}
-
 	return true;
 }
 
@@ -92,18 +90,17 @@ bool ModuleEnemy::AddEnemy(Enemy_Type type, int x, int y)
 			break;
 		}
 	}
-
 	return ret;
 }
 
 void ModuleEnemy::HandleEnemiesSpawn()
 {
-	/*
 	// Iterate all the enemies queue
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (spawnQueue[i].type != Enemy_Type::NO_TYPE)
 		{
+			/*
 			// Spawn a new enemy if the screen has reached a spawn position
 			if (spawnQueue[i].x * SCREEN_SIZE < app->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
 			{
@@ -112,9 +109,10 @@ void ModuleEnemy::HandleEnemiesSpawn()
 				SpawnEnemy(spawnQueue[i]);
 				spawnQueue[i].type = Enemy_Type::NO_TYPE; // Removing the newly spawned enemy from the queue
 			}
+			*/
 		}
 	}
-	*/
+	
 }
 
 void ModuleEnemy::HandleEnemiesDespawn()

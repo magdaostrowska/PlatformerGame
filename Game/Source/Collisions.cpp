@@ -1,11 +1,5 @@
 #include "Collisions.h"
 
-#include "App.h"
-
-#include "Render.h"
-#include "Input.h"
-#include "SDL/include/SDL_Scancode.h"
-
 Collisions::Collisions() : Module()
 {
 	name.Create("collisions");

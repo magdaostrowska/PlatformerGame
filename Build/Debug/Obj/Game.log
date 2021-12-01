@@ -1,4 +1,4 @@
-﻿  Collisions.cpp
+﻿  ModuleEnemy.cpp
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Game.vcxproj -> C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

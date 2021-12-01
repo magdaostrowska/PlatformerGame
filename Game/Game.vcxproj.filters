@@ -24,10 +24,16 @@
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="PerfTimer.cpp" />
-    <ClCompile Include="Source\Enemy.cpp" />
-    <ClCompile Include="Source\WalkingEnemy.cpp" />
-    <ClCompile Include="Source\FlyingEnemy.cpp" />
     <ClCompile Include="Source\ModuleEnemy.cpp" />
+    <ClCompile Include="Source\WalkingEnemy.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FlyingEnemy.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -72,10 +78,16 @@
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="PerfTimer.h" />
-    <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\FlyingEnemy.h" />
-    <ClInclude Include="Source\WalkingEnemy.h" />
     <ClInclude Include="Source\ModuleEnemy.h" />
+    <ClInclude Include="Source\WalkingEnemy.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FlyingEnemy.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -89,6 +101,9 @@
     </Filter>
     <Filter Include="File">
       <UniqueIdentifier>{0704224e-29be-469f-827c-81007dbc7fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemies">
+      <UniqueIdentifier>{4f94e4be-12f6-4a97-9070-1d644ba9c58f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -2,10 +2,10 @@
 #define __MODULE_ENEMY_H__
 
 #include "Module.h"
+#include "Globals.h"
 #include "WalkingEnemy.h"
 #include "FlyingEnemy.h"
 
-#define MAX_ENEMIES 100
 
 enum class Enemy_Type
 {

@@ -17,7 +17,7 @@ WalkingEnemy::WalkingEnemy(int x, int y) : Enemy(x, y)
 	//path.PushBack({ -0.3f, 0.0f }, 150, &front);
 	//path.PushBack({ 1.2f, 0.0f }, 150, &back);
 
-	//collider = app->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)app->enemies);
+	collider = app->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::ENEMY, (Module*)app->enemies);
 }
 
 void WalkingEnemy::Update()

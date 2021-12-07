@@ -88,6 +88,7 @@
     <ClInclude Include="Source\Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Globals.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

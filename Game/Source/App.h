@@ -16,6 +16,7 @@
 #include "Title.h"
 #include "FadeToBlack.h"
 #include "Enemy.h"
+#include "PathFinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -23,9 +24,6 @@
 
 #include <iostream>
 #include <sstream>
-
-#define CONFIG_FILENAME		"config.xml"
-#define SAVE_STATE_FILENAME "save_game.xml"
 
 // Modules
 class Window;
@@ -41,6 +39,7 @@ class Player;
 class Title;
 class FadeToBlack;
 class ModuleEnemy;
+class PathFinding;
 
 class App
 {
@@ -121,6 +120,7 @@ public:
 	Title* titleScreen;
 	FadeToBlack* fade;
 	ModuleEnemy* enemies;
+	PathFinding* pathfinding;
 
 private:
 

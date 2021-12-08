@@ -19,6 +19,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	titleScreen = new Title();
 	fade = new FadeToBlack();
 	enemies = new ModuleEnemy(false);
+	pathfinding = new PathFinding();
 
 	saveGameRequested = false;
 	loadGameRequested = false;
@@ -40,6 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(titleScreen);
 	AddModule(fade);
 	AddModule(enemies);
+	AddModule(pathfinding);
 
 	// Render last to swap buffer
 	AddModule(render);

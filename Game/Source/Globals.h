@@ -47,8 +47,16 @@ typedef unsigned int uint;
 #define WIN_RESIZABLE 0
 #define VSYNC 1
 
+// Files
+#define CONFIG_FILENAME		"config.xml"
+#define SAVE_STATE_FILENAME "save_game.xml"
+
+// Enemies
 #define MAX_ENEMIES 100
 #define SPAWN_MARGIN 50
 
+// Pathfinding
+#define DEFAULT_PATH_LENGTH 50
+#define INVALID_WALK_CODE 255
 
 #endif // __GLOBALS_H__

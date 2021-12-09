@@ -149,6 +149,7 @@
     <ClInclude Include="Source\Map.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PQueue.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

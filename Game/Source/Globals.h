@@ -59,4 +59,6 @@ typedef unsigned int uint;
 #define DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
 
+#define COST_MAP_SIZE	100
+
 #endif // __GLOBALS_H__

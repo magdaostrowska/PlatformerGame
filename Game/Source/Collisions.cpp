@@ -1,11 +1,5 @@
 #include "Collisions.h"
 
-#include "App.h"
-
-#include "Render.h"
-#include "Input.h"
-#include "SDL/include/SDL_Scancode.h"
-
 Collisions::Collisions() : Module()
 {
 	name.Create("collisions");
@@ -17,16 +11,19 @@ Collisions::Collisions() : Module()
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::DEATH] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
 
 	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::GROUND][Collider::Type::WALL] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::DEATH] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::ENEMY] = false;
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WALL][Collider::Type::DEATH] = false;
+	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = false;
 }
 
 Collisions::~Collisions()

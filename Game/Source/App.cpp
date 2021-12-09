@@ -1,23 +1,5 @@
 #include "App.h"
-#include "Window.h"
-#include "Input.h"
-#include "Render.h"
-#include "Textures.h"
-#include "Audio.h"
-#include "Scene.h"
-#include "Map.h"
-#include "Player.h"
-#include "Collisions.h"
-#include "Fonts.h"
-#include "Title.h"
-#include "FadeToBlack.h"
-
-
-#include "Defs.h"
-#include "Log.h"
-
-#include <iostream>
-#include <sstream>
+#include "ModuleEnemy.h"
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
@@ -36,6 +18,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
+	enemies = new ModuleEnemy(false);
+	pathfinding = new PathFinding();
 
 	saveGameRequested = false;
 	loadGameRequested = false;
@@ -56,6 +40,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(titleScreen);
 	AddModule(fade);
+	AddModule(enemies);
+	AddModule(pathfinding);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -170,10 +156,12 @@ pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 
 	pugi::xml_parse_result result = configFile.load_file(CONFIG_FILENAME);
 
-	if (result == NULL) 
+	if (result == NULL) {
 		LOG("Could not load xml file: %s. pugi error: %s", CONFIG_FILENAME, result.description());
-	else 
+	}
+	else {
 		ret = configFile.child("config");
+	}
 
 	return ret;
 }

@@ -113,12 +113,12 @@ bool Player::Awake(pugi::xml_node& config) {
 bool Player::Start()
 {
 	//texture = App->textures->Load("Assets/Textures/spritesheet_player.png");
-	textureIdleLeft = app->tex->Load("Assets/Textures/player/punk_idle_left.png");
-	textureRunLeft = app->tex->Load("Assets/Textures/player/punk_run_left.png");
-	textureJumpLeft = app->tex->Load("Assets/Textures/player/punk_jump_left.png");
-	textureIdleRight = app->tex->Load("Assets/Textures/player/punk_idle_right.png");
-	textureRunRight = app->tex->Load("Assets/Textures/player/punk_run_right.png");
-	textureJumpRight = app->tex->Load("Assets/Textures/player/punk_jump_right.png");
+	textureIdleLeft = app->tex->Load("Assets/Textures/player/Punk_idle_left.png");
+	textureRunLeft = app->tex->Load("Assets/Textures/player/Punk_run_left.png");
+	textureJumpLeft = app->tex->Load("Assets/Textures/player/Punk_jump_left.png");
+	textureIdleRight = app->tex->Load("Assets/Textures/player/Punk_idle_right.png");
+	textureRunRight = app->tex->Load("Assets/Textures/player/Punk_run_right.png");
+	textureJumpRight = app->tex->Load("Assets/Textures/player/Punk_jump_right.png");
 
 	//idleLeft.Reset();
 	currentAnimation = &idleLeft;
@@ -227,18 +227,6 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN) {
 		position = { 1500,0 };
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		//app->scene->level = 1;
-		//app->scene->Start();
-		//position = { 0,0 };
-	}
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		//app->scene->level = 2;
-		//app->scene->Start();
-		//position = { 0,0 };
 	}
 
 	if (isTouchingLeft == false && isTouchingRight == false) {
@@ -448,7 +436,6 @@ bool Player::Update(float dt)
 	if (collider != nullptr)
 	{
 		collider->SetPos(position.x + 6 - speed, position.y + 14);
-
 	}
 	return true;
 }

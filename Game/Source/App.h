@@ -3,11 +3,27 @@
 
 #include "Module.h"
 #include "List.h"
+#include "Window.h"
+#include "Input.h"
+#include "Render.h"
+#include "Textures.h"
+#include "Audio.h"
+#include "Scene.h"
+#include "Map.h"
+#include "Player.h"
+#include "Collisions.h"
+#include "Fonts.h"
+#include "Title.h"
+#include "FadeToBlack.h"
+#include "Enemy.h"
+#include "PathFinding.h"
 
+#include "Defs.h"
+#include "Log.h"
 #include "PugiXml/src/pugixml.hpp"
 
-#define CONFIG_FILENAME		"config.xml"
-#define SAVE_STATE_FILENAME "save_game.xml"
+#include <iostream>
+#include <sstream>
 
 // Modules
 class Window;
@@ -22,6 +38,8 @@ class Collisions;
 class Player;
 class Title;
 class FadeToBlack;
+class ModuleEnemy;
+class PathFinding;
 
 class App
 {
@@ -101,6 +119,8 @@ public:
 	Fonts* fonts;
 	Title* titleScreen;
 	FadeToBlack* fade;
+	ModuleEnemy* enemies;
+	PathFinding* pathfinding;
 
 private:
 

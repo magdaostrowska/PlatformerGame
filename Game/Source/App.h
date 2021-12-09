@@ -122,6 +122,7 @@ public:
 	ModuleEnemy* enemies;
 	PathFinding* pathfinding;
 
+
 private:
 
 	int argc;
@@ -145,6 +146,10 @@ private:
 
 	SString filenameGame;
 	SString filenameConfig;
+
+	float framerateCapped;
+	bool changeFramerate;
+	int framerate;
 };
 
 extern App* app;

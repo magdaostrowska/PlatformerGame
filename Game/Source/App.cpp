@@ -5,6 +5,8 @@
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {	
 	frames = 0;
+	framerateCapped = -1;
+	changeFramerate = false;
 
 	win = new Window();
 	input = new Input();
@@ -86,8 +88,14 @@ bool App::Awake()
 		configApp = config.child("app");
 
 		// Reading the title from the config file
-		//title.Create(configApp.child("title").child_value());
-		//organization.Create(configApp.child("organization").child_value());
+		title.Create(configApp.child("title").child_value());
+		organization.Create(configApp.child("organization").child_value());
+		
+		framerate = configApp.attribute("framerate").as_int(0);
+		if (framerate > 0)
+		{
+			framerateCapped = 1000 / framerate;
+		}
 	}
 
 	if (ret == true)
@@ -131,6 +139,21 @@ bool App::Update()
 {
 	bool ret = true;
 	PrepareUpdate();
+
+	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
+		changeFramerate = !changeFramerate;
+	}
+
+	if (changeFramerate)
+	{
+		framerateCapped = 1000 / 30;
+		framerate = 30;
+	}
+	else
+	{
+		framerateCapped = 1000 / 60;
+		framerate = 60;
+	}
 
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;

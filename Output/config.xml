@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
-  <app>
-    <title>Platformer Game</title>
+  <app framerate="60">
+    <title>Platventure</title>
     <organization>UPC</organization>
   </app>
   <renderer>

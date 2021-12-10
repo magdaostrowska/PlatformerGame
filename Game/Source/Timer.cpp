@@ -13,7 +13,7 @@ Timer::Timer()
 	Start();
 }
 
-Timer::~Timer(){
+Timer::~Timer() {
 }
 
 void Timer::Start()

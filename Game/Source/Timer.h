@@ -1,7 +1,7 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#include "Source/Defs.h"
+#include "Defs.h"
 
 class Timer
 {

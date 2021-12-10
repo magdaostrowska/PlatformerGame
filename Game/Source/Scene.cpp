@@ -187,6 +187,7 @@ bool Scene::Update(float dt)
 	
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
+	/*
 	// Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 				   app->map->mapData.width, app->map->mapData.height,
@@ -194,6 +195,7 @@ bool Scene::Update(float dt)
 				   app->map->mapData.tilesets.count());
 
 	app->win->SetTitle(title.GetString());
+	*/
 
 	return true;
 }

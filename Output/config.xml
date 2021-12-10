@@ -31,6 +31,15 @@
     <level level="1" />
     <camera x="0" y="-126" />
   </player>
+  <walkingEnemy>
+    <speed value ="200.0"/>
+    <die_timer value ="1"/>
+  </walkingEnemy>
+  <flyingEnemy>
+    <speed value ="40.0"/>
+    <fall_velocity value ="150.0"/>
+    <die_timer value ="1"/>
+  </flyingEnemy>
   <title />
   <fade />
   <renderer>

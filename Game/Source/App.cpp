@@ -1,9 +1,10 @@
 #include "App.h"
-#include "ModuleEnemy.h"
+//#include "ModuleEnemy.h"
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {	
+	dt = 0.0f;
 	frames = 0;
 	framerateCapped = -1;
 	changeFramerate = false;
@@ -20,7 +21,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
-	enemies = new ModuleEnemy(false);
+	//enemies = new ModuleEnemy(false);
 	pathfinding = new PathFinding();
 
 	saveGameRequested = false;
@@ -42,7 +43,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(titleScreen);
 	AddModule(fade);
-	AddModule(enemies);
+	//AddModule(enemies);
 	AddModule(pathfinding);
 
 	// Render last to swap buffer
@@ -120,6 +121,10 @@ bool App::Awake()
 // Called before the first frame
 bool App::Start()
 {
+	startupTime.Start();
+	lastSecFrameTime.Start();
+	frameTime.Start();
+
 	bool ret = true;
 	ListItem<Module*>* item;
 	item = modules.start;
@@ -192,14 +197,47 @@ pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	frameCount++;
+	lastSecFrameCount++;
+
+	//Calculate the dt: differential time since last frame
+	dt = frameTime.ReadSec();
+	frameTime.Start();
+	ptimer.Start();
 }
 
 // ---------------------------------------------
 void App::FinishUpdate()
 {
+	std::string vsyncState;
+
 	// Calling Load / Save methods
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
+
+	if (lastSecFrameTime.Read() > 1000)
+	{
+		lastSecFrameTime.Start();
+		lastSecFrameCount = 0;
+	}
+
+	float averagefps = float(frameCount) / startupTime.ReadSec();
+	uint32 lastFrameMS = frameTime.Read();
+
+	if (app->render->vsync)
+	{
+		vsyncState = "on";
+	}
+	else {
+		vsyncState = "off";
+	}
+
+	//static char title[64];
+	//sprintf_s(title, 256, "Av.FPS: %.2f Last-Frame MS: %02u", averagefps, lastFrameMS);
+	//app->win->SetTitle(title);
+
+	SString title("Av.FPS: %.2f Last-Frame MS: %02u", averagefps, lastFrameMS);
+	//app->win->SetTitle(title.GetString());
 }
 
 // Calling modules before each loop iteration

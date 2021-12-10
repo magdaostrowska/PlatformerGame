@@ -16,6 +16,8 @@ Render::Render() : Module()
 	background.g = 0;
 	background.b = 0;
 	background.a = 0;
+
+	vsync = false;
 }
 
 // Destructor
@@ -34,6 +36,7 @@ bool Render::Awake(pugi::xml_node& config)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 		LOG("Using vsync");
+		vsync = true;
 	}
 
 	renderer = SDL_CreateRenderer(app->win->window, -1, flags);

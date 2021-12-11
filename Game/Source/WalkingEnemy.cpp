@@ -4,8 +4,9 @@ WalkingEnemy::WalkingEnemy() : Enemy(Enemy_Type::WALKING_ENEMY)
 {
 	name.Create("WalkingEnemy");
 	type = Enemy_Type::WALKING_ENEMY;
+	current_animation = nullptr;
 
-	//idle.PushBack({ 0,44,63,27 });
+	idle.PushBack({ 0,44,63,27 });
 	//idle.PushBack({ 75,165,63,27 });
 	//idle.PushBack({ 127,165,63,27 });
 	//idle.PushBack({ 179,165,63,27 });
@@ -14,13 +15,16 @@ WalkingEnemy::WalkingEnemy() : Enemy(Enemy_Type::WALKING_ENEMY)
 bool WalkingEnemy::Awake(pugi::xml_node& config)
 {
 	speed = config.child("velocity").attribute("value").as_float();
+	position.x = 0;
+	position.y = 50;
 	return true;
 }
 
 bool WalkingEnemy::Start()
 {
 	enemySprite = app->tex->Load("Assets/Textures/enemies/enemy.png");
-	//colliderEnemy = app->collisions->AddCollider(current_animation->GetCurrentFrame(), Collider::ENEMY, (Module*)this); //a collider to start
+	current_animation = &idle;
+	colliderEnemy = app->collisions->AddCollider(current_animation->GetCurrentFrame(), Collider::ENEMY, (Module*)this); //a collider to start
 	return true;
 }
 

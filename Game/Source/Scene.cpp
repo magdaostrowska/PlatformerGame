@@ -42,6 +42,7 @@ bool Scene::Start()
 
 	if (level == 1)
 	{
+		app->enemies->CreateEnemy(Enemy_Type::WALKING_ENEMY, 0, 0);
 		app->map->Load("map_level1.tmx");
 		back1 = app->tex->Load("Assets/textures/back_image.png");
 	}
@@ -50,8 +51,6 @@ bool Scene::Start()
 		app->map->Load("map_level2.tmx");
 		back1 = app->tex->Load("Assets/textures/back_image2.png");
 	}
-
-	app->enemies->CreateEnemy(Enemy_Type::WALKING_ENEMY, 0, 0);
 
 	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
 	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);

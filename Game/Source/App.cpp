@@ -38,10 +38,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fonts);
 	AddModule(map);
 	AddModule(collisions);
+	AddModule(enemies);
 	AddModule(player);
 	AddModule(titleScreen);
 	AddModule(fade);
-	AddModule(enemies);
 	AddModule(pathfinding);
 
 	// Render last to swap buffer

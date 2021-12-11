@@ -21,6 +21,10 @@ public:
 
 	void RenderEnemy() override;
 	void CalculatePath();
+
+public:
+	SDL_Texture* textureIdle;
+
 };
 
 #endif // !_WALKINGENEMY_

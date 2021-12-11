@@ -26,6 +26,10 @@ bool ModuleEnemy::Start()
 bool ModuleEnemy::PreUpdate()
 {
 	bool ret = true;
+	for (int i = 0; i < enemiesList.size(); i++)
+	{
+		enemiesList[i]->PreUpdate();
+	}
 	return ret;
 }
 
@@ -42,6 +46,10 @@ bool ModuleEnemy::Update(float dt)
 bool ModuleEnemy::PostUpdate()
 {
 	bool ret = true;
+	for (int i = 0; i < enemiesList.size(); i++)
+	{
+		enemiesList[i]->PostUpdate();
+	}
 	return ret;
 }
 

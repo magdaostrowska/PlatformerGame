@@ -100,7 +100,6 @@ bool Scene::Update(float dt)
 			level = 1;
 			app->map->RemoveCol();
 			app->map->CleanUp();
-
 			app->map->Load("map_level1.tmx");
 			app->tex->UnLoad(back1);
 			back1 = app->tex->Load("Assets/textures/back_image.png");
@@ -243,10 +242,9 @@ bool Scene::PostUpdate()
 		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
 	}
 	
-
 	for (int i = 0; i < app->enemies->enemiesList.size(); i++)
 	{
-		//app->render->DrawTexture();
+		app->render->DrawTexture(app->enemies->enemiesList[i]->enemySprite, app->enemies->enemiesList[i]->position.x, app->enemies->enemiesList[i]->position.y);
 	}
 
 	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);

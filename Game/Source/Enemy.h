@@ -54,7 +54,6 @@ public:
 	Animation* currentAnimation;
 	//std::unique_ptr<Animation> currentAnimation = std::make_unique<Animation>();
 
-	SDL_Texture* enemySprite;
 	//std::unique_ptr<SDL_Texture> enemySprite = std::make_unique<SDL_Texture>();
 	Collider* colliderEnemy;
 

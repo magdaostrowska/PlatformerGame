@@ -71,7 +71,6 @@ bool FadeToBlack::PostUpdate()
 
 bool FadeToBlack::Fade(float frames, int mode)
 {
-
 	bool ret = false;
 
 	if (currentStep == Fade_Step::NONE)
@@ -84,7 +83,6 @@ bool FadeToBlack::Fade(float frames, int mode)
 			currentStep = Fade_Step::FROM_BLACK;
 			frameCount = frames;
 		}
-		
 		
 		maxFadeFrames = frames;
 

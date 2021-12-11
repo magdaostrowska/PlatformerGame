@@ -37,6 +37,7 @@ public:
 
 	//ListItem<Enemy*> enemyList;
 	std::vector<Enemy*> enemiesList;
+	SDL_Texture* enemySprite;
 };
 
 #endif // __MODULEENEMY_H__

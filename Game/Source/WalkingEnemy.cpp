@@ -5,6 +5,7 @@ WalkingEnemy::WalkingEnemy() : Enemy(Enemy_Type::WALKING_ENEMY)
 	name.Create("WalkingEnemy");
 	type = Enemy_Type::WALKING_ENEMY;
 	currentAnimation = nullptr;
+	textureIdle = nullptr;
 
 	idle.PushBack({ 0,44,63,27 });
 	//idle.PushBack({ 75,165,63,27 });
@@ -73,6 +74,7 @@ bool WalkingEnemy::Update(float dt)
 
 bool WalkingEnemy::CleanUp()
 {
+	enemySprite = nullptr;
 	return false;
 }
 

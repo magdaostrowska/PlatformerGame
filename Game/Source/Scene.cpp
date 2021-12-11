@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Fonts.h"
 #include "Title.h"
+#include "WalkingEnemy.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -50,11 +51,12 @@ bool Scene::Start()
 		back1 = app->tex->Load("Assets/textures/back_image2.png");
 	}
 
+	app->enemies->CreateEnemy(Enemy_Type::WALKING_ENEMY, 0, 0);
+
 	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
 	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);
 
 	back_pos = { 0,0 };
-	
 	// Load music
 	//app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
@@ -186,16 +188,6 @@ bool Scene::Update(float dt)
 	back_pos.x = app->render->camera.x/40;
 	
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
-
-	/*
-	// Set the window title with map/tileset info
-	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-				   app->map->mapData.width, app->map->mapData.height,
-				   app->map->mapData.tileWidth, app->map->mapData.tileHeight,
-				   app->map->mapData.tilesets.count());
-
-	app->win->SetTitle(title.GetString());
-	*/
 
 	return true;
 }

@@ -18,6 +18,7 @@
 #include "PathFinding.h"
 #include "Timer.h"
 #include "PerfTimer.h"
+//#include "ModuleEnemy.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -40,7 +41,7 @@ class Collisions;
 class Player;
 class Title;
 class FadeToBlack;
-//class ModuleEnemy;
+class ModuleEnemy;
 class PathFinding;
 
 class App
@@ -121,7 +122,7 @@ public:
 	Fonts* fonts;
 	Title* titleScreen;
 	FadeToBlack* fade;
-	//ModuleEnemy* enemies;
+	ModuleEnemy* enemies;
 	PathFinding* pathfinding;
 
 

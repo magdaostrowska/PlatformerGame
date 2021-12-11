@@ -12,31 +12,15 @@ public:
 	WalkingEnemy();
 	~WalkingEnemy() {};
 
-	bool Awake(pugi::xml_node&);
-	bool Start();
-	bool PreUpdate();
-	bool Update(float dt);
-	bool CleanUp();
+	bool Awake(pugi::xml_node&) override;
+	bool Start() override;
+	bool PreUpdate() override;
+	bool Update(float dt) override;
+	bool CleanUp() override;
 	void OnCollision(Collider* c1, Collider* c2);
 
+	void RenderEnemy() override;
 	void CalculatePath();
-
-private:
-	bool set_path;
-	bool set_timer;
-
-	SDL_Texture* debug_tex;
-
-	int path_num;
-	int tick1, tick2;
-
-	int speed;
-
-	bool stun;
-	bool reset;
-	bool ready;
-
-	iPoint objective;
 };
 
 #endif // !_WALKINGENEMY_

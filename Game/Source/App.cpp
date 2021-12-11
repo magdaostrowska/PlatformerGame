@@ -1,5 +1,5 @@
 #include "App.h"
-//#include "ModuleEnemy.h"
+#include "ModuleEnemy.h"
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
@@ -19,7 +19,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
-	//enemies = new ModuleEnemy(false);
+	enemies = new ModuleEnemy();
 	pathfinding = new PathFinding();
 
 	saveGameRequested = false;
@@ -41,7 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(titleScreen);
 	AddModule(fade);
-	//AddModule(enemies);
+	AddModule(enemies);
 	AddModule(pathfinding);
 
 	// Render last to swap buffer
@@ -72,10 +72,6 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
-	pugi::xml_document configFile;
-	pugi::xml_node config;
-	pugi::xml_node configApp;
-
 	bool ret = false;
 
 	// Loading config from XML

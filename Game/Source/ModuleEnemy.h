@@ -2,6 +2,8 @@
 #define __MODULEENEMY_H__
 
 #include "Module.h"
+#include "App.h"
+#include <vector>
 
 enum class Enemy_Type 
 {
@@ -10,6 +12,8 @@ enum class Enemy_Type
 	NO_TYPE,
 };
 
+class Enemy;
+
 class ModuleEnemy : public Module {
 
 public:
@@ -17,23 +21,22 @@ public:
 	ModuleEnemy();
 	~ModuleEnemy();
 
-	virtual bool Awake(pugi::xml_node& config);
-	virtual bool Start();
-	virtual bool PreUpdate();
-	virtual bool Update(float dt);
-	virtual bool PostUpdate();
-	virtual bool CleanUp();
+	bool Awake(pugi::xml_node& config);
+	bool Start();
+	bool PreUpdate();
+	bool Update(float dt);
+	bool PostUpdate();
+	bool CleanUp();
 
-	bool Save(pugi::xml_node& file)const;
-	bool Load(pugi::xml_node& file);
+	//bool Save(pugi::xml_node& file)const;
+	//bool Load(pugi::xml_node& file);
 
-	//j1Entity* CreateEntity(entityTypes type, int position_x, int position_y);
-	//void DestroyEntity(j1Entity* entity);
-	void DestroyAllEntities();
+	Enemy* CreateEnemy(Enemy_Type type, int x, int y);
 
 public:
 
-	//p2List<j1Entity*> entitiesList;
+	//ListItem<Enemy*> enemyList;
+	std::vector<Enemy*> enemiesList;
 };
 
 #endif // __MODULEENEMY_H__

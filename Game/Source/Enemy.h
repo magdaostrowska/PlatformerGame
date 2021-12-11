@@ -51,8 +51,8 @@ public:
 	Animation hurt;
 	Animation death;
 
-	Animation* current_animation;
-	//std::unique_ptr<Animation> current_animation = std::make_unique<Animation>();
+	Animation* currentAnimation;
+	//std::unique_ptr<Animation> currentAnimation = std::make_unique<Animation>();
 
 	SDL_Texture* enemySprite;
 	//std::unique_ptr<SDL_Texture> enemySprite = std::make_unique<SDL_Texture>();

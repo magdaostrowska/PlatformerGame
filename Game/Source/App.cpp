@@ -16,10 +16,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	map = new Map();
 	collisions = new Collisions();
+	enemies = new ModuleEnemy();
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
-	enemies = new ModuleEnemy();
 	pathfinding = new PathFinding();
 
 	saveGameRequested = false;

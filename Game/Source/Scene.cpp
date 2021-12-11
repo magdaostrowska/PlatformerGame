@@ -10,6 +10,7 @@
 #include "Fonts.h"
 #include "Title.h"
 #include "WalkingEnemy.h"
+#include "ModuleEnemy.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -214,7 +215,6 @@ bool Scene::PostUpdate()
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 620 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 620 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START A NEW GAME");
 
 		return true;
-
 	}
 
 	app->render->DrawTexture(back1, back_pos.x, back_pos.y, &rectMap, 1.0f);
@@ -242,6 +242,13 @@ bool Scene::PostUpdate()
 	else if (app->player->currentAnimation == &app->player->jumpRight) {
 		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
 	}
+	
+
+	for (int i = 0; i < app->enemies->enemiesList.size(); i++)
+	{
+		//app->render->DrawTexture();
+	}
+
 	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);
 	
 	blackRect = { 0, (app->render->camera.y - app->render->camera.y * 2) / 3, app->render->camera.w,( app->win->screenSurface->h / 2 - 324 * 3 / 2)/3 };

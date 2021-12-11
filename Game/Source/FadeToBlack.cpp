@@ -2,6 +2,7 @@
 #include "Render.h"
 #include "App.h"
 #include "Window.h"
+#include "ModuleEnemy.h"
 
 #include "SDL/include/SDL_render.h"
 
@@ -37,6 +38,7 @@ bool FadeToBlack::Update(float dt)
 		{
 			//moduleToDisable->Disable();
 			//moduleToEnable->Enable();
+			app->enemies->Start();
 
 			currentStep = Fade_Step::FROM_BLACK;
 		}

@@ -39,13 +39,6 @@ public:
 	void Die();
 
 public:
-
-	const int FPS = 30;
-	const int frameDelay = 100 / FPS;
-
-	Uint32 frameStart;
-	int frameTime;
-
 	iPoint position;
 
 	int lifes;

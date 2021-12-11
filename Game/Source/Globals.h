@@ -2,6 +2,7 @@
 #define __GLOBALS_H__
 
 #include "windows.h"
+
 #include <stdio.h>
 
 /*
@@ -45,7 +46,6 @@ typedef unsigned int uint;
 #define WIN_FULLSCREEN_DESKTOP 1
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
-#define VSYNC 1
 
 // Files
 #define CONFIG_FILENAME		"config.xml"
@@ -58,5 +58,9 @@ typedef unsigned int uint;
 // Pathfinding
 #define DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
+
+#define COST_MAP_SIZE 100
+
+#define MAX_FRAMES 100
 
 #endif // __GLOBALS_H__

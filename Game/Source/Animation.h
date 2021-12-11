@@ -1,14 +1,21 @@
 #ifndef __ANIMATION_H__
 #define __ANIMATION_H__
 
+#include "Globals.h"
 #include "SDL/include/SDL_rect.h"
-#define MAX_FRAMES 100
+
+struct Frame 
+{
+	SDL_Rect rect;
+	float speed;
+};
 
 class Animation
 {
 public:
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
+	Frame framesFrame[MAX_FRAMES];
 	bool loop = true;
 
 	bool pingpong = false;
@@ -18,12 +25,24 @@ private:
 	int totalFrames = 0;
 	int loopCount = 0;
 	int pingpongDirection = 1;
+	int num_frames = 0;
+	int last_frame = 0;
+	int cont = -1;
 
 public:
 
 	void PushBack(const SDL_Rect& rect)
 	{
 		frames[totalFrames++] = rect;
+	}
+
+	void PushBackFrame(const SDL_Rect& rect, float speed = 1.0f)
+	{
+		num_frames++;
+		++last_frame;
+		int i = ++cont;
+		framesFrame[i].rect = rect;
+		framesFrame[i].speed = speed;
 	}
 
 	void Reset()

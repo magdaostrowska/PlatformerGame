@@ -1,25 +1,42 @@
-#ifndef __WALKING_ENEMY_H__
-#define __WALKING_ENEMY_H__
+#ifndef _WALKINGENEMY_
+#define _WALKINGENEMY_
 
 #include "Enemy.h"
-#include "App.h"
-#include "Collisions.h"
+#include "ModuleEnemy.h"
+#include "Collider.h"
+#include "SDL/include/SDL.h"
 
 class WalkingEnemy : public Enemy
 {
 public:
-	// Constructor (x y coordinates in the world)
-	// Creates animation and movement data and the collider
-	WalkingEnemy(int x, int y);
+	WalkingEnemy();
+	~WalkingEnemy() {};
 
-	// The enemy is going to follow the different steps in the path
-	// Position will be updated depending on the speed defined at each step
-	void Update() override;
+	bool Awake(pugi::xml_node&);
+	bool Start();
+	bool PreUpdate();
+	bool Update(float dt);
+	bool CleanUp();
+	void OnCollision(Collider* c1, Collider* c2);
+
+	void CalculatePath();
 
 private:
+	bool set_path;
+	bool set_timer;
 
-	// Enemy animations
-	Animation front, back;
+	SDL_Texture* debug_tex;
+
+	int path_num;
+	int tick1, tick2;
+
+	int speed;
+
+	bool stun;
+	bool reset;
+	bool ready;
+
+	iPoint objective;
 };
 
-#endif // __WALKING_ENEMY_H__
+#endif // !_WALKINGENEMY_

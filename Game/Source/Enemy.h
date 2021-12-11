@@ -1,64 +1,84 @@
 #ifndef __ENEMY_H__
 #define __ENEMY_H__
 
-#include "App.h"
-#include "Collisions.h"
-#include "Render.h"
-#include "Point.h"
+#include "ModuleEnemy.h"
 #include "Animation.h"
+#include "App.h"
+#include <memory>
 
-struct SDL_Texture;
-struct Collider;
-
-class Enemy {
-
-public:
-	// Constructor
-	// Saves the spawn position for later movement calculations
-	Enemy(int x, int y);
-
-	// Destructor
-	virtual ~Enemy();
-
-	// Returns the enemy's collider
-	const Collider* GetCollider() const;
-
-	// Called from inhering enemies' Udpate
-	// Updates animation and collider position
-	virtual void Update();
-
-	// Called from ModuleEnemies' Update
-	virtual void Draw();
-
-	// Collision response
-	// Triggers an animation and a sound fx
-	virtual void OnCollision(Collider* collider);
-
-	// Sets flag for deletion and for the collider aswell
-	virtual void SetToDelete();
-
-public:
-	// The current position in the world
-	iPoint position;
-
-	// The enemy's texture
-	SDL_Texture* texture = nullptr;
-
-	// Sound fx when destroyed
-	int destroyedFx = 0;
-
-	// A flag for the enemy removal. Important! We do not delete objects instantly
-	bool pendingToDelete = false;
-
-protected:
-	// A ptr to the current animation
-	Animation* currentAnim = nullptr;
-
-	// The enemy's collider
-	Collider* collider = nullptr;
-
-	// Original spawn position. Stored for movement calculations
-	iPoint spawnPos;
+enum class Enemy_State
+{
+	IDLE,
+	WALK_FORWARD,
+	WALK_BACKWARD,
+	JUMP,
+	JUMP_FORWARD,
+	JUMP_BACKWARD,
+	FLY,
+	FLY_FORWARD,
+	FLY_BACKWARD,
+	FLY_UP,
+	IS_HIT,
+	FALL,
+	DIE,
 };
 
-#endif // __ENEMY_H__
+class Enemy : public ModuleEnemy {
+
+public:
+	Enemy(Enemy_Type type);
+	virtual ~Enemy();
+
+	virtual bool Awake(pugi::xml_node& config) { return true; };
+	virtual bool Start() { return true; };
+	virtual bool PreUpdate() { return true; };
+	virtual bool Update(float dt) { return true; };
+	virtual bool PostUpdate() { return true; };
+	virtual bool CleanUp() { return true; };
+
+	virtual bool OnCollision() { return true; };
+	virtual void BlitEverything() {};
+
+public:
+
+	Animation idle;
+	Animation walk;
+	Animation jump_up;
+	Animation jump_down;
+	Animation fly;
+	Animation fall;
+	Animation hurt;
+	Animation death;
+
+	Animation* current_animation;
+	//std::unique_ptr<Animation> current_animation = std::make_unique<Animation>();
+
+	SDL_Texture* enemySprite;
+	//std::unique_ptr<SDL_Texture> enemySprite = std::make_unique<SDL_Texture>();
+	//Collider* collider_entity;
+
+	//Type and states
+	Enemy_Type type;
+	Enemy_State state;
+
+	//Initial position
+	//float				initX;
+	//float				initY;
+
+	bool				movingToLeft;
+	bool				movingToRight;
+	bool				isHit;
+	bool				isReversed;
+	bool				isDead;
+
+	//Entity settings
+	iPoint				position;
+	float				speed;
+	float				fallSpeed;
+	float 				maxFallSpeed;
+	float 				jumpSpeed; // optional
+	float				dt;
+};
+
+
+#endif

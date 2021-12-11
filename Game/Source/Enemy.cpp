@@ -1,49 +1,18 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int x, int y) : position(x, y)
+Enemy::Enemy(Enemy_Type type) : ModuleEnemy()
 {
-	spawnPos = position;
+	type = Enemy_Type::NO_TYPE;
+	state = Enemy_State::IDLE;
+
+	isDead = false;
+	movingToRight = false;
+	movingToLeft = false;
+	isHit = false;
+	isReversed = false;
 }
 
 Enemy::~Enemy()
 {
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
-}
 
-const Collider* Enemy::GetCollider() const
-{
-	return collider;
-}
-
-void Enemy::Update()
-{
-	if (currentAnim != nullptr)
-		currentAnim->Update();
-
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
-}
-
-void Enemy::Draw()
-{
-	if (currentAnim != nullptr)
-		app->render->DrawTexture(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
-}
-
-void Enemy::OnCollision(Collider* collider)
-{
-	/*
-	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	App->audio->PlayFx(destroyedFx);
-
-	SetToDelete();
-	*/
-}
-
-void Enemy::SetToDelete()
-{
-	pendingToDelete = true;
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
 }

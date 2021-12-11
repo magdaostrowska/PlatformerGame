@@ -1,9 +1,10 @@
 #include "App.h"
-#include "ModuleEnemy.h"
+//#include "ModuleEnemy.h"
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {	
+	dt = 0.0f;
 	frames = 0;
 
 	win = new Window();
@@ -18,7 +19,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
-	enemies = new ModuleEnemy(false);
+	//enemies = new ModuleEnemy(false);
 	pathfinding = new PathFinding();
 
 	saveGameRequested = false;
@@ -40,7 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(titleScreen);
 	AddModule(fade);
-	AddModule(enemies);
+	//AddModule(enemies);
 	AddModule(pathfinding);
 
 	// Render last to swap buffer
@@ -86,8 +87,8 @@ bool App::Awake()
 		configApp = config.child("app");
 
 		// Reading the title from the config file
-		//title.Create(configApp.child("title").child_value());
-		//organization.Create(configApp.child("organization").child_value());
+		title.Create(configApp.child("title").child_value());
+		organization.Create(configApp.child("organization").child_value());
 	}
 
 	if (ret == true)
@@ -112,6 +113,10 @@ bool App::Awake()
 // Called before the first frame
 bool App::Start()
 {
+	startupTime.Start();
+	lastSecFrameTime.Start();
+	frameTime.Start();
+
 	bool ret = true;
 	ListItem<Module*>* item;
 	item = modules.start;
@@ -131,6 +136,19 @@ bool App::Update()
 {
 	bool ret = true;
 	PrepareUpdate();
+
+	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
+		app->render->vsync = !app->render->vsync;
+	}
+
+	if (app->render->vsync)
+	{
+		framerate = 30;
+	}
+	else
+	{
+		framerate = 60;
+	}
 
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
@@ -153,15 +171,12 @@ bool App::Update()
 pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 {
 	pugi::xml_node ret;
-
 	pugi::xml_parse_result result = configFile.load_file(CONFIG_FILENAME);
 
-	if (result == NULL) {
+	if (result == NULL)
 		LOG("Could not load xml file: %s. pugi error: %s", CONFIG_FILENAME, result.description());
-	}
-	else {
+	else
 		ret = configFile.child("config");
-	}
 
 	return ret;
 }
@@ -169,6 +184,13 @@ pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	frameCount++;
+	lastSecFrameCount++;
+
+	//Calculate the dt: differential time since last frame
+	dt = frameTime.ReadSec();
+	frameTime.Start();
+	ptimer.Start();
 }
 
 // ---------------------------------------------
@@ -177,6 +199,32 @@ void App::FinishUpdate()
 	// Calling Load / Save methods
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
+
+	if (lastSecFrameTime.Read() > 1000)
+	{
+		lastSecFrameTime.Start();
+		lastSecFrameCount = 0;
+	}
+
+	float averagefps = float(frameCount) / startupTime.ReadSec();
+	uint32 lastFrameMS = frameTime.Read();
+	uint32 last_frame_ms = frameTime.Read();
+
+	std::string vsyncState  = "";
+	app->render->vsync ? vsyncState = "on" : vsyncState = "off";	
+
+	SString title("FPS: %i Av.FPS: %.2f Last Frame Ms: %02u",
+		framerate, averagefps, lastFrameMS);
+
+	app->win->SetTitle(title.GetString());
+
+	// Set cap to either 30 or 60 fps
+	PerfTimer delay_timer;
+	delay_timer.Start();
+	double delay = 1000 / framerate - last_frame_ms;
+
+	if (last_frame_ms < 1000 / framerate)
+		SDL_Delay(delay);
 }
 
 // Calling modules before each loop iteration

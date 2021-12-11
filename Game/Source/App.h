@@ -15,8 +15,9 @@
 #include "Fonts.h"
 #include "Title.h"
 #include "FadeToBlack.h"
-#include "Enemy.h"
 #include "PathFinding.h"
+#include "Timer.h"
+#include "PerfTimer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -24,6 +25,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <string>
 
 // Modules
 class Window;
@@ -38,7 +40,7 @@ class Collisions;
 class Player;
 class Title;
 class FadeToBlack;
-class ModuleEnemy;
+//class ModuleEnemy;
 class PathFinding;
 
 class App
@@ -119,8 +121,9 @@ public:
 	Fonts* fonts;
 	Title* titleScreen;
 	FadeToBlack* fade;
-	ModuleEnemy* enemies;
+	//ModuleEnemy* enemies;
 	PathFinding* pathfinding;
+
 
 private:
 
@@ -145,6 +148,18 @@ private:
 
 	SString filenameGame;
 	SString filenameConfig;
+
+	int framerate;
+
+	PerfTimer ptimer;
+	//PerfTimer* frameDuration;
+
+	Timer startupTime;
+	Timer frameTime;
+	Timer lastSecFrameTime;
+
+	uint64 frameCount = 0;
+	uint32 lastSecFrameCount = 0;
 };
 
 extern App* app;

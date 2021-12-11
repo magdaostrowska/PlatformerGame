@@ -55,36 +55,29 @@ public:
 
 	SDL_Texture* enemySprite;
 	//std::unique_ptr<SDL_Texture> enemySprite = std::make_unique<SDL_Texture>();
-	Collider* collider_entity;
+	//Collider* collider_entity;
 
 	//Type and states
 	Enemy_Type type;
 	Enemy_State state;
 
 	//Initial position
-	float				initX;
-	float				initY;
+	//float				initX;
+	//float				initY;
 
-	bool				isMovingLeft;
-	bool				isMovingRight;
-	bool				beingHit;
+	bool				movingToLeft;
+	bool				movingToRight;
+	bool				isHit;
 	bool				isReversed;
 	bool				isDead;
 
 	//Entity settings
 	iPoint				position;
 	float				speed;
-	float				fallVelocity;
-	float 				maxFallVelocity;
-	float 				gravity;
-	float 				jumpVelocity;
-	float				decreaseVelocity;
-
-	float				deltaTime;
-
-	//Colliders and collisions
-	bool 				collider_at_right; //If true, entity can't go to the right
-	bool 				collider_at_left;
+	float				fallSpeed;
+	float 				maxFallSpeed;
+	float 				jumpSpeed; // optional
+	float				dt;
 };
 
 

@@ -6,8 +6,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 {	
 	dt = 0.0f;
 	frames = 0;
-	framerateCapped = -1;
-	changeFramerate = false;
 
 	win = new Window();
 	input = new Input();
@@ -91,12 +89,6 @@ bool App::Awake()
 		// Reading the title from the config file
 		title.Create(configApp.child("title").child_value());
 		organization.Create(configApp.child("organization").child_value());
-		
-		framerate = configApp.attribute("framerate").as_int(0);
-		if (framerate > 0)
-		{
-			framerateCapped = 1000 / framerate;
-		}
 	}
 
 	if (ret == true)
@@ -146,17 +138,15 @@ bool App::Update()
 	PrepareUpdate();
 
 	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
-		changeFramerate = !changeFramerate;
+		app->render->vsync = !app->render->vsync;
 	}
 
-	if (changeFramerate)
+	if (app->render->vsync)
 	{
-		framerateCapped = 1000 / 30;
 		framerate = 30;
 	}
 	else
 	{
-		framerateCapped = 1000 / 60;
 		framerate = 60;
 	}
 
@@ -181,15 +171,12 @@ bool App::Update()
 pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 {
 	pugi::xml_node ret;
-
 	pugi::xml_parse_result result = configFile.load_file(CONFIG_FILENAME);
 
-	if (result == NULL) {
+	if (result == NULL)
 		LOG("Could not load xml file: %s. pugi error: %s", CONFIG_FILENAME, result.description());
-	}
-	else {
+	else
 		ret = configFile.child("config");
-	}
 
 	return ret;
 }
@@ -209,8 +196,6 @@ void App::PrepareUpdate()
 // ---------------------------------------------
 void App::FinishUpdate()
 {
-	std::string vsyncState;
-
 	// Calling Load / Save methods
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
@@ -223,21 +208,23 @@ void App::FinishUpdate()
 
 	float averagefps = float(frameCount) / startupTime.ReadSec();
 	uint32 lastFrameMS = frameTime.Read();
+	uint32 last_frame_ms = frameTime.Read();
 
-	if (app->render->vsync)
-	{
-		vsyncState = "on";
-	}
-	else {
-		vsyncState = "off";
-	}
+	std::string vsyncState  = "";
+	app->render->vsync ? vsyncState = "on" : vsyncState = "off";	
 
-	//static char title[64];
-	//sprintf_s(title, 256, "Av.FPS: %.2f Last-Frame MS: %02u", averagefps, lastFrameMS);
-	//app->win->SetTitle(title);
+	SString title("FPS: %i Av.FPS: %.2f Last Frame Ms: %02u",
+		framerate, averagefps, lastFrameMS);
 
-	SString title("Av.FPS: %.2f Last-Frame MS: %02u", averagefps, lastFrameMS);
-	//app->win->SetTitle(title.GetString());
+	app->win->SetTitle(title.GetString());
+
+	// Set cap to either 30 or 60 fps
+	PerfTimer delay_timer;
+	delay_timer.Start();
+	double delay = 1000 / framerate - last_frame_ms;
+
+	if (last_frame_ms < 1000 / framerate)
+		SDL_Delay(delay);
 }
 
 // Calling modules before each loop iteration

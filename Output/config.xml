@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <config>
-  <app framerate="60">
+  <app>
     <title>Platventure</title>
     <organization>UPC</organization>
   </app>
   <renderer>
-    <vsync value="false" />
+    <vsync value="true" />
   </renderer>
   <window>
     <resolution width="1280" height="720" scale="3" />

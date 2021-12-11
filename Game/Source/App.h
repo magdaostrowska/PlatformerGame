@@ -149,8 +149,6 @@ private:
 	SString filenameGame;
 	SString filenameConfig;
 
-	float framerateCapped;
-	bool changeFramerate;
 	int framerate;
 
 	PerfTimer ptimer;

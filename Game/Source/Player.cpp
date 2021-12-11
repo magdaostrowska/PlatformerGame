@@ -214,13 +214,6 @@ bool Player::Update(float dt)
 {
 	currentTime = SDL_GetTicks();
 
-	frameStart = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - frameStart;
-
-	if (frameDelay > frameTime) {
-		SDL_Delay(frameDelay - frameTime);
-	}
-
 	if (app->titleScreen->inTitle == 1) {
 		return true;
 	}

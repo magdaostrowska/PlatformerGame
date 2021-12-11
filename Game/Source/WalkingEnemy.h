@@ -20,11 +20,6 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 
 	void CalculatePath();
-	void BlitPath();
-	void CheckPath();
-	void BlitEverything();
-
-	bool CheckInAir();
 
 private:
 	bool set_path;

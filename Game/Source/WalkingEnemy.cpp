@@ -2,11 +2,16 @@
 
 WalkingEnemy::WalkingEnemy() : Enemy(Enemy_Type::WALKING_ENEMY)
 {
+	name.Create("WalkingEnemy");
+	type = Enemy_Type::WALKING_ENEMY;
 }
 
-bool WalkingEnemy::Awake(pugi::xml_node&)
+bool WalkingEnemy::Awake(pugi::xml_node& config)
 {
-	return false;
+	config = app->GetConfig();
+	config = config.child("walkingEnemy");
+	speed = config.child("velocity").attribute("value").as_float();
+	return true;
 }
 
 bool WalkingEnemy::Start()
@@ -35,21 +40,4 @@ void WalkingEnemy::OnCollision(Collider* c1, Collider* c2)
 
 void WalkingEnemy::CalculatePath()
 {
-}
-
-void WalkingEnemy::BlitPath()
-{
-}
-
-void WalkingEnemy::CheckPath()
-{
-}
-
-void WalkingEnemy::BlitEverything()
-{
-}
-
-bool WalkingEnemy::CheckInAir()
-{
-	return false;
 }

@@ -5,10 +5,6 @@
 
 #include "Module.h"
 #include "Collider.h"
-#include "App.h"
-#include "Render.h"
-#include "Input.h"
-#include "SDL/include/SDL_Scancode.h"
 
 class Collisions : public Module
 {

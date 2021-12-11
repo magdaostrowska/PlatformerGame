@@ -1,21 +1,68 @@
-﻿  Enemy.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  ModuleEnemy.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\ModuleEnemy.cpp(29,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\ModuleEnemy.cpp(39,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\ModuleEnemy.cpp(49,20): warning C4018: '<': signed/unsigned mismatch
+﻿  AnyItem.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Collider.cpp
+  Collisions.cpp
+  FadeToBlack.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\FadeToBlack.cpp(83,17): warning C4244: '=': conversión de 'float' a 'Uint32'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\FadeToBlack.cpp(87,19): warning C4244: '=': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  Fonts.cpp
+  Items.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Item_Coin.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Item_Potion.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Main.cpp
+  App.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(205,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(236,14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(242,47): warning C4244: 'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  Audio.cpp
+  Input.cpp
+  Map.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(25,20): warning C4018: '<': no coinciden signed/unsigned
+  Particle.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Particle.cpp(51,19): warning C4018: '>=': no coinciden signed/unsigned
+  PerfTimer.cpp
+  Player.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(15,10): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(16,14): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(17,18): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(208,8): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
   Scene.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Scene.cpp(245,20): warning C4018: '<': signed/unsigned mismatch
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Render.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Render.cpp(90,26): warning C4018: '<': no coinciden signed/unsigned
+  Shots.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Shots.cpp(128,24): warning C4244: '=': conversión de 'float' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+  Textures.cpp
+  Generando código...
+  Compilando...
+  Timer.cpp
   Title.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  WalkingEnemy.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Window.cpp
+  Log.cpp
+  pugixml.cpp
+  Generando código...
+  Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

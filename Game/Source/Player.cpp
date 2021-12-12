@@ -348,7 +348,6 @@ bool Player::Update(float dt)
 			
 			//position.y += 1;
 		}
-
 	}
 	//godMode == true
 	else {
@@ -359,8 +358,6 @@ bool Player::Update(float dt)
 			position.y += speed;
 		}
 	}
-
-	
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
 		if (position.x < 1600 - 24) {

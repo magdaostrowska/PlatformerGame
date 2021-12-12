@@ -38,7 +38,6 @@ Walk_Enemy::Walk_Enemy(int x, int y) : AnyEnemy(x, y)
 
 void Walk_Enemy::Update(float dt)
 {
-
 	speed = 1 * dt/6;
 	currentAnim->Update();
 	if (app->titleScreen->inTitle == 0) {
@@ -54,13 +53,8 @@ void Walk_Enemy::Update(float dt)
 			if (isRight == true) {
 				position.x += speed * dir;
 			}
-			
 		}
 	}
-
-	
-
-	
 
 	collider->SetPos(position.x+22, position.y+16);
 
@@ -75,16 +69,14 @@ void Walk_Enemy::Update(float dt)
 		currentAnim = &walkLeft;
 		break;
 	}
-	
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	AnyEnemy::Update(dt);
 }
 
-void Walk_Enemy::PostUpdate() {
-
-}
+void Walk_Enemy::PostUpdate() 
+{}
 
 void Walk_Enemy::OnCollision(Collider* col)
 {
@@ -98,14 +90,12 @@ void Walk_Enemy::OnCollision(Collider* col)
 
 	if (col->type == Collider::Type::GROUND) {
 		
-
 		switch (dir) {
 		case 1:
 			if (collider->rect.x + collider->rect.w < col->rect.x + col->rect.w){// && collider->rect.x + collider->rect.w > col->rect.x) 
 			//if (collider->rect.x < col->rect.x {// && collider->rect.x + collider->rect.w > col->rect.x) {
 				isRight = true;
 			}
-			
 			break;
 		case -1:
 			if (collider->rect.x + speed < col->rect.x + col->rect.w) {//&& collider->rect.x > col->rect.x) {
@@ -115,7 +105,6 @@ void Walk_Enemy::OnCollision(Collider* col)
 			break;
 		}
 	}
-
 
 	AnyEnemy::OnCollision(collider);
 }

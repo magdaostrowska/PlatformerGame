@@ -651,7 +651,8 @@ void Map::LoadCol() {
 							pos.y+4,
 							&r);
 						*/
-						app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x, pos.y + 4);
+						app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x + 5, pos.y + 4);
+						app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x - 130, pos.y - 90);
 						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::ENEMY, this);
 						i++;
 					}

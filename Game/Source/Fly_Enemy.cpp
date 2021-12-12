@@ -4,10 +4,13 @@
 #include "Collisions.h"
 #include "Player.h"
 #include "Title.h"
+#include "Map.h"
+#include "PathFinding.h"
 
 Fly_Enemy::Fly_Enemy(int x, int y) : AnyEnemy(x, y)
 {
-	state = FlyingEnemyState::FLY_LEFT;
+	state = FlyingEnemyState::IDLE;
+	followsPath = true;
 
 	texture_left = app->tex->Load("Assets/textures/enemies/fly_enemy_left.png");
 	texture_right = app->tex->Load("Assets/textures/enemies/fly_enemy_right.png");
@@ -36,7 +39,7 @@ Fly_Enemy::Fly_Enemy(int x, int y) : AnyEnemy(x, y)
 	die.PushBack({ 128,654,48,39 });
 	die.PushBack({ 192,654,48,39 });
 
-	currentAnim = &flyRight;
+	currentAnim = &flyLeft;
 
 	dir = 0;
 	speed = 1 * 16 / 6;
@@ -46,9 +49,12 @@ Fly_Enemy::Fly_Enemy(int x, int y) : AnyEnemy(x, y)
 
 void Fly_Enemy::Update(float dt)
 {
+	CalculatePath();
+
 	switch (state)
 	{
 	case FlyingEnemyState::IDLE:
+		followsPath = true;
 		break;
 	case FlyingEnemyState::FLY_LEFT:
 		position.x -= speed;
@@ -130,6 +136,37 @@ void Fly_Enemy::OnCollision(Collider* col)
 			break;
 		}
 	}
-
 	AnyEnemy::OnCollision(collider);
+}
+
+void Fly_Enemy::CalculatePath()
+{
+	iPoint playerPos = app->map->WorldToMap(app->player->position.x, app->player->position.y); // player position
+	iPoint enemyPos = app->map->WorldToMap(position.x, position.y); // enemy position
+
+	if (playerPos != enemyPos)
+	{
+		app->pathfinding->CreatePath(playerPos, enemyPos);
+		if (followsPath == true)PathToMove();
+	}
+}
+
+void Fly_Enemy::PathToMove()
+{
+	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+	iPoint pos = app->map->MapToWorld(path->At(1)->x, path->At(1)->y);
+
+	if (pos.x < position.x) 
+	{
+		state = FlyingEnemyState::FLY_LEFT;
+	}
+	if (pos.x > position.x)
+	{
+		state = FlyingEnemyState::FLY_RIGHT;
+	}
+		
+	if (pos.x >= position.x - 5 && pos.x <= position.x + 5) 
+	{
+		state = FlyingEnemyState::FLY_DOWN;
+	}
 }

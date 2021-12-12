@@ -25,6 +25,9 @@ public:
 	void PostUpdate() override;
 	void OnCollision(Collider* collider) override;
 
+	void CalculatePath();
+	void PathToMove();
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
@@ -38,7 +41,7 @@ private:
 
 	bool isLeft = false;
 	bool isRight = false;
-
+	bool followsPath;
 	int speed;
 };
 

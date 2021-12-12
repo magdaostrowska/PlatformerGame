@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="1">
- <tileset firstgid="1" source="Basic_tileset.tsx"/>
- <tileset firstgid="257" source="full_potion.tsx"/>
- <tileset firstgid="266" source="coin.tsx"/>
- <tileset firstgid="271" source="Monster1Pack.tsx"/>
- <tileset firstgid="376" source="../../../../../../Downloads/PlatformerGame-c1806958477e7ac1a83083ef83569427c10e48f5/PlatformerGame-c1806958477e7ac1a83083ef83569427c10e48f5/Output/Assets/maps/Monster1Pack.tsx"/>
- <tileset firstgid="448" source="../../../../../../Desktop/Framerate + items/PlatformerGame-main/Output/Assets/maps/coin.tsx"/>
- <tileset firstgid="453" source="../../../../../../Downloads/PlatformerGame-c1806958477e7ac1a83083ef83569427c10e48f5/PlatformerGame-c1806958477e7ac1a83083ef83569427c10e48f5/Output/Assets/maps/full_potion.tsx"/>
+  <tileset firstgid="1" source="Basic_tileset.tsx" tilewidth ="32" tileheight="32">
+    <image source="Basic_tileset.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="257" source="full_potion.tsx" tilewidth ="32" tileheight="32">
+    <image source="potion.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="266" source="coin.tsx" tilewidth ="32" tileheight="32">
+    <image source="coin.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="271" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+    <image source="walk_enemy.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="376" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+    <image source="walk_enemy.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="448" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+    <image source="walk_enemy.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="453" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+    <image source="walk_enemy.png" width="512" height="512"/>
+  </tileset>
  <layer id="4" name="platforms_background_back" width="50" height="10">
   <properties>
    <property name="col" type="int" value="0"/>

@@ -12,6 +12,7 @@
 #include "Scene.h"
 #include "Fonts.h"
 #include "Window.h"
+#include "Shots.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -39,12 +40,25 @@ public:
 	void Die();
 
 public:
+
+	//const int FPS = 30;
+	//const int frameDelay = 100 / FPS;
+
+	Uint32 frameStart;
+	int frameTime;
+
 	iPoint position;
 
+	int maxLifes;
 	int lifes;
+
+	int coins;
 
 	int speed;
 	int jumpSpeed;
+	int fallSpeed;
+
+	int pdt;
 
 	bool runningToLeft;
 	bool runningToRight;
@@ -90,6 +104,12 @@ public:
 	int lastGroundposY;
 
 	int loadingPos = 0;
+
+	int shotMaxCountdown = 20;
+	int shotCountdown = 0;
+
+	int hitCountdown=0;
+	int	hitMaxCountdown = 60;
 
 	pugi::xml_document	document;
 

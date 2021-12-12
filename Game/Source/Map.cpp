@@ -1,4 +1,3 @@
-
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
@@ -7,6 +6,8 @@
 #include "Defs.h"
 #include "Log.h"
 #include "Collisions.h"
+#include "items.h"
+#include "Enemies.h"
 
 #include <math.h>
 
@@ -137,236 +138,6 @@ iPoint Map::WorldToMap(int x, int y) const
 	}
 
 	return ret;
-}
-
-void Map::ResetPath()
-{
-	frontier.Clear();
-	visited.clear();
-	breadcrumbs.clear();
-	path.Clear();
-
-	frontier.Push(iPoint(19, 4), 0);
-	visited.add(iPoint(19, 4));
-	breadcrumbs.add(iPoint(19, 4));
-
-	memset(costSoFar, 0, sizeof(uint) * COST_MAP_SIZE * COST_MAP_SIZE);
-}
-
-void Map::DrawPath()
-{
-	iPoint point;
-
-	// Draw visited
-	ListItem<iPoint>* item = visited.start;
-
-	while (item)
-	{
-		point = item->data;
-		TileSet* tileset = GetTilesetFromTileId(26);
-
-		SDL_Rect rec = tileset->GetTileRect(26);
-		iPoint pos = MapToWorld(point.x, point.y);
-
-		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
-
-		item = item->next;
-	}
-
-	// Draw frontier
-	for (uint i = 0; i < frontier.Count(); ++i)
-	{
-		point = *(frontier.Peek(i));
-		TileSet* tileset = GetTilesetFromTileId(25);
-
-		SDL_Rect rec = tileset->GetTileRect(25);
-		iPoint pos = MapToWorld(point.x, point.y);
-
-		app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
-	}
-
-	// Draw path
-	for (uint i = 0; i < path.Count(); ++i)
-	{
-		iPoint pos = MapToWorld(path[i].x, path[i].y);
-		app->render->DrawTexture(tileX, pos.x, pos.y);
-	}
-
-}
-
-
-int Map::MovementCost(int x, int y) const
-{
-	int ret = -1;
-
-	if ((x >= 0) && (x < mapData.width) && (y >= 0) && (y < mapData.height))
-	{
-		int id = mapData.layers.start->next->data->Get(x, y);
-
-		if (id == 26) ret = 20;
-		else ret = 1;
-	}
-
-	return ret;
-}
-
-
-bool Map::IsWalkable(int x, int y) const
-{
-	// L10: DONE 3: return true only if x and y are within map limits
-	// and the tile is walkable (tile id 0 in the navigation layer)
-
-	bool isWalkable = false;
-	if (x >= 0 && y >= 0 && x < mapData.width && y < mapData.height) {
-
-		//gets the second layer
-		MapLayer* layer = mapData.layers.start->next->data;
-		int tileId = layer->Get(x, y);
-		if (tileId != 26) isWalkable = true;
-	}
-
-	return isWalkable;
-}
-
-void Map::ComputePath(int x, int y)
-{
-	path.Clear();
-	iPoint goal = WorldToMap(x, y);
-
-	// L11: TODO 2: Follow the breadcrumps to goal back to the origin
-	// add each step into "path" dyn array (it will then draw automatically)
-
-	path.PushBack(goal);
-	int index = visited.find(goal);
-
-	while ((index >= 0) && (goal != breadcrumbs[index]))
-	{
-		goal = breadcrumbs[index];
-		path.PushBack(goal);
-		index = visited.find(goal);
-	}
-}
-
-void Map::ComputePathAStar(int x, int y)
-{
-	// Compute AStart pathfinding
-	finishAStar = false;
-	ResetPath();
-	path.Clear();
-	goalAStar = WorldToMap(x, y);
-	path.PushBack(goalAStar);
-}
-
-void Map::PropagateBFS()
-{
-	// DONE 1: If frontier queue contains elements
-	// pop the last one and calculate its 4 neighbors
-	iPoint curr;
-	if (frontier.Pop(curr))
-	{
-		// For each neighbor, if not visited, add it
-		// to the frontier queue and visited list
-		iPoint neighbors[4];
-		neighbors[0].create(curr.x + 1, curr.y + 0);
-		neighbors[1].create(curr.x + 0, curr.y + 1);
-		neighbors[2].create(curr.x - 1, curr.y + 0);
-		neighbors[3].create(curr.x + 0, curr.y - 1);
-
-		for (uint i = 0; i < 4; ++i)
-		{
-			if (IsWalkable(neighbors[i].x, neighbors[i].y))
-			{
-				if (visited.find(neighbors[i]) == -1)
-				{
-					frontier.Push(neighbors[i], 0);
-					visited.add(neighbors[i]);
-
-					// Record the direction to the previous node 
-					// with the new list "breadcrumps"
-					breadcrumbs.add(curr);
-				}
-			}
-		}
-	}
-}
-
-void Map::PropagateDijkstra()
-{
-	// Taking BFS as a reference, implement the Dijkstra algorithm
-	// use the 2 dimensional array "costSoFar" to track the accumulated costs
-	// on each cell (is already reset to 0 automatically)
-
-	iPoint curr;
-	if (frontier.Pop(curr))
-	{
-		iPoint neighbors[4];
-		neighbors[0].create(curr.x + 1, curr.y + 0);
-		neighbors[1].create(curr.x + 0, curr.y + 1);
-		neighbors[2].create(curr.x - 1, curr.y + 0);
-		neighbors[3].create(curr.x + 0, curr.y - 1);
-
-		for (uint i = 0; i < 4; ++i)
-		{
-			int cost = MovementCost(neighbors[i].x, neighbors[i].y);
-
-			if (cost >= 0)
-			{
-				cost += costSoFar[curr.x][curr.y];
-				if (visited.find(neighbors[i]) == -1 || cost < costSoFar[neighbors[i].x][neighbors[i].y])
-				{
-					costSoFar[neighbors[i].x][neighbors[i].y] = cost;
-					frontier.Push(neighbors[i], cost);
-					visited.add(neighbors[i]);
-					breadcrumbs.add(curr);
-				}
-			}
-		}
-	}
-}
-
-void Map::PropagateAStar(int heuristic)
-{
-	// L12a: TODO 2: Implement AStar algorythm
-	// Consider the different heuristics
-	iPoint curr;
-	if (finishAStar == false && frontier.Pop(curr))
-	{
-		if (curr == goalAStar)
-		{
-			finishAStar = true;
-			return;
-		}
-
-		iPoint neighbors[4];
-		neighbors[0].create(curr.x + 1, curr.y + 0);
-		neighbors[1].create(curr.x + 0, curr.y + 1);
-		neighbors[2].create(curr.x - 1, curr.y + 0);
-		neighbors[3].create(curr.x + 0, curr.y - 1);
-
-		for (uint i = 0; i < 4; ++i)
-		{
-			int cost = MovementCost(neighbors[i].x, neighbors[i].y);
-
-			if (cost >= 0)
-			{
-				cost += costSoFar[curr.x][curr.y];
-				if (visited.find(neighbors[i]) == -1 || cost < costSoFar[neighbors[i].x][neighbors[i].y])
-				{
-					costSoFar[neighbors[i].x][neighbors[i].y] = cost;
-					switch (heuristic)
-					{
-					case 1: cost += goalAStar.DistanceManhattan(neighbors[i]); break;
-					case 2: cost += goalAStar.DistanceNoSqrt(neighbors[i]); break;
-					default: cost += goalAStar.DistanceTo(neighbors[i]); break;
-					}
-
-					frontier.Push(neighbors[i], cost);
-					visited.add(neighbors[i]);
-					breadcrumbs.add(curr);
-				}
-			}
-		}
-	}
 }
 
 // Pick the right Tileset based on a tile id
@@ -790,7 +561,73 @@ void Map::LoadCol() {
 				}
 			}
 		}
-		else if (mapLayerItem->data->properties.GetProperty("col") == 3) {
+
+		if (mapLayerItem->data->properties.GetProperty("item") == 1) {
+
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
+
+					if (gid > 0) {
+
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
+
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
+						/*
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y+4,
+							&r);
+						*/
+						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::COIN, this);
+						app->items->AddItem(Item_type::COIN, pos.x, pos.y + 4);
+						i++;
+					}
+
+				}
+			}
+
+		}
+		else if (mapLayerItem->data->properties.GetProperty("item") == 2) {
+			
+
+				for (int x = 0; x < mapLayerItem->data->width; x++)
+				{
+					for (int y = 0; y < mapLayerItem->data->height; y++)
+					{
+						// L04: DONE 9: Complete the draw function
+						int gid = mapLayerItem->data->Get(x, y);
+
+						if (gid > 0) {
+
+							//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+							//now we always use the firt tileset in the list
+							TileSet* tileset = mapData.tilesets.start->data;
+
+							SDL_Rect r = tileset->GetTileRect(gid);
+							iPoint pos = MapToWorld(x, y);
+							/*
+							app->render->DrawTexture(tileset->texture,
+								pos.x,
+								pos.y+4,
+								&r);
+							*/
+							app->items->AddItem(Item_type::POTION, pos.x, pos.y + 4);
+							i++;
+						}
+
+					}
+				}
+
+		}
+
+		if (mapLayerItem->data->properties.GetProperty("enemy") == 1) {
 
 
 			for (int x = 0; x < mapLayerItem->data->width; x++)
@@ -808,21 +645,53 @@ void Map::LoadCol() {
 
 						SDL_Rect r = tileset->GetTileRect(gid);
 						iPoint pos = MapToWorld(x, y);
-
 						/*
 						app->render->DrawTexture(tileset->texture,
 							pos.x,
 							pos.y+4,
 							&r);
 						*/
-
-						collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::DEATH, this);
+						app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x, pos.y + 4);
+						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::ENEMY, this);
 						i++;
 					}
 
 				}
 			}
+
+		}else if (mapLayerItem->data->properties.GetProperty("enemy") == 2) {
+
+
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
+
+					if (gid > 0) {
+
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
+
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
+						/*
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y+4,
+							&r);
+						*/
+						app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x, pos.y + 4);
+						i++;
+					}
+
+				}
+			}
+
 		}
+
 		mapLayerItem = mapLayerItem->next;
 	}
 }

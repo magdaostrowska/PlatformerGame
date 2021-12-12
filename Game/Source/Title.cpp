@@ -6,7 +6,6 @@
 #include "Player.h"
 #include "Textures.h"
 #include "Map.h"
-#include "ModuleEnemy.h"
 
 Title::Title() : Module()
 {
@@ -41,9 +40,10 @@ bool Title::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 			app->fade->Fade(240, 1);
 			inTitle = 0;
-			//app->player->Spawn(); 
+			//app->player->Spawn(); //ELIMINAR LO DE ABAJO
 			app->player->position.x = app->player->position.y = 0;
 			app->player->lifes = 3;
+			
 		}
 	}
 	if (inTitle == 3) {
@@ -61,6 +61,7 @@ bool Title::Update(float dt)
 			app->map->LoadCol();
 			app->fade->Fade(240, 1);
 			inTitle = 0;
+
 		}
 	}
 	return true;

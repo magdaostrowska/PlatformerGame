@@ -13,11 +13,9 @@ Timer::Timer()
 	Start();
 }
 
-Timer::~Timer() {
-}
-
 void Timer::Start()
 {
+	//...
 	startTime = SDL_GetTicks();
 }
 
@@ -29,9 +27,4 @@ uint32 Timer::Read() const
 float Timer::ReadSec() const
 {
 	return (float)(SDL_GetTicks() - startTime) / 1000.0f;
-}
-
-uint32 Timer::GetStartTime()
-{
-	return startTime;
 }

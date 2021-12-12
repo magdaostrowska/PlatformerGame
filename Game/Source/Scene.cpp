@@ -9,8 +9,7 @@
 #include "Player.h"
 #include "Fonts.h"
 #include "Title.h"
-#include "WalkingEnemy.h"
-#include "ModuleEnemy.h"
+#include "Items.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,20 +42,20 @@ bool Scene::Start()
 
 	if (level == 1)
 	{
-		app->enemies->CreateEnemy(Enemy_Type::WALKING_ENEMY, 0, 0);
 		app->map->Load("map_level1.tmx");
 		back1 = app->tex->Load("Assets/textures/back_image.png");
 	}
 	else if (level == 2)
 	{
 		app->map->Load("map_level2.tmx");
-		back1 = app->tex->Load("Assets/textures/back_image2.png");
+		back1 = app->tex->Load("Assets/textures/back_image_2.png");
 	}
 
 	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
 	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);
 
 	back_pos = { 0,0 };
+	
 	// Load music
 	//app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
@@ -67,12 +66,18 @@ bool Scene::Start()
 bool Scene::PreUpdate()
 {
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		loadinglvl1 = true;
+		//if (level == 2) {
+			loadinglvl1 = true;
+		//}
+		
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) 
-	{
-		loadinglvl2 = true;	
+	
+
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		
+		loadinglvl2 = true;
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -100,6 +105,7 @@ bool Scene::Update(float dt)
 			level = 1;
 			app->map->RemoveCol();
 			app->map->CleanUp();
+
 			app->map->Load("map_level1.tmx");
 			app->tex->UnLoad(back1);
 			back1 = app->tex->Load("Assets/textures/back_image.png");
@@ -119,7 +125,7 @@ bool Scene::Update(float dt)
 
 			app->map->Load("map_level2.tmx");
 			app->tex->UnLoad(back1);
-			back1 = app->tex->Load("Assets/textures/back_image2.png");
+			back1 = app->tex->Load("Assets/textures/back_image_2.png");
 			//app->player->Spawn();
 			app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
 			app->map->LoadCol();
@@ -137,7 +143,7 @@ bool Scene::Update(float dt)
 
 				app->map->Load("map_level2.tmx");
 				app->tex->UnLoad(back1);
-				back1 = app->tex->Load("Assets/textures/back_image2.png");
+				back1 = app->tex->Load("Assets/textures/back_image_2.png");
 				//app->player->Spawn();
 				app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
 				app->map->LoadCol();
@@ -188,6 +194,14 @@ bool Scene::Update(float dt)
 	
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
+	// Set the window title with map/tileset info
+	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
+				   app->map->mapData.width, app->map->mapData.height,
+				   app->map->mapData.tileWidth, app->map->mapData.tileHeight,
+				   app->map->mapData.tilesets.count());
+
+	//app->win->SetTitle(title.GetString());
+
 	return true;
 }
 
@@ -214,6 +228,7 @@ bool Scene::PostUpdate()
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 620 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 620 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START A NEW GAME");
 
 		return true;
+
 	}
 
 	app->render->DrawTexture(back1, back_pos.x, back_pos.y, &rectMap, 1.0f);
@@ -241,14 +256,11 @@ bool Scene::PostUpdate()
 	else if (app->player->currentAnimation == &app->player->jumpRight) {
 		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
 	}
-	
-	// Render enemies
-	for (int i = 0; i < app->enemies->enemiesList.size(); i++)
-	{
-		app->enemies->enemiesList[i]->RenderEnemy();
-	}
+
+	//app->render->DrawTexture(app->items->textureRunLeft, app->, app->player->position.y, &app->player->rectPlayer, 1.0f);
 
 	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);
+	sprintf_s(playerCoins, 2, "%01d", app->player->coins);
 	
 	blackRect = { 0, (app->render->camera.y - app->render->camera.y * 2) / 3, app->render->camera.w,( app->win->screenSurface->h / 2 - 324 * 3 / 2)/3 };
 	app->render->DrawRectangle(blackRect, 0, 0, 0, 255, true);
@@ -258,8 +270,14 @@ bool Scene::PostUpdate()
 	//app->fonts->BlitText(((app->player->position.x - app->player->position.x * 2) * app->win->GetScale()) + (app->win->screenSurface->w / 2 - 24 * app->win->GetScale()) , 0, textFont,"Lifes:");
 	//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes:");
 
-	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 140/2) - (app->render->camera.x - (app->render->camera.w / 2 - 140/2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes: ");
-	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (180 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (180 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()) + 240 / app->win->GetScale(), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerLifes);
+	//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 19*20 /2) - (app->render->camera.x - (app->render->camera.w / 2 - 19*20/2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes: ");
+	//app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (19*20 / 2) / app->win->GetScale()) - (app->render->camera.x - (app->render->camera.w / 2 - (19*20 / 2) / app->win->GetScale())) * 2) / app->win->GetScale()) - 7*20 / app->win->GetScale(), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerLifes);
+
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20) / 2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "Lifes:");
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2 + 6*20) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20) / 2 + 6 * 20)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerLifes);
+
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2 + 7 * 20) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20 ) / 2 + 7 * 20)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "   Coins:");
+	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2 + 16 * 20) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20) / 2 + 16 * 20)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerCoins);
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;

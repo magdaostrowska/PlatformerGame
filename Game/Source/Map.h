@@ -2,12 +2,11 @@
 #define __MAP_H__
 
 #include "Module.h"
-#include "Globals.h"
 #include "List.h"
 #include "Point.h"
 #include "DynArray.h"
 #include "Collisions.h"
-#include "PQueue.h"
+
 #include "PugiXml\src\pugixml.hpp"
 
 // Creating a struct to hold information for a TileSet
@@ -139,23 +138,6 @@ public:
 	// Add orthographic world to map coordinates
 	iPoint WorldToMap(int x, int y) const;
 
-	// BFS Pathfinding methods
-	void ResetPath();
-	void DrawPath();
-	bool IsWalkable(int x, int y) const;
-
-	// More pathfinding methods
-	int MovementCost(int x, int y) const;
-	void ComputePath(int x, int y);
-
-	// AStar pathfinding
-	void ComputePathAStar(int x, int y);
-
-	// Propagation methods
-	void PropagateBFS();
-	void PropagateDijkstra();
-	void PropagateAStar(int heuristic);
-
 private:
 
 	// Methods to load all required map data
@@ -186,21 +168,6 @@ private:
 
 	SString folder;
 	bool mapLoaded;
-
-	// BFS Pathfinding variables
-	PQueue<iPoint> frontier;
-	List<iPoint> visited;
-
-	// Additional variables
-	List<iPoint> breadcrumbs;
-	uint costSoFar[COST_MAP_SIZE][COST_MAP_SIZE];
-	DynArray<iPoint> path;
-
-	// AStar (A*) variables
-	iPoint goalAStar;			// Store goal target tile
-	bool finishAStar = false;	// Detect when reached goal
-
-	SDL_Texture* tileX = nullptr;
 };
 
 #endif // __MAP_H__

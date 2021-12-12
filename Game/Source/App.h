@@ -3,30 +3,14 @@
 
 #include "Module.h"
 #include "List.h"
-#include "Window.h"
-#include "Input.h"
-#include "Render.h"
-#include "Textures.h"
-#include "Audio.h"
-#include "Scene.h"
-#include "Map.h"
-#include "Player.h"
-#include "Collisions.h"
-#include "Fonts.h"
-#include "Title.h"
-#include "FadeToBlack.h"
-#include "PathFinding.h"
-#include "Timer.h"
-#include "PerfTimer.h"
-//#include "ModuleEnemy.h"
 
-#include "Defs.h"
-#include "Log.h"
+#include "PerfTimer.h"
+#include "Timer.h"
+
 #include "PugiXml/src/pugixml.hpp"
 
-#include <iostream>
-#include <sstream>
-#include <string>
+#define CONFIG_FILENAME		"config.xml"
+#define SAVE_STATE_FILENAME "save_game.xml"
 
 // Modules
 class Window;
@@ -41,8 +25,9 @@ class Collisions;
 class Player;
 class Title;
 class FadeToBlack;
-class ModuleEnemy;
-class PathFinding;
+class Shots;
+class Items;
+class Enemies;
 
 class App
 {
@@ -122,9 +107,9 @@ public:
 	Fonts* fonts;
 	Title* titleScreen;
 	FadeToBlack* fade;
-	ModuleEnemy* enemies;
-	PathFinding* pathfinding;
-
+	Shots* shots;
+	Items* items;
+	Enemies* enemies;
 
 private:
 
@@ -141,26 +126,27 @@ private:
 	pugi::xml_node config;
 	pugi::xml_node configApp;
 
-	uint frames;
-	float dt;
-
 	mutable bool saveGameRequested;
 	bool loadGameRequested;
 
 	SString filenameGame;
 	SString filenameConfig;
 
-	int framerate;
-
-	PerfTimer ptimer;
-	//PerfTimer* frameDuration;
+	PerfTimer* ptimer;
+	PerfTimer* frameDuration;
 
 	Timer startupTime;
 	Timer frameTime;
 	Timer lastSecFrameTime;
 
 	uint64 frameCount = 0;
+	uint32 framesPerSecond = 0;
 	uint32 lastSecFrameCount = 0;
+
+	float averageFps = 0.0f;
+	float dt = 0.0f;
+
+	uint32 maxFrameRate = 0;
 };
 
 extern App* app;

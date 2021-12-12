@@ -1,5 +1,12 @@
 #include "Collisions.h"
 
+#include "App.h"
+
+#include "Render.h"
+#include "Input.h"
+#include "Title.h"
+#include "SDL/include/SDL_Scancode.h"
+
 Collisions::Collisions() : Module()
 {
 	name.Create("collisions");
@@ -10,26 +17,58 @@ Collisions::Collisions() : Module()
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::DEATH] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::COIN] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::POTION] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::SHOT] = false;
 
 	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::GROUND][Collider::Type::WALL] = false;
-	matrix[Collider::Type::GROUND][Collider::Type::DEATH] = false;
-	matrix[Collider::Type::GROUND][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::GROUND][Collider::Type::COIN] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::POTION] = false;
+	matrix[Collider::Type::GROUND][Collider::Type::SHOT] = false;
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::GROUND] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::WALL][Collider::Type::DEATH] = false;
-	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::WALL][Collider::Type::COIN] = false;
+	matrix[Collider::Type::WALL][Collider::Type::POTION] = false;
+	matrix[Collider::Type::WALL][Collider::Type::SHOT] = true;
 
-	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = true;
+	matrix[Collider::Type::COIN][Collider::Type::WALL] = false;
+	matrix[Collider::Type::COIN][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::COIN][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::COIN][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::COIN][Collider::Type::COIN] = false;
+	matrix[Collider::Type::COIN][Collider::Type::POTION] = false;
+	matrix[Collider::Type::COIN][Collider::Type::SHOT] = false;
+
+	matrix[Collider::Type::POTION][Collider::Type::WALL] = false;
+	matrix[Collider::Type::POTION][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::POTION][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::POTION][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::POTION][Collider::Type::COIN] = false;
+	matrix[Collider::Type::POTION][Collider::Type::POTION] = false;
+	matrix[Collider::Type::POTION][Collider::Type::SHOT] = false;
+
+	matrix[Collider::Type::SHOT][Collider::Type::WALL] = true;
+	matrix[Collider::Type::SHOT][Collider::Type::GROUND] = false;
+	matrix[Collider::Type::SHOT][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::SHOT][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::SHOT][Collider::Type::COIN] = false;
+	matrix[Collider::Type::SHOT][Collider::Type::POTION] = false;
+	matrix[Collider::Type::SHOT][Collider::Type::SHOT] = false;
+
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
-	matrix[Collider::Type::ENEMY][Collider::Type::DEATH] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = true;
+	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::COIN] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::POTION] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::SHOT] = true;
 }
 
 Collisions::~Collisions()
@@ -104,26 +143,40 @@ void Collisions::DebugDraw()
 		if (colliders[i] == nullptr)
 			continue;
 
-		switch (colliders[i]->type)
-		{
-		case Collider::Type::NONE: // white
-			app->render->DrawRectangle(colliders[i]->rect, 255, 255, 255, alpha);
-			break;
-		case Collider::Type::PLAYER: // blue
-			app->render->DrawRectangle(colliders[i]->rect, 0, 0, 255, alpha);
-			break;
-		case Collider::Type::GROUND: // green
-			app->render->DrawRectangle(colliders[i]->rect, 0, 255, 0, alpha);
-			break;
-		case Collider::Type::WALL: // yellow
-			app->render->DrawRectangle(colliders[i]->rect, 255, 255, 0, alpha);
-			break;
-		case Collider::Type::ENEMY: // red
-			app->render->DrawRectangle(colliders[i]->rect, 255, 0, 0, alpha);
-			break;
-		case Collider::Type::DEATH: // orange
-			app->render->DrawRectangle(colliders[i]->rect, 255, 179, 0, alpha);
-			break;
+		if (app->titleScreen->inTitle == 0) {
+
+			switch (colliders[i]->type)
+			{
+			case Collider::Type::NONE: // white
+				app->render->DrawRectangle(colliders[i]->rect, 255, 255, 255, alpha);
+				break;
+
+			case Collider::Type::PLAYER: // blue
+				app->render->DrawRectangle(colliders[i]->rect, 0, 0, 255, alpha);
+				break;
+			case Collider::Type::GROUND: // green
+				app->render->DrawRectangle(colliders[i]->rect, 0, 255, 0, alpha);
+				break;
+
+			case Collider::Type::WALL: // yellow
+				app->render->DrawRectangle(colliders[i]->rect, 255, 255, 0, alpha);
+				break;
+			case Collider::Type::ENEMY: // red
+				app->render->DrawRectangle(colliders[i]->rect, 255, 0, 0, alpha);
+				break;
+
+			case Collider::Type::SHOT: // light yellow
+				app->render->DrawRectangle(colliders[i]->rect, 150, 150, 0, alpha);
+				break;
+
+			case Collider::Type::POTION: // light yellow
+				app->render->DrawRectangle(colliders[i]->rect, 150, 230, 50, alpha);
+				break;
+
+			case Collider::Type::COIN: // light yellow
+				app->render->DrawRectangle(colliders[i]->rect, 255, 100, 0, alpha);
+				break;
+			}
 		}
 	}
 }

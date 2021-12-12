@@ -2,7 +2,6 @@
 #include "Render.h"
 #include "App.h"
 #include "Window.h"
-#include "ModuleEnemy.h"
 
 #include "SDL/include/SDL_render.h"
 
@@ -38,7 +37,6 @@ bool FadeToBlack::Update(float dt)
 		{
 			//moduleToDisable->Disable();
 			//moduleToEnable->Enable();
-			app->enemies->Start();
 
 			currentStep = Fade_Step::FROM_BLACK;
 		}
@@ -71,6 +69,7 @@ bool FadeToBlack::PostUpdate()
 
 bool FadeToBlack::Fade(float frames, int mode)
 {
+
 	bool ret = false;
 
 	if (currentStep == Fade_Step::NONE)
@@ -83,6 +82,7 @@ bool FadeToBlack::Fade(float frames, int mode)
 			currentStep = Fade_Step::FROM_BLACK;
 			frameCount = frames;
 		}
+		
 		
 		maxFadeFrames = frames;
 

@@ -1,4 +1,5 @@
-﻿  WalkingEnemy.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+﻿  Walk_Enemy.cpp
+X:\Users\xavie\Desktop\Framerate + items\PlatformerGame-main\Game\Source\Animation.h(54,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\Framerate + items\PlatformerGame-main\Game\Source\Animation.h(56,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\Framerate + items\PlatformerGame-main\Game\Source\Walk_Enemy.cpp(42,16): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Game.vcxproj -> X:\Users\xavie\Desktop\Framerate + items\PlatformerGame-main\Build\Debug\Game.exe

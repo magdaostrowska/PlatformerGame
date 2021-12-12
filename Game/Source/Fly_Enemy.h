@@ -2,6 +2,8 @@
 #define __FLY_ENEMY_H__
 
 #include "AnyEnemy.h"
+#include "App.h"
+#include <iostream>
 
 enum class FlyingEnemyState {
 	IDLE,
@@ -27,6 +29,9 @@ public:
 
 	void CalculatePath();
 	void PathToMove();
+
+	bool LoadState(pugi::xml_node& data) override;
+	bool SaveState(pugi::xml_node& data) const override;
 
 private:
 	// A set of steps that define the position in the screen

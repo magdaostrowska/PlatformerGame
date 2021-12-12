@@ -17,6 +17,8 @@
 
 Enemies::Enemies() : Module()
 {
+	name.Create("enemies");
+
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 		enemiesList[i] = nullptr;
 }
@@ -159,6 +161,30 @@ void Enemies::HandleEnemiesDespawn()
 	if (removeAll == true) {
 		removeAll = false;
 	}
+}
+
+bool Enemies::LoadState(pugi::xml_node& data)
+{
+	for (int i = 0; i < MAX_ENEMIES; i++)
+	{
+		if (enemiesList[i] != nullptr)
+		{
+			enemiesList[i]->LoadState(data);
+		}
+	}
+	return true;
+}
+
+bool Enemies::SaveState(pugi::xml_node& data) const
+{
+	for (int i = 0; i < MAX_ENEMIES; i++)
+	{
+		if (enemiesList[i] != nullptr)
+		{
+			enemiesList[i]->SaveState(data);
+		}
+	}
+	return true;
 }
 
 void Enemies::SpawnEnemy(const EnemySpawnpoint& info)

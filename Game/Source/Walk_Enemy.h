@@ -2,6 +2,7 @@
 #define __WALK_ENEMY_H__
 
 #include "AnyEnemy.h"
+#include "App.h"
 
 class Walk_Enemy : public AnyEnemy
 {
@@ -15,6 +16,9 @@ public:
 	void Update(float dt) override;
 	void PostUpdate() override;
 	void OnCollision(Collider* collider) override;
+
+	bool LoadState(pugi::xml_node& data) override;
+	bool SaveState(pugi::xml_node& data) const override;
 
 private:
 	// A set of steps that define the position in the screen

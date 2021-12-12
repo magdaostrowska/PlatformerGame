@@ -51,7 +51,7 @@ Walk_Enemy::Walk_Enemy(int x, int y) : AnyEnemy(x, y)
 
 	dieLeft.loop = false;
 	dieLeft.speed = 0.1f;
-	
+
 	dieRight.PushBack({ 192,192,64,32 });
 	dieRight.PushBack({ 128,192,64,32 });
 	dieRight.PushBack({ 64,192,64,32 });
@@ -71,8 +71,8 @@ Walk_Enemy::Walk_Enemy(int x, int y) : AnyEnemy(x, y)
 	lifes = 3;
 
 	dir = 0;
-	speed = 1*16/6;
-	walkRect = { x+22-5, y+16, 23+10, 18 };
+	speed = 1 * 16 / 6;
+	walkRect = { x + 22 - 5, y + 16, 23 + 10, 18 };
 
 	collider = app->collisions->AddCollider(walkRect, Collider::Type::ENEMY, (Module*)app->enemies);
 }
@@ -80,11 +80,11 @@ Walk_Enemy::Walk_Enemy(int x, int y) : AnyEnemy(x, y)
 void Walk_Enemy::Update(float dt)
 {
 
-	speed = 1 * dt/6;
-	
+	speed = 1 * dt / 6;
+
 	if (app->titleScreen->inTitle == 0 && app->player->collider != NULL && collider != NULL) {
 		if (app->player->collider->rect.x < collider->rect.x) {
-			
+
 			dir = -1;
 			if (isLeft == true) {
 				position.x += speed * dir;
@@ -95,15 +95,15 @@ void Walk_Enemy::Update(float dt)
 			if (isRight == true) {
 				position.x += speed * dir;
 			}
-			
+
 		}
 	}
 
-	
 
-	
 
-	collider->SetPos(position.x+22 - 5, position.y+16);
+
+
+	collider->SetPos(position.x + 22 - 5, position.y + 16);
 
 	isLeft = false;
 	isRight = false;
@@ -159,7 +159,7 @@ void Walk_Enemy::Update(float dt)
 			if (pendingToDelete == false) {
 				currentAnim = &walkLeft;
 			}
-			
+
 		}
 		else if (currentAnim == &hitRight) {
 			if (hitRight.HasFinished()) {
@@ -203,7 +203,7 @@ void Walk_Enemy::Update(float dt)
 		}
 		break;
 	}
-	
+
 	if (hitCountdown > 0) {
 		hitCountdown = hitCountdown - dt / 16;
 	}
@@ -224,12 +224,12 @@ void Walk_Enemy::OnCollision(Collider* col)
 		if (app->player->hitCountdown <= 0)
 		{
 			app->player->Die();
-			
+
 		}
 	}
 
 	if (col->type == Collider::Type::GROUND) {
-		
+
 
 		switch (dir) {
 		case 1:
@@ -239,11 +239,11 @@ void Walk_Enemy::OnCollision(Collider* col)
 			if (collider->rect.x + collider->rect.w > col->rect.x && collider->rect.x < col->rect.x) {
 				isRight = true;
 			}
-			
+
 			break;
 		case -1:
 			if (collider->rect.x< col->rect.x + collider->rect.w && collider->rect.x > col->rect.x) {
-			//if (collider->rect.x > col->rect.x) {
+				//if (collider->rect.x > col->rect.x) {
 				isLeft = true;
 			}
 			break;
@@ -281,7 +281,7 @@ void Walk_Enemy::OnCollision(Collider* col)
 			hitCountdown = hitMaxCountdown;
 			int o = 0;
 		}
-		
+
 	}
 
 

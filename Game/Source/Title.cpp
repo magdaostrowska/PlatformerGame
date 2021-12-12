@@ -61,8 +61,6 @@ bool Title::Update(float dt)
 			app->map->LoadCol();
 			app->fade->Fade(240, 1);
 			inTitle = 0;
-			
-			
 
 		}
 	}

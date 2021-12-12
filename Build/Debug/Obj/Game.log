@@ -1,6 +1,5 @@
-﻿  App.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(73,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(75,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(226,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(227,13): warning C4244: 'argument': conversion from 'double' to 'Uint32', possible loss of data
+﻿  Fly_Enemy.cpp
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Fly_Enemy.cpp(77,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

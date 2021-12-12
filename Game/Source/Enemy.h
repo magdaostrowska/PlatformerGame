@@ -4,7 +4,7 @@
 #include "ModuleEnemy.h"
 #include "Animation.h"
 #include "App.h"
-#include <memory>
+//#include <memory>
 
 enum class Enemy_State
 {
@@ -36,8 +36,9 @@ public:
 	virtual bool PostUpdate() { return true; };
 	virtual bool CleanUp() { return true; };
 
+	virtual void RenderEnemy() {};
+
 	virtual bool OnCollision() { return true; };
-	virtual void BlitEverything() {};
 
 public:
 
@@ -50,12 +51,11 @@ public:
 	Animation hurt;
 	Animation death;
 
-	Animation* current_animation;
-	//std::unique_ptr<Animation> current_animation = std::make_unique<Animation>();
+	Animation* currentAnimation;
+	//std::unique_ptr<Animation> currentAnimation = std::make_unique<Animation>();
 
-	SDL_Texture* enemySprite;
 	//std::unique_ptr<SDL_Texture> enemySprite = std::make_unique<SDL_Texture>();
-	//Collider* collider_entity;
+	Collider* colliderEnemy;
 
 	//Type and states
 	Enemy_Type type;

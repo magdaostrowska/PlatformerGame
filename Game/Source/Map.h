@@ -2,13 +2,16 @@
 #define __MAP_H__
 
 #include "Module.h"
-#include "Globals.h"
 #include "List.h"
 #include "Point.h"
 #include "DynArray.h"
 #include "Collisions.h"
 #include "PQueue.h"
 #include "PugiXml\src\pugixml.hpp"
+
+#define COST_MAP_SIZE	100
+
+struct SDL_Texture;
 
 // Creating a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
@@ -155,6 +158,8 @@ public:
 	void PropagateBFS();
 	void PropagateDijkstra();
 	void PropagateAStar(int heuristic);
+
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 private:
 

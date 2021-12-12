@@ -1,4 +1,3 @@
-
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
@@ -7,6 +6,8 @@
 #include "Defs.h"
 #include "Log.h"
 #include "Collisions.h"
+#include "items.h"
+#include "Enemies.h"
 
 #include <math.h>
 
@@ -135,7 +136,6 @@ iPoint Map::WorldToMap(int x, int y) const
 		LOG("Unknown map type");
 		ret.x = x; ret.y = y;
 	}
-
 	return ret;
 }
 
@@ -191,9 +191,7 @@ void Map::DrawPath()
 		iPoint pos = MapToWorld(path[i].x, path[i].y);
 		app->render->DrawTexture(tileX, pos.x, pos.y);
 	}
-
 }
-
 
 int Map::MovementCost(int x, int y) const
 {
@@ -206,14 +204,13 @@ int Map::MovementCost(int x, int y) const
 		if (id == 26) ret = 20;
 		else ret = 1;
 	}
-
 	return ret;
 }
 
 
 bool Map::IsWalkable(int x, int y) const
 {
-	// L10: DONE 3: return true only if x and y are within map limits
+	// return true only if x and y are within map limits
 	// and the tile is walkable (tile id 0 in the navigation layer)
 
 	bool isWalkable = false;
@@ -233,7 +230,7 @@ void Map::ComputePath(int x, int y)
 	path.Clear();
 	iPoint goal = WorldToMap(x, y);
 
-	// L11: TODO 2: Follow the breadcrumps to goal back to the origin
+	// Follow the breadcrumps to goal back to the origin
 	// add each step into "path" dyn array (it will then draw automatically)
 
 	path.PushBack(goal);
@@ -259,7 +256,7 @@ void Map::ComputePathAStar(int x, int y)
 
 void Map::PropagateBFS()
 {
-	// DONE 1: If frontier queue contains elements
+	// If frontier queue contains elements
 	// pop the last one and calculate its 4 neighbors
 	iPoint curr;
 	if (frontier.Pop(curr))
@@ -326,8 +323,6 @@ void Map::PropagateDijkstra()
 
 void Map::PropagateAStar(int heuristic)
 {
-	// L12a: TODO 2: Implement AStar algorythm
-	// Consider the different heuristics
 	iPoint curr;
 	if (finishAStar == false && frontier.Pop(curr))
 	{
@@ -367,6 +362,52 @@ void Map::PropagateAStar(int heuristic)
 			}
 		}
 	}
+}
+
+bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
+{
+	bool ret = false;
+	ListItem<MapLayer*>* item;
+	item = mapData.layers.start;
+
+	for (item = mapData.layers.start; item != NULL; item = item->next)
+	{
+		MapLayer* layer = item->data;
+
+		if (layer->properties.GetProperty("col", 0) != 0)
+			continue;
+
+		if (layer->properties.GetProperty("col", 1) != 1)
+			continue;
+
+		if (layer->properties.GetProperty("col", 2) != 2)
+			continue;
+
+		int p = 0;
+		uchar* map = new uchar[layer->width * layer->height];
+		memset(map, 1, layer->width * layer->height);
+
+		for (int y = 0; y < mapData.height; ++y)
+		{
+			for (int x = 0; x < mapData.width; ++x)
+			{
+				int i = (y * layer->width) + x;
+				int tile_id = layer->Get(x, y);
+
+				if (layer->data[tile_id] > 0)
+				{
+					map[i] = 0;
+					p++;
+				}
+			}
+		}
+		*buffer = map;
+		width = mapData.width;
+		height = mapData.height;
+		ret = true;
+		break;
+	}
+	return ret;
 }
 
 // Pick the right Tileset based on a tile id
@@ -790,7 +831,73 @@ void Map::LoadCol() {
 				}
 			}
 		}
-		else if (mapLayerItem->data->properties.GetProperty("col") == 3) {
+
+		if (mapLayerItem->data->properties.GetProperty("item") == 1) {
+
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
+
+					if (gid > 0) {
+
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
+
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
+						/*
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y+4,
+							&r);
+						*/
+						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::COIN, this);
+						app->items->AddItem(Item_type::COIN, pos.x, pos.y + 4);
+						i++;
+					}
+
+				}
+			}
+
+		}
+		else if (mapLayerItem->data->properties.GetProperty("item") == 2) {
+			
+
+				for (int x = 0; x < mapLayerItem->data->width; x++)
+				{
+					for (int y = 0; y < mapLayerItem->data->height; y++)
+					{
+						// L04: DONE 9: Complete the draw function
+						int gid = mapLayerItem->data->Get(x, y);
+
+						if (gid > 0) {
+
+							//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+							//now we always use the firt tileset in the list
+							TileSet* tileset = mapData.tilesets.start->data;
+
+							SDL_Rect r = tileset->GetTileRect(gid);
+							iPoint pos = MapToWorld(x, y);
+							/*
+							app->render->DrawTexture(tileset->texture,
+								pos.x,
+								pos.y+4,
+								&r);
+							*/
+							app->items->AddItem(Item_type::POTION, pos.x, pos.y + 4);
+							i++;
+						}
+
+					}
+				}
+
+		}
+
+		if (mapLayerItem->data->properties.GetProperty("enemy") == 1) {
 
 
 			for (int x = 0; x < mapLayerItem->data->width; x++)
@@ -808,21 +915,54 @@ void Map::LoadCol() {
 
 						SDL_Rect r = tileset->GetTileRect(gid);
 						iPoint pos = MapToWorld(x, y);
-
 						/*
 						app->render->DrawTexture(tileset->texture,
 							pos.x,
 							pos.y+4,
 							&r);
 						*/
-
-						collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::DEATH, this);
+						app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x + 5, pos.y + 4);
+						app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x - 130, pos.y - 90);
+						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::ENEMY, this);
 						i++;
 					}
 
 				}
 			}
+
+		}else if (mapLayerItem->data->properties.GetProperty("enemy") == 2) {
+
+
+			for (int x = 0; x < mapLayerItem->data->width; x++)
+			{
+				for (int y = 0; y < mapLayerItem->data->height; y++)
+				{
+					// L04: DONE 9: Complete the draw function
+					int gid = mapLayerItem->data->Get(x, y);
+
+					if (gid > 0) {
+
+						//L06: TODO 4: Obtain the tile set using GetTilesetFromTileId
+						//now we always use the firt tileset in the list
+						TileSet* tileset = mapData.tilesets.start->data;
+
+						SDL_Rect r = tileset->GetTileRect(gid);
+						iPoint pos = MapToWorld(x, y);
+						/*
+						app->render->DrawTexture(tileset->texture,
+							pos.x,
+							pos.y+4,
+							&r);
+						*/
+						app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x, pos.y + 4);
+						i++;
+					}
+
+				}
+			}
+
 		}
+
 		mapLayerItem = mapLayerItem->next;
 	}
 }

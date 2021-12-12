@@ -4,19 +4,29 @@ WalkingEnemy::WalkingEnemy() : Enemy(Enemy_Type::WALKING_ENEMY)
 {
 	name.Create("WalkingEnemy");
 	type = Enemy_Type::WALKING_ENEMY;
+	currentAnimation = nullptr;
+	textureIdle = nullptr;
+
+	idle.PushBack({ 0,51,62,13 });
+	idle.PushBack({ 62,51,62,13 });
+	idle.PushBack({ 124,51,62,13 });
+	idle.PushBack({ 186,51,62,13 });
 }
 
 bool WalkingEnemy::Awake(pugi::xml_node& config)
 {
-	config = app->GetConfig();
-	config = config.child("walkingEnemy");
 	speed = config.child("velocity").attribute("value").as_float();
+	position.x = 0;
+	position.y = 50;
 	return true;
 }
 
 bool WalkingEnemy::Start()
 {
-	return false;
+	enemySprite = app->tex->Load("Assets/Textures/enemies/enemy.png");
+	currentAnimation = &idle;
+	colliderEnemy = app->collisions->AddCollider(currentAnimation->GetCurrentFrame(), Collider::ENEMY, (Module*)this); //a collider to start
+	return true;
 }
 
 bool WalkingEnemy::PreUpdate()
@@ -26,16 +36,68 @@ bool WalkingEnemy::PreUpdate()
 
 bool WalkingEnemy::Update(float dt)
 {
-	return false;
+	position.y += 1;
+
+	switch (state)
+	{
+	case Enemy_State::IDLE:
+		currentAnimation = &idle;
+		//ready = true;
+		break;
+	case Enemy_State::WALK_FORWARD:
+		currentAnimation = &walk;
+		isReversed = true;
+		movingToLeft = false;
+		movingToRight = true;
+		position.x += 2;
+		break;
+	case Enemy_State::WALK_BACKWARD:
+		currentAnimation = &walk;
+		isReversed = false;
+		movingToLeft = true;
+		movingToRight = false;
+		position.x -= 2;
+		break;
+	case Enemy_State::IS_HIT:
+		currentAnimation = &hurt;
+		hurt.Reset();
+		isDead = true;
+		//app->enemies->DestroyEnemy(this);
+		break;
+	default:
+		break;
+	}
+
+	//RenderEnemy();
+	return true;
 }
 
 bool WalkingEnemy::CleanUp()
 {
+	enemySprite = nullptr;
 	return false;
 }
 
 void WalkingEnemy::OnCollision(Collider* c1, Collider* c2)
 {
+	if (c1->type == Collider::Type::ENEMY && c2->type == Collider::Type::GROUND)
+	{
+		position.y -= 1;
+	}
+}
+
+void WalkingEnemy::RenderEnemy()
+{
+	if (enemySprite != nullptr && currentAnimation != nullptr)
+	{
+		if (isReversed)
+			app->render->DrawTexture(enemySprite, position.x, position.y, &currentAnimation->GetCurrentFrame(), 1, 2);
+		else
+			app->render->DrawTexture(enemySprite, position.x, position.y, &currentAnimation->GetCurrentFrame());
+
+		if (colliderEnemy != nullptr)
+			colliderEnemy->SetPos(position.x, position.y);
+	}
 }
 
 void WalkingEnemy::CalculatePath()

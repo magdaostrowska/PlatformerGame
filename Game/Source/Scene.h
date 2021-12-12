@@ -58,6 +58,7 @@ private:
 	
 
 	char playerLifes[2] = { "\0" };
+	char playerCoins[2] = { "\0" };
 	SDL_Rect blackRect = {0,0,0,0};
 	SDL_Rect blackRect2 = { 0,0,0,0 };
 };

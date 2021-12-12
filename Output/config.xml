@@ -9,8 +9,8 @@
     <vsync value="true" />
   </renderer>
   <window>
-    <resolution width="1920" height="1080" scale="3" />
-    <fullscreen value="true" />
+    <resolution width="1280" height="720" scale="3" />
+    <fullscreen value="false" />
     <borderless value="false" />
     <resizable value="false" />
     <fullscreen_window value="false" />
@@ -25,10 +25,9 @@
   <fonts />
   <map />
   <collisions />
-  <lifes lifes="6" />
   <player>
     <position x="0" y="0" />
-    <lifes lifes="6" />
+    <lifes lifes="3" />
     <level level="1" />
     <camera x="0" y="-126" />
   </player>

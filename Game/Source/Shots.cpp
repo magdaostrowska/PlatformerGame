@@ -112,8 +112,6 @@ void Shots::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ACTIVE_SHOTS; ++i)
 	{
-
-		/*
 		// Always destroy particles that collide
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
@@ -121,7 +119,6 @@ void Shots::OnCollision(Collider* c1, Collider* c2)
 			particles[i]->collider->pendingToDelete = true;
 			break;
 		}
-		*/
 	}
 }
 

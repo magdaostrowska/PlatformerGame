@@ -62,11 +62,6 @@ protected:
 	iPoint spawnPos;
 	int dir;
 
-	int lifes;
-
-	int hitCountdown = 0;
-	int	hitMaxCountdown = 60;
-
 	
 };
 

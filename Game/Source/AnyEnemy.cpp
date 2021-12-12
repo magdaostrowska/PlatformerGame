@@ -12,8 +12,8 @@ AnyEnemy::AnyEnemy(int x, int y) : position(x, y)
 
 AnyEnemy::~AnyEnemy()
 {
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	//if (collider != nullptr)
+		//collider->pendingToDelete = true;
 }
 
 const Collider* AnyEnemy::GetCollider() const

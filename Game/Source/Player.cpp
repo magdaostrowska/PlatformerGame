@@ -203,6 +203,9 @@ void Player::ReSpawn() {
 	lifes = maxLifes;
 	position.x = posIniX;
 	position.y = posIniY;
+	coins = 0;
+	
+	stunCountdown == 0;
 }
 
 bool Player::LoadState(pugi::xml_node& data)
@@ -270,7 +273,14 @@ bool Player::Update(float dt)
 	}
 
 	if (lifes >= 1) {
-		currentAnimation = &idleLeft;
+		if (currentAnimation == &hurtLeft) {
+			currentAnimation = &idleRight;
+		}
+		
+		if (currentAnimation == &hurtRight) {
+			currentAnimation = &idleLeft;
+		}
+		
 	}
 	
 

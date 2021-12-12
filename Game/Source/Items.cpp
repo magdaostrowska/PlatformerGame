@@ -146,9 +146,20 @@ void Items::HandleItemsDespawn()
 			if (app->titleScreen->inTitle != 0) {
 				items[i]->SetToDelete();
 			}
-			//	
-			//}
+
+			if (removeAll == true) {
+				items[i]->SetToDelete();
+			}
+
+
+			
 		}
+
+		
+	}
+
+	if (removeAll == true) {
+		removeAll = false;
 	}
 }
 

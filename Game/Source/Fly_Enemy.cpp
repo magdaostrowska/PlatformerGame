@@ -114,7 +114,6 @@ void Fly_Enemy::PostUpdate()
 
 void Fly_Enemy::OnCollision(Collider* col)
 {
-<<<<<<< HEAD
 	if (app->player->godMode == false)
 	{
 		if (col->type == Collider::Type::PLAYER) {
@@ -127,17 +126,6 @@ void Fly_Enemy::OnCollision(Collider* col)
 				app->player->Die();
 				app->player->hitCountdown = app->player->hitMaxCountdown;
 			}
-=======
-	if (col->type == Collider::Type::PLAYER) {
-
-		position.x += 300;
-		position.y -= 150;
-
-		if (app->player->hitCountdown == 0)
-		{
-			app->player->Die();
-			app->player->hitCountdown = app->player->hitMaxCountdown;
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
 		}
 	}
 
@@ -150,11 +138,7 @@ void Fly_Enemy::OnCollision(Collider* col)
 			}
 			break;
 		case -1:
-<<<<<<< HEAD
 			if (collider->rect.x + speed < col->rect.x + col->rect.w)
-=======
-			if (collider->rect.x + speed < col->rect.x + col->rect.w) 
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
 				isLeft = true;
 			break;
 		}
@@ -179,11 +163,7 @@ void Fly_Enemy::PathToMove()
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 	iPoint pos = app->map->MapToWorld(path->At(1)->x, path->At(1)->y);
 
-<<<<<<< HEAD
 	if (pos.x < position.x)
-=======
-	if (pos.x < position.x) 
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
 	{
 		state = FlyingEnemyState::FLY_LEFT;
 	}
@@ -191,13 +171,8 @@ void Fly_Enemy::PathToMove()
 	{
 		state = FlyingEnemyState::FLY_RIGHT;
 	}
-<<<<<<< HEAD
 
 	if (pos.x >= position.x - 5 && pos.x <= position.x + 5)
-=======
-		
-	if (pos.x >= position.x - 5 && pos.x <= position.x + 5) 
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
 	{
 		state = FlyingEnemyState::FLY_DOWN;
 	}

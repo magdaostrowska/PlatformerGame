@@ -1,7 +1,2 @@
-<<<<<<< HEAD
 PlatformToolSet=v142:VCToolArchitecture=Native32Bit:VCToolsVersion=14.28.29333:TargetPlatformVersion=10.0.18362.0:
-Debug|Win32|X:\Users\xavie\Documents\GitHub\PlatformerGame\|
-=======
-PlatformToolSet=v142:VCToolArchitecture=Native32Bit:VCToolsVersion=14.29.30133:TargetPlatformVersion=10.0.19041.0:
-Debug|Win32|C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\|
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
+Debug|Win32|X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\|

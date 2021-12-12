@@ -66,13 +66,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(enemies);
 	AddModule(fade);
 	AddModule(collisions);
-<<<<<<< HEAD
 	AddModule(pathfinding);
 	
 	
-=======
-	AddModule(pathfinding);	
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
 
 	// Render last to swap buffer
 	AddModule(render);

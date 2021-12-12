@@ -1,12 +1,131 @@
-<<<<<<< HEAD
-﻿  Enemies.cpp
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
-=======
-﻿  Fly_Enemy.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Fly_Enemy.cpp(77,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
+﻿  AnyEnemy.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  AnyItem.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Collider.cpp
+  Collisions.cpp
+  Enemies.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  FadeToBlack.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\FadeToBlack.cpp(83,17): warning C4244: '=': conversión de 'float' a 'Uint32'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\FadeToBlack.cpp(87,19): warning C4244: '=': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  Fly_Enemy.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Fly_Enemy.cpp(77,19): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+  Fonts.cpp
+  Items.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Item_Coin.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Item_Potion.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Main.cpp
+  App.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\App.cpp(211,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\App.cpp(242,14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\App.cpp(248,47): warning C4244: 'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  Audio.cpp
+  Input.cpp
+  Map.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Map.cpp(26,20): warning C4018: '<': no coinciden signed/unsigned
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Map.cpp(284,50): warning C4018: '<': no coinciden signed/unsigned
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Map.cpp(320,50): warning C4018: '<': no coinciden signed/unsigned
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Point.h(111,24): warning C4244: 'argumento': conversión de 'TYPE' a 'float'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Point.h(107): message : al compilar la función del miembro clase plantilla "TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const"
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Map.cpp(327): message : Vea la referencia a la creación de una instancia de la función plantilla "TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const" que se está compilando
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Scene.h(54): message : Vea la referencia a la creación de una instancia de clase plantilla "Point<int>" que se está compilando
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Point.h(111,15): warning C4244: 'return': conversión de 'float' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+  Particle.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Particle.cpp(51,19): warning C4018: '>=': no coinciden signed/unsigned
+  PathFinding.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Point.h(111,24): warning C4244: 'argumento': conversión de 'TYPE' a 'float'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Point.h(107): message : al compilar la función del miembro clase plantilla "TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const"
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\PathFinding.cpp(157): message : Vea la referencia a la creación de una instancia de la función plantilla "TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const" que se está compilando
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\PathFinding.h(66): message : Vea la referencia a la creación de una instancia de clase plantilla "Point<int>" que se está compilando
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Point.h(111,15): warning C4244: 'return': conversión de 'float' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+  PerfTimer.cpp
+  Player.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Player.cpp(16,10): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Player.cpp(17,14): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Player.cpp(18,18): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Player.cpp(257,8): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Player.cpp(535,31): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Player.cpp(539,33): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Player.cpp(544,33): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Generando código...
+  Compilando...
+  Scene.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Render.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Render.cpp(90,26): warning C4018: '<': no coinciden signed/unsigned
+  Shots.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Shots.cpp(131,24): warning C4244: '=': conversión de 'float' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+  Textures.cpp
+  Timer.cpp
+  Title.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Walk_Enemy.cpp
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Walk_Enemy.cpp(83,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Game\Source\Walk_Enemy.cpp(208,31): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Window.cpp
+  Log.cpp
+  pugixml.cpp
+  Generando código...
+  Game.vcxproj -> X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Build\Debug\Game.exe

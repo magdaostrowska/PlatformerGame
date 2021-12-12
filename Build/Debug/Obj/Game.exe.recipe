@@ -2,11 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-<<<<<<< HEAD
-      <FullPath>X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe</FullPath>
-=======
-      <FullPath>C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe</FullPath>
->>>>>>> c1ebbe5e9187464a08e621c0e269df56c5a6ec15
+      <FullPath>X:\Users\xavie\Desktop\backup plat 6\PlatformerGame\Build\Debug\Game.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

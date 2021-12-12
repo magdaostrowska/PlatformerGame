@@ -65,6 +65,9 @@ public:
 
 	bool removeAll = false;
 
+	bool LoadState(pugi::xml_node& data);
+	bool SaveState(pugi::xml_node& data) const;
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);

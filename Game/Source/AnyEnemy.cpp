@@ -1,6 +1,5 @@
 #include "AnyEnemy.h"
 
-#include "App.h"
 #include "Collisions.h"
 #include "Audio.h"
 #include "Render.h"
@@ -72,4 +71,14 @@ void AnyEnemy::SetToDelete()
 	pendingToDelete = true;
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
+}
+
+bool AnyEnemy::LoadState(pugi::xml_node& data)
+{
+	return true;
+}
+
+bool AnyEnemy::SaveState(pugi::xml_node& data) const
+{
+	return true;
 }

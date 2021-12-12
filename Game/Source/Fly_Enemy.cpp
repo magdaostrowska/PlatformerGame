@@ -1,6 +1,5 @@
 #include "Fly_Enemy.h"
 #include "Textures.h"
-#include "App.h"
 #include "Collisions.h"
 #include "Player.h"
 #include "Title.h"
@@ -176,4 +175,29 @@ void Fly_Enemy::PathToMove()
 	{
 		state = FlyingEnemyState::FLY_DOWN;
 	}
+}
+
+bool Fly_Enemy::LoadState(pugi::xml_node& data)
+{
+	data = data.child("flying_enemy");
+
+	//Load enemy's position
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	return true;
+}
+
+bool Fly_Enemy::SaveState(pugi::xml_node& data) const
+{
+	std::cout << "SaveState Player" << std::endl;
+	data = data.append_child("flying_enemy");
+
+	//Enemy's position
+	
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+
+	data = data.parent();
+	return true;
 }

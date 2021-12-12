@@ -7,16 +7,33 @@
 	<scene />
 	<fonts />
 	<map />
-	<collisions />
+	<:anonymous />
 	<player>
-		<position x="1247" y="116" />
-		<lifes lifes="2" />
+		<position x="0" y="180" />
+		<lifes lifes="6" />
 		<level level="1" />
-		<camera x="-2817" y="54" />
+		<camera x="0" y="54" />
 	</player>
 	<title />
+	<:anonymous />
+	<enemies>
+		<walking_enemy>
+			<position x="334" y="196" />
+		</walking_enemy>
+		<walking_enemy>
+			<position x="0" y="0" />
+		</walking_enemy>
+		<flying_enemy>
+			<position x="0" y="99" />
+		</flying_enemy>
+		<flying_enemy>
+			<position x="0" y="99" />
+		</flying_enemy>
+	</enemies>
 	<fade />
+	<collisions />
+	<pathfinding />
 	<renderer>
-		<renderer_camera x="-2817" y="54" />
+		<renderer_camera x="0" y="54" />
 	</renderer>
 </game_state>

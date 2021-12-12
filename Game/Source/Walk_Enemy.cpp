@@ -1,6 +1,4 @@
 #include "Walk_Enemy.h"
-
-#include "App.h"
 #include "Collisions.h"
 #include "Textures.h"
 #include "Player.h"
@@ -281,9 +279,29 @@ void Walk_Enemy::OnCollision(Collider* col)
 			hitCountdown = hitMaxCountdown;
 			int o = 0;
 		}
-
 	}
-
-
 	AnyEnemy::OnCollision(collider);
+}
+
+bool Walk_Enemy::LoadState(pugi::xml_node& data)
+{
+	data = data.child("walking_enemy");
+
+	//Load enemy's position
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	return true;
+}
+
+bool Walk_Enemy::SaveState(pugi::xml_node& data) const
+{
+	data = data.append_child("walking_enemy");
+
+	//Enemy's position
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+
+	data = data.parent();
+	return true;
 }

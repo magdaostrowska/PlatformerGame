@@ -7,8 +7,8 @@ class PerfTimer
 {
 public:
 
+	// Constructor
 	PerfTimer();
-	~PerfTimer();
 
 	void Start();
 	double ReadMs() const;

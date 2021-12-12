@@ -38,7 +38,7 @@ public:
 	SDL_Surface* screenSurface;
 
 private:
-	//SString title;
+	SString title;
 	uint width;
 	uint height;
 	uint scale;

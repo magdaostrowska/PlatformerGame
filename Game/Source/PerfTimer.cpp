@@ -7,14 +7,14 @@
 
 uint64 PerfTimer::frequency = 0;
 
+// L07: DONE 2: Fill Constructor, Start(),ReadMs() and ReadTicks() methods
+// they are simple, one line each!
+
 PerfTimer::PerfTimer()
 {
+	//...
 	Start();
 	frequency = SDL_GetPerformanceFrequency();
-}
-
-PerfTimer::~PerfTimer()
-{
 }
 
 void PerfTimer::Start()

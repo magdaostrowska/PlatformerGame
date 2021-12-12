@@ -10,7 +10,7 @@
 #include "Fonts.h"
 #include "Title.h"
 #include "Items.h"
-#include "Enemies.h"
+#include "PathFinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -40,7 +40,6 @@ bool Scene::Awake()
 bool Scene::Start()
 {
 	// Loading map
-
 	if (level == 1)
 	{
 		app->map->Load("map_level1.tmx");
@@ -51,6 +50,13 @@ bool Scene::Start()
 		app->map->Load("map_level2.tmx");
 		back1 = app->tex->Load("Assets/textures/back_image_2.png");
 	}
+
+	int w, h;
+	uchar* data = NULL;
+
+	//pathfinding
+	if (app->map->CreateWalkabilityMap(w, h, &data))
+		app->pathfinding->SetMap(w, h, data);
 
 	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
 	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);
@@ -111,7 +117,7 @@ bool Scene::Update(float dt)
 			app->tex->UnLoad(back1);
 			back1 = app->tex->Load("Assets/textures/back_image.png");
 			//app->player->Spawn();
-			//app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+			app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
 			app->map->LoadCol();
 			loadinglvl1 = false;
 		}
@@ -122,8 +128,6 @@ bool Scene::Update(float dt)
 		if (app->fade->frameCount >= 120 / 2) {
 			level = 2;
 			app->map->RemoveCol();
-			app->enemies->removeAll = true;
-			app->items->removeAll = true;
 			app->map->CleanUp();
 
 			app->map->Load("map_level2.tmx");
@@ -143,8 +147,7 @@ bool Scene::Update(float dt)
 				level = 2;
 				app->map->RemoveCol();
 				app->map->CleanUp();
-				app->enemies->removeAll = true;
-				app->items->removeAll = true;
+
 				app->map->Load("map_level2.tmx");
 				app->tex->UnLoad(back1);
 				back1 = app->tex->Load("Assets/textures/back_image_2.png");
@@ -259,18 +262,6 @@ bool Scene::PostUpdate()
 	}
 	else if (app->player->currentAnimation == &app->player->jumpRight) {
 		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
-	}
-	else if (app->player->currentAnimation == &app->player->hurtLeft) {
-		app->render->DrawTexture(app->player->textureHitLeft, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
-	}
-	else if (app->player->currentAnimation == &app->player->hurtRight) {
-		app->render->DrawTexture(app->player->textureHitRight, app->player->position.x , app->player->position.y, &app->player->rectPlayer, 1.0f);
-	}
-	else if (app->player->currentAnimation == &app->player->deathLeft) {
-		app->render->DrawTexture(app->player->textureDeathLeft, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
-	}
-	else if (app->player->currentAnimation == &app->player->deathRight) {
-		app->render->DrawTexture(app->player->textureDeathRight, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
 	}
 
 	//app->render->DrawTexture(app->items->textureRunLeft, app->, app->player->position.y, &app->player->rectPlayer, 1.0f);

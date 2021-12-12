@@ -1,4 +1,5 @@
-﻿  Items.cpp
-X:\Users\xavie\Downloads\plat game\PlatformerGame-7f92ae420b1d2789d2d87b8a01ab4f86fb881b77\PlatformerGame-7f92ae420b1d2789d2d87b8a01ab4f86fb881b77\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Downloads\plat game\PlatformerGame-7f92ae420b1d2789d2d87b8a01ab4f86fb881b77\PlatformerGame-7f92ae420b1d2789d2d87b8a01ab4f86fb881b77\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Game.vcxproj -> X:\Users\xavie\Downloads\plat game\PlatformerGame-7f92ae420b1d2789d2d87b8a01ab4f86fb881b77\PlatformerGame-7f92ae420b1d2789d2d87b8a01ab4f86fb881b77\Build\Debug\Game.exe
+﻿  Fly_Enemy.cpp
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(54,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(56,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Fly_Enemy.cpp(77,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

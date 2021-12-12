@@ -28,6 +28,7 @@ class FadeToBlack;
 class Shots;
 class Items;
 class Enemies;
+class PathFinding;
 
 class App
 {
@@ -67,13 +68,12 @@ public:
 
 	//virtual void OnCollision(Collider* c1, Collider* c2);
 
-
+private:
 
 	// Load config file
 	// NOTE: It receives config document
 	pugi::xml_node LoadConfig(pugi::xml_document&) const;
 
-private:
 	// Call modules before each loop iteration
 	void PrepareUpdate();
 
@@ -111,6 +111,7 @@ public:
 	Shots* shots;
 	Items* items;
 	Enemies* enemies;
+	PathFinding* pathfinding;
 
 private:
 

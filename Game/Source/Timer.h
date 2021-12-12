@@ -9,10 +9,13 @@ public:
 
 	// Constructor
 	Timer();
+	~Timer();
 
 	void Start();
 	uint32 Read() const;
 	float ReadSec() const;
+
+	uint32 GetStartTime();
 
 private:
 	uint32 startTime;

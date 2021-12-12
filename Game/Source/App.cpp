@@ -1,29 +1,11 @@
 #include "App.h"
-#include "Window.h"
-#include "Input.h"
-#include "Render.h"
-#include "Textures.h"
-#include "Audio.h"
-#include "Scene.h"
-#include "Map.h"
-#include "Player.h"
-#include "Collisions.h"
-#include "Fonts.h"
-#include "Title.h"
-#include "FadeToBlack.h"
-#include "Shots.h"
-#include "Items.h"
-
-
-#include "Defs.h"
-#include "Log.h"
-
-#include <iostream>
-#include <sstream>
+#include "ModuleEnemy.h"
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {	
+	dt = 0.0f;
+	frames = 0;
 
 	win = new Window();
 	input = new Input();
@@ -34,11 +16,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	map = new Map();
 	collisions = new Collisions();
+	enemies = new ModuleEnemy();
 	player = new Player();
 	titleScreen = new Title();
 	fade = new FadeToBlack();
-	shots = new Shots();
-	items = new Items();
+	pathfinding = new PathFinding();
 
 	saveGameRequested = false;
 	loadGameRequested = false;
@@ -56,19 +38,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fonts);
 	AddModule(map);
 	AddModule(collisions);
-	AddModule(shots);
+	AddModule(enemies);
 	AddModule(player);
 	AddModule(titleScreen);
-	AddModule(items);
 	AddModule(fade);
-	
-	
+	AddModule(pathfinding);
 
 	// Render last to swap buffer
 	AddModule(render);
-
-	ptimer = new PerfTimer();
-	frameDuration = new PerfTimer();
 }
 
 // Destructor
@@ -95,10 +72,6 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
-	pugi::xml_document configFile;
-	pugi::xml_node config;
-	pugi::xml_node configApp;
-
 	bool ret = false;
 
 	// Loading config from XML
@@ -108,11 +81,10 @@ bool App::Awake()
 	{
 		ret = true;
 		configApp = config.child("app");
-		maxFrameRate = config.child("frcap").attribute("value").as_int();
 
 		// Reading the title from the config file
-		//title.Create(configApp.child("title").child_value());
-		//organization.Create(configApp.child("organization").child_value());
+		title.Create(configApp.child("title").child_value());
+		organization.Create(configApp.child("organization").child_value());
 	}
 
 	if (ret == true)
@@ -127,7 +99,6 @@ bool App::Awake()
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
 			ret = item->data->Awake(config.child(item->data->name.GetString()));
-			
 			item = item->next;
 		}
 	}
@@ -138,10 +109,9 @@ bool App::Awake()
 // Called before the first frame
 bool App::Start()
 {
-
-
 	startupTime.Start();
 	lastSecFrameTime.Start();
+	frameTime.Start();
 
 	bool ret = true;
 	ListItem<Module*>* item;
@@ -162,6 +132,19 @@ bool App::Update()
 {
 	bool ret = true;
 	PrepareUpdate();
+
+	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
+		app->render->vsync = !app->render->vsync;
+	}
+
+	if (app->render->vsync)
+	{
+		framerate = 30;
+	}
+	else
+	{
+		framerate = 60;
+	}
 
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
@@ -184,12 +167,11 @@ bool App::Update()
 pugi::xml_node App::LoadConfig(pugi::xml_document& configFile) const
 {
 	pugi::xml_node ret;
-
 	pugi::xml_parse_result result = configFile.load_file(CONFIG_FILENAME);
 
-	if (result == NULL) 
+	if (result == NULL)
 		LOG("Could not load xml file: %s. pugi error: %s", CONFIG_FILENAME, result.description());
-	else 
+	else
 		ret = configFile.child("config");
 
 	return ret;
@@ -201,9 +183,10 @@ void App::PrepareUpdate()
 	frameCount++;
 	lastSecFrameCount++;
 
-	// L08: DONE 4: Calculate the dt: differential time since last frame
-	dt = frameDuration->ReadMs();
-	frameDuration->Start();
+	//Calculate the dt: differential time since last frame
+	dt = frameTime.ReadSec();
+	frameTime.Start();
+	ptimer.Start();
 }
 
 // ---------------------------------------------
@@ -213,36 +196,31 @@ void App::FinishUpdate()
 	if (loadGameRequested == true) LoadGame();
 	if (saveGameRequested == true) SaveGame();
 
-	// Amount of frames since startup
-	// Amount of time since game start (use a low resolution timer)
-	// Amount of ms took the last update
-	// Amount of frames during the last second
-	// Average FPS for the whole game life
-
-	float secondsSinceStartup = startupTime.ReadSec();
-
-	if (lastSecFrameTime.Read() > 1000) {
+	if (lastSecFrameTime.Read() > 1000)
+	{
 		lastSecFrameTime.Start();
-		framesPerSecond = lastSecFrameCount;
 		lastSecFrameCount = 0;
-		averageFps = (averageFps + framesPerSecond) / 2;
 	}
 
-	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u ",
-	averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+	float averagefps = float(frameCount) / startupTime.ReadSec();
+	uint32 lastFrameMS = frameTime.Read();
+	uint32 last_frame_ms = frameTime.Read();
 
-	// L08: DONE 2: Use SDL_Delay to make sure you get your capped framerate
-	float delay = float(maxFrameRate) - frameDuration->ReadMs();
-	//LOG("F: %f Delay:%f", frameDuration->ReadMs(), delay);
+	std::string vsyncState  = "";
+	app->render->vsync ? vsyncState = "on" : vsyncState = "off";	
 
-	// L08: DONE 3: Measure accurately the amount of time SDL_Delay() actually waits compared to what was expected
-	PerfTimer* delayt = new PerfTimer();
-	delayt->Start();
-	if (maxFrameRate > 0 && delay > 0) SDL_Delay(delay);
-	LOG("Expected %f milliseconds and the real delay is % f", delay, delayt->ReadMs());
+	SString title("FPS: %i Av.FPS: %.2f Last Frame Ms: %02u",
+		framerate, averagefps, lastFrameMS);
 
-	app->win->SetTitle(title);
+	app->win->SetTitle(title.GetString());
+
+	// Set cap to either 30 or 60 fps
+	PerfTimer delay_timer;
+	delay_timer.Start();
+	double delay = 1000 / framerate - last_frame_ms;
+
+	if (last_frame_ms < 1000 / framerate)
+		SDL_Delay(delay);
 }
 
 // Calling modules before each loop iteration

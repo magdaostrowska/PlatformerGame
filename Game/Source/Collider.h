@@ -16,9 +16,7 @@ struct Collider
 		GROUND,
 		WALL,
 		DEATH,
-		COIN,
-		POTION,
-		SHOT,
+		ENEMY,
 
 		MAX
 	};

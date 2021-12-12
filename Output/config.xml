@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <config>
   <app>
-    <title>Platformer Game</title>
+    <title>Platventure</title>
     <organization>UPC</organization>
   </app>
-  <frcap value = "16" />
   <renderer>
-    <vsync value="false" />
+    <vsync value="true" />
   </renderer>
   <window>
-    <resolution width="1920" height="1080" scale="3" />
-    <fullscreen value="true" />
+    <resolution width="1280" height="720" scale="3" />
+    <fullscreen value="false" />
     <borderless value="false" />
-    <resizable value="false" />
+    <resizable value="true" />
     <fullscreen_window value="false" />
   </window>
   <map>
     <folder>Assets/maps/</folder>
   </map>
+  <window />
   <input />
   <textures />
   <audio />
@@ -31,10 +31,18 @@
     <level level="1" />
     <camera x="0" y="-126" />
   </player>
+  <walkingEnemy>
+    <speed value ="200.0"/>
+    <die_timer value ="1"/>
+  </walkingEnemy>
+  <flyingEnemy>
+    <speed value ="40.0"/>
+    <fall_velocity value ="150.0"/>
+    <die_timer value ="1"/>
+  </flyingEnemy>
   <title />
   <fade />
   <renderer>
     <rendercamera x="0" y="-126" />
   </renderer>
-
 </config>

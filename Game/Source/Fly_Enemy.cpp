@@ -128,6 +128,10 @@ void Fly_Enemy::OnCollision(Collider* col)
 		}
 	}
 
+	if (col->type == Collider::Type::SHOT) {
+		pendingToDelete = true;
+	}
+
 	if (col->type == Collider::Type::GROUND) {
 
 		switch (dir) {

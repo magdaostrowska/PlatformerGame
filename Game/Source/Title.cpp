@@ -38,23 +38,11 @@ bool Title::Update(float dt)
 	}
 	if (inTitle == 2) {
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
-			//app->fade->Fade(240, 1);
-			//inTitle = 0;
-			//app->player->Spawn(app->player->playerInfo); //ELIMINAR LO DE ABAJO
-			//app->player->position.x = app->player->position.y = 0;
-			//app->player->lifes = 3;
-			app->map->RemoveCol();
-			app->map->CleanUp();
-
-			app->map->Load("map_level1.tmx");
-			app->tex->UnLoad(app->scene->back1);
-			app->scene->back1 = app->tex->Load("Assets/textures/back_image.png");
-			app->player->ReSpawn();
-			//app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
-			//app->player->lifes = 3;//borrar al poner spawn
-			app->map->LoadCol();
 			app->fade->Fade(240, 1);
 			inTitle = 0;
+			//app->player->Spawn(); //ELIMINAR LO DE ABAJO
+			app->player->position.x = app->player->position.y = 0;
+			app->player->lifes = 3;
 			
 		}
 	}
@@ -67,7 +55,9 @@ bool Title::Update(float dt)
 			app->map->Load("map_level1.tmx");
 			app->tex->UnLoad(app->scene->back1);
 			app->scene->back1 = app->tex->Load("Assets/textures/back_image.png");
-			app->player->ReSpawn();
+			//app->player->Spawn();
+			app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+			app->player->lifes = 3;//borrar al poner spawn
 			app->map->LoadCol();
 			app->fade->Fade(240, 1);
 			inTitle = 0;

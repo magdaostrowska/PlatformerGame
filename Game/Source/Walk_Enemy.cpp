@@ -80,13 +80,14 @@ void Walk_Enemy::PostUpdate()
 
 void Walk_Enemy::OnCollision(Collider* col)
 {
-	if (col->type == Collider::Type::PLAYER) {
+
+	/*if (col->type == Collider::Type::PLAYER) {
 		if (app->player->hitCountdown == 0)
 		{
 			app->player->Die();
 			app->player->hitCountdown = app->player->hitMaxCountdown;
 		}
-	}
+	}*/
 
 	if (col->type == Collider::Type::GROUND) {
 		

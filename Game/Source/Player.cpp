@@ -537,9 +537,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 							loadingPos = 0;
 						}
 					}
-
-
-
 				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
@@ -577,9 +574,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 							loadingPos = 0;
 						}
 					}
-
-
-
 				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 

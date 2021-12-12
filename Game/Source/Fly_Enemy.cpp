@@ -1,6 +1,5 @@
 #include "Fly_Enemy.h"
 #include "Textures.h"
-#include "App.h"
 #include "Collisions.h"
 #include "Player.h"
 #include "Title.h"
@@ -114,16 +113,23 @@ void Fly_Enemy::PostUpdate()
 
 void Fly_Enemy::OnCollision(Collider* col)
 {
-	if (col->type == Collider::Type::PLAYER) {
+	if (app->player->godMode == false)
+	{
+		if (col->type == Collider::Type::PLAYER) {
 
-		position.x += 300;
-		position.y -= 150;
+			position.x += 300;
+			position.y -= 150;
 
-		if (app->player->hitCountdown == 0)
-		{
-			app->player->Die();
-			app->player->hitCountdown = app->player->hitMaxCountdown;
+			if (app->player->hitCountdown == 0)
+			{
+				app->player->Die();
+				app->player->hitCountdown = app->player->hitMaxCountdown;
+			}
 		}
+	}
+
+	if (col->type == Collider::Type::SHOT) {
+		pendingToDelete = true;
 	}
 
 	if (col->type == Collider::Type::GROUND) {
@@ -135,7 +141,7 @@ void Fly_Enemy::OnCollision(Collider* col)
 			}
 			break;
 		case -1:
-			if (collider->rect.x + speed < col->rect.x + col->rect.w) 
+			if (collider->rect.x + speed < col->rect.x + col->rect.w)
 				isLeft = true;
 			break;
 		}
@@ -160,7 +166,7 @@ void Fly_Enemy::PathToMove()
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 	iPoint pos = app->map->MapToWorld(path->At(1)->x, path->At(1)->y);
 
-	if (pos.x < position.x) 
+	if (pos.x < position.x)
 	{
 		state = FlyingEnemyState::FLY_LEFT;
 	}
@@ -168,9 +174,34 @@ void Fly_Enemy::PathToMove()
 	{
 		state = FlyingEnemyState::FLY_RIGHT;
 	}
-		
-	if (pos.x >= position.x - 5 && pos.x <= position.x + 5) 
+
+	if (pos.x >= position.x - 5 && pos.x <= position.x + 5)
 	{
 		state = FlyingEnemyState::FLY_DOWN;
 	}
+}
+
+bool Fly_Enemy::LoadState(pugi::xml_node& data)
+{
+	data = data.child("flying_enemy");
+
+	//Load enemy's position
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	return true;
+}
+
+bool Fly_Enemy::SaveState(pugi::xml_node& data) const
+{
+	std::cout << "SaveState Player" << std::endl;
+	data = data.append_child("flying_enemy");
+
+	//Enemy's position
+	
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+
+	data = data.parent();
+	return true;
 }

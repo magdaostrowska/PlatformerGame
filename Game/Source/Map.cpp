@@ -111,34 +111,6 @@ iPoint Map::MapToWorld(int x, int y) const
 	return ret;
 }
 
-iPoint Map::WorldToMap(int x, int y) const
-{
-	iPoint ret(0, 0);
-
-	// Add orthographic world to map coordinates
-	// Add the case for isometric maps to WorldToMap
-
-	if (mapData.type == MAPTYPE_ORTHOGONAL)
-	{
-		ret.x = x / mapData.tileWidth;
-		ret.y = y / mapData.tileHeight;
-	}
-	else if (mapData.type == MAPTYPE_ISOMETRIC)
-	{
-
-		float halfWidth = mapData.tileWidth * 0.5f;
-		float halfHeight = mapData.tileHeight * 0.5f;
-		ret.x = int((x / halfWidth + y / halfHeight) / 2);
-		ret.y = int((y / halfHeight - (x / halfWidth)) / 2);
-	}
-	else
-	{
-		LOG("Unknown map type");
-		ret.x = x; ret.y = y;
-	}
-	return ret;
-}
-
 void Map::ResetPath()
 {
 	frontier.Clear();
@@ -407,6 +379,36 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 		ret = true;
 		break;
 	}
+	return ret;
+}
+
+
+iPoint Map::WorldToMap(int x, int y) const
+{
+	iPoint ret(0, 0);
+
+	// Add orthographic world to map coordinates
+	// Add the case for isometric maps to WorldToMap
+
+	if (mapData.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x / mapData.tileWidth;
+		ret.y = y / mapData.tileHeight;
+	}
+	else if (mapData.type == MAPTYPE_ISOMETRIC)
+	{
+
+		float halfWidth = mapData.tileWidth * 0.5f;
+		float halfHeight = mapData.tileHeight * 0.5f;
+		ret.x = int((x / halfWidth + y / halfHeight) / 2);
+		ret.y = int((y / halfHeight - (x / halfWidth)) / 2);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
+
 	return ret;
 }
 
@@ -921,8 +923,7 @@ void Map::LoadCol() {
 							pos.y+4,
 							&r);
 						*/
-						app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x + 5, pos.y + 4);
-						app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x - 130, pos.y - 90);
+						app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x, pos.y + 4);
 						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::ENEMY, this);
 						i++;
 					}

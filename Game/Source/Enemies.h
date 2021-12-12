@@ -63,6 +63,11 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
+	bool removeAll = false;
+
+	bool LoadState(pugi::xml_node& data);
+	bool SaveState(pugi::xml_node& data) const;
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -81,6 +86,7 @@ private:
 	int enemyDestroyedFx = 0;
 
 	bool spawnAll = false;
+	
 };
 
 #endif // __ENEMIES_H__

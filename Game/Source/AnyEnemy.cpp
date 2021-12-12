@@ -1,6 +1,5 @@
 #include "AnyEnemy.h"
 
-#include "App.h"
 #include "Collisions.h"
 #include "Audio.h"
 #include "Render.h"
@@ -13,8 +12,8 @@ AnyEnemy::AnyEnemy(int x, int y) : position(x, y)
 
 AnyEnemy::~AnyEnemy()
 {
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	//if (collider != nullptr)
+		//collider->pendingToDelete = true;
 }
 
 const Collider* AnyEnemy::GetCollider() const
@@ -72,4 +71,14 @@ void AnyEnemy::SetToDelete()
 	pendingToDelete = true;
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
+}
+
+bool AnyEnemy::LoadState(pugi::xml_node& data)
+{
+	return true;
+}
+
+bool AnyEnemy::SaveState(pugi::xml_node& data) const
+{
+	return true;
 }

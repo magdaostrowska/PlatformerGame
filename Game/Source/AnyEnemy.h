@@ -3,6 +3,7 @@
 
 #include "Point.h"
 #include "Animation.h"
+#include "App.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -36,6 +37,9 @@ public:
 	// Sets flag for deletion and for the collider aswell
 	virtual void SetToDelete();
 
+	virtual bool LoadState(pugi::xml_node& data);
+	virtual bool SaveState(pugi::xml_node& data) const;
+
 public:
 	// The current position in the world
 	iPoint position;
@@ -61,6 +65,11 @@ protected:
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 	int dir;
+
+	int lifes;
+
+	int hitCountdown = 0;
+	int	hitMaxCountdown = 60;
 
 	
 };

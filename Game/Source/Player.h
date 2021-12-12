@@ -32,10 +32,14 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	void ReSpawn();
+
 	void OnCollision(Collider* c1, Collider* c2) override;
 		
 	bool LoadState(pugi::xml_node& data);
 	bool SaveState(pugi::xml_node& data) const;
+
+	pugi::xml_node playerInfo;
 
 	void Die();
 
@@ -51,6 +55,8 @@ public:
 
 	int maxLifes;
 	int lifes;
+	int posIniX;
+	int posIniY;
 
 	int coins;
 
@@ -88,10 +94,14 @@ public:
 	SDL_Texture* textureRunRight;
 	SDL_Texture* textureJumpLeft;
 	SDL_Texture* textureJumpRight;
+	SDL_Texture* textureHitLeft;
+	SDL_Texture* textureHitRight;
+	SDL_Texture* textureDeathRight;
+	SDL_Texture* textureDeathLeft;
 
 	Animation* currentAnimation;
 
-	Animation idleLeft, idleRight, runLeft, runRight, jumpLeft, jumpRight;
+	Animation idleLeft, idleRight, runLeft, runRight, jumpLeft, jumpRight, hurtLeft, hurtRight, deathRight, deathLeft;
 
 	Collider* collider;
 
@@ -110,6 +120,11 @@ public:
 
 	int hitCountdown=0;
 	int	hitMaxCountdown = 60;
+
+	int stunCountdown = 0;
+	int	stunMaxCountdown = 30;
+
+	bool isStunned = false;
 
 	pugi::xml_document	document;
 

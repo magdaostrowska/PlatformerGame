@@ -52,7 +52,7 @@ struct Properties
 		SString name;
 		int value;
 	};
-	
+
 	~Properties()
 	{
 		ListItem<Property*>* listItem;
@@ -117,24 +117,24 @@ class Map : public Module
 {
 public:
 
-    Map();
+	Map();
 
-    // Destructor
-    virtual ~Map();
+	// Destructor
+	virtual ~Map();
 
-    // Called before render is available
-    bool Awake(pugi::xml_node& conf);
+	// Called before render is available
+	bool Awake(pugi::xml_node& conf);
 
 	bool Start();
 
-    // Called each loop iteration
-    void Draw();
+	// Called each loop iteration
+	void Draw();
 
-    // Called before quitting
-    bool CleanUp();
+	// Called before quitting
+	bool CleanUp();
 
-    // Load new map
-    bool Load(const char* path);
+	// Load new map
+	bool Load(const char* path);
 
 	// Create a method that translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;

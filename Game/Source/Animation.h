@@ -21,6 +21,10 @@ private:
 
 public:
 
+	void ResetLoopCount() {
+		loopCount = 0;
+	}
+
 	void PushBack(const SDL_Rect& rect)
 	{
 		frames[totalFrames++] = rect;

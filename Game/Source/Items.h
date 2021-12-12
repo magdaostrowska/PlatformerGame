@@ -62,6 +62,8 @@ public:
 	// Destroys any items that have moved outside the camera limits
 	void HandleItemsDespawn();
 
+	bool removeAll = false;
+
 private:
 	// Spawns a new item using the data from the queue
 	void SpawnItem(const ItemSpawnpoint& info);

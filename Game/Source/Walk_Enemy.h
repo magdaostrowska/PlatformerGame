@@ -2,6 +2,7 @@
 #define __WALK_ENEMY_H__
 
 #include "AnyEnemy.h"
+#include "App.h"
 
 class Walk_Enemy : public AnyEnemy
 {
@@ -16,13 +17,16 @@ public:
 	void PostUpdate() override;
 	void OnCollision(Collider* collider) override;
 
+	bool LoadState(pugi::xml_node& data) override;
+	bool SaveState(pugi::xml_node& data) const override;
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
 
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
-	Animation walkLeft, walkRight;
+	Animation walkLeft, walkRight, hitLeft, hitRight, dieLeft, dieRight;
 	SDL_Rect walkRect; 
 
 	bool noLeft = false;

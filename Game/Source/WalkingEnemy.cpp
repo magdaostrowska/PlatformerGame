@@ -7,10 +7,10 @@ WalkingEnemy::WalkingEnemy() : Enemy(Enemy_Type::WALKING_ENEMY)
 	currentAnimation = nullptr;
 	textureIdle = nullptr;
 
-	idle.PushBack({ 0,44,63,27 });
-	//idle.PushBack({ 75,165,63,27 });
-	//idle.PushBack({ 127,165,63,27 });
-	//idle.PushBack({ 179,165,63,27 });
+	idle.PushBack({ 0,51,62,13 });
+	idle.PushBack({ 62,51,62,13 });
+	idle.PushBack({ 124,51,62,13 });
+	idle.PushBack({ 186,51,62,13 });
 }
 
 bool WalkingEnemy::Awake(pugi::xml_node& config)
@@ -68,7 +68,7 @@ bool WalkingEnemy::Update(float dt)
 		break;
 	}
 
-	RenderEnemy();
+	//RenderEnemy();
 	return true;
 }
 

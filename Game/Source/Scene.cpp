@@ -242,9 +242,10 @@ bool Scene::PostUpdate()
 		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
 	}
 	
+	// Render enemies
 	for (int i = 0; i < app->enemies->enemiesList.size(); i++)
 	{
-		app->render->DrawTexture(app->enemies->enemiesList[i]->enemySprite, app->enemies->enemiesList[i]->position.x, app->enemies->enemiesList[i]->position.y);
+		app->enemies->enemiesList[i]->RenderEnemy();
 	}
 
 	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);

@@ -14,7 +14,7 @@
 #include "Shots.h"
 #include "Items.h"
 #include "Enemies.h"
-
+#include "PathFinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -41,6 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	shots = new Shots();
 	items = new Items();
 	enemies = new Enemies();
+	pathfinding = new PathFinding();
 
 	saveGameRequested = false;
 	loadGameRequested = false;
@@ -65,8 +66,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(enemies);
 	AddModule(fade);
 	AddModule(collisions);
-	
-	
+	AddModule(pathfinding);	
 
 	// Render last to swap buffer
 	AddModule(render);

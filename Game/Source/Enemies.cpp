@@ -146,17 +146,10 @@ void Enemies::HandleEnemiesDespawn()
 			if (app->titleScreen->inTitle != 0) {
 				enemiesList[i]->SetToDelete();
 			}
-
-			if (removeAll==true) {
-				enemiesList[i]->SetToDelete();
-			}
-
 			
 			//}
 		}
-		if (removeAll == true) {
-			removeAll = false;
-		}
+		
 	}
 }
 

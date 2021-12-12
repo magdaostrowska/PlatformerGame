@@ -42,8 +42,7 @@ public:
 
 	// The enemy's texture
 	SDL_Texture* texture_left = nullptr;
-	SDL_Texture* texture_right = nullptr;
-	SDL_Texture* texture_die = nullptr;
+	SDL_Texture* texture_right=nullptr;
 
 	// Sound fx when destroyed
 	int destroyedFx = 0;
@@ -61,6 +60,11 @@ protected:
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 	int dir;
+
+	int lifes;
+
+	int hitCountdown = 0;
+	int	hitMaxCountdown = 60;
 
 	
 };

@@ -54,7 +54,6 @@
     <ClCompile Include="Source\Walk_Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PathFinding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -129,7 +128,6 @@
     <ClInclude Include="Source\Walk_Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PathFinding.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

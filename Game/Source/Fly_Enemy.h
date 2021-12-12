@@ -3,15 +3,6 @@
 
 #include "AnyEnemy.h"
 
-enum class FlyingEnemyState {
-	IDLE,
-	FLY_LEFT,
-	FLY_RIGHT,
-	FLY_UP,
-	FLY_DOWN,
-	DIE,
-};
-
 class Fly_Enemy : public AnyEnemy
 {
 public:
@@ -22,11 +13,6 @@ public:
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
 	void Update(float dt) override;
-	void PostUpdate() override;
-	void OnCollision(Collider* collider) override;
-
-	void CalculatePath();
-	void PathToMove();
 
 private:
 	// A set of steps that define the position in the screen
@@ -34,15 +20,8 @@ private:
 
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
-	Animation flyLeft, flyRight, die;
+	Animation fly;
 	SDL_Rect flyRect;
-
-	FlyingEnemyState state;
-
-	bool isLeft = false;
-	bool isRight = false;
-	bool followsPath;
-	int speed;
 };
 
 #endif // __WALK_ENEMY_H__

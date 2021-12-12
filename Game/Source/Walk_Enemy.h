@@ -22,7 +22,7 @@ private:
 
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
-	Animation walkLeft, walkRight;
+	Animation walkLeft, walkRight, hitLeft, hitRight, dieLeft, dieRight;
 	SDL_Rect walkRect; 
 
 	bool noLeft = false;

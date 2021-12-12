@@ -6,10 +6,19 @@
   <tileset firstgid="257" source="full_potion.tsx" tilewidth ="32" tileheight="32">
     <image source="potion.png" width="512" height="512"/>
   </tileset>
-  <tileset firstgid="267" source="coin.tsx" tilewidth ="32" tileheight="32">
+  <tileset firstgid="266" source="coin.tsx" tilewidth ="32" tileheight="32">
     <image source="coin.png" width="512" height="512"/>
   </tileset>
-  <tileset firstgid="272" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+  <tileset firstgid="271" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+    <image source="walk_enemy.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="376" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+    <image source="walk_enemy.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="448" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
+    <image source="walk_enemy.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="453" source="Monster1Pack.tsx" tilewidth ="32" tileheight="32">
     <image source="walk_enemy.png" width="512" height="512"/>
   </tileset>
  <layer id="4" name="platforms_background_back" width="50" height="10">
@@ -2141,6 +2150,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="448"/>
    <tile/>
    <tile/>
    <tile/>
@@ -2178,6 +2188,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="448"/>
    <tile/>
    <tile/>
    <tile/>
@@ -2295,13 +2306,13 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="448"/>
    <tile/>
    <tile/>
-   <tile gid="265"/>
    <tile/>
+   <tile gid="448"/>
    <tile/>
    <tile/>
-   <tile gid="265"/>
    <tile/>
    <tile/>
    <tile/>
@@ -2367,6 +2378,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="448"/>
    <tile/>
    <tile/>
    <tile/>
@@ -2424,10 +2436,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="453"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3179,7 +3188,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="276"/>
+   <tile gid="274"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3299,6 +3308,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="382"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3370,8 +3380,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="274"/>
    <tile/>
-   <tile gid="276"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3487,8 +3497,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="382"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3630,7 +3639,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="376"/>
+   <tile gid="374"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3650,7 +3659,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="376"/>
+   <tile gid="374"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4135,7 +4144,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="377"/>
+   <tile gid="375"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4155,7 +4164,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="377"/>
+   <tile gid="375"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4191,7 +4200,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="277"/>
+   <tile gid="275"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4311,6 +4320,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="383"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4382,8 +4392,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="275"/>
    <tile/>
-   <tile gid="277"/>
    <tile/>
    <tile/>
    <tile/>
@@ -4499,8 +4509,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="383"/>
    <tile/>
    <tile/>
    <tile/>

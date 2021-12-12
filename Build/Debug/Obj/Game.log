@@ -1,5 +1,4 @@
-﻿  Fly_Enemy.cpp
+﻿  AnyEnemy.cpp
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Fly_Enemy.cpp(76,19): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
   Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

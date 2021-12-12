@@ -114,15 +114,18 @@ void Fly_Enemy::PostUpdate()
 
 void Fly_Enemy::OnCollision(Collider* col)
 {
-	if (col->type == Collider::Type::PLAYER) {
+	if (app->player->godMode == false) 
+	{
+		if (col->type == Collider::Type::PLAYER) {
 
-		position.x += 300;
-		position.y -= 150;
+			position.x += 300;
+			position.y -= 150;
 
-		if (app->player->hitCountdown == 0)
-		{
-			app->player->Die();
-			app->player->hitCountdown = app->player->hitMaxCountdown;
+			if (app->player->hitCountdown == 0)
+			{
+				app->player->Die();
+				app->player->hitCountdown = app->player->hitMaxCountdown;
+			}
 		}
 	}
 

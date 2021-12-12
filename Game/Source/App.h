@@ -28,6 +28,7 @@ class FadeToBlack;
 class Shots;
 class Items;
 class Enemies;
+class PathFinding;
 
 class App
 {
@@ -110,6 +111,7 @@ public:
 	Shots* shots;
 	Items* items;
 	Enemies* enemies;
+	PathFinding* pathfinding;
 
 private:
 

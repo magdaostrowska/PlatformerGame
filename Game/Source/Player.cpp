@@ -154,7 +154,6 @@ void Player::Spawn(pugi::xml_node& config) {
 	lifes = maxLifes;
 	
 	document.load_file("config.xml");
-
 }
 
 bool Player::LoadState(pugi::xml_node& data)

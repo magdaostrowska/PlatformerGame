@@ -3,6 +3,15 @@
 
 #include "AnyEnemy.h"
 
+enum class FlyingEnemyState {
+	IDLE,
+	FLY_LEFT,
+	FLY_RIGHT,
+	FLY_UP,
+	FLY_DOWN,
+	DIE,
+};
+
 class Fly_Enemy : public AnyEnemy
 {
 public:
@@ -22,8 +31,10 @@ private:
 
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
-	Animation flyLeft, flyRight;
+	Animation flyLeft, flyRight, die;
 	SDL_Rect flyRect;
+
+	FlyingEnemyState state;
 
 	bool isLeft = false;
 	bool isRight = false;

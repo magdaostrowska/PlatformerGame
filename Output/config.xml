@@ -6,7 +6,7 @@
   </app>
   <frcap value = "16" />
   <renderer>
-    <vsync value="false" />
+    <vsync value="true" />
   </renderer>
   <window>
     <resolution width="1920" height="1080" scale="3" />

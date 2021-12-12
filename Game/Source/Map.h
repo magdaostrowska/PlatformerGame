@@ -6,8 +6,12 @@
 #include "Point.h"
 #include "DynArray.h"
 #include "Collisions.h"
-
+#include "PQueue.h"
 #include "PugiXml\src\pugixml.hpp"
+
+#define COST_MAP_SIZE	100
+
+struct SDL_Texture;
 
 // Creating a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
@@ -48,7 +52,7 @@ struct Properties
 		SString name;
 		int value;
 	};
-	
+
 	~Properties()
 	{
 		ListItem<Property*>* listItem;
@@ -113,30 +117,49 @@ class Map : public Module
 {
 public:
 
-    Map();
+	Map();
 
-    // Destructor
-    virtual ~Map();
+	// Destructor
+	virtual ~Map();
 
-    // Called before render is available
-    bool Awake(pugi::xml_node& conf);
+	// Called before render is available
+	bool Awake(pugi::xml_node& conf);
 
 	bool Start();
 
-    // Called each loop iteration
-    void Draw();
+	// Called each loop iteration
+	void Draw();
 
-    // Called before quitting
-    bool CleanUp();
+	// Called before quitting
+	bool CleanUp();
 
-    // Load new map
-    bool Load(const char* path);
+	// Load new map
+	bool Load(const char* path);
 
 	// Create a method that translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
 
 	// Add orthographic world to map coordinates
 	iPoint WorldToMap(int x, int y) const;
+
+	// BFS Pathfinding methods
+	void ResetPath();
+	void DrawPath();
+	bool IsWalkable(int x, int y) const;
+
+	// More pathfinding methods
+	int MovementCost(int x, int y) const;
+	void ComputePath(int x, int y);
+
+	// AStar pathfinding
+	void ComputePathAStar(int x, int y);
+
+	// Propagation methods
+	void PropagateBFS();
+	void PropagateDijkstra();
+	void PropagateAStar(int heuristic);
+
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 private:
 
@@ -168,6 +191,21 @@ private:
 
 	SString folder;
 	bool mapLoaded;
+
+	// BFS Pathfinding variables
+	PQueue<iPoint> frontier;
+	List<iPoint> visited;
+
+	// Additional variables
+	List<iPoint> breadcrumbs;
+	uint costSoFar[COST_MAP_SIZE][COST_MAP_SIZE];
+	DynArray<iPoint> path;
+
+	// AStar (A*) variables
+	iPoint goalAStar;			// Store goal target tile
+	bool finishAStar = false;	// Detect when reached goal
+
+	SDL_Texture* tileX = nullptr;
 };
 
 #endif // __MAP_H__

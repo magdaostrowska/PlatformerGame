@@ -11,6 +11,7 @@
 #include "Title.h"
 #include "Items.h"
 #include "Enemies.h"
+#include "PathFinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -51,6 +52,13 @@ bool Scene::Start()
 		app->map->Load("map_level2.tmx");
 		back1 = app->tex->Load("Assets/textures/back_image_2.png");
 	}
+
+	int w, h;
+	uchar* data = NULL;
+
+	//pathfinding
+	if (app->map->CreateWalkabilityMap(w, h, &data))
+		app->pathfinding->SetMap(w, h, data);
 
 	char lookupTableChars[] = { " !'#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[/]^_ abcdefghijklmnopqrstuvwxyz{|}~ çüéâäàaçêëèïîìäaéÆæôöòûù" };
 	textFont = app->fonts->Load("Assets/fonts/pixel_font.png", lookupTableChars, 8);

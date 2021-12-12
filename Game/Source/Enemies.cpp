@@ -154,9 +154,10 @@ void Enemies::HandleEnemiesDespawn()
 			
 			//}
 		}
-		if (removeAll == true) {
-			removeAll = false;
-		}
+		
+	}
+	if (removeAll == true) {
+		removeAll = false;
 	}
 }
 

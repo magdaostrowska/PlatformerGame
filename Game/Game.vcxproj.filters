@@ -85,6 +85,12 @@
     <ClCompile Include="Source\PerfTimer.cpp">
       <Filter>Timers</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -193,6 +199,12 @@
     <ClInclude Include="Source\PerfTimer.h">
       <Filter>Timers</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -221,6 +233,9 @@
     </Filter>
     <Filter Include="Timers">
       <UniqueIdentifier>{750b66be-2542-4559-99c6-42d5aaf63159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{23928f2b-043b-4ee3-83c4-925af508ff7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ Fly_Enemy::Fly_Enemy(int x, int y) : AnyEnemy(x, y)
 	followsPath = true;
 
 	texture_left = app->tex->Load("Assets/textures/enemies/fly_enemy_left.png");
-	texture_right = app->tex->Load("Assets/textures/enemies/fly_enemy_right.png");
+	texture_right = app->tex->Load("Assets/textures/enemies/fly_enemy_right_1.png");
 	texture_die = app->tex->Load("Assets/textures/enemies/fly_enemy_left.png");
 
 	flyLeft.PushBack({ 0,18,64,40 });

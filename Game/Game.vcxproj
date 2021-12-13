@@ -126,6 +126,7 @@
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Source\Fly_Enemy.h" />
     <ClInclude Include="Source\Fonts.h" />
+    <ClInclude Include="Source\Globals.h" />
     <ClInclude Include="Source\Items.h" />
     <ClInclude Include="Source\Item_Coin.h" />
     <ClInclude Include="Source\Item_Potion.h" />

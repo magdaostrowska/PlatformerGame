@@ -2,12 +2,10 @@
 #include "Window.h"
 #include "Render.h"
 #include "Player.h"
-
+#include "Globals.h"
 #include "Defs.h"
 #include "Log.h"
 #include <iostream>
-
-#define VSYNC true
 
 Render::Render() : Module()
 {

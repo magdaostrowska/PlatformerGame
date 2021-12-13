@@ -14,8 +14,8 @@ AnyItem::AnyItem(int x, int y) : position(x, y)
 
 AnyItem::~AnyItem()
 {
-	if (collider != nullptr)
-		collider->pendingToDelete = true;
+	//if (collider != nullptr)
+		//collider->pendingToDelete = true;
 }
 
 const Collider* AnyItem::GetCollider() const

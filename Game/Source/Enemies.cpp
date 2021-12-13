@@ -6,14 +6,10 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Title.h"
-
+#include "Globals.h"
 #include "AnyEnemy.h"
 #include "Fly_Enemy.h"
 #include "Walk_Enemy.h"
-
-
-#define SPAWN_MARGIN 50
-
 
 Enemies::Enemies() : Module()
 {

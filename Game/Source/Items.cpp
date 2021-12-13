@@ -1,19 +1,12 @@
 #include "Items.h"
-
 #include "App.h"
-
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
 #include "Title.h"
-
 #include "AnyItem.h"
 #include "Item_Coin.h"
 #include "Item_Potion.h"
-
-
-#define SPAWN_MARGIN 50
-
 
 Items::Items() : Module()
 {

@@ -2,8 +2,7 @@
 #define __ENEMIES_H__
 
 #include "Module.h"
-
-#define MAX_ENEMIES 100
+#include "Globals.h"
 
 enum class Enemy_Type
 {

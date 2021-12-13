@@ -2,8 +2,7 @@
 #define __ITEMS_H__
 
 #include "Module.h"
-
-#define MAX_ITEMS 100
+#include "Globals.h"
 
 enum class Item_type
 {

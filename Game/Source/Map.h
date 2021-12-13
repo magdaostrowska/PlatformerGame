@@ -6,10 +6,9 @@
 #include "Point.h"
 #include "DynArray.h"
 #include "Collisions.h"
+#include "Globals.h"
 #include "PQueue.h"
 #include "PugiXml\src\pugixml.hpp"
-
-#define COST_MAP_SIZE	100
 
 struct SDL_Texture;
 

@@ -3,17 +3,19 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "EntityManager.h"
 
-enum class Item_type
-{
-	NO_TYPE,
-	COIN,
-	POTION,
-};
+//enum class Item_type
+//{
+//	NO_TYPE,
+//	COIN,
+//	POTION,
+//};
 
 struct ItemSpawnpoint
 {
-	Item_type type = Item_type::NO_TYPE;
+	//Item_type type = Item_type::NO_TYPE;
+	EntityType type = EntityType::UNKNOWN;
 	int x, y;
 };
 
@@ -53,7 +55,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an item into the queue to be spawned later
-	bool AddItem(Item_type type, int x, int y);
+	bool AddItem(EntityType type, int x, int y);
 
 	// Iterates the queue and checks for camera position
 	void HandleItemsSpawn();
@@ -72,7 +74,7 @@ private:
 	ItemSpawnpoint spawnQueue[MAX_ITEMS];
 
 	// All spawned items in the scene
-	AnyItem* items[MAX_ITEMS] = { nullptr };
+	Entity* items[MAX_ITEMS] = { nullptr };
 
 	// The items sprite sheet
 	SDL_Texture* texture = nullptr;

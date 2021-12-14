@@ -5,7 +5,7 @@
 #include "Textures.h"
 #include "Player.h"
 
-Item_Coin::Item_Coin(int x, int y) : AnyItem(x, y)
+Item_Coin::Item_Coin(int x, int y) : Entity(EntityType::ITEM_COIN, x, y)
 {
 	texture = app->tex->Load("Assets/textures/items/coin.png");
 
@@ -30,7 +30,7 @@ Item_Coin::Item_Coin(int x, int y) : AnyItem(x, y)
 	collider = app->collisions->AddCollider(coinRect, Collider::Type::COIN, (Module*)app->items);
 }
 
-void Item_Coin::Update(float dt)
+bool Item_Coin::Update(float dt)
 {
 	//path.Update();
 	//position = spawnPos + path.GetRelativePosition();
@@ -41,14 +41,14 @@ void Item_Coin::Update(float dt)
 
 	//currentAnim->Update();
 
-	AnyItem::Update(dt);
+	Entity::Update(dt);
+	return true;
 }
 
 void Item_Coin::OnCollision(Collider* collider)
 {
 	app->player->coins++;
 		SetToDelete();
-	
 
-	AnyItem::OnCollision(collider);
+	Entity::OnCollision(collider);
 }

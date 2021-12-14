@@ -1,23 +1,24 @@
-#ifndef __ENTITY_H__
-#define __ENTITY_H__
+#ifndef __ENTITYMANAGER_H__
+#define __ENTITYMANAGER_H__
 
 #include "Module.h"
-#include "Player.h"
-#include "Walk_Enemy.h"
-#include "Fly_Enemy.h"
-#include "Item_Potion.h"
-#include "Item_Coin.h"
-#include "List.h"
-
 #include <vector>
 
 class Entity;
-enum class EntityType;
+
+enum class EntityType
+{
+	PLAYER,
+	WALK_ENEMY,
+	FLY_ENEMY,
+	ITEM_COIN,
+	ITEM_POTION,
+	UNKNOWN
+};
 
 class EntityManager : public Module
 {
 public:
-
 	EntityManager();
 	~EntityManager();
 
@@ -37,7 +38,8 @@ public:
 public:
 
 	std::vector<Entity*> entites;
-	
+
 };
 
-#endif
+
+#endif // !__ENTITYMANAGER_H__

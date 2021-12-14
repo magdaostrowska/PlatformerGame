@@ -1,23 +1,21 @@
 #include "EntityManager.h"
-#include "Entity.h"
 
-EntityManager::EntityManager() : Module()
+EntityManager::EntityManager()
 {
-	name.Create("entityManager");
+	name.Create("EntityManager");
 }
 
 EntityManager::~EntityManager()
-{
-}
+{}
 
 bool EntityManager::Awake(pugi::xml_node& config)
 {
-	return false;
+	return true;
 }
 
 bool EntityManager::Start()
 {
-	return false;
+	return true;
 }
 
 bool EntityManager::PreUpdate()
@@ -54,14 +52,24 @@ Entity* EntityManager::CreateEntity(EntityType type)
 {
 	Entity* ret = nullptr;
 
-	//switch (type)
-	//{
-	//case EntityType::PLAYER:
-	//	//ret = new Player(); 
-	//	break;
-	//case EntityType::WALK_ENEMY: 	//	ret = new Walk_Enemy(); 	//	break;	//case EntityType::FLY_ENEMY:	//	ret = new Fly_Enemy();	//	break;
-	//case EntityType::ITEM_COIN:	//	ret = new Item_Coin();	//	break;	//case EntityType::ITEM_POTION:	//	ret = new Item_Potion();	//	break;
-	//}
+	switch (type)
+	{
+	case EntityType::PLAYER:
+		//ret = new Player(); 
+		break;
+	case EntityType::WALK_ENEMY: 
+		//ret = new Walk_Enemy(); 
+		break;
+	case EntityType::FLY_ENEMY:
+		//ret = new Fly_Enemy();
+		break;
+	case EntityType::ITEM_COIN:
+		//ret = new Item_Coin();
+		break;
+	case EntityType::ITEM_POTION:
+		//ret = new Item_Potion();
+		break;
+	}
 
 	if (ret != nullptr)
 		entites.push_back(ret);

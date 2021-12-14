@@ -35,14 +35,11 @@ void AnyItem::Update(float dt)
 void AnyItem::Draw()
 {
 	if (currentAnim != nullptr) {
-		if (app->titleScreen->inTitle == 0) {
+		if (app->titleScreen->inTitle == 0)
 			app->render->DrawTexture(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
-		}
-		
-	}
-		
-}
 
+	}
+}
 
 void AnyItem::OnCollision(Collider* collider)
 {
@@ -51,7 +48,6 @@ void AnyItem::OnCollision(Collider* collider)
 
 	//SetToDelete();
 }
-
 
 void AnyItem::SetToDelete()
 {

@@ -8,6 +8,7 @@
 #include "Collisions.h"
 #include "Globals.h"
 #include "PQueue.h"
+#include "EntityManager.h"
 #include "PugiXml\src\pugixml.hpp"
 
 struct SDL_Texture;

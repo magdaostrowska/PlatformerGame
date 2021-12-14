@@ -86,13 +86,13 @@ bool Items::CleanUp()
 	return true;
 }
 
-bool Items::AddItem(Item_type type, int x, int y)
+bool Items::AddItem(EntityType type, int x, int y)
 {
 	bool ret = false;
 
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (spawnQueue[i].type == Item_type::NO_TYPE)
+		if (spawnQueue[i].type == EntityType::UNKNOWN)
 		{
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
@@ -110,7 +110,7 @@ void Items::HandleItemsSpawn()
 	// Iterate all the items queue
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (spawnQueue[i].type != Item_type::NO_TYPE)
+		if (spawnQueue[i].type != EntityType::UNKNOWN)
 		{
 			// Spawn a new item if the screen has reached a spawn position
 			//if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (app->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
@@ -118,7 +118,7 @@ void Items::HandleItemsSpawn()
 			//	LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
 			if (app->titleScreen->inTitle == 0) {
 				SpawnItem(spawnQueue[i]);
-				spawnQueue[i].type = Item_type::NO_TYPE; // Removing the newly spawned enemy from the queue
+				spawnQueue[i].type = EntityType::UNKNOWN; // Removing the newly spawned enemy from the queue
 			}
 			
 			//}
@@ -136,24 +136,16 @@ void Items::HandleItemsDespawn()
 			// Delete the item when it has reached the end of the screen
 			//if (items[i]->position.x * SCREEN_SIZE < (app->render->camera.x) - SPAWN_MARGIN)
 			//{
-			if (app->titleScreen->inTitle != 0) {
+			if (app->titleScreen->inTitle != 0)
 				items[i]->SetToDelete();
-			}
 
-			if (removeAll == true) {
+			if (removeAll == true)
 				items[i]->SetToDelete();
-			}
-
-
-			
 		}
-
-		
 	}
 
-	if (removeAll == true) {
+	if (removeAll == true)
 		removeAll = false;
-	}
 }
 
 void Items::SpawnItem(const ItemSpawnpoint& info)
@@ -165,11 +157,11 @@ void Items::SpawnItem(const ItemSpawnpoint& info)
 		{
 			switch (info.type)
 			{
-			case Item_type::COIN:
+			case EntityType::ITEM_COIN:
 				items[i] = new Item_Coin(info.x, info.y);
 				break;
-			case Item_type::POTION:
-				items[i] = new Item_Potion(info.x, info.y);
+			case EntityType::ITEM_POTION:
+				//items[i] = new Item_Potion(info.x, info.y);
 				break;
 			}
 			//items[i]->texture = texture;

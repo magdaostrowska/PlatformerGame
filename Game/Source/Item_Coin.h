@@ -2,9 +2,11 @@
 #define __ITEM_COIN_H__
 
 #include "AnyItem.h"
-//#include "Path.h"
+#include "Entity.h"
 
-class Item_Coin : public AnyItem
+class EntityManager;
+
+class Item_Coin : public Entity
 {
 public:
 	// Constructor (x y coordinates in the world)
@@ -13,7 +15,7 @@ public:
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
-	void Update(float dt) override;
+	bool Update(float dt) override;
 
 	void OnCollision(Collider* collider) override;
 

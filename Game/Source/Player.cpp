@@ -4,7 +4,7 @@
 #include "Map.h"
 #include <iostream>
 
-Player::Player() : Module()
+Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");
 
@@ -409,9 +409,6 @@ bool Player::Update(float dt)
 						stopJumping = false;
 					}
 				}
-
-				//position.y += 1;
-			//}
 		}
 	}
 	//godMode == true
@@ -524,6 +521,7 @@ bool Player::Update(float dt)
 		{
 			int pos = 0;
 			int dir = 1;
+
 			if (currentAnimation == &idleRight || currentAnimation == &runRight || currentAnimation == &jumpRight) {
 				pos = -16;
 				dir = -1;
@@ -531,7 +529,6 @@ bool Player::Update(float dt)
 			else if (currentAnimation == &idleLeft || currentAnimation == &runLeft || currentAnimation == &jumpLeft) {
 				pos = collider->rect.w +2;
 				dir = 1;
-				
 			}
 
 			Particle* newParticle = app->shots->AddParticle(app->shots->shot, position.x + pos, position.y+16, dir, Collider::Type::SHOT);
@@ -541,62 +538,40 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (hitCountdown > 0) {
+	if (hitCountdown > 0)
 		hitCountdown = hitCountdown - dt / 16;
-	}
 
-	if (shotCountdown > 0) {
+	if (shotCountdown > 0)
 		shotCountdown = shotCountdown - dt / 16;
-	}
 
 	if (stunCountdown > 0) {
 		isStunned = true;
 		stunCountdown = stunCountdown - dt / 16;
 	}
-	else {
+	else
 		isStunned = false;
-	}
 
 	if (isStunned == true) {
-		if (currentAnimation == &idleRight || currentAnimation == &runRight || currentAnimation == &jumpRight) {
+		if (currentAnimation == &idleRight || currentAnimation == &runRight || currentAnimation == &jumpRight)
 			currentAnimation = &hurtLeft;
-		}
-		else if (currentAnimation == &idleLeft || currentAnimation == &runLeft || currentAnimation == &jumpLeft) {
+		else if (currentAnimation == &idleLeft || currentAnimation == &runLeft || currentAnimation == &jumpLeft)
 			currentAnimation = &hurtRight;
-
-		}
 	}
 
-	
-
-	
-
 	if (!godMode) {
-		if (position.y >= (app->render->camera.y + app->render->camera.h) / 3){
+		if (position.y >= (app->render->camera.y + app->render->camera.h) / 3)
 			Die();
-		}
 	}
 
 	if (collider != nullptr)
-	{
 		collider->SetPos(position.x + 6 - speed, position.y + 14);
-
-	}
 
 	if ((deathLeft.HasFinished() || deathRight.HasFinished() )&& lifes <=0) {
 		
 		app->fade->Fade(120, 0);
-		if (app->fade->frameCount >= app->fade->maxFadeFrames) {
+		if (app->fade->frameCount >= app->fade->maxFadeFrames) 
 			app->titleScreen->inTitle = 2;
-		}
-
-		//app->map->RemoveCol();
-		//app->map->LoadCol();
-		//position = { 0,0 };
-		//Spawn(playerInfo);
-		//coins = 0;
 	}
-
 
 	return true;
 }
@@ -607,7 +582,6 @@ bool Player::PostUpdate()
 		return true;
 	}
 	currentAnimation->Update();
-
 	
 	return true;
 }
@@ -616,29 +590,21 @@ void Player::Die() {
 	if (lifes > 1) {
 		lifes--;
 		
-		
-		if (position.y >= (app->render->camera.y + app->render->camera.h) / 3) {
+		if (position.y >= (app->render->camera.y + app->render->camera.h) / 3)
 			position = { lastGroundposX,lastGroundposY - 48 };
-		}
 
 		hitCountdown = hitMaxCountdown;
 		stunCountdown = stunMaxCountdown;
 		
 	}
 	else if (lifes <= 1) {
+
 		lifes = 0;
-		if (currentAnimation == &idleRight || currentAnimation == &runRight || currentAnimation == &jumpRight || currentAnimation == &hurtRight) {
+		if (currentAnimation == &idleRight || currentAnimation == &runRight || currentAnimation == &jumpRight || currentAnimation == &hurtRight)
 			currentAnimation = &deathLeft;
-		}
-		else if (currentAnimation == &idleLeft || currentAnimation == &runLeft || currentAnimation == &jumpLeft || currentAnimation == &hurtLeft) {
+		else if (currentAnimation == &idleLeft || currentAnimation == &runLeft || currentAnimation == &jumpLeft || currentAnimation == &hurtLeft)
 			currentAnimation = &deathRight;
-
-		}
-
-		
-		
 	}
-
 }
 
 void Player::OnCollision(Collider* c1, Collider* c2)
@@ -654,13 +620,9 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				else {
 					loadingPos++;
 					if (loadingPos >= 3) {
-						if (position.y != c2->rect.y - 48) {
+						if (position.y != c2->rect.y - 48)
 							loadingPos = 0;
-						}
 					}
-
-
-
 				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 
@@ -669,7 +631,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					lastGroundposX = c2->rect.x;
 					lastGroundposY = c2->rect.y;
 				}
-
 			}
 
 			if (c1->rect.y + c1->rect.h - jumpSpeed * 16 / 4 != c2->rect.y && isJumping == false) {
@@ -698,9 +659,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 							loadingPos = 0;
 						}
 					}
-
-
-
 				}
 
 				if (c1->rect.x + 1 < c2->rect.x + c2->rect.w && c1->rect.x + c1->rect.w - 1 > c2->rect.x) { 

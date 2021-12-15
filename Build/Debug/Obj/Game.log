@@ -1,8 +1,12 @@
-﻿  Item_Potion.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Items.cpp
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
-C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-  Game.vcxproj -> C:\Users\HP Zbook\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe
+﻿  Player.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(16,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(17,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(18,18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(208,16): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(260,8): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(542,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(545,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(549,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Game.vcxproj -> C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

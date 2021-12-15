@@ -2,6 +2,7 @@
 #define __PLAYER_H__
 
 #include "Module.h"
+#include "Entity.h"
 #include "Animation.h"
 #include "Point.h"
 #include "App.h"
@@ -17,7 +18,7 @@
 struct SDL_Texture;
 struct Collider;
 
-class Player : public Module
+class Player : public Entity
 {
 public:
 

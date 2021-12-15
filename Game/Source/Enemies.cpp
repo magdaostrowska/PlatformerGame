@@ -1,7 +1,5 @@
 #include "Enemies.h"
-
 #include "App.h"
-
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -106,7 +104,6 @@ bool Enemies::AddEnemy(Enemy_Type type, int x, int y)
 			break;
 		}
 	}
-
 	return ret;
 }
 
@@ -141,15 +138,11 @@ void Enemies::HandleEnemiesDespawn()
 			//if (enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
 			//{
 				//LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
-			if (app->titleScreen->inTitle != 0) {
+			if (app->titleScreen->inTitle != 0)
 				enemiesList[i]->SetToDelete();
-			}
 
-			if (removeAll==true) {
+			if (removeAll==true) 
 				enemiesList[i]->SetToDelete();
-			}
-
-			
 			//}
 		}
 		
@@ -164,9 +157,7 @@ bool Enemies::LoadState(pugi::xml_node& data)
 	for (int i = 0; i < MAX_ENEMIES; i++)
 	{
 		if (enemiesList[i] != nullptr)
-		{
 			enemiesList[i]->LoadState(data);
-		}
 	}
 	return true;
 }
@@ -176,9 +167,7 @@ bool Enemies::SaveState(pugi::xml_node& data) const
 	for (int i = 0; i < MAX_ENEMIES; i++)
 	{
 		if (enemiesList[i] != nullptr)
-		{
 			enemiesList[i]->SaveState(data);
-		}
 	}
 	return true;
 }

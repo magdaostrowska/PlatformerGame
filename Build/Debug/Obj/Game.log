@@ -1,4 +1,54 @@
-﻿  Player.cpp
+﻿  App.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(211,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(242,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(248,47): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
+  Enemies.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Entity.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Fly_Enemy.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Fly_Enemy.cpp(76,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Item_Coin.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Item_Potion.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Items.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Map.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(26,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(284,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(320,50): warning C4018: '<': signed/unsigned mismatch
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Point.h(111,24): warning C4244: 'argument': conversion from 'TYPE' to 'float', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Point.h(107): message : while compiling class template member function 'TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const'
+          with
+          [
+              TYPE=int
+          ]
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(327): message : see reference to function template instantiation 'TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const' being compiled
+          with
+          [
+              TYPE=int
+          ]
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Scene.h(54): message : see reference to class template instantiation 'Point<int>' being compiled
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Point.h(111,15): warning C4244: 'return': conversion from 'float' to 'TYPE', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+  Player.cpp
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(16,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
@@ -9,4 +59,29 @@ C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(260,
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(542,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(545,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Player.cpp(549,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Render.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Render.cpp(88,26): warning C4018: '<': signed/unsigned mismatch
+  Scene.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Shots.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Shots.cpp(131,24): warning C4244: '=': conversion from 'float' to 'TYPE', possible loss of data
+          with
+          [
+              TYPE=int
+          ]
+  Title.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Walk_Enemy.cpp
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Walk_Enemy.cpp(81,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Game\Source\Walk_Enemy.cpp(206,31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  LINK : C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe not found or not built by the last incremental link; performing full link
   Game.vcxproj -> C:\Users\magdalenaoj\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

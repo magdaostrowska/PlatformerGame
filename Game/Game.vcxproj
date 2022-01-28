@@ -99,6 +99,8 @@
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\Fly_Enemy.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp" />
+    <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\Item_Coin.cpp" />
     <ClCompile Include="Source\Item_Potion.cpp" />
@@ -131,6 +133,9 @@
     <ClInclude Include="Source\Fly_Enemy.h" />
     <ClInclude Include="Source\Fonts.h" />
     <ClInclude Include="Source\Globals.h" />
+    <ClInclude Include="Source\GuiButton.h" />
+    <ClInclude Include="Source\GuiControl.h" />
+    <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Items.h" />
     <ClInclude Include="Source\Item_Coin.h" />
     <ClInclude Include="Source\Item_Potion.h" />

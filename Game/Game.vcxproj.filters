@@ -91,6 +91,12 @@
     <ClCompile Include="Source\Entity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GuiButton.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -205,6 +211,15 @@
     <ClInclude Include="Source\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GuiButton.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -236,6 +251,9 @@
     </Filter>
     <Filter Include="Entities">
       <UniqueIdentifier>{23928f2b-043b-4ee3-83c4-925af508ff7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{2535093a-458f-4b8c-8312-75e05400068e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

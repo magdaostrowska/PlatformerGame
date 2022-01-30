@@ -213,7 +213,6 @@ bool Walk_Enemy::Update(float dt)
 	currentAnim->Update();
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
-	//AnyEnemy::Update(dt);
 
 	return true;
 }
@@ -286,7 +285,6 @@ void Walk_Enemy::OnCollision(Collider* col)
 			int o = 0;
 		}
 	}
-	//AnyEnemy::OnCollision(collider);
 }
 
 bool Walk_Enemy::LoadState(pugi::xml_node& data)

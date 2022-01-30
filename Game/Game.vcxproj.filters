@@ -10,17 +10,14 @@
       <Filter>External\PugiXml</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collider.cpp" />
-    <ClCompile Include="Source\AnyItem.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Item_Coin.cpp">
-      <Filter>Items</Filter>
+      <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="Source\Item_Potion.cpp">
-      <Filter>Items</Filter>
+      <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="Source\Items.cpp">
-      <Filter>Items</Filter>
+      <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shots.cpp">
       <Filter>Particles</Filter>
@@ -29,16 +26,13 @@
       <Filter>Particles</Filter>
     </ClCompile>
     <ClCompile Include="Source\Enemies.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AnyEnemy.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Source\Fly_Enemy.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Source\Walk_Enemy.cpp">
-      <Filter>Enemies</Filter>
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Source\Audio.cpp">
       <Filter>Modules</Filter>
@@ -107,6 +101,7 @@
     <ClCompile Include="Source\Intro.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PauseMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -136,17 +131,14 @@
     </ClInclude>
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Collider.h" />
-    <ClInclude Include="Source\AnyItem.h">
-      <Filter>Items</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Item_Coin.h">
-      <Filter>Items</Filter>
+      <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="Source\Item_Potion.h">
-      <Filter>Items</Filter>
+      <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="Source\Items.h">
-      <Filter>Items</Filter>
+      <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="Source\Shots.h">
       <Filter>Particles</Filter>
@@ -155,16 +147,13 @@
       <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemies.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AnyEnemy.h">
-      <Filter>Enemies</Filter>
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Fly_Enemy.h">
-      <Filter>Enemies</Filter>
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Walk_Enemy.h">
-      <Filter>Enemies</Filter>
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Audio.h">
       <Filter>Modules</Filter>
@@ -240,6 +229,7 @@
     <ClInclude Include="Source\Intro.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PauseMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -254,14 +244,8 @@
     <Filter Include="File">
       <UniqueIdentifier>{0704224e-29be-469f-827c-81007dbc7fce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Items">
-      <UniqueIdentifier>{fa55492c-0520-4e2a-a458-3163f79c92c6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Particles">
       <UniqueIdentifier>{5b82b028-fb2b-4f9c-9784-dcde6eb370c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Enemies">
-      <UniqueIdentifier>{b28ae151-1298-459f-a142-c74733cc8351}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules">
       <UniqueIdentifier>{4be98050-b475-4c1d-86f7-181b574efd7b}</UniqueIdentifier>
@@ -274,6 +258,12 @@
     </Filter>
     <Filter Include="Gui">
       <UniqueIdentifier>{2535093a-458f-4b8c-8312-75e05400068e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemies">
+      <UniqueIdentifier>{b28ae151-1298-459f-a142-c74733cc8351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Items">
+      <UniqueIdentifier>{fa55492c-0520-4e2a-a458-3163f79c92c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

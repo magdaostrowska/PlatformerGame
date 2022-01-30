@@ -111,7 +111,6 @@ bool Fly_Enemy::Update(float dt)
 		currentAnim = &flyLeft;
 		break;
 	}
-	//AnyEnemy::Update(dt);
 
 	return true;
 }
@@ -157,7 +156,6 @@ void Fly_Enemy::OnCollision(Collider* col)
 			break;
 		}
 	}
-	//AnyEnemy::OnCollision(collider);
 }
 
 void Fly_Enemy::CalculatePath()

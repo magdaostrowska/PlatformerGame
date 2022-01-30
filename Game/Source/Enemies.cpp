@@ -5,7 +5,6 @@
 #include "Audio.h"
 #include "Title.h"
 #include "Globals.h"
-#include "AnyEnemy.h"
 #include "Fly_Enemy.h"
 #include "Walk_Enemy.h"
 

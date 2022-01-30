@@ -72,8 +72,8 @@ bool Render::Update(float dt)
 {
 	uint scale = app->win->GetScale();
 
-	camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + ((app->win->screenSurface->w - 24 * scale) / 2);
-	camera.y = ((app->player->position.y - app->player->position.y * 2) * scale) + (app->win->screenSurface->h / 2 - 24 * scale);
+	camera.x = ((app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x * 2) * scale) + ((app->win->screenSurface->w - 24 * scale) / 2);
+	camera.y = ((app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y - app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y * 2) * scale) + (app->win->screenSurface->h / 2 - 24 * scale);
 
 	if (camera.x > 0) {
 		//camera.x = ((app->player->position.x - app->player->position.x * 2) * scale) + (app->win->screenSurface->w / 2 - 24 * scale);

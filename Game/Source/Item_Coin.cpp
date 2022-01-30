@@ -56,7 +56,7 @@ void Item_Coin::OnCollision(Collider* collider)
 	//app->player->coins++;
 	app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->coins++;
 	//LOG("coin");
-	//SetToDelete();
+	SetToDelete();
 
 	//Entity::OnCollision(collider);
 }

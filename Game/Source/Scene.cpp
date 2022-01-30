@@ -94,12 +94,14 @@ bool Scene::PreUpdate()
 	{
 		if (level == 1)
 		{
-			app->player->position.x = 0;
-			app->player->position.y = 0;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = 0;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 0;
+
 		}
 		else if (level == 2) {
-			app->player->position.x = 0;
-			app->player->position.y = 180;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = 0;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 180;
+
 		}
 	}
 	return true;
@@ -285,8 +287,8 @@ bool Scene::PostUpdate()
 
 	//app->render->DrawTexture(app->items->textureRunLeft, app->, app->player->position.y, &app->player->rectPlayer, 1.0f);
 
-	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);
-	sprintf_s(playerCoins, 2, "%01d", app->player->coins);
+	sprintf_s(playerLifes, 2, "%01d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->lifes);
+	sprintf_s(playerCoins, 2, "%01d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->coins);
 	
 	blackRect = { 0, (app->render->camera.y - app->render->camera.y * 2) / 3, app->render->camera.w,( app->win->screenSurface->h / 2 - 324 * 3 / 2)/3 };
 	app->render->DrawRectangle(blackRect, 0, 0, 0, 255, true);

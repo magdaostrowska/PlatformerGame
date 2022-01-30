@@ -56,6 +56,10 @@ bool Items::Update(float dt)
 			itemsL[i]->Update(dt);
 
 		}
+
+		if (itemsL[0] == nullptr && app->titleScreen->inTitle ==0) {
+			int r = 0;
+		}
 			
 	}
 
@@ -66,17 +70,37 @@ bool Items::Update(float dt)
 
 bool Items::PostUpdate()
 {
+
+	int w = 0;
+
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
+
 		if (itemsL[i] != nullptr) {
 			//position.x = items[i]->position.x;
 			//position.y = items[i]->position.y;
+
+			//itemsL[i]->position.x = 40;
+			//itemsL[i]->position.y = 40;
+			//itemsL[i]->collider = itemsL[i]->GetCollider();
+			if (itemsL[i]->collider == nullptr) {
+				int u = 8;
+			}
+			else {
+				int e =7;
+			}
 			itemsL[i]->Draw();
+		}
+
+		w++;
+
+		if (itemsL[0] == nullptr) {
+			int a = 5;
 		}
 			
 	}
 
-	int u = 7;
+	
 
 	return true;
 }
@@ -212,11 +236,11 @@ void Items::OnCollision(Collider* c1, Collider* c2)
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
 		
-		if (itemsL[i] != nullptr)
+		if (app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->itemsL[i] != nullptr)
 		{
-			if (itemsL[i]->GetCollider() == c1) {
+			if (app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->itemsL[i]->GetCollider() == c1) {
 				//int u = position.x;
-				itemsL[i]->OnCollision(c2); //Notify the enemy of a collision
+				app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->itemsL[i]->OnCollision(c2); //Notify the enemy of a collision
 				break;
 			}
 			

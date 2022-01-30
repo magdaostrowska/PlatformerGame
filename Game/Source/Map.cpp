@@ -890,7 +890,7 @@ void Map::LoadCol() {
 								pos.y+4,
 								&r);
 							*/
-							app->items->AddItem(Item_type::POTION, pos.x, pos.y + 4);
+							//app->items->AddItem(Item_type::POTION, pos.x, pos.y + 4);
 							i++;
 						}
 

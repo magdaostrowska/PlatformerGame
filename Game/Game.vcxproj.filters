@@ -10,9 +10,6 @@
       <Filter>External\PugiXml</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collider.cpp" />
-    <ClCompile Include="Source\AnyItem.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Item_Coin.cpp">
       <Filter>Items</Filter>
     </ClCompile>
@@ -29,9 +26,6 @@
       <Filter>Particles</Filter>
     </ClCompile>
     <ClCompile Include="Source\Enemies.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AnyEnemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Source\Fly_Enemy.cpp">
@@ -107,6 +101,7 @@
     <ClCompile Include="Source\Intro.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PauseMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -136,9 +131,6 @@
     </ClInclude>
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Collider.h" />
-    <ClInclude Include="Source\AnyItem.h">
-      <Filter>Items</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Item_Coin.h">
       <Filter>Items</Filter>
     </ClInclude>
@@ -155,9 +147,6 @@
       <Filter>Particles</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemies.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AnyEnemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Source\Fly_Enemy.h">
@@ -240,6 +229,7 @@
     <ClInclude Include="Source\Intro.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PauseMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

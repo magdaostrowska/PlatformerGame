@@ -8,7 +8,10 @@
 #include "Title.h"
 #include "Render.h"
 
+#include <vector>
+
 struct SDL_Texture;
+
 
 class Entity : public EntityManager
 {
@@ -26,14 +29,23 @@ public:
 	virtual bool CleanUp() { return true; };
 	virtual bool OnCollision() { return true; };
 
+	Player* FindSubClassPlayer();
+	Items* FindSubClassItem();
+
+	Entity* FindEntity(EntityType type);
+
 	virtual void Draw();
 	virtual void OnCollision(Collider* collider);
 	virtual void SetToDelete();
 
 	// Returns the enemy's collider
-	const Collider* GetCollider() const;
+	//const Collider* GetCollider() const;
 
 public:
+
+	std::vector<Player*> playerList;
+	std::vector<Items*> itemList;
+	std::vector<Enemies*> enemyList;
 
 	EntityType type;
 	iPoint position;
@@ -47,7 +59,7 @@ public:
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
-protected:
+
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
@@ -56,6 +68,10 @@ protected:
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
+
+	
+
+	//std::vector<T*> subEntities;
 };
 
 #endif // !__ENTITY_H__

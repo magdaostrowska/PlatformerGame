@@ -15,6 +15,8 @@
 #include "Items.h"
 #include "Enemies.h"
 #include "PathFinding.h"
+#include "EntityManager.h"
+#include "Entity.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -42,6 +44,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	items = new Items();
 	enemies = new Enemies();
 	pathfinding = new PathFinding();
+	entity = new EntityManager();
 
 	saveGameRequested = false;
 	loadGameRequested = false;
@@ -59,14 +62,18 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fonts);
 	AddModule(map);
 	
-	AddModule(shots);
-	AddModule(player);
+	//AddModule(shots);
+	//AddModule(player);
 	AddModule(titleScreen);
-	AddModule(items);
-	AddModule(enemies);
-	AddModule(fade);
+	//AddModule(items);
+	//AddModule(enemies);
+	
 	AddModule(collisions);
 	AddModule(pathfinding);
+
+	AddModule(entity);
+
+	AddModule(fade);
 	
 	
 

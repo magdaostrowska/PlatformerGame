@@ -77,7 +77,7 @@ void Fly_Enemy::Update(float dt)
 	currentAnim->Update();
 
 	if (app->titleScreen->inTitle == 0) {
-		if (app->player->collider->rect.x < collider->rect.x) {
+		if (app->entity->FindEntity(EntityType::PLAYER)->collider->rect.x < collider->rect.x) {
 
 			dir = -1;
 			if (isLeft == true) {

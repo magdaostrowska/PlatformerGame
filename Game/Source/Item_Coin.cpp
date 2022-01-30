@@ -4,9 +4,15 @@
 #include "Collisions.h"
 #include "Textures.h"
 #include "Player.h"
+#include "Items.h"
+#include "Log.h"
 
-Item_Coin::Item_Coin(int x, int y) : Entity(EntityType::ITEM_COIN, x, y)
+Item_Coin::Item_Coin(int x, int y) : Items()
 {
+
+	position.x = x;
+	position.y = y;
+
 	texture = app->tex->Load("Assets/textures/items/coin.png");
 
 	coinAnim.PushBack({ 0, 0, 32, 32 });
@@ -27,7 +33,7 @@ Item_Coin::Item_Coin(int x, int y) : Entity(EntityType::ITEM_COIN, x, y)
 	coinRect = { x+9, y+8, 14, 16 };
 
 	//collider = app->collisions->AddCollider({ x+9, y+8, 16, 16 }, Collider::Type::COIN, (Module*)app->items);
-	collider = app->collisions->AddCollider(coinRect, Collider::Type::COIN, (Module*)app->items);
+	collider = app->collisions->AddCollider(coinRect, Collider::Type::COIN, this);
 }
 
 bool Item_Coin::Update(float dt)
@@ -39,16 +45,23 @@ bool Item_Coin::Update(float dt)
 	// It will update the collider depending on the position
 	//collider->SetPos(coinRect.x, coinRect.y);
 
-	//currentAnim->Update();
+	currentAnim->Update();
 
-	Entity::Update(dt);
+	//Items::Update(dt);
 	return true;
 }
 
 void Item_Coin::OnCollision(Collider* collider)
 {
-	app->player->coins++;
-		SetToDelete();
+	//app->player->coins++;
+	app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->coins++;
+	//LOG("coin");
+	//SetToDelete();
 
-	Entity::OnCollision(collider);
+	//Entity::OnCollision(collider);
 }
+
+//Collider* Item_Coin::GetCollider() const 
+//{
+//	return collider;
+//}

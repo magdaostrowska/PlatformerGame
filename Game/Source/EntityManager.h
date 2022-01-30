@@ -1,20 +1,22 @@
-#ifndef __ENTITYMANAGER_H__
-#define __ENTITYMANAGER_H__
+#ifndef __ENTITY_MANAGER_H__
+#define __ENTITY_MANAGER_H__
 
 #include "Module.h"
+#include "List.h"
 #include <vector>
+
+
 
 class Entity;
 
 enum class EntityType
 {
 	PLAYER,
-	WALK_ENEMY,
-	FLY_ENEMY,
-	ITEM_COIN,
-	ITEM_POTION,
+	ENEMY,
+	ITEM,
 	UNKNOWN
 };
+
 
 class EntityManager : public Module
 {
@@ -32,14 +34,19 @@ public:
 	bool Save(pugi::xml_node& file)const;
 	bool Load(pugi::xml_node& file);
 
+	
 	Entity* CreateEntity(EntityType type);
+	
+	Entity* FindEntity(EntityType type);
+
+
 	void DestroyEntity(Entity* entity);
 
 public:
 
-	std::vector<Entity*> entites;
+	List<Entity*> entities;
 
 };
 
 
-#endif // !__ENTITYMANAGER_H__
+#endif // !__ENTITY_MANAGER_H__

@@ -15,6 +15,9 @@
 #include "Window.h"
 #include "Shots.h"
 
+#include "EntityManager.h"
+#include "Entity.h"
+
 struct SDL_Texture;
 struct Collider;
 
@@ -103,8 +106,6 @@ public:
 	Animation* currentAnimation;
 
 	Animation idleLeft, idleRight, runLeft, runRight, jumpLeft, jumpRight, hurtLeft, hurtRight, deathRight, deathLeft;
-
-	Collider* collider;
 
 	unsigned int currentTime;
 

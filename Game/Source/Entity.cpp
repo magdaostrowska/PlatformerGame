@@ -1,4 +1,7 @@
 #include "Entity.h"
+#include "Player.h"
+#include "EntityManager.h"
+
 
 Entity::Entity(EntityType type) : type(type)
 {
@@ -37,7 +40,29 @@ void Entity::SetToDelete()
 		collider->pendingToDelete = true;
 }
 
-const Collider* Entity::GetCollider() const
+//const Collider* Entity::GetCollider() const
+//{
+//	return collider;
+//}
+
+Player* Entity::FindSubClassPlayer()
 {
-	return collider;
+	Player* ret = nullptr;
+
+	for (int i = 0; i < playerList.size(); i++) {
+			ret = playerList.at(i);
+	}
+	return ret;
 }
+
+Items* Entity::FindSubClassItem()
+{
+	Items* ret = nullptr;
+
+	for (int i = 0; i < itemList.size(); i++) {
+		ret = itemList.at(i);
+	}
+	return ret;
+}
+
+

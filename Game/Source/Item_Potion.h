@@ -6,9 +6,9 @@
 #include "App.h"
 #include "Collisions.h"
 #include "Textures.h"
-#include "Player.h"
+#include "Items.h"
 
-class Item_Potion : public Entity
+class Item_Potion : public Items
 {
 public:
 	// Constructor (x y coordinates in the world)

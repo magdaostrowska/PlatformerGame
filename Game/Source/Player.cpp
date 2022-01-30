@@ -44,7 +44,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	textureJumpLeft = nullptr;
 	textureJumpRight = nullptr;
 
-	currentAnimation = nullptr;
+	currentAnimation = &idleLeft;
 
 	collider = nullptr;
 
@@ -251,6 +251,7 @@ bool Player::SaveState(pugi::xml_node& data) const
 
 bool Player::PreUpdate() {
 
+	int e = 7;
 	return true;
 }
 

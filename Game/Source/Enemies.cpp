@@ -9,7 +9,7 @@
 #include "Fly_Enemy.h"
 #include "Walk_Enemy.h"
 
-Enemies::Enemies() : Module()
+Enemies::Enemies() : Entity(EntityType::ENEMY)
 {
 	name.Create("enemies");
 

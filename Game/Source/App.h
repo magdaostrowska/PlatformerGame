@@ -26,6 +26,7 @@ class Shots;
 class Items;
 class Enemies;
 class PathFinding;
+class EntityManager;
 
 class App
 {
@@ -110,6 +111,7 @@ public:
 	Items* items;
 	Enemies* enemies;
 	PathFinding* pathfinding;
+	EntityManager* entity;
 
 private:
 

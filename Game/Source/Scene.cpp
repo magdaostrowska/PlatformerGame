@@ -12,6 +12,7 @@
 #include "Items.h"
 #include "Enemies.h"
 #include "PathFinding.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -144,7 +145,8 @@ bool Scene::Update(float dt)
 		}
 	}
 
-	if (app->player->position.x > 1504 && app->player->position.y == 148) {
+	if (app->entity->FindEntity(EntityType::PLAYER)->position.x > 1504 && app->entity->FindEntity(EntityType::PLAYER)->position.y == 148) {
+
 		if (level == 1) {
 			app->fade->Fade(120, 1);
 			if (app->fade->frameCount >= 120 / 2) {
@@ -247,38 +249,38 @@ bool Scene::PostUpdate()
 
 	// Draw map
 	app->map->Draw();
+	
+	app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation->GetCurrentFrame();
 
-	app->player->rectPlayer = app->player->currentAnimation->GetCurrentFrame();
-
-	if (app->player->currentAnimation == &app->player->idleLeft) {
-		app->render->DrawTexture(app->player->textureIdleLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->idleLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureIdleLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->idleRight) {
-		app->render->DrawTexture(app->player->textureIdleRight, app->player->position.x - 19, app->player->position.y, & app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->idleRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureIdleRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, & app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->runLeft) {
-		app->render->DrawTexture(app->player->textureRunLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->runLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureRunLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->runRight) {
-		app->render->DrawTexture(app->player->textureRunRight, app->player->position.x - 19, app->player->position.y, &app->player-> rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->runRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureRunRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()-> rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->jumpLeft) {
-		app->render->DrawTexture(app->player->textureJumpLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->jumpLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureJumpLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->jumpRight) {
-		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->jumpRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureJumpRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->hurtLeft) {
-		app->render->DrawTexture(app->player->textureHitLeft, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hurtLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureHitLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->hurtRight) {
-		app->render->DrawTexture(app->player->textureHitRight, app->player->position.x , app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hurtRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureHitRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x , app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->deathLeft) {
-		app->render->DrawTexture(app->player->textureDeathLeft, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->deathLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureDeathLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->deathRight) {
-		app->render->DrawTexture(app->player->textureDeathRight, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->deathRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureDeathRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
 
 	//app->render->DrawTexture(app->items->textureRunLeft, app->, app->player->position.y, &app->player->rectPlayer, 1.0f);

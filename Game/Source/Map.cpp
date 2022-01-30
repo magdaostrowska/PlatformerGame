@@ -858,7 +858,7 @@ void Map::LoadCol() {
 							&r);
 						*/
 						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::COIN, this);
-						app->items->AddItem(EntityType::ITEM_COIN, pos.x, pos.y + 4);
+						app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->AddItem(Item_type::COIN, pos.x, pos.y + 4);
 						i++;
 					}
 
@@ -890,7 +890,7 @@ void Map::LoadCol() {
 								pos.y+4,
 								&r);
 							*/
-							app->items->AddItem(EntityType::ITEM_POTION, pos.x, pos.y + 4);
+							app->items->AddItem(Item_type::POTION, pos.x, pos.y + 4);
 							i++;
 						}
 

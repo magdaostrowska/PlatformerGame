@@ -4,6 +4,11 @@
 #include "Module.h"
 #include "Globals.h"
 
+
+#include "EntityManager.h"
+#include "Entity.h"
+
+
 enum class Enemy_Type
 {
 	NO_TYPE,
@@ -20,7 +25,7 @@ struct EnemySpawnpoint
 class AnyEnemy;
 struct SDL_Texture;
 
-class Enemies : public Module
+class Enemies : public Entity
 {
 public:
 	// Constructor

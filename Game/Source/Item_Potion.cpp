@@ -1,6 +1,9 @@
 #include "Item_Potion.h"
+#include "Items.h"
+#include "App.h"
+#include "Player.h"
 
-Item_Potion::Item_Potion(int x, int y) : Entity(EntityType::ITEM_POTION, x, y)
+Item_Potion::Item_Potion(int x, int y) : Items()
 {
 	texture = app->tex->Load("Assets/textures/items/potion.png");
 
@@ -18,7 +21,7 @@ Item_Potion::Item_Potion(int x, int y) : Entity(EntityType::ITEM_POTION, x, y)
 
 	currentAnim = &potAnim;
 	potRect = { x + 9, y + 8, 14, 16 };
-	collider = app->collisions->AddCollider(potRect, Collider::Type::POTION, (Module*)app->items);
+	//collider = app->collisions->AddCollider(potRect, Collider::Type::POTION, (Module*)app->items);
 }
 
 bool Item_Potion::Update(float dt)
@@ -34,8 +37,8 @@ void Item_Potion::OnCollision(Collider* collider)
 	//app->particles->AddParticle(app->particles->explosion, position.x, position.y);
 	//app->audio->PlayFx(destroyedFx);
 
-	if (app->player->lifes < app->player->maxLifes) {
-		app->player->lifes++;
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->lifes < app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->maxLifes) {
+		app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->lifes++;
 		SetToDelete();
 	}
 

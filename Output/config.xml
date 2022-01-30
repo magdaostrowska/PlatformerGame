@@ -9,8 +9,8 @@
     <vsync value="true" />
   </renderer>
   <window>
-    <resolution width="1280" height="720" scale="3" />
-    <fullscreen value="false" />
+    <resolution width="1920" height="1080" scale="3" />
+    <fullscreen value="true" />
     <borderless value="false" />
     <resizable value="false" />
     <fullscreen_window value="false" />

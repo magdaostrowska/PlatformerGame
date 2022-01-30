@@ -49,7 +49,7 @@ Fly_Enemy::Fly_Enemy(int x, int y) : Enemies()
 
 	flyRect = { 0, 0, 24, 24 };
 
-	collider = app->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)app->enemies);
+	collider = app->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, this);
 }
 
 bool Fly_Enemy::Update(float dt)
@@ -130,7 +130,7 @@ void Fly_Enemy::OnCollision(Collider* col)
 			position.x += 300;
 			position.y -= 150;
 
-			if (app->player->hitCountdown == 0)
+			if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hitCountdown == 0)
 			{
 				app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->Die();
 				app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hitCountdown = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hitMaxCountdown;

@@ -49,7 +49,7 @@ bool Title::Update(float dt)
 			app->map->Load("map_level1.tmx");
 			app->tex->UnLoad(app->scene->back1);
 			app->scene->back1 = app->tex->Load("Assets/textures/back_image.png");
-			app->player->ReSpawn();
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->ReSpawn();
 			//app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
 			//app->player->lifes = 3;//borrar al poner spawn
 			app->map->LoadCol();
@@ -67,7 +67,7 @@ bool Title::Update(float dt)
 			app->map->Load("map_level1.tmx");
 			app->tex->UnLoad(app->scene->back1);
 			app->scene->back1 = app->tex->Load("Assets/textures/back_image.png");
-			app->player->ReSpawn();
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->ReSpawn();
 			app->map->LoadCol();
 			app->fade->Fade(240, 1);
 			inTitle = 0;

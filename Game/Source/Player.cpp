@@ -338,7 +338,7 @@ bool Player::Update(float dt)
 		
 		if (onGround == false && stopJumping == true) {
 			isJumping = false;
-			//if (isStunned == false) {
+			if (isStunned == false && lifes > 0) {
 				if (currentTime >= lastTimeFall + 200) {
 
 					if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && numJumps > 0) {
@@ -410,6 +410,7 @@ bool Player::Update(float dt)
 						stopJumping = false;
 					}
 				}
+			}
 		}
 	}
 	//godMode == true
@@ -422,7 +423,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	//if (isStunned == false) {
+	if (isStunned == false && lifes > 0) {
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
 			if (position.x < 1600 - 24) {
 				position.x += speed * pdt / 4;
@@ -451,7 +452,7 @@ bool Player::Update(float dt)
 				currentAnimation = &idleLeft;
 			}
 		}
-	//}
+	}
 
 	wallLeft = false;
 	wallRight = false;
@@ -488,7 +489,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	//if (isStunned == false) {
+	if (isStunned == false && lifes >0) {
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && wallRight == false) {
 			if (position.x < 1600 - 24) {
 				runningToLeft = true;
@@ -501,7 +502,7 @@ bool Player::Update(float dt)
 				runningToLeft = false;
 			}
 		}
-	//}
+	}
 	
 
 	if (isJumping == true || onGround == false) {

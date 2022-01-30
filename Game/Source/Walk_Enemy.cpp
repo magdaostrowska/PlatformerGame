@@ -76,7 +76,7 @@ Walk_Enemy::Walk_Enemy(int x, int y) : Enemies()
 	speed = 1 * 16 / 6;
 	walkRect = { x + 22 - 5, y + 16, 23 + 10, 18 };
 
-	collider = app->collisions->AddCollider(walkRect, Collider::Type::ENEMY, (Module*)app->enemies);
+	collider = app->collisions->AddCollider(walkRect, Collider::Type::ENEMY, this);
 }
 
 bool Walk_Enemy::Update(float dt)
@@ -225,9 +225,9 @@ bool Walk_Enemy::PostUpdate() {
 void Walk_Enemy::OnCollision(Collider* col)
 {
 	if (col->type == Collider::Type::PLAYER) {
-		if (app->player->hitCountdown <= 0)
+		if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hitCountdown <= 0)
 		{
-			app->player->Die();
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->Die();
 
 		}
 	}

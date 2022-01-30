@@ -1,10 +1,10 @@
 #ifndef __WALK_ENEMY_H__
 #define __WALK_ENEMY_H__
 
-#include "AnyEnemy.h"
-#include "App.h"
+#include "Entity.h"
+#include"Enemies.h"
 
-class Walk_Enemy : public AnyEnemy
+class Walk_Enemy : public Enemies
 {
 public:
 	// Constructor (x y coordinates in the world)
@@ -13,8 +13,8 @@ public:
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
-	void Update(float dt) override;
-	void PostUpdate() override;
+	bool Update(float dt) override;
+	bool PostUpdate() override;
 	void OnCollision(Collider* collider) override;
 
 	bool LoadState(pugi::xml_node& data) override;

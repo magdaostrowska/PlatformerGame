@@ -21,7 +21,7 @@ struct ItemSpawnpoint
 	int x, y;
 };
 
-class AnyItem;
+//class AnyItem;
 struct SDL_Texture;
 
 class Items : public Entity

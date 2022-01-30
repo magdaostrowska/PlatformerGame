@@ -3,9 +3,13 @@
 #include "Textures.h"
 #include "Player.h"
 #include "Title.h"
+#include "Enemies.h"
 
-Walk_Enemy::Walk_Enemy(int x, int y) : AnyEnemy(x, y)
+Walk_Enemy::Walk_Enemy(int x, int y) : Enemies()
 {
+	position.x = x;
+	position.y = y;
+
 	texture_left = app->tex->Load("Assets/textures/enemies/walk_enemy_left.png");
 	texture_right = app->tex->Load("Assets/textures/enemies/walk_enemy_right.png");
 
@@ -75,20 +79,20 @@ Walk_Enemy::Walk_Enemy(int x, int y) : AnyEnemy(x, y)
 	collider = app->collisions->AddCollider(walkRect, Collider::Type::ENEMY, (Module*)app->enemies);
 }
 
-void Walk_Enemy::Update(float dt)
+bool Walk_Enemy::Update(float dt)
 {
 
 	speed = 1 * dt / 6;
-
-	if (app->titleScreen->inTitle == 0 && app->player->collider != NULL && collider != NULL) {
-		if (app->player->collider->rect.x < collider->rect.x) {
+	
+	if (app->titleScreen->inTitle == 0 && app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider != NULL && collider != NULL) {
+		if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x < collider->rect.x) {
 
 			dir = -1;
 			if (isLeft == true) {
 				position.x += speed * dir;
 			}
 		}
-		else if (app->player->collider->rect.x + app->player->collider->rect.w > collider->rect.x + collider->rect.w) {
+		else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x + app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.w > collider->rect.x + collider->rect.w) {
 			dir = 1;
 			if (isRight == true) {
 				position.x += speed * dir;
@@ -209,11 +213,13 @@ void Walk_Enemy::Update(float dt)
 	currentAnim->Update();
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
-	AnyEnemy::Update(dt);
+	//AnyEnemy::Update(dt);
+
+	return true;
 }
 
-void Walk_Enemy::PostUpdate() {
-
+bool Walk_Enemy::PostUpdate() {
+	return true;
 }
 
 void Walk_Enemy::OnCollision(Collider* col)
@@ -280,7 +286,7 @@ void Walk_Enemy::OnCollision(Collider* col)
 			int o = 0;
 		}
 	}
-	AnyEnemy::OnCollision(collider);
+	//AnyEnemy::OnCollision(collider);
 }
 
 bool Walk_Enemy::LoadState(pugi::xml_node& data)

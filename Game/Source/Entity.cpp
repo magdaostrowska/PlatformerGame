@@ -65,4 +65,14 @@ Items* Entity::FindSubClassItem()
 	return ret;
 }
 
+Enemies* Entity::FindSubClassEnemy()
+{
+	Enemies* ret = nullptr;
+
+	for (int i = 0; i < enemyList.size(); i++) {
+		ret = enemyList.at(i);
+	}
+	return ret;
+}
+
 

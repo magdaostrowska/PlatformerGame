@@ -52,8 +52,9 @@ bool Enemies::Update(float dt)
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemiesList[i] != nullptr)
+		if (enemiesList[i] != nullptr) {
 			enemiesList[i]->Update(dt);
+		}
 	}
 
 	HandleEnemiesDespawn();
@@ -65,8 +66,10 @@ bool  Enemies::PostUpdate()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemiesList[i] != nullptr)
+		if (enemiesList[i] != nullptr) {
 			enemiesList[i]->Draw();
+		}
+			
 	}
 
 	return true;
@@ -87,6 +90,23 @@ bool Enemies::CleanUp()
 	}
 
 	return true;
+}
+
+void Enemies::Draw()
+{
+	if (currentAnim != nullptr) {
+		if (app->titleScreen->inTitle == 0) {
+			switch (dir) {
+			case 1:
+				app->render->DrawTexture(texture_right, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+				break;
+			case -1:
+				app->render->DrawTexture(texture_left, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+				break;
+			}
+
+		}
+	}
 }
 
 bool Enemies::AddEnemy(Enemy_Type type, int x, int y)
@@ -181,10 +201,10 @@ void Enemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-			case Enemy_Type::WALK_ENEMY:
+			case Enemy_Type::WALK:
 				enemiesList[i] = new Walk_Enemy(info.x, info.y);
 				break;
-			case Enemy_Type::FLY_ENEMY:
+			case Enemy_Type::FLY:
 				enemiesList[i] = new Fly_Enemy(info.x, info.y);
 				break;
 			}
@@ -195,14 +215,38 @@ void Enemies::SpawnEnemy(const EnemySpawnpoint& info)
 	}
 }
 
+void Enemies::SetToDelete()
+{
+	pendingToDelete = true;
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
+}
+
 void Enemies::OnCollision(Collider* c1, Collider* c2)
 {
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	int j = 8;
+	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (enemiesList[i] != nullptr && enemiesList[i]->GetCollider() == c1)
+
+		if (app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->enemiesList[i] != nullptr)
 		{
-			enemiesList[i]->OnCollision(c2); //Notify the enemy of a collision
-			break;
+			if (app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->enemiesList[i]->GetCollider() == c1) {
+				//int u = position.x;
+				app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->enemiesList[i]->OnCollision(c2); //Notify the enemy of a collision
+				break;
+			}
+
+
 		}
 	}
+}
+
+void Enemies::OnCollision(Collider* collider)
+{
+
+}
+
+Collider* Enemies::GetCollider() const
+{
+	return collider;
 }

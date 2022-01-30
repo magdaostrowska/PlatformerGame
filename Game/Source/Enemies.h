@@ -12,8 +12,8 @@
 enum class Enemy_Type
 {
 	NO_TYPE,
-	WALK_ENEMY,
-	FLY_ENEMY,
+	WALK,
+	FLY,
 };
 
 struct EnemySpawnpoint
@@ -22,7 +22,7 @@ struct EnemySpawnpoint
 	int x, y;
 };
 
-class AnyEnemy;
+//class AnyEnemy;
 struct SDL_Texture;
 
 class Enemies : public Entity
@@ -54,9 +54,15 @@ public:
 	// Destroys all active enemies left in the array
 	bool CleanUp() override;
 
+	void Draw();
+
 	// Called when an enemi collider hits another collider
 	// The enemy is destroyed and an explosion particle is fired
 	void OnCollision(Collider* c1, Collider* c2) override;
+
+	virtual void OnCollision(Collider* collider);
+
+	virtual Collider* GetCollider() const;
 
 	// Add an enemy into the queue to be spawned later
 	bool AddEnemy(Enemy_Type type, int x, int y);
@@ -67,6 +73,8 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
+	void SetToDelete();
+
 	bool removeAll = false;
 
 	bool LoadState(pugi::xml_node& data);
@@ -76,12 +84,12 @@ private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
 
-private:
+public:
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
 
 	// All spawned enemies in the scene
-	AnyEnemy* enemiesList[MAX_ENEMIES] = { nullptr };
+	Enemies* enemiesList[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
@@ -90,7 +98,34 @@ private:
 	int enemyDestroyedFx = 0;
 
 	bool spawnAll = false;
-	
+
+	////////////////ANY ITEM
+
+// The current position in the world
+	iPoint position;
+
+	// The enemy's texture
+	SDL_Texture* texture_left = nullptr;
+	SDL_Texture* texture_right = nullptr;
+	SDL_Texture* texture_die = nullptr;
+
+	// A flag for the enemy removal. Important! We do not delete objects instantly
+	bool pendingToDelete = false;
+
+	// A ptr to the current animation
+	Animation* currentAnim = nullptr;
+
+	// The enemy's collider
+	//Collider* collider = nullptr;
+
+	// Original spawn position. Stored for movement calculations
+	iPoint spawnPos;
+	int dir;
+
+	int lifes;
+
+	int hitCountdown = 0;
+	int	hitMaxCountdown = 60;
 };
 
 #endif // __ENEMIES_H__

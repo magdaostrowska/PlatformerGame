@@ -1,7 +1,32 @@
-﻿  App.cpp
+﻿  Enemies.cpp
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(220,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(251,14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(257,47): warning C4244: 'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
+  Map.cpp
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(26,20): warning C4018: '<': no coinciden signed/unsigned
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(284,50): warning C4018: '<': no coinciden signed/unsigned
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(320,50): warning C4018: '<': no coinciden signed/unsigned
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Point.h(111,24): warning C4244: 'argumento': conversión de 'TYPE' a 'float'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Point.h(107): message : al compilar la función del miembro clase plantilla "TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const"
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Map.cpp(327): message : Vea la referencia a la creación de una instancia de la función plantilla "TYPE Point<TYPE>::DistanceTo(const Point<TYPE> &) const" que se está compilando
+          with
+          [
+              TYPE=int
+          ]
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Scene.h(54): message : Vea la referencia a la creación de una instancia de clase plantilla "Point<int>" que se está compilando
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Point.h(111,15): warning C4244: 'return': conversión de 'float' a 'TYPE'; posible pérdida de datos
+          with
+          [
+              TYPE=int
+          ]
+  Generando código...
   Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

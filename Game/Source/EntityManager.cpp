@@ -15,6 +15,19 @@ EntityManager::~EntityManager()
 
 bool EntityManager::Awake(pugi::xml_node& config)
 {
+
+	Entity* player = CreateEntity(EntityType::PLAYER);
+	player->entityName.Create("player");
+
+	Entity* items = CreateEntity(EntityType::ITEM);
+	items->entityName.Create("items");
+
+	Entity* enemies = CreateEntity(EntityType::ENEMY);
+	enemies->entityName.Create("enemies");
+
+
+
+
 	pugi::xml_document EnConfigFile;
 	pugi::xml_node EnConfig;
 	pugi::xml_node EnConfigApp;
@@ -33,10 +46,6 @@ bool EntityManager::Awake(pugi::xml_node& config)
 		//title.Create(configApp.child("title").child_value());
 		//organization.Create(configApp.child("organization").child_value());
 	//}
-
-	Entity* player = CreateEntity(EntityType::PLAYER);
-	player->entityName.Create("player");
-	CreateEntity(EntityType::ITEM);
 
 	//if (ret == true) {
 		ListItem<Entity*>* item;

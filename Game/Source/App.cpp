@@ -70,9 +70,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	
 	//AddModule(collisions);
 	AddModule(pathfinding);
+	
 
 	AddModule(entity);
-
 	AddModule(collisions);
 
 	AddModule(fade);

@@ -31,6 +31,7 @@ public:
 
 	Player* FindSubClassPlayer();
 	Items* FindSubClassItem();
+	Enemies* FindSubClassEnemy();
 
 	Entity* FindEntity(EntityType type);
 

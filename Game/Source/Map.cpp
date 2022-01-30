@@ -924,8 +924,10 @@ void Map::LoadCol() {
 							pos.y+4,
 							&r);
 						*/
-						app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x, pos.y + 4);
+						//app->enemies->AddEnemy(Enemy_Type::WALK_ENEMY, pos.x, pos.y + 4);
 						//collider[i] = app->collisions->AddCollider({ pos.x, pos.y + 4, r.w,  r.h }, Collider::Type::ENEMY, this);
+						app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->AddEnemy(Enemy_Type::WALK, pos.x, pos.y + 4);
+						
 						i++;
 					}
 
@@ -957,6 +959,8 @@ void Map::LoadCol() {
 							&r);
 						*/
 						//app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x, pos.y + 4);
+						app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->AddEnemy(Enemy_Type::FLY, pos.x, pos.y + 4);
+
 						i++;
 					}
 

@@ -1,5 +1,7 @@
-﻿  EntityManager.cpp
+﻿  App.cpp
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(58,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
 X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\Animation.h(60,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\EntityManager.cpp(214,20): warning C4018: '<': no coinciden signed/unsigned
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(220,28): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(251,14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+X:\Users\xavie\Documents\GitHub\PlatformerGame\Game\Source\App.cpp(257,47): warning C4244: 'argumento': conversión de 'float' a 'Uint32'; posible pérdida de datos
   Game.vcxproj -> X:\Users\xavie\Documents\GitHub\PlatformerGame\Build\Debug\Game.exe

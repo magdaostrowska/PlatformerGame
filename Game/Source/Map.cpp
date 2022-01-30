@@ -891,6 +891,7 @@ void Map::LoadCol() {
 								&r);
 							*/
 							//app->items->AddItem(Item_type::POTION, pos.x, pos.y + 4);
+							app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->AddItem(Item_type::POTION, pos.x, pos.y + 4);
 							i++;
 						}
 
@@ -955,7 +956,7 @@ void Map::LoadCol() {
 							pos.y+4,
 							&r);
 						*/
-						app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x, pos.y + 4);
+						//app->enemies->AddEnemy(Enemy_Type::FLY_ENEMY, pos.x, pos.y + 4);
 						i++;
 					}
 

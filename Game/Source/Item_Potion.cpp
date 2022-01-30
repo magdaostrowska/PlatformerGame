@@ -5,6 +5,10 @@
 
 Item_Potion::Item_Potion(int x, int y) : Items()
 {
+
+	position.x = x;
+	position.y = y;
+
 	texture = app->tex->Load("Assets/textures/items/potion.png");
 
 	potAnim.PushBack({ 0, 0, 32, 32 });
@@ -21,14 +25,17 @@ Item_Potion::Item_Potion(int x, int y) : Items()
 
 	currentAnim = &potAnim;
 	potRect = { x + 9, y + 8, 14, 16 };
-	//collider = app->collisions->AddCollider(potRect, Collider::Type::POTION, (Module*)app->items);
+	collider = app->collisions->AddCollider(potRect, Collider::Type::POTION, (Module*)app->items);
 }
 
 bool Item_Potion::Update(float dt)
 {
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
-	Entity::Update(dt);
+
+	currentAnim->Update();
+
+	//Entity::Update(dt);
 	return true;
 }
 

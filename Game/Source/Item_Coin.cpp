@@ -44,9 +44,9 @@ bool Item_Coin::Update(float dt)
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	//collider->SetPos(coinRect.x, coinRect.y);
-
-	currentAnim->Update();
-
+	if (app->scene->inPause == false) {
+		currentAnim->Update();
+	}
 	//Items::Update(dt);
 	return true;
 }

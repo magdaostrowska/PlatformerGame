@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Textures.h"
 #include "Map.h"
+#include "GuiManager.h"
 
 Title::Title() : Module()
 {
@@ -25,6 +26,18 @@ bool Title::Awake() {
 bool Title::Start()
 {
 	intro_image = app->tex->Load("Assets/textures/intro_image.png");
+	
+
+	btn1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Test1", { (((app->render->camera.x - app->render->camera.w / 2 - 150 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 150 / 2)) * 2) / (int)app->win->GetScale()), 150, 150, 50 }, this);
+	btn2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Test1", { (((app->render->camera.x - app->render->camera.w / 2 - 110 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 110 / 2)) * 2) / (int)app->win->GetScale()), 230, 110, 40 }, this);
+	
+	btn3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Test1", { 5, 5,  20, 20 }, this);
+
+	//btn2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Test2", { (((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / (int)app->win->GetScale()), -90, 160, 40 }, this);
+
+	//btn1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Test1", {30, 30, 160, 40 }, this);
+	
+
 	inTitle = 1;
 	return true;
 }
@@ -86,10 +99,62 @@ bool Title::Update(float dt)
 
 bool Title::PostUpdate()
 {
-	return true;
+	bool ret = true;
+	if (toExit == true) {
+		ret = false;
+	}
+	return ret;
 }
 
 bool Title::CleanUp()
 {
+	return true;
+}
+
+bool Title::OnGuiMouseClickEvent(GuiControl* control)
+{
+
+	switch (control->type)
+	{
+	case GuiControlType::BUTTON:
+	{
+		if (inTitle == 0) {
+
+			if (control->id == 3)
+			{
+				if (app->scene->inPause == true) {
+					app->scene->inPause = false;
+				}
+				else {
+					app->scene->inPause = true;
+				}
+				
+			}
+			
+		}
+		else if (inTitle == 1) {
+
+			
+
+			if (control->id == 1)
+			{
+				app->fade->Fade(240, 1);
+				inTitle = 0;
+			}
+
+			if (control->id == 2)
+			{
+				toExit = true;
+			}
+
+		}
+		
+
+	}
+	//Other cases here
+
+	default: break;
+	}
+
 	return true;
 }

@@ -47,7 +47,7 @@ bool GuiButton::Update(float dt)
 	return false;
 }
 
-bool GuiButton::Draw()
+bool GuiButton::Draw(Render* render)
 {
 
 	// Draw the right button depending on state

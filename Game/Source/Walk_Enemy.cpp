@@ -83,134 +83,137 @@ bool Walk_Enemy::Update(float dt)
 {
 
 	speed = 1 * dt / 6;
-	
-	if (app->titleScreen->inTitle == 0 && app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider != NULL && collider != NULL) {
-		if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x < collider->rect.x) {
 
-			dir = -1;
-			if (isLeft == true) {
-				position.x += speed * dir;
+	if (app->scene->inPause == false) {
+
+		if (app->titleScreen->inTitle == 0 && app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider != NULL && collider != NULL) {
+			if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x < collider->rect.x) {
+
+				dir = -1;
+				if (isLeft == true) {
+					position.x += speed * dir;
+				}
+			}
+			else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x + app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.w > collider->rect.x + collider->rect.w) {
+				dir = 1;
+				if (isRight == true) {
+					position.x += speed * dir;
+				}
+
 			}
 		}
-		else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x + app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.w > collider->rect.x + collider->rect.w) {
-			dir = 1;
-			if (isRight == true) {
-				position.x += speed * dir;
-			}
-
-		}
-	}
 
 
 
 
 
-	collider->SetPos(position.x + 22 - 5, position.y + 16);
+		collider->SetPos(position.x + 22 - 5, position.y + 16);
 
-	isLeft = false;
-	isRight = false;
+		isLeft = false;
+		isRight = false;
 
-	switch (dir) {
-	case 1:
-		if (currentAnim != &hitRight && currentAnim != &hitLeft && currentAnim != &dieLeft && currentAnim != &dieRight) {
-			currentAnim = &walkRight;
-		}
-		else if (currentAnim == &hitRight) {
-			if (hitRight.HasFinished()) {
-				hitRight.Reset();
-				hitRight.ResetLoopCount();
-				hitLeft.Reset();
-				hitLeft.ResetLoopCount();
+		switch (dir) {
+		case 1:
+			if (currentAnim != &hitRight && currentAnim != &hitLeft && currentAnim != &dieLeft && currentAnim != &dieRight) {
 				currentAnim = &walkRight;
 			}
-		}
-		else if (currentAnim == &hitLeft) {
-			if (hitLeft.HasFinished()) {
-				hitRight.Reset();
-				hitRight.ResetLoopCount();
-				hitLeft.Reset();
-				hitLeft.ResetLoopCount();
-				currentAnim = &walkRight;
+			else if (currentAnim == &hitRight) {
+				if (hitRight.HasFinished()) {
+					hitRight.Reset();
+					hitRight.ResetLoopCount();
+					hitLeft.Reset();
+					hitLeft.ResetLoopCount();
+					currentAnim = &walkRight;
+				}
 			}
-		}
-		else if (currentAnim == &dieRight) {
-			if (dieRight.HasFinished()) {
-				dieRight.Reset();
-				dieRight.ResetLoopCount();
-				dieLeft.Reset();
-				dieLeft.ResetLoopCount();
-				SetToDelete();
-				texture_left = nullptr;
-				texture_right = nullptr;
+			else if (currentAnim == &hitLeft) {
+				if (hitLeft.HasFinished()) {
+					hitRight.Reset();
+					hitRight.ResetLoopCount();
+					hitLeft.Reset();
+					hitLeft.ResetLoopCount();
+					currentAnim = &walkRight;
+				}
 			}
-		}
-		else if (currentAnim == &dieLeft) {
-			if (dieLeft.HasFinished()) {
-				dieRight.Reset();
-				dieRight.ResetLoopCount();
-				dieLeft.Reset();
-				dieLeft.ResetLoopCount();
-				SetToDelete();
-				texture_left = nullptr;
-				texture_right = nullptr;
+			else if (currentAnim == &dieRight) {
+				if (dieRight.HasFinished()) {
+					dieRight.Reset();
+					dieRight.ResetLoopCount();
+					dieLeft.Reset();
+					dieLeft.ResetLoopCount();
+					SetToDelete();
+					texture_left = nullptr;
+					texture_right = nullptr;
+				}
 			}
-		}
-		break;
-	case -1:
-		if (currentAnim != &hitRight && currentAnim != &hitLeft && currentAnim != &dieLeft && currentAnim != &dieRight) {
-			if (pendingToDelete == false) {
-				currentAnim = &walkLeft;
+			else if (currentAnim == &dieLeft) {
+				if (dieLeft.HasFinished()) {
+					dieRight.Reset();
+					dieRight.ResetLoopCount();
+					dieLeft.Reset();
+					dieLeft.ResetLoopCount();
+					SetToDelete();
+					texture_left = nullptr;
+					texture_right = nullptr;
+				}
 			}
+			break;
+		case -1:
+			if (currentAnim != &hitRight && currentAnim != &hitLeft && currentAnim != &dieLeft && currentAnim != &dieRight) {
+				if (pendingToDelete == false) {
+					currentAnim = &walkLeft;
+				}
 
-		}
-		else if (currentAnim == &hitRight) {
-			if (hitRight.HasFinished()) {
-				hitRight.Reset();
-				hitRight.ResetLoopCount();
-				hitLeft.Reset();
-				hitLeft.ResetLoopCount();
-				currentAnim = &walkLeft;
 			}
-		}
-		else if (currentAnim == &hitLeft) {
-			if (hitLeft.HasFinished()) {
-				hitRight.Reset();
-				hitRight.ResetLoopCount();
-				hitLeft.Reset();
-				hitLeft.ResetLoopCount();
-				currentAnim = &walkLeft;
+			else if (currentAnim == &hitRight) {
+				if (hitRight.HasFinished()) {
+					hitRight.Reset();
+					hitRight.ResetLoopCount();
+					hitLeft.Reset();
+					hitLeft.ResetLoopCount();
+					currentAnim = &walkLeft;
+				}
 			}
-		}
-		else if (currentAnim == &dieRight) {
-			if (dieRight.HasFinished()) {
-				dieRight.Reset();
-				dieRight.ResetLoopCount();
-				dieLeft.Reset();
-				dieLeft.ResetLoopCount();
-				SetToDelete();
-				texture_left = nullptr;
-				texture_right = nullptr;
+			else if (currentAnim == &hitLeft) {
+				if (hitLeft.HasFinished()) {
+					hitRight.Reset();
+					hitRight.ResetLoopCount();
+					hitLeft.Reset();
+					hitLeft.ResetLoopCount();
+					currentAnim = &walkLeft;
+				}
 			}
-		}
-		else if (currentAnim == &dieLeft) {
-			if (dieLeft.HasFinished()) {
-				dieRight.Reset();
-				dieRight.ResetLoopCount();
-				dieLeft.Reset();
-				dieLeft.ResetLoopCount();
-				SetToDelete();
-				texture_left = nullptr;
-				texture_right = nullptr;
+			else if (currentAnim == &dieRight) {
+				if (dieRight.HasFinished()) {
+					dieRight.Reset();
+					dieRight.ResetLoopCount();
+					dieLeft.Reset();
+					dieLeft.ResetLoopCount();
+					SetToDelete();
+					texture_left = nullptr;
+					texture_right = nullptr;
+				}
 			}
+			else if (currentAnim == &dieLeft) {
+				if (dieLeft.HasFinished()) {
+					dieRight.Reset();
+					dieRight.ResetLoopCount();
+					dieLeft.Reset();
+					dieLeft.ResetLoopCount();
+					SetToDelete();
+					texture_left = nullptr;
+					texture_right = nullptr;
+				}
+			}
+			break;
 		}
-		break;
+
+		if (hitCountdown > 0) {
+			hitCountdown = hitCountdown - dt / 16;
+		}
+
+		currentAnim->Update();
 	}
-
-	if (hitCountdown > 0) {
-		hitCountdown = hitCountdown - dt / 16;
-	}
-
-	currentAnim->Update();
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	//AnyEnemy::Update(dt);

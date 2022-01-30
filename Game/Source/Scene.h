@@ -47,6 +47,8 @@ public:
 	bool loadinglvl1 = false;
 	bool loadinglvl2 = false;
 
+	bool inPause = false;
+
 private:
 
 	int textFont = -1;
@@ -61,6 +63,8 @@ private:
 	char playerCoins[2] = { "\0" };
 	SDL_Rect blackRect = {0,0,0,0};
 	SDL_Rect blackRect2 = { 0,0,0,0 };
+
+	
 };
 
 #endif // __SCENE_H__

@@ -34,7 +34,7 @@ bool Settings::Draw()
 		fxSlider->Update(dt);
 		fullscreenCheckbox->Update(dt);
 		VSyncCheckbox->Update(dt);*/
-		backButton->Draw();
+		//backButton->Draw();
 	}
 
 	return true;

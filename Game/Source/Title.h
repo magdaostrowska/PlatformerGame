@@ -2,6 +2,7 @@
 #define __TITLE_H__
 
 #include "Module.h"
+#include "GuiButton.h"
 
 struct SDL_Texture;
 
@@ -27,9 +28,18 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Define multiple Gui Event methods
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 	int inTitle=0;
 
 	SDL_Texture* intro_image = nullptr;
+
+	bool toExit = false;
+
+	GuiButton* btn1;
+	GuiButton* btn2;
+	GuiButton* btn3;
 
 private:
 	//int textFont = -1;

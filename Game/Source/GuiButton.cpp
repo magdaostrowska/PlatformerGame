@@ -26,7 +26,7 @@ bool GuiButton::Update(float dt)
 		app->input->GetMousePosition(mouseX, mouseY);
 
 		if ((mouseX > bounds.x) && (mouseX < (bounds.x + bounds.w)) &&
-			(mouseY > bounds.y) && (mouseY < (bounds.y + bounds.h)))
+			(mouseY -20> bounds.y) && (mouseY - 20 < (bounds.y + bounds.h)))
 		{
 			state = GuiControlState::FOCUSED;
 

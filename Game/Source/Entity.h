@@ -69,6 +69,8 @@ public:
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 
+	SString entityName;
+
 	
 
 	//std::vector<T*> subEntities;

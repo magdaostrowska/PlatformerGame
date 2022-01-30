@@ -15,23 +15,46 @@ EntityManager::~EntityManager()
 
 bool EntityManager::Awake(pugi::xml_node& config)
 {
-	CreateEntity(EntityType::PLAYER);
+	pugi::xml_document EnConfigFile;
+	pugi::xml_node EnConfig;
+	pugi::xml_node EnConfigApp;
+
+	bool ret = false;
+
+	EnConfig = app->LoadConfig(EnConfigFile);
+
+	//if (EnConfig.empty() == false)
+	//{
+		ret = true;
+		EnConfigApp = EnConfig.child("app");
+		//maxFrameRate = config.child("frcap").attribute("value").as_int();
+
+		// Reading the title from the config file
+		//title.Create(configApp.child("title").child_value());
+		//organization.Create(configApp.child("organization").child_value());
+	//}
+
+	Entity* player = CreateEntity(EntityType::PLAYER);
+	player->entityName.Create("player");
 	CreateEntity(EntityType::ITEM);
 
-	bool ret = true;
-	ListItem<Entity*>* item;
-	item = entities.start;
+	//if (ret == true) {
+		ListItem<Entity*>* item;
+		item = entities.start;
 
-	while ((item != NULL) && (ret == true))
-	{
-		// L01: DONE 5: Add a new argument to the Awake method to receive a pointer to an xml node.
-		// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
-		// that can be used to read all variables for that module.
-		// Send nullptr if the node does not exist in config.xml
-		ret = item->data->Awake(config.child(item->data->name.GetString()));
+		while ((item != NULL) && (ret == true))
+		{
+			// L01: DONE 5: Add a new argument to the Awake method to receive a pointer to an xml node.
+			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
+			// that can be used to read all variables for that module.
+			// Send nullptr if the node does not exist in config.xml
+			//ret = item->data->Awake(config.child(item->data->entityName.GetString()));
+			ret = item->data->Awake(EnConfig.child(item->data->name.GetString()));
 
-		item = item->next;
-	}
+			item = item->next;
+		}
+	//}
+	
 	
 	return true;
 }

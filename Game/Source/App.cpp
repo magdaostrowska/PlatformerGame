@@ -58,13 +58,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(titleScreen);
 	AddModule(scene);
 	AddModule(fonts);
 	AddModule(map);
 	
 	//AddModule(shots);
 	//AddModule(player);
-	AddModule(titleScreen);
+	
 	//AddModule(items);
 	//AddModule(enemies);
 	

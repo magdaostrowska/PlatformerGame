@@ -104,6 +104,9 @@
       <Filter>Gui</Filter>
     </ClCompile>
     <ClCompile Include="Source\GuiCheckbox.cpp" />
+    <ClCompile Include="Source\Intro.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -234,6 +237,9 @@
       <Filter>Gui</Filter>
     </ClInclude>
     <ClInclude Include="Source\GuiCheckbox.h" />
+    <ClInclude Include="Source\Intro.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

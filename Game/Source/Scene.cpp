@@ -147,16 +147,6 @@ bool Scene::Update(float dt)
 		}
 	}
 
-	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x > 1504) {
-		
-			int i = 8;
-		}
-
-	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y == 148) {
-
-		int u = 8;
-	}
-
 	//LOG( "numero X: %d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x);
 	//LOG("numero Y: %d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y);
 
@@ -240,8 +230,10 @@ bool Scene::PostUpdate()
 	bool ret = true;
 
 	if (app->titleScreen->inTitle == 1) {
+		app->render->DrawTexture(app->titleScreen->intro_image, 80, 30);
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 220 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 220 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PLATVENTURE");
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START");
+		//app->guiManager->Draw();
 		return true;
 	}
 	else if(app->titleScreen->inTitle == 2){

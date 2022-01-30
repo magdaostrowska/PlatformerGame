@@ -29,6 +29,8 @@ public:
 
 	int inTitle=0;
 
+	SDL_Texture* intro_image = nullptr;
+
 private:
 	//int textFont = -1;
 

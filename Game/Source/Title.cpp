@@ -24,18 +24,24 @@ bool Title::Awake() {
 }
 bool Title::Start()
 {
+	intro_image = app->tex->Load("Assets/textures/intro_image.png");
 	inTitle = 1;
 	return true;
 }
 
 bool Title::Update(float dt)
 {
+	//TITULO
 	if (inTitle == 1) {
+
+		//app->render->DrawTexture(intro_image, 0,0);
+
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 			app->fade->Fade(240, 1);
 			inTitle = 0;
 		}
 	}
+	//REINICIO
 	if (inTitle == 2) {
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 			//app->fade->Fade(240, 1);
@@ -58,6 +64,7 @@ bool Title::Update(float dt)
 			
 		}
 	}
+	//FELICIDADES
 	if (inTitle == 3) {
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 			app->scene->level = 1;

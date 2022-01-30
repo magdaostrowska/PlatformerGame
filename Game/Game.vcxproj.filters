@@ -97,6 +97,13 @@
     <ClCompile Include="Source\GuiManager.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Settings.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiSlider.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiCheckbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -220,6 +227,13 @@
     <ClInclude Include="Source\GuiManager.h">
       <Filter>Gui</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Settings.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiSlider.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiCheckbox.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

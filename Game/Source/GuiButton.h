@@ -14,7 +14,7 @@ public:
 	virtual ~GuiButton();
 
 	bool Update(float dt);
-	bool Draw(Render* render);
+	bool Draw();
 
 	int mouseX, mouseY;
 	unsigned int click;

@@ -47,7 +47,7 @@ bool GuiButton::Update(float dt)
 	return false;
 }
 
-bool GuiButton::Draw(Render* render)
+bool GuiButton::Draw()
 {
 
 	// Draw the right button depending on state
@@ -56,27 +56,27 @@ bool GuiButton::Draw(Render* render)
 
 	case GuiControlState::DISABLED:
 	{
-		render->DrawRectangle(bounds, 0, 0, 0, 0);
+		app->render->DrawRectangle(bounds, 0, 0, 0, 0);
 	} break;
 
 	case GuiControlState::NORMAL:
 	{
-		render->DrawRectangle(bounds, 255, 0, 0, 255);
+		app->render->DrawRectangle(bounds, 255, 0, 0, 255);
 
 	} break;
 
 	//Draw the button according the GuiControl State
 	case GuiControlState::FOCUSED:
 	{
-		render->DrawRectangle(bounds, 255, 255, 255, 160);
+		app->render->DrawRectangle(bounds, 255, 255, 255, 160);
 	} break;
 	case GuiControlState::PRESSED:
 	{
-		render->DrawRectangle(bounds, 255, 255, 255, 255);
+		app->render->DrawRectangle(bounds, 255, 255, 255, 255);
 	} break;
 
 
-	case GuiControlState::SELECTED: render->DrawRectangle(bounds, 0, 255, 0, 255);
+	case GuiControlState::SELECTED: app->render->DrawRectangle(bounds, 0, 255, 0, 255);
 		break;
 
 	default:

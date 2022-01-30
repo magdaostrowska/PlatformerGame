@@ -320,6 +320,11 @@ bool Scene::PostUpdate()
 	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2 + 7 * 20) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20 ) / 2 + 7 * 20)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "   Coins:");
 	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2 + 16 * 20) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20) / 2 + 16 * 20)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerCoins);
 
+	if (level == 2) {
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (12 * 20) / 2) - (app->render->camera.x - (app->render->camera.w / 2 - (12 * 20) / 2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2 + 50) / app->win->GetScale(), textFont, "Coming soon!");
+
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;
 	}

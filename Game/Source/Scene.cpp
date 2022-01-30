@@ -67,7 +67,7 @@ bool Scene::Start()
 	back_pos = { 0,0 };
 	
 	// Load music
-	//app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
+	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
 	return true;
 }

@@ -104,6 +104,7 @@
       <Filter>Gui</Filter>
     </ClCompile>
     <ClCompile Include="Source\GuiCheckbox.cpp" />
+    <ClCompile Include="Source\PauseMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -234,6 +235,7 @@
       <Filter>Gui</Filter>
     </ClInclude>
     <ClInclude Include="Source\GuiCheckbox.h" />
+    <ClInclude Include="Source\PauseMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

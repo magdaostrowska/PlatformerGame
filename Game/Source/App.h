@@ -27,6 +27,7 @@ class Items;
 class Enemies;
 class PathFinding;
 class EntityManager;
+class GuiManager;
 
 class App
 {
@@ -112,6 +113,7 @@ public:
 	Enemies* enemies;
 	PathFinding* pathfinding;
 	EntityManager* entity;
+	GuiManager* guiManager;
 
 private:
 

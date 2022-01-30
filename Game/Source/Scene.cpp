@@ -13,6 +13,7 @@
 #include "Enemies.h"
 #include "PathFinding.h"
 #include "Player.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -233,7 +234,7 @@ bool Scene::PostUpdate()
 		app->render->DrawTexture(app->titleScreen->intro_image, 80, 30);
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 220 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 220 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PLATVENTURE");
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START");
-		//app->guiManager->Draw();
+		app->guiManager->Draw();
 		return true;
 	}
 	else if(app->titleScreen->inTitle == 2){

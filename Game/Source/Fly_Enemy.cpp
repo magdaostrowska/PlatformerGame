@@ -139,7 +139,8 @@ void Fly_Enemy::OnCollision(Collider* col)
 	}
 
 	if (col->type == Collider::Type::SHOT) {
-		pendingToDelete = true;
+		//pendingToDelete = true;
+		SetToDelete();
 	}
 
 	if (col->type == Collider::Type::GROUND) {

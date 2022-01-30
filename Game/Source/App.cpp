@@ -17,6 +17,7 @@
 #include "PathFinding.h"
 #include "EntityManager.h"
 #include "Entity.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -45,6 +46,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	enemies = new Enemies();
 	pathfinding = new PathFinding();
 	entity = new EntityManager();
+	guiManager = new GuiManager();
 
 	saveGameRequested = false;
 	loadGameRequested = false;
@@ -58,12 +60,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
+
 	AddModule(titleScreen);
+
 	AddModule(scene);
 	AddModule(fonts);
 	AddModule(map);
 	
-	//AddModule(shots);
+	AddModule(guiManager);
+	AddModule(shots);
 	//AddModule(player);
 	
 	//AddModule(items);

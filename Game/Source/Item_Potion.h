@@ -1,7 +1,6 @@
 #ifndef __ITEM_POTION_H__
 #define __ITEM_POTION_H__
 
-#include "AnyItem.h"
 #include "Entity.h"
 #include "App.h"
 #include "Collisions.h"

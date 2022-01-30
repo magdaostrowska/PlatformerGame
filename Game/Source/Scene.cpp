@@ -235,6 +235,9 @@ bool Scene::PostUpdate()
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 220 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 220 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()) -100, textFont, "PLATVENTURE");
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()) - 100, textFont, "PRESS ENTER TO START");
 		app->guiManager->Draw();
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 80 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 80/2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2)) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PLAY");
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 80 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 80 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 90) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 90)) * 2) / app->win->GetScale()), textFont, "EXIT");
+
 		return true;
 	}
 	else if(app->titleScreen->inTitle == 2){

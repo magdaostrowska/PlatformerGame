@@ -91,7 +91,6 @@ bool GuiManager::Draw() {
 			if (control->data->id == 3)
 			{
 				control->data->Draw(app->render);
-				int u = 7;
 			}
 
 		}

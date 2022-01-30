@@ -2,8 +2,7 @@
 #define __DYNARRAY_H__
 
 #include "Defs.h"
-
-#define DYN_ARRAY_BLOCK_SIZE 16
+#include "Globals.h"
 
 template<class VALUE>
 class DynArray

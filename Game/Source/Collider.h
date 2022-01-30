@@ -2,8 +2,7 @@
 #define __COLLIDER_H__
 
 #include "SDL/include/SDL_Rect.h"
-
-#define MAX_LISTENERS 10
+#include "Globals.h"
 
 class Module;
 

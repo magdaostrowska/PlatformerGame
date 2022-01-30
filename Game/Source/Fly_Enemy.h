@@ -1,8 +1,8 @@
 #ifndef __FLY_ENEMY_H__
 #define __FLY_ENEMY_H__
 
-#include "AnyEnemy.h"
-#include "App.h"
+#include "Enemies.h"
+#include "Entity.h"
 #include <iostream>
 
 enum class FlyingEnemyState {
@@ -14,7 +14,7 @@ enum class FlyingEnemyState {
 	DIE,
 };
 
-class Fly_Enemy : public AnyEnemy
+class Fly_Enemy : public Enemies
 {
 public:
 	// Constructor (x y coordinates in the world)
@@ -23,8 +23,8 @@ public:
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
-	void Update(float dt) override;
-	void PostUpdate() override;
+	bool Update(float dt) override;
+	bool PostUpdate() override;
 	void OnCollision(Collider* collider) override;
 
 	void CalculatePath();

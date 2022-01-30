@@ -2,10 +2,7 @@
 #define __INPUT_H__
 
 #include "Module.h"
-
-//#define NUM_KEYS 352
-#define NUM_MOUSE_BUTTONS 5
-//#define LAST_KEYS_PRESSED_BUFFER 50
+#include "Globals.h"
 
 struct SDL_Rect;
 

@@ -1,12 +1,14 @@
 #include "Item_Potion.h"
-
+#include "Items.h"
 #include "App.h"
-#include "Collisions.h"
-#include "Textures.h"
 #include "Player.h"
 
-Item_Potion::Item_Potion(int x, int y) : AnyItem(x, y)
+Item_Potion::Item_Potion(int x, int y) : Items()
 {
+
+	position.x = x;
+	position.y = y;
+
 	texture = app->tex->Load("Assets/textures/items/potion.png");
 
 	potAnim.PushBack({ 0, 0, 32, 32 });
@@ -18,30 +20,23 @@ Item_Potion::Item_Potion(int x, int y) : AnyItem(x, y)
 	potAnim.PushBack({ 192, 0, 32, 32 });
 	potAnim.PushBack({ 224, 0, 32, 32 });
 
-
 	potAnim.loop = true;
 	potAnim.speed = 0.1f;
 
 	currentAnim = &potAnim;
-
-	//path.PushBack({ -1.0f, -0.5f }, 100);
-	//path.PushBack({ -1.0f, 0.5f }, 80);
-	//path.PushBack({ -1.0f, 1.0f }, 80);
-
 	potRect = { x + 9, y + 8, 14, 16 };
-
-	//collider = app->collisions->AddCollider({ x+9, y+8, 16, 16 }, Collider::Type::COIN, (Module*)app->items);
 	collider = app->collisions->AddCollider(potRect, Collider::Type::POTION, (Module*)app->items);
 }
 
-void Item_Potion::Update(float dt)
+bool Item_Potion::Update(float dt)
 {
-	//path.Update();
-	//position = spawnPos + path.GetRelativePosition();
-
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
-	AnyItem::Update(dt);
+
+	currentAnim->Update();
+
+	//Entity::Update(dt);
+	return true;
 }
 
 void Item_Potion::OnCollision(Collider* collider)
@@ -49,11 +44,10 @@ void Item_Potion::OnCollision(Collider* collider)
 	//app->particles->AddParticle(app->particles->explosion, position.x, position.y);
 	//app->audio->PlayFx(destroyedFx);
 
-	if (app->player->lifes < app->player->maxLifes) {
-		app->player->lifes++;
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->lifes < app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->maxLifes) {
+		app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->lifes++;
 		SetToDelete();
 	}
 
-	
-	AnyItem::OnCollision(collider);
+	Entity::OnCollision(collider);
 }

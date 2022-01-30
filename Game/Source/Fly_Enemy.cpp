@@ -6,13 +6,17 @@
 #include "Map.h"
 #include "PathFinding.h"
 
-Fly_Enemy::Fly_Enemy(int x, int y) : AnyEnemy(x, y)
+Fly_Enemy::Fly_Enemy(int x, int y) : Enemies()
 {
+
+	position.x = x;
+	position.y = y;
+
 	state = FlyingEnemyState::IDLE;
 	followsPath = true;
 
 	texture_left = app->tex->Load("Assets/textures/enemies/fly_enemy_left.png");
-	texture_right = app->tex->Load("Assets/textures/enemies/fly_enemy_right.png");
+	texture_right = app->tex->Load("Assets/textures/enemies/fly_enemy_right_1.png");
 	texture_die = app->tex->Load("Assets/textures/enemies/fly_enemy_left.png");
 
 	flyLeft.PushBack({ 0,18,64,40 });
@@ -43,10 +47,12 @@ Fly_Enemy::Fly_Enemy(int x, int y) : AnyEnemy(x, y)
 	dir = 0;
 	speed = 1 * 16 / 6;
 
-	collider = app->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)app->enemies);
+	flyRect = { 0, 0, 24, 24 };
+
+	collider = app->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, this);
 }
 
-void Fly_Enemy::Update(float dt)
+bool Fly_Enemy::Update(float dt)
 {
 	CalculatePath();
 
@@ -77,14 +83,14 @@ void Fly_Enemy::Update(float dt)
 	currentAnim->Update();
 
 	if (app->titleScreen->inTitle == 0) {
-		if (app->player->collider->rect.x < collider->rect.x) {
+		if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x < collider->rect.x) {
 
 			dir = -1;
 			if (isLeft == true) {
 				position.x += speed * dir;
 			}
 		}
-		else if (app->player->collider->rect.x + app->player->collider->rect.w > collider->rect.x + collider->rect.w) {
+		else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x + app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.w > collider->rect.x + collider->rect.w) {
 			dir = 1;
 			if (isRight == true) {
 				position.x += speed * dir;
@@ -105,31 +111,36 @@ void Fly_Enemy::Update(float dt)
 		currentAnim = &flyLeft;
 		break;
 	}
-	AnyEnemy::Update(dt);
+	//AnyEnemy::Update(dt);
+
+	return true;
 }
 
-void Fly_Enemy::PostUpdate()
-{}
+bool Fly_Enemy::PostUpdate()
+{
+	return true;
+}
 
 void Fly_Enemy::OnCollision(Collider* col)
 {
-	if (app->player->godMode == false)
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->godMode == false)
 	{
 		if (col->type == Collider::Type::PLAYER) {
 
 			position.x += 300;
 			position.y -= 150;
 
-			if (app->player->hitCountdown == 0)
+			if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hitCountdown == 0)
 			{
-				app->player->Die();
-				app->player->hitCountdown = app->player->hitMaxCountdown;
+				app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->Die();
+				app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hitCountdown = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hitMaxCountdown;
 			}
 		}
 	}
 
 	if (col->type == Collider::Type::SHOT) {
-		pendingToDelete = true;
+		//pendingToDelete = true;
+		SetToDelete();
 	}
 
 	if (col->type == Collider::Type::GROUND) {
@@ -146,12 +157,12 @@ void Fly_Enemy::OnCollision(Collider* col)
 			break;
 		}
 	}
-	AnyEnemy::OnCollision(collider);
+	//AnyEnemy::OnCollision(collider);
 }
 
 void Fly_Enemy::CalculatePath()
 {
-	iPoint playerPos = app->map->WorldToMap(app->player->position.x, app->player->position.y); // player position
+	iPoint playerPos = app->map->WorldToMap(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y); // player position
 	iPoint enemyPos = app->map->WorldToMap(position.x, position.y); // enemy position
 
 	if (playerPos != enemyPos)

@@ -1,24 +1,17 @@
 #include "Items.h"
-
 #include "App.h"
-
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
 #include "Title.h"
-
 #include "AnyItem.h"
 #include "Item_Coin.h"
 #include "Item_Potion.h"
 
-
-#define SPAWN_MARGIN 50
-
-
-Items::Items() : Module()
+Items::Items() : Entity(EntityType::ITEM)
 {
 	for (uint i = 0; i < MAX_ITEMS; ++i)
-		items[i] = nullptr;
+		itemsL[i] = nullptr;
 }
 
 Items::~Items()
@@ -40,10 +33,10 @@ bool Items::PreUpdate()
 	// Remove all enemies scheduled for deletion
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (items[i] != nullptr && items[i]->pendingToDelete)
+		if (itemsL[i] != nullptr && itemsL[i]->pendingToDelete)
 		{
-			delete items[i];
-			items[i] = nullptr;
+			delete itemsL[i];
+			itemsL[i] = nullptr;
 		}
 	}
 
@@ -56,8 +49,18 @@ bool Items::Update(float dt)
 
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (items[i] != nullptr)
-			items[i]->Update(dt);
+
+		if (itemsL[i] != nullptr) {
+
+		
+			itemsL[i]->Update(dt);
+
+		}
+
+		if (itemsL[0] == nullptr && app->titleScreen->inTitle ==0) {
+			int r = 0;
+		}
+			
 	}
 
 	HandleItemsDespawn();
@@ -67,11 +70,37 @@ bool Items::Update(float dt)
 
 bool Items::PostUpdate()
 {
+
+	int w = 0;
+
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (items[i] != nullptr)
-			items[i]->Draw();
+
+		if (itemsL[i] != nullptr) {
+			//position.x = items[i]->position.x;
+			//position.y = items[i]->position.y;
+
+			//itemsL[i]->position.x = 40;
+			//itemsL[i]->position.y = 40;
+			//itemsL[i]->collider = itemsL[i]->GetCollider();
+			if (itemsL[i]->collider == nullptr) {
+				int u = 8;
+			}
+			else {
+				int e =7;
+			}
+			itemsL[i]->Draw();
+		}
+
+		w++;
+
+		if (itemsL[0] == nullptr) {
+			int a = 5;
+		}
+			
 	}
+
+	
 
 	return true;
 }
@@ -81,16 +110,30 @@ bool Items::CleanUp()
 {
 	//LOG("Freeing all items");
 
-	for (uint i = 0; i < MAX_ITEMS; ++i)
+	/*for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (items[i] != nullptr)
+		if (itemsL[i] != nullptr)
 		{
-			delete items[i];
-			items[i] = nullptr;
+			delete itemsL[i];
+			itemsL[i] = nullptr;
 		}
-	}
+	}*/
 
 	return true;
+}
+
+void Items::Draw()
+{
+	if (currentAnim != nullptr) {
+		if (app->titleScreen->inTitle == 0) {
+			app->render->DrawTexture(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+			
+			//app->render->DrawTexture(texture,40, 40, &(currentAnim->GetCurrentFrame()));
+
+			//int u = 0;
+		}
+			
+	}
 }
 
 bool Items::AddItem(Item_type type, int x, int y)
@@ -138,29 +181,23 @@ void Items::HandleItemsDespawn()
 	// Iterate existing items
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (items[i] != nullptr)
+		if (itemsL[i] != nullptr)
 		{
 			// Delete the item when it has reached the end of the screen
 			//if (items[i]->position.x * SCREEN_SIZE < (app->render->camera.x) - SPAWN_MARGIN)
 			//{
-			if (app->titleScreen->inTitle != 0) {
-				items[i]->SetToDelete();
-			}
+			if (app->titleScreen->inTitle != 0)
+				itemsL[i]->SetToDelete();
 
-			if (removeAll == true) {
-				items[i]->SetToDelete();
-			}
-
-
-			
+			if (removeAll == true)
+				itemsL[i]->SetToDelete();
 		}
-
-		
 	}
 
 	if (removeAll == true) {
 		removeAll = false;
 	}
+		
 }
 
 void Items::SpawnItem(const ItemSpawnpoint& info)
@@ -168,15 +205,15 @@ void Items::SpawnItem(const ItemSpawnpoint& info)
 	// Find an empty slot in the items array
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (items[i] == nullptr)
+		if (itemsL[i] == nullptr)
 		{
 			switch (info.type)
 			{
 			case Item_type::COIN:
-				items[i] = new Item_Coin(info.x, info.y);
+				itemsL[i] = new Item_Coin(info.x, info.y);
 				break;
 			case Item_type::POTION:
-				items[i] = new Item_Potion(info.x, info.y);
+				itemsL[i] = new Item_Potion(info.x, info.y);
 				break;
 			}
 			//items[i]->texture = texture;
@@ -186,14 +223,38 @@ void Items::SpawnItem(const ItemSpawnpoint& info)
 	}
 }
 
+void Items::SetToDelete()
+{
+	pendingToDelete = true;
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
+}
+
 void Items::OnCollision(Collider* c1, Collider* c2)
 {
+	int j = 8;
 	for (uint i = 0; i < MAX_ITEMS; ++i)
 	{
-		if (items[i] != nullptr && items[i]->GetCollider() == c1)
+		
+		if (app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->itemsL[i] != nullptr)
 		{
-			items[i]->OnCollision(c2); //Notify the enemy of a collision
-			break;
+			if (app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->itemsL[i]->GetCollider() == c1) {
+				//int u = position.x;
+				app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->itemsL[i]->OnCollision(c2); //Notify the enemy of a collision
+				break;
+			}
+			
+			
 		}
 	}
+}
+
+void Items::OnCollision(Collider* collider)
+{
+	
+}
+
+Collider* Items::GetCollider() const
+{
+	return collider;
 }

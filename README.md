@@ -1,13 +1,15 @@
 # PlatformerGame
-Platformer Game is a simple platformer game made in C++ for 
+Platventure is a simple platformer game made in C++ for 
 learning purposes at CITM - UPC. 
 
 Repository Link: [github.com/magdaostrowska/PlatformerGame](https://github.com/magdaostrowska/PlatformerGame)
 
-## Engine Controls:
+## Game Controls:
 - A: move to the left
 - D: move to the right
+- K: player's fireball shot
 - Space: jump
+- 2xSpace: double jump
 - WASD: player's moves in GodMode
 - F1/F2: start from the first/second level
 - F3: start from the beginning of the current level

@@ -12,6 +12,8 @@
 #include "Items.h"
 #include "Enemies.h"
 #include "PathFinding.h"
+#include "Player.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -66,7 +68,7 @@ bool Scene::Start()
 	back_pos = { 0,0 };
 	
 	// Load music
-	//app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
+	app->audio->PlayMusic("Assets/audio/music/music_spy.ogg");
 
 	return true;
 }
@@ -93,12 +95,14 @@ bool Scene::PreUpdate()
 	{
 		if (level == 1)
 		{
-			app->player->position.x = 0;
-			app->player->position.y = 0;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = 0;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 0;
+
 		}
 		else if (level == 2) {
-			app->player->position.x = 0;
-			app->player->position.y = 180;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = 0;
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 180;
+
 		}
 	}
 	return true;
@@ -130,40 +134,44 @@ bool Scene::Update(float dt)
 		if (app->fade->frameCount >= 120 / 2) {
 			level = 2;
 			app->map->RemoveCol();
-			app->enemies->removeAll = true;
-			app->items->removeAll = true;
+			app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->removeAll = true;
+			app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->removeAll = true;
 			app->map->CleanUp();
 
 			app->map->Load("map_level2.tmx");
 			app->tex->UnLoad(back1);
 			back1 = app->tex->Load("Assets/textures/back_image_2.png");
 			//app->player->Spawn();
-			app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 0; //borrar al poner spawn
 			app->map->LoadCol();
 			loadinglvl2 = false;
 		}
 	}
 
-	if (app->player->position.x > 1504 && app->player->position.y == 148) {
+	//LOG( "numero X: %d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x);
+	//LOG("numero Y: %d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y);
+
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x > 1504 && app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y == 148) {
+
 		if (level == 1) {
 			app->fade->Fade(120, 1);
 			if (app->fade->frameCount >= 120 / 2) {
 				level = 2;
 				app->map->RemoveCol();
 				app->map->CleanUp();
-				app->enemies->removeAll = true;
-				app->items->removeAll = true;
+				app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->removeAll = true;
+				app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->removeAll = true;
 				app->map->Load("map_level2.tmx");
 				app->tex->UnLoad(back1);
 				back1 = app->tex->Load("Assets/textures/back_image_2.png");
 				//app->player->Spawn();
-				app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+				app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 0; //borrar al poner spawn
 				app->map->LoadCol();
 			}
 		}
 	}
 
-	if (app->player->position.x > 1504 && app->player->position.y == 180) {
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x > 1504 && app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y == 180) {
 		if(level == 2 && app->titleScreen->inTitle !=3) {
 			app->fade->Fade(120,0);
 			if (app->fade->frameCount >= app->fade->maxFadeFrames) {
@@ -183,7 +191,7 @@ bool Scene::Update(float dt)
 	//Load the previous state (even across levels)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
 		app->LoadGameRequest();
-		app->player->loadingPos = 1;
+		app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->loadingPos = 1;
 	}
 
 	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
@@ -223,8 +231,10 @@ bool Scene::PostUpdate()
 	bool ret = true;
 
 	if (app->titleScreen->inTitle == 1) {
+		app->render->DrawTexture(app->titleScreen->intro_image, 80, 30);
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 220 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 220 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PLATVENTURE");
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START");
+		app->guiManager->Draw();
 		return true;
 	}
 	else if(app->titleScreen->inTitle == 2){
@@ -247,44 +257,44 @@ bool Scene::PostUpdate()
 
 	// Draw map
 	app->map->Draw();
+	
+	app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation->GetCurrentFrame();
 
-	app->player->rectPlayer = app->player->currentAnimation->GetCurrentFrame();
-
-	if (app->player->currentAnimation == &app->player->idleLeft) {
-		app->render->DrawTexture(app->player->textureIdleLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->idleLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureIdleLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->idleRight) {
-		app->render->DrawTexture(app->player->textureIdleRight, app->player->position.x - 19, app->player->position.y, & app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->idleRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureIdleRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, & app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->runLeft) {
-		app->render->DrawTexture(app->player->textureRunLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->runLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureRunLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->runRight) {
-		app->render->DrawTexture(app->player->textureRunRight, app->player->position.x - 19, app->player->position.y, &app->player-> rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->runRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureRunRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()-> rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->jumpLeft) {
-		app->render->DrawTexture(app->player->textureJumpLeft, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->jumpLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureJumpLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->jumpRight) {
-		app->render->DrawTexture(app->player->textureJumpRight, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->jumpRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureJumpRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->hurtLeft) {
-		app->render->DrawTexture(app->player->textureHitLeft, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hurtLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureHitLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->hurtRight) {
-		app->render->DrawTexture(app->player->textureHitRight, app->player->position.x , app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->hurtRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureHitRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x , app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->deathLeft) {
-		app->render->DrawTexture(app->player->textureDeathLeft, app->player->position.x - 19, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->deathLeft) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureDeathLeft, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x - 19, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
-	else if (app->player->currentAnimation == &app->player->deathRight) {
-		app->render->DrawTexture(app->player->textureDeathRight, app->player->position.x, app->player->position.y, &app->player->rectPlayer, 1.0f);
+	else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->currentAnimation == &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->deathRight) {
+		app->render->DrawTexture(app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->textureDeathRight, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x, app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y, &app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->rectPlayer, 1.0f);
 	}
 
 	//app->render->DrawTexture(app->items->textureRunLeft, app->, app->player->position.y, &app->player->rectPlayer, 1.0f);
 
-	sprintf_s(playerLifes, 2, "%01d", app->player->lifes);
-	sprintf_s(playerCoins, 2, "%01d", app->player->coins);
+	sprintf_s(playerLifes, 2, "%01d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->lifes);
+	sprintf_s(playerCoins, 2, "%01d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->coins);
 	
 	blackRect = { 0, (app->render->camera.y - app->render->camera.y * 2) / 3, app->render->camera.w,( app->win->screenSurface->h / 2 - 324 * 3 / 2)/3 };
 	app->render->DrawRectangle(blackRect, 0, 0, 0, 255, true);
@@ -302,6 +312,11 @@ bool Scene::PostUpdate()
 
 	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2 + 7 * 20) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20 ) / 2 + 7 * 20)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, "   Coins:");
 	app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (17 * 20) / 2 + 16 * 20) - (app->render->camera.x - (app->render->camera.w / 2 - (17 * 20) / 2 + 16 * 20)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2) / app->win->GetScale(), textFont, playerCoins);
+
+	if (level == 2) {
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (12 * 20) / 2) - (app->render->camera.x - (app->render->camera.w / 2 - (12 * 20) / 2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2 + 50) / app->win->GetScale(), textFont, "Coming soon!");
+
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;

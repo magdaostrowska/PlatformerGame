@@ -2,13 +2,11 @@
 #define __SSTRING_H__
 
 #include "Defs.h"
-
+#include "Globals.h"
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
 #include <assert.h>
-
-#define TMP_STRING_SIZE	4096
 
 class SString
 {

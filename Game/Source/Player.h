@@ -2,6 +2,7 @@
 #define __PLAYER_H__
 
 #include "Module.h"
+#include "Entity.h"
 #include "Animation.h"
 #include "Point.h"
 #include "App.h"
@@ -14,10 +15,13 @@
 #include "Window.h"
 #include "Shots.h"
 
+#include "EntityManager.h"
+#include "Entity.h"
+
 struct SDL_Texture;
 struct Collider;
 
-class Player : public Module
+class Player : public Entity
 {
 public:
 
@@ -102,8 +106,6 @@ public:
 	Animation* currentAnimation;
 
 	Animation idleLeft, idleRight, runLeft, runRight, jumpLeft, jumpRight, hurtLeft, hurtRight, deathRight, deathLeft;
-
-	Collider* collider;
 
 	unsigned int currentTime;
 

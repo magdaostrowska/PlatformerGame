@@ -66,4 +66,6 @@ typedef unsigned int uint;
 #define COST_MAP_SIZE 100
 #define MAX_FRAMES 100
 
+#define SPACEBOUNDBAR 10
+
 #endif // __GLOBALS_H__

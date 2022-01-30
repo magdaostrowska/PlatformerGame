@@ -1,107 +1,133 @@
 #include "PauseMenu.h"
 
-PauseMenu::PauseMenu()
+PauseMenu::PauseMenu(iPoint position)
 {
-	name.Create("PauseMmenu");
-	settings_created = false;
-	isPauseMenuCreated = false;
-	isInGameGuiCreated = false;
-	background = nullptr;
-	inGameGui = false;
+	name.Create("PauseMenu");
+	screenRect = { 0, 0, WIDTH, HEIGHT };
+	padding = 100;
+
+	resumeButton = new GuiButton(1, { position.x , position.y, 183, 91 }, "RESUME");
+	settingsButton = new GuiButton(2, { position.x , position.y + padding, 183, 91 }, "SETTINGS");
+	backToTitleButton = new GuiButton(3, { position.x , position.y + padding * 2, 183, 91 }, "TITLE");
+	exitButton = new GuiButton(4, { position.x , position.y + padding * 3, 90, 90 }, "EXIT");
+
+	isActive = false;
+	isPauseMenuActive = false;
 }
 
-bool PauseMenu::Awake(pugi::xml_node& conf)
+PauseMenu::~PauseMenu()
 {
 
-	return true;
-}
-
-bool PauseMenu::Start()
-{
-	return true;
 }
 
 bool PauseMenu::Update(float dt)
 {
-	switch (attribute)
-	{
-	case PAUSE_MENU:
-		if (isPauseMenuCreated == false)CreatePauseMenu();
-		break;
-	case PAUSE_GUI:
-		inGameGui = true;
-		if (isInGameGuiCreated == false)CreateInGameGui();
-		break;
-	case NONE:
-		DestroyAllGui();
-		break;
-	default:
-		break;
-	}
+	bool ret = true;
 
+	if (isActive)
+	{
+		resumeButton->Update(dt);
+		settingsButton->Update(dt);
+		backToTitleButton->Update(dt);
+		ret = exitButton->Update(dt);
+		if (isPauseMenuActive)
+		{
+			// TODO: settingsMenu->Update(dt);
+			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+				CloseSettingsMenu();
+		}
+		else
+		{
+			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+			{
+				// TODO: app->sceneManager->SetPause(false);
+				isActive = false;
+				isPauseMenuActive = false;
+			}
+		}
+	}
 	return true;
 }
 
 bool PauseMenu::CleanUp()
 {
-	DestroyAllGui();
-
 	return true;
 }
 
-void PauseMenu::CreatePauseMenu()
+bool PauseMenu::Draw()
 {
-	int pos_x = app->player->position.x;
-	int pos_y = app->player->position.y;
-
-	// TODO add buttons etc
-
-	isPauseMenuCreated = true;
+	return false;
 }
 
-void PauseMenu::DestroyPauseMenu()
+bool PauseMenu::Event(GuiControl* control)
 {
-	// TODO destroy buttons etc
-	isPauseMenuCreated = false;
-}
+	switch (control->type)
+	{
+	case GuiControlType::BUTTON:
+	{
+		if (control->id == 1)
+		{
+			//app->sceneManager->SetPause(false);
+			active = false;
+			isPauseMenuActive = false;
+		}
+		else if (control->id == 2)
+		{
+			isPauseMenuActive = true;
+			resumeButton->state = GuiControlState::DISABLED;
+			settingsButton->state = GuiControlState::DISABLED;
+			backToTitleButton->state = GuiControlState::DISABLED;
+			exitButton->state = GuiControlState::DISABLED;
+			/*settingsMenu->MovePosition();
+			settingsMenu->sldMusic->SetValue(app->audio->GetVolumeMusic());
+			settingsMenu->sldFx->SetValue(app->audio->GetVolumeFx());
+			settingsMenu->AbleDisableSetting();*/
+		}
+		else if (control->id == 3)
+		{
+			
+		}
+		else if (control->id == 4)
+		{
+			return false;
+		}
+		else if (control->id == 10)
+		{
+			CloseSettingsMenu();
+		}
 
-void PauseMenu::CreateInGameGui()
-{
-	//Lifes
-	iPoint heartPos[3] = {
-		{10, 0}, //heart 1
-		{50, 0}, //heart 2
-		{90, 0} //heart 3
-	};
-
-	for (size_t i = 0; i < app->player->lifes; i++)
+	}
+	case GuiControlType::SLIDER:
 	{
 		
 	}
-
-	//Coins
-	iPoint coinPos = { 200, 20 };
-
-	for (size_t i = 0; i < app->player->coins; i++)
+	case GuiControlType::CHECKBOX:
 	{
 		
 	}
+	default: break;
+	}
+	return true;
 
-	isInGameGuiCreated = true;
 }
 
-void PauseMenu::DestroyInGameGui()
+void PauseMenu::AbleDisableSetting()
 {
-	isInGameGuiCreated = false;
+	isActive = !isActive;
 }
 
-void PauseMenu::UpdateInGameGui()
+void PauseMenu::AbleDisableMenu()
 {
-	CreateInGameGui();
+	isPauseMenuActive = !isPauseMenuActive;
 }
 
-void PauseMenu::DestroyAllGui()
+void PauseMenu::CloseSettingsMenu()
 {
-	DestroyPauseMenu();
-	DestroyInGameGui();
+	isPauseMenuActive = false;
+	resumeButton->state = GuiControlState::NORMAL;
+	settingsButton->state = GuiControlState::NORMAL;
+	backToTitleButton->state = GuiControlState::NORMAL;
+	exitButton->state = GuiControlState::NORMAL;
+	//settingsMenu->AbleDisableSetting();
+	app->SaveGameRequest();
 }

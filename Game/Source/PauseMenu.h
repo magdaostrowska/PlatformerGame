@@ -5,49 +5,42 @@
 #include "Textures.h"
 #include "App.h"
 #include "Player.h"
+#include "GuiButton.h"
+#include "Globals.h"
+#include "Audio.h"
+#include "Log.h"
 #include "PugiXml/src/pugixml.hpp"
-
-enum MenuAttributes
-{
-	PAUSE_MENU,
-	PAUSE_GUI,
-	NONE,
-};
 
 class PauseMenu : public Module {
 
 public:
-	PauseMenu();
-	~PauseMenu();
 
-	bool Awake(pugi::xml_node& config);
-	bool Start();
+	PauseMenu(iPoint position);
+	~PauseMenu();
+	
 	bool Update(float dt);
 	bool CleanUp();
 
-	void CreatePauseMenu();
-	void DestroyPauseMenu();
+	bool Draw();
+	bool Event(GuiControl* control);
 
-	void CreateInGameGui();
-	void DestroyInGameGui();
-	void UpdateInGameGui();
+	void AbleDisableSetting();
+	void AbleDisableMenu();
 
-	void DestroyAllGui();
-
-public:
-
-	MenuAttributes attribute;
-	bool inGameGui;
-
+	void CloseSettingsMenu();
 
 private:
 
-	SDL_Texture* background;
-	bool settings_created;
-	bool isPauseMenuCreated;
-	bool isInGameGuiCreated;
+	SDL_Rect screenRect = { NULL };
+	GuiButton* resumeButton;
+	GuiButton* settingsButton;
+	GuiButton* backToTitleButton;
+	GuiButton* exitButton;
 
-	//ListItem<*> screen_ui;
+	//TODO: GuiSettings* settingsMenu;
+
+	int padding;
+	bool isActive, isPauseMenuActive;
 };
 
 

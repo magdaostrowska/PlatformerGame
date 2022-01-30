@@ -133,21 +133,34 @@ bool Scene::Update(float dt)
 		if (app->fade->frameCount >= 120 / 2) {
 			level = 2;
 			app->map->RemoveCol();
-			app->enemies->removeAll = true;
-			app->items->removeAll = true;
+			app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->removeAll = true;
+			app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->removeAll = true;
 			app->map->CleanUp();
 
 			app->map->Load("map_level2.tmx");
 			app->tex->UnLoad(back1);
 			back1 = app->tex->Load("Assets/textures/back_image_2.png");
 			//app->player->Spawn();
-			app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+			app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 0; //borrar al poner spawn
 			app->map->LoadCol();
 			loadinglvl2 = false;
 		}
 	}
 
-	if (app->entity->FindEntity(EntityType::PLAYER)->position.x > 1504 && app->entity->FindEntity(EntityType::PLAYER)->position.y == 148) {
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x > 1504) {
+		
+			int i = 8;
+		}
+
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y == 148) {
+
+		int u = 8;
+	}
+
+	//LOG( "numero X: %d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x);
+	//LOG("numero Y: %d", app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y);
+
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x > 1504 && app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y == 148) {
 
 		if (level == 1) {
 			app->fade->Fade(120, 1);
@@ -155,19 +168,19 @@ bool Scene::Update(float dt)
 				level = 2;
 				app->map->RemoveCol();
 				app->map->CleanUp();
-				app->enemies->removeAll = true;
-				app->items->removeAll = true;
+				app->entity->FindEntity(EntityType::ENEMY)->FindSubClassEnemy()->removeAll = true;
+				app->entity->FindEntity(EntityType::ITEM)->FindSubClassItem()->removeAll = true;
 				app->map->Load("map_level2.tmx");
 				app->tex->UnLoad(back1);
 				back1 = app->tex->Load("Assets/textures/back_image_2.png");
 				//app->player->Spawn();
-				app->player->position.x = app->player->position.y = 0; //borrar al poner spawn
+				app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x = app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y = 0; //borrar al poner spawn
 				app->map->LoadCol();
 			}
 		}
 	}
 
-	if (app->player->position.x > 1504 && app->player->position.y == 180) {
+	if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.x > 1504 && app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->position.y == 180) {
 		if(level == 2 && app->titleScreen->inTitle !=3) {
 			app->fade->Fade(120,0);
 			if (app->fade->frameCount >= app->fade->maxFadeFrames) {
@@ -187,7 +200,7 @@ bool Scene::Update(float dt)
 	//Load the previous state (even across levels)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
 		app->LoadGameRequest();
-		app->player->loadingPos = 1;
+		app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->loadingPos = 1;
 	}
 
 	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)

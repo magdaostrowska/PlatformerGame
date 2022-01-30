@@ -54,65 +54,66 @@ Fly_Enemy::Fly_Enemy(int x, int y) : Enemies()
 
 bool Fly_Enemy::Update(float dt)
 {
-	CalculatePath();
+	if (app->scene->inPause == false) {
+		CalculatePath();
 
-	switch (state)
-	{
-	case FlyingEnemyState::IDLE:
-		followsPath = true;
-		break;
-	case FlyingEnemyState::FLY_LEFT:
-		position.x -= speed;
-		break;
-	case FlyingEnemyState::FLY_RIGHT:
-		position.x += speed;
-		break;
-	case FlyingEnemyState::FLY_UP:
-		position.y -= speed;
-		break;
-	case FlyingEnemyState::FLY_DOWN:
-		position.y += speed;
-		break;
-	case FlyingEnemyState::DIE:
-		break;
-	default:
-		break;
-	}
+		switch (state)
+		{
+		case FlyingEnemyState::IDLE:
+			followsPath = true;
+			break;
+		case FlyingEnemyState::FLY_LEFT:
+			position.x -= speed;
+			break;
+		case FlyingEnemyState::FLY_RIGHT:
+			position.x += speed;
+			break;
+		case FlyingEnemyState::FLY_UP:
+			position.y -= speed;
+			break;
+		case FlyingEnemyState::FLY_DOWN:
+			position.y += speed;
+			break;
+		case FlyingEnemyState::DIE:
+			break;
+		default:
+			break;
+		}
 
-	speed = 0.5 * dt / 6;
-	currentAnim->Update();
+		speed = 0.5 * dt / 6;
+		currentAnim->Update();
 
-	if (app->titleScreen->inTitle == 0) {
-		if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x < collider->rect.x) {
+		if (app->titleScreen->inTitle == 0) {
+			if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x < collider->rect.x) {
 
-			dir = -1;
-			if (isLeft == true) {
-				position.x += speed * dir;
+				dir = -1;
+				if (isLeft == true) {
+					position.x += speed * dir;
+				}
+			}
+			else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x + app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.w > collider->rect.x + collider->rect.w) {
+				dir = 1;
+				if (isRight == true) {
+					position.x += speed * dir;
+				}
 			}
 		}
-		else if (app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.x + app->entity->FindEntity(EntityType::PLAYER)->FindSubClassPlayer()->collider->rect.w > collider->rect.x + collider->rect.w) {
-			dir = 1;
-			if (isRight == true) {
-				position.x += speed * dir;
-			}
+
+		collider->SetPos(position.x + 22, position.y + 16);
+
+		isLeft = false;
+		isRight = false;
+
+		switch (dir) {
+		case 1:
+			currentAnim = &flyRight;
+			break;
+		case -1:
+			currentAnim = &flyLeft;
+			break;
 		}
+		//AnyEnemy::Update(dt);
 	}
-
-	collider->SetPos(position.x + 22, position.y + 16);
-
-	isLeft = false;
-	isRight = false;
-
-	switch (dir) {
-	case 1:
-		currentAnim = &flyRight;
-		break;
-	case -1:
-		currentAnim = &flyLeft;
-		break;
-	}
-	//AnyEnemy::Update(dt);
-
 	return true;
 }
 

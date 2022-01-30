@@ -33,8 +33,9 @@ bool Item_Potion::Update(float dt)
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 
-	currentAnim->Update();
-
+	if (app->scene->inPause == false) {
+		currentAnim->Update();
+	}
 	//Entity::Update(dt);
 	return true;
 }

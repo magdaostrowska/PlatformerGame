@@ -4,7 +4,6 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Title.h"
-#include "AnyItem.h"
 #include "Item_Coin.h"
 #include "Item_Potion.h"
 

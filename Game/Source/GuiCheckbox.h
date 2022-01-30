@@ -5,44 +5,33 @@
 #include "Point.h"
 #include "SString.h"
 
-class GuiCheckBox : public GuiControl
+class GuiCheckbox : public GuiControl
 {
 public:
 
-	GuiCheckBox(uint32 id, SDL_Rect bounds, const char* text, bool initState = false, SDL_Texture* texture = NULL);
-	virtual ~GuiCheckBox();
+	GuiCheckbox(uint32 id, SDL_Rect bounds, const char* text, bool initState = false, SDL_Texture* texture = NULL);
+	virtual ~GuiCheckbox();
 
 	bool Update(float dt);
 	bool Draw();
 
-	bool GetValue() { return checked; };
-	void SetValue(bool state) { checked = state; };
+	bool GetValue();
+	void SetValue(bool state) { isChecked = state; };
 
 private:
 
 	void ChangeImageChecked();
 
-	// GuiCheckBox specific properties
 	iPoint* rectAtlasPos = new iPoint(87, 99);
-	int margin = 10;
-
+	iPoint* falseAtlasPos = new iPoint(227, 201);
+	iPoint* trueAtlasPos = new iPoint(552, 1407);
+	
 	SDL_Rect button;
-	int rectTexW = 183;
-	int rectTexH = 91;
-
 	SDL_Rect checkBoxInput;
 	SDL_Rect checkBoxImage;
 
-	iPoint* falseAtlasPos = new iPoint(227, 201);
-	iPoint* trueAtlasPos = new iPoint(552, 1407);
-	int squareTexW = 88;
-	int squareTexH = 88;
-	int marginSquare = 9;
-
-	bool textDisable = false;
-
-	bool mouseIn = false;
-	bool checked;
+	int squareTexWidth, squareTexHeight, rectTexWidth, rectTexHeight, margin, marginSquare;
+	bool textDisable, isMouseIn, isChecked;
 };
 
 #endif // __GUICHECKBOX_H__

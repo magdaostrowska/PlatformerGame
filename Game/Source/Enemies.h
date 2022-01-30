@@ -22,7 +22,6 @@ struct EnemySpawnpoint
 	int x, y;
 };
 
-//class AnyEnemy;
 struct SDL_Texture;
 
 class Enemies : public Entity

@@ -232,15 +232,19 @@ bool Scene::PostUpdate()
 
 	if (app->titleScreen->inTitle == 1) {
 		app->render->DrawTexture(app->titleScreen->intro_image, 80, 30);
-		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 220 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 220 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "PLATVENTURE");
-		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START");
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 220 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 220 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()) -100, textFont, "PLATVENTURE");
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 400 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 400 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()) - 100, textFont, "PRESS ENTER TO START");
 		app->guiManager->Draw();
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 80 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 80/2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2)) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PLAY");
+		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 80 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 80 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 90) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 90)) * 2) / app->win->GetScale()), textFont, "EXIT");
+
 		return true;
 	}
 	else if(app->titleScreen->inTitle == 2){
 		
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 180 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 180 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "GAME OVER");
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 480 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 480 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO TRY AGAIN");
+		app->guiManager->Draw();
 		return true;
 		
 	}
@@ -248,10 +252,13 @@ bool Scene::PostUpdate()
 
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 300 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 300 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - 20 / 2) - (app->render->camera.y - (app->render->camera.h / 2 - 20 / 2)) * 2) / app->win->GetScale()), textFont, "CONGRATULATIONS");
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - 620 / 2) - (app->render->camera.x - (app->render->camera.w / 2 - 620 / 2)) * 2) / app->win->GetScale()), (((app->render->camera.y - app->render->camera.h / 2 - (20 / 2) + 20) - (app->render->camera.y - (app->render->camera.h / 2 - (20 / 2) + 20)) * 2) / app->win->GetScale()), textFont, "PRESS ENTER TO START A NEW GAME");
-
+		app->guiManager->Draw();
 		return true;
 
 	}
+
+	
+	
 
 	app->render->DrawTexture(back1, back_pos.x, back_pos.y, &rectMap, 1.0f);
 
@@ -317,6 +324,8 @@ bool Scene::PostUpdate()
 		app->fonts->BlitText((((app->render->camera.x - app->render->camera.w / 2 - (12 * 20) / 2) - (app->render->camera.x - (app->render->camera.w / 2 - (12 * 20) / 2)) * 2) / app->win->GetScale()), (app->render->camera.y - app->render->camera.y * 2 + 50) / app->win->GetScale(), textFont, "Coming soon!");
 
 	}
+
+	app->guiManager->Draw();
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		ret = false;

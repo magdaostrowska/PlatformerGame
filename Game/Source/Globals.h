@@ -25,6 +25,9 @@ typedef unsigned int uint;
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
 
+#define WIDTH 1920
+#define HEIGHT 1080
+
 #define VSYNC true
 
 // Files

@@ -4,6 +4,7 @@
 
 #include "GuiButton.h"
 #include "Audio.h"
+#include "Title.h"
 
 GuiManager::GuiManager() :Module()
 {
@@ -85,7 +86,31 @@ bool GuiManager::Draw() {
 
 	while (control != nullptr)
 	{
-		control->data->Draw(app->render);
+		if (app->titleScreen->inTitle == 0) {
+
+			if (control->data->id == 3)
+			{
+				control->data->Draw(app->render);
+			}
+
+		}
+		else if (app->titleScreen->inTitle == 1) {
+
+
+
+			if (control->data->id == 1)
+			{
+				control->data->Draw(app->render);
+			}
+
+			if (control->data->id == 2)
+			{
+				control->data->Draw(app->render);
+			}
+
+		}
+
+		//control->data->Draw(app->render);
 		control = control->next;
 	}
 

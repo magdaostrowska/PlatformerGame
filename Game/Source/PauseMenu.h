@@ -18,8 +18,8 @@ public:
 	PauseMenu(iPoint position);
 	~PauseMenu();
 	
-	bool Update(float dt);
-	bool CleanUp();
+	bool Update(float dt) override;
+	bool CleanUp() override;
 
 	bool Draw();
 	bool Event(GuiControl* control);
